@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/10/trunk/src/parse
+END
+presimple.java
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/src/parse/presimple.java
+END
+parenthesize.java
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/src/parse/parenthesize.java
+END
+CastToNonSimple.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/src/parse/CastToNonSimple.java
+END
+GrammarCheck.java
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/src/parse/GrammarCheck.java
+END
+GroupFractions.java
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/src/parse/GroupFractions.java
+END
+formula.java
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/src/parse/formula.java
+END
+tosimpleterms.java
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/src/parse/tosimpleterms.java
+END
+preorganized.java
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/src/parse/preorganized.java
+END
+path.java
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/8/trunk/src/parse/path.java
+END
+PreGroupFractions.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/src/parse/PreGroupFractions.java
+END
+composefractions.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/src/parse/composefractions.java
+END
