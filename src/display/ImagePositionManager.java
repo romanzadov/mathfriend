@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import parse.path;
 
 import representTerms.PlaceAndFont;
-import representTerms.image;
+import representTerms.Image;
 import representTerms.stringrect;
 import tree.term;
 import android.util.Log;
@@ -35,7 +35,7 @@ public class ImagePositionManager {
 		//the width and height of my display remain constant. 
 	}
 	
-	public point blGhost(image myGhost, int prefferedFont){
+	public point blGhost(Image myGhost, int prefferedFont){
 		point bl = new point();
 		//position the ghost term. and return the bottom left corner
 		//The top 1/3 of the screen is for the ghost. It'll have to be resized if it is too big.
@@ -72,7 +72,7 @@ public class ImagePositionManager {
 		return bl;
 	}
 	
-	public PlaceAndFont blMain(image myMain, int prefferedFont){
+	public PlaceAndFont blMain(Image myMain, int prefferedFont){
 		//check that image fits into the display at the preffered font
 		
 		point bl = new point();
@@ -103,17 +103,17 @@ public class ImagePositionManager {
 		return new PlaceAndFont(bl, scale);
 	}
 	
-	public ArrayList<image> getHistory(	ArrayList<String> history ,int prefferedFont, int mainBottom){
+	public ArrayList<Image> getHistory(	ArrayList<String> history ,int prefferedFont, int mainBottom){
 		//all the previous steps are stored in "history"
 		// this method returns those images and their locations
 		int historyStep = 1;
-		ArrayList<image> imageHistory = new ArrayList<image>();
+		ArrayList<Image> imageHistory = new ArrayList<Image>();
 		
 		for(int i = 0; i<history.size(); i++){
 			//create image
 			path pa = new path();
 			term tr = pa.getTermFromString(history.get(i));
-			image step = new image(tr, new point(0,0), null);
+			Image step = new Image(tr, new point(0,0), null);
 			
 			//figure out new font if we have to scale it
 			float scale = 1;

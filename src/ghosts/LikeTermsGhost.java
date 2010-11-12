@@ -6,7 +6,7 @@ import container.RelativeContainer;
 
 import move.identify.FindSel;
 import move.identify.ReturnSel;
-import representTerms.image;
+import representTerms.Image;
 import tree.downwalk;
 import tree.term;
 import tree.downwalk.TreeFunction;
@@ -19,10 +19,10 @@ public class LikeTermsGhost implements TreeFunction{
 	term a = null;
 	term b = null;
 	term aPLUSb = null;
-	image im;
+	Image im;
 
-	public image Like(){
-		image Ghost =null;
+	public Image Like(){
+		Image Ghost =null;
 		term second = null;
 		if(aPLUSb != null){
 			try {
@@ -76,12 +76,12 @@ public class LikeTermsGhost implements TreeFunction{
 			}
 		//	RelativeContainer dc = new RelativeContainer();
 		//	dc.drawelement(second, (int)im.tr.font);
-			Ghost = new image(second, new point(im.bel.x, 80), null);
+			Ghost = new Image(second, new point(im.bel.x, 80), null);
 		}
 
 		return Ghost;
 	}
-	public LikeTermsGhost(image img){
+	public LikeTermsGhost(Image img){
 		im = img;
 		downwalk walk = new downwalk(img.tr, this);
 	}

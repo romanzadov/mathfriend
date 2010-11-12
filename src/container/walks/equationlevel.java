@@ -3,7 +3,7 @@ package container.walks;
 import java.util.ArrayList;
 
 import display.point;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 
 public class equationlevel {

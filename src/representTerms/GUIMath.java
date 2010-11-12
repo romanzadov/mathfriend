@@ -1,27 +1,31 @@
 package representTerms;
 
+import java.util.ArrayList;
+
 import display.point;
 
 public class GUIMath {
 
-	int minFont;
-	int maxFont;
+	public static int MIN_FONT = 0;
+	public static int MAX_FONT = 40;
 	int xDisplay;
 	int yDisplay;
 	
+	public void updateScreen(int xDisp, int yDisp){
+		xDisplay = xDisp;
+		yDisplay = yDisp;
+	}
+	
 	public GUIMath(int minF, int maxF, int displayWidth, int displayHeight){
-		minFont = minF;
-		maxFont = maxF;
+		MIN_FONT = minF;
+		MAX_FONT = maxF;
 		xDisplay = displayWidth;
 		yDisplay = displayHeight;
 	}
 	
-	
-	public PlaceAndFont getPlaceAndFont(float xTerm, float yTerm, int prefferedFont){
+	public PlaceAndFont getCenteredPlaceAndFont(float xTerm, float yTerm, int prefferedFont){
 
 		point bl = new point();
-		
-		System.out.println("x: "+xTerm+" y: "+yTerm+ " font: "+prefferedFont + " xd: "+xDisplay+ " yd: "+yDisplay);
 		
 		if(justFits(xTerm, yTerm, prefferedFont)){
 			bl = scaledBl(xTerm, yTerm, prefferedFont);
@@ -29,14 +33,14 @@ public class GUIMath {
 		}
 		else {
 			int reducedFont = reducedFont(xTerm, yTerm);
-			if(reducedFont > minFont){
+			if(reducedFont > MIN_FONT){
 				bl = scaledBl(xTerm, yTerm, reducedFont);
 				return new PlaceAndFont(bl, reducedFont);
 			}
 			
 			else{
-				bl = scaledBl(xTerm, yTerm, minFont);
-				return new PlaceAndFont(bl, minFont);
+				bl = scaledBl(xTerm, yTerm, MIN_FONT);
+				return new PlaceAndFont(bl, MIN_FONT);
 			}
 		}
 	}
@@ -55,18 +59,17 @@ public class GUIMath {
 	}
 	
 	private int reducedFont(float xTerm, float yTerm){ 
-		int xFontMinimum = (int) ((xDisplay - minFont - minFont)/(xTerm));
-		int yFontMinimum = (int) ((yDisplay - minFont - minFont)/(yTerm));
+		int xFontMinimum = (int) ((xDisplay - MIN_FONT - MIN_FONT)/(xTerm));
+		int yFontMinimum = (int) ((yDisplay - MIN_FONT - MIN_FONT)/(yTerm));
 		
 		return Math.min(xFontMinimum, yFontMinimum);
 	}
 	
 	private boolean justFits(float xTerm, float yTerm, int prefferedFont){
 		boolean fits = true;
-		if((prefferedFont * xTerm) > (xDisplay-minFont-minFont)){fits = false;}
-		if((prefferedFont * yTerm) > (yDisplay - minFont - minFont)){fits = false;}
+		if((prefferedFont * xTerm) > (xDisplay-MIN_FONT-MIN_FONT)){fits = false;}
+		if((prefferedFont * yTerm) > (yDisplay - MIN_FONT - MIN_FONT)){fits = false;}
 		return fits;
 	}
-	
 	
 }

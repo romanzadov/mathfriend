@@ -7,7 +7,7 @@ import display.point;
 
 import move.identify.FindSel;
 import move.identify.ReturnSel;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import tree.operators.divide;
 import tree.operators.equals;
@@ -19,7 +19,7 @@ import tree.simple.Number;
 
 public class timesmove {
 
-	public image inTermMoves(image im, term sel,
+	public Image inTermMoves(Image im, term sel,
 			int IntermIndex) {
 		term second = null;
 		try {
@@ -84,17 +84,17 @@ public class timesmove {
 		 
 	
 
-		image Ghost = new image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
-		Ghost = new image(Ghost.tr.toString(), Ghost.bel);
+		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		return Ghost;
 	}
 
-	public image overEqualsMoves(image im,
+	public Image overEqualsMoves(Image im,
 			term sel, int IntermIndex, double xsel) {
 		
 		
 		
-		image Ghost = null;
+		Image Ghost = null;
 		
 		boolean selfraction =  false;
 		if(sel.operator instanceof times || sel.operator instanceof divide){
@@ -162,8 +162,8 @@ public class timesmove {
 //			RelativeContainer dt = new RelativeContainer();
 //			dt.drawelement(second, (int)im.tr.font);
 			
-			Ghost = new image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
-			Ghost = new image(Ghost.tr.toString(), Ghost.bel);
+			Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+			Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		
 		
 	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ghosts.GhostImage;
 import move.identify.selectterm;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import android.R;
 import android.app.Activity;
@@ -107,14 +107,14 @@ public class DisplayScreen extends Activity{
 						selsBottomLeft.y = newSelect.ScreenPosition.container.bl.y;
 
 						a.selTerm = (term)newSelect.clone();
-						a.iSel = new image(a.selTerm, a.selTerm.container.bl, null );
+						a.iSel = new Image(a.selTerm, a.selTerm.container.bl, null );
 					}
 					else{
 						selsBottomLeft.x = a.iMain.bel.x;
 						selsBottomLeft.y = a.iMain.bel.y;
 						
 						a.selTerm = (term)a.mainTerm.clone();
-						a.iSel = new image(a.selTerm, a.iMain.bel, null );
+						a.iSel = new Image(a.selTerm, a.iMain.bel, null );
 					}
 
 				} catch (CloneNotSupportedException e) {}

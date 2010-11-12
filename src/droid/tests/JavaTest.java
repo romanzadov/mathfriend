@@ -2,7 +2,7 @@ package droid.tests;
 
 import display.point;
 import parse.path;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import android.util.Log;
 
@@ -19,7 +19,7 @@ public class JavaTest {
 		pa = new path();
 		term selTerm = pa.getTermFromString(sel);
 		
-		image mainImage = new image(mainTerm, new point(0,0), null);
+		Image mainImage = new Image(mainTerm, new point(0,0), null);
 			
 	}
 }

@@ -6,7 +6,7 @@ import container.RelativeContainer;
 
 import display.point;
 import display.rectangle;
-import representTerms.image;
+import representTerms.Image;
 import tree.*;
 import tree.simple.Number;
 
@@ -77,18 +77,18 @@ public class equals extends operator{
 		return c;
 	}
 
-	public image inTermMoves(image im, term sel, int IntermIndex){
+	public Image inTermMoves(Image im, term sel, int IntermIndex){
 
 		int selindex = sel.parent.getChilds().indexOf(sel);
-		image Ghost = im;
+		Image Ghost = im;
 		Ghost = MoveFocus(im, sel, selindex, IntermIndex);
 		
 		return Ghost;
 
 	}
 
-	public image MoveFocus(image im, term sel, int selindex, int IntermIndex){
-		image Ghost = new image();
+	public Image MoveFocus(Image im, term sel, int selindex, int IntermIndex){
+		Image Ghost = new Image();
 		term second = new term();
 		try {
 			second = (term) im.tr.clone();
@@ -181,7 +181,7 @@ public class equals extends operator{
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second);
 	//	ColorText CT = new ColorText(secondsel, /.red);
-		Ghost = new image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
 
 
 
@@ -189,7 +189,7 @@ public class equals extends operator{
 
 	}
 	@Override
-	public image overEqualsMoves(image im, term sel, int IntermIndex,
+	public Image overEqualsMoves(Image im, term sel, int IntermIndex,
 			double xsel) {
 		// TODO Auto-generated method stub
 		return null;

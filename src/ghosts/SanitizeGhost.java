@@ -1,6 +1,6 @@
 package ghosts;
 
-import representTerms.image;
+import representTerms.Image;
 import tree.downwalk;
 import tree.term;
 import tree.downwalk.TreeFunction;
@@ -10,7 +10,7 @@ public class SanitizeGhost  implements TreeFunction{
 
 	static final String TAG = "SanitizeGhost";
 
-	public SanitizeGhost(image Ghost){
+	public SanitizeGhost(Image Ghost){
 //		Log.d(TAG, "old ghost tr: "+Ghost.tr);
 
 		if(Ghost.tr != null){
@@ -28,7 +28,7 @@ public class SanitizeGhost  implements TreeFunction{
 			}
 			//RelativeContainer dn = new RelativeContainer();
 			//dn.drawelement(Ghost.tr, (int)Ghost.tr.font);
-			Ghost = new image(Ghost.tr, Ghost.bel, null);
+			Ghost = new Image(Ghost.tr, Ghost.bel, null);
 
 		} catch (Exception e) {}
 

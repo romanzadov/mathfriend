@@ -1,7 +1,7 @@
 package tree.operators;
 
 
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import tree.notsimple.equation;
 import tree.simple.simpleterm;
@@ -85,9 +85,9 @@ public abstract class operator extends simpleterm{
 		return a;
 	}
 
-	public abstract image inTermMoves(image im, term sel, int IntermIndex);
+	public abstract Image inTermMoves(Image im, term sel, int IntermIndex);
 	
-	public abstract image overEqualsMoves(image im, term sel, int IntermIndex, double xsel);
+	public abstract Image overEqualsMoves(Image im, term sel, int IntermIndex, double xsel);
 
 	public equation ToBothSides(equation eq, operator op, term sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");

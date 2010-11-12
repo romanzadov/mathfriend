@@ -2,7 +2,7 @@ package container;
 
 import java.util.ArrayList;
 
-import representTerms.image;
+import representTerms.Image;
 import representTerms.stringrect;
 import tree.downwalk;
 import tree.term;
@@ -15,7 +15,7 @@ public class AbsoluteContainer implements TreeFunction{
 	ArrayList<stringrect> sr = new ArrayList<stringrect>();
 	
 	
-	public ArrayList<stringrect> multiply(image im, int fontsize, point bel){
+	public ArrayList<stringrect> multiply(Image im, int fontsize, point bel){
 		
 			sr = im.relativeContainers;
 			

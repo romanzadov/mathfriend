@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import move.identify.FindSel;
 import move.identify.ReturnSel;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import tree.operators.minus;
 import tree.operators.operator;
@@ -17,7 +17,7 @@ public class plusmove {
 
 	static final String TAG = "plusmove";
 
-	public image overEquals(image im, term sel, int equalsIndex, double xsel){
+	public Image overEquals(Image im, term sel, int equalsIndex, double xsel){
 		//path pa = new path();
 		//term second = pa.pathway(im.ft.originalstring);
 		term second = new term();
@@ -111,8 +111,8 @@ public class plusmove {
 		 
 	
 
-		image Ghost = new image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
-		Ghost = new image(Ghost.tr.toString(), Ghost.bel);
+		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		return Ghost;
 
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import move.identify.selectterm;
 import parse.path;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import android.app.Activity;
 import android.os.Bundle;
@@ -156,13 +156,13 @@ public class DisplayThreeViews extends Activity implements OnClickListener, OnTo
 							selsBottomLeft.y = newSelect.ScreenPosition.container.bl.y;
 
 						
-							mainView.selectedImage = new image(newSelect, newSelect.ScreenPosition.container.bl, null );
+							mainView.selectedImage = new Image(newSelect, newSelect.ScreenPosition.container.bl, null );
 						}
 						else{
 							selsBottomLeft = mainCorner;
 							path pa = new path();
 							term sel = pa.getTermFromString(mainView.myEquation);
-							mainView.selectedImage = new image(sel, mainCorner, null );
+							mainView.selectedImage = new Image(sel, mainCorner, null );
 						}
 
 					
@@ -194,7 +194,7 @@ public class DisplayThreeViews extends Activity implements OnClickListener, OnTo
 					mainView.selectedImage.bel.y = y-30;
 					
 					GhostImage gm = new GhostImage();
-					image Ghost = (gm.newImage(mainView.equationImage, 
+					Image Ghost = (gm.newImage(mainView.equationImage, 
 							mainView.selectedImage.tr, new point(event.getX(), event.getY()), down));
 					Log.d(TAG, "ghost: "+Ghost);
 					ghostView.equationImage = Ghost;

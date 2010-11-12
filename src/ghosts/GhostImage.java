@@ -1,7 +1,7 @@
 package ghosts;
 
 import container.walks.FindSel;
-import representTerms.image;
+import representTerms.Image;
 import tree.downwalk;
 import tree.term;
 import tree.downwalk.TreeFunction;
@@ -22,10 +22,10 @@ public class GhostImage {
 	term SwitchMe;
 	static final String TAG = "GhostImage";
 
-	public image newImage(image im, term sel, point current, point tapped){
+	public Image newImage(Image im, term sel, point current, point tapped){
 
 
-		image Ghost = im;
+		Image Ghost = im;
 		int selIndex = 0;
 
 		sel = findSel(im, sel, tapped);
@@ -78,8 +78,8 @@ public class GhostImage {
 
 
 
-	public image CheckEquals(image im, term sel, double xsel, int IntermIndex ){
-		image Ghost = new image();
+	public Image CheckEquals(Image im, term sel, double xsel, int IntermIndex ){
+		Image Ghost = new Image();
 		int selindex = 0;
 		if((sel.parent!=null)&&
 				(sel.parent.parent!=null)&&
@@ -143,7 +143,7 @@ public class GhostImage {
 		return Ghost;
 	}
 
-	public term findSel(image main, term sel, point tapped){
+	public term findSel(Image main, term sel, point tapped){
 
 		FindSel fs = new FindSel(main, sel, tapped);
 		if(fs.found==null){

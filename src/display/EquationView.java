@@ -3,7 +3,7 @@ package display;
 import java.util.ArrayList;
 
 import representTerms.PlaceAndFont;
-import representTerms.image;
+import representTerms.Image;
 import representTerms.stringrect;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,8 +31,8 @@ public class EquationView extends View{
 	public String myEquation;
 	public rectangle coverSelected = new rectangle();
 	
-	public image equationImage;
-	public image selectedImage;
+	public Image equationImage;
+	public Image selectedImage;
 
 	public int prefferedFont = 30;
 
@@ -47,8 +47,8 @@ public class EquationView extends View{
 		myEquation = equation;
 
 		if(myDisplayType.equals(DisplayType.MAIN)){
-			equationImage = new image(myEquation, prefferedFont, getWidth(), getHeight());
-			selectedImage = new image(myEquation, prefferedFont, getWidth(), getHeight());
+			equationImage = new Image(myEquation, prefferedFont, getWidth(), getHeight());
+			selectedImage = new Image(myEquation, prefferedFont, getWidth(), getHeight());
 		}
 		
 		shadowRect.setARGB(210,210,210,175);
@@ -82,7 +82,7 @@ public class EquationView extends View{
 				
 				Log.d(TAG, "Ghost: "+equationImage);
 				
-				image ghost = new image(myEquation, prefferedFont, getWidth(), getHeight());
+				Image ghost = new Image(myEquation, prefferedFont, getWidth(), getHeight());
 				point bl = centerEquation(ghost);
 				ArrayList <stringrect> sr = ghost.getAbsoluteContainers((int)((float)prefferedFont*scale), bl);
 
@@ -108,7 +108,7 @@ public class EquationView extends View{
 		else if (myDisplayType.equals(DisplayType.MAIN)){
 			if(myEquation != null){
 				
-				equationImage = new image(myEquation, prefferedFont, getWidth(), getHeight());
+				equationImage = new Image(myEquation, prefferedFont, getWidth(), getHeight());
 				point bl = centerEquation(equationImage);
 				
 				ArrayList <stringrect> sr = equationImage.getAbsoluteContainers((int)((float)prefferedFont*scale), bl);
@@ -249,7 +249,7 @@ public class EquationView extends View{
 	}
 
 
-	public point centerEquation(image im){
+	public point centerEquation(Image im){
 		//centers image in your view
 		point bl = new point();
 
@@ -279,7 +279,7 @@ public class EquationView extends View{
 		return bl;
 	}
 
-	public point topEquation(image im){
+	public point topEquation(Image im){
 		//puts your equation at the top of the view (this is for the history type)
 		point bl = centerEquation(im);
 		int imageHeight = (int)(2*bl.y - getHeight());

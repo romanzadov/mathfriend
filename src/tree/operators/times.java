@@ -6,7 +6,7 @@ import container.AllignFracBar;
 import move.operators.timesmove;
 
 import parse.composefractions;
-import representTerms.image;
+import representTerms.Image;
 
 import display.rectangle;
 import tree.*;
@@ -125,17 +125,17 @@ public class times extends operator{
 	}
 	timesmove tm = new timesmove();
 	@Override
-	public image inTermMoves(image im, term sel,
+	public Image inTermMoves(Image im, term sel,
 			int IntermIndex) {
 		
-		image Ghost = tm.inTermMoves(im, sel, IntermIndex);
+		Image Ghost = tm.inTermMoves(im, sel, IntermIndex);
 		return Ghost;
 	}
 	@Override
-	public representTerms.image overEqualsMoves(representTerms.image im,
+	public representTerms.Image overEqualsMoves(representTerms.Image im,
 			term sel, int IntermIndex, double xsel) {
 		
-		image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);	
+		Image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);	
 		return Ghost;
 	}
 	

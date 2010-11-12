@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import parse.path;
 import representTerms.PlaceAndFont;
-import representTerms.image;
+import representTerms.Image;
 import representTerms.stringrect;
 import tree.term;
 import android.content.Context;
@@ -39,9 +39,9 @@ public class PaintDisplayScreen extends View {
 	term selTerm;
 	term ghostTerm;
 
-	image iMain;
-	image iSel;
-	image iGhost = null;
+	Image iMain;
+	Image iSel;
+	Image iGhost = null;
 
 	ImagePositionManager myImagePositionManager;
 
@@ -123,8 +123,8 @@ public class PaintDisplayScreen extends View {
 
 		Log.d(TAG, "mainTerm: "+mainTerm.toString());
 
-		iMain = new image(mainTerm.toString(), fontsize, width, height);
-		iSel = new image(selTerm.toString(), fontsize, width, height);
+		iMain = new Image(mainTerm.toString(), fontsize, width, height);
+		iSel = new Image(selTerm.toString(), fontsize, width, height);
 
 	}
 
@@ -223,7 +223,7 @@ public class PaintDisplayScreen extends View {
 			}
 		}
 
-		ArrayList<image> historyImages = myImagePositionManager.getHistory(history, fontsize, 
+		ArrayList<Image> historyImages = myImagePositionManager.getHistory(history, fontsize, 
 						(int)iMain.tr.ScreenPosition.container.bl.y);
 		
 		for(int j = 0; j<historyImages.size(); j++){

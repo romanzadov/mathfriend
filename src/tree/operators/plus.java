@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import move.identify.FindSel;
 import move.identify.ReturnSel;
 import move.operators.plusmove;
-import representTerms.image;
+import representTerms.Image;
 import tree.term;
 import display.point;
 import display.rectangle;
@@ -97,7 +97,7 @@ public class plus extends operator{
 		return c;
 	}
 
-	public image inTermMoves(image im, term sel, int IntermIndex){
+	public Image inTermMoves(Image im, term sel, int IntermIndex){
 
 		term second = new term();
 		try {
@@ -121,15 +121,15 @@ public class plus extends operator{
 
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second, (int)im.tr.font);
-		image Ghost = new image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
 
 		return Ghost;
 	}
 
-	public image overEqualsMoves(image im, term sel, int IntermIndex, double xsel){
+	public Image overEqualsMoves(Image im, term sel, int IntermIndex, double xsel){
 		
 		plusmove pm = new plusmove();
-		image Ghost = new image();
+		Image Ghost = new Image();
 		if(!(sel.parent.parent.getChilds().get(IntermIndex) instanceof operator)){
 			Ghost = pm.overEquals(im, sel, IntermIndex, xsel);}
 		

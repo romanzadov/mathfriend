@@ -8,14 +8,15 @@ import javax.swing.JPanel;
 import parse.path;
 import representTerms.GUIMath;
 import representTerms.PlaceAndFont;
-import representTerms.image;
+import representTerms.Image;
 import representTerms.stringrect;
+import user.UserPrefferences;
 
 public class RunAsJava {
 	
 	int width = 500;
 	int height = 300;
-	int font = 35;
+	
 
 	public static void main(String[] args) {
 		String st = "2x-5=7";
@@ -26,10 +27,8 @@ public class RunAsJava {
 	
 	public void startFrame(String st){
 		
-		image im = new image(st, font, width, height);
+		Image im = new Image(st, UserPrefferences.PREFFERED_FONT, width, height);
 		System.out.println(im);
-		
-		
 		
 		JFrame f = new JFrame();
 		JPanel p = new JPanel();

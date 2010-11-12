@@ -1,7 +1,7 @@
 package tree.operators;
 import move.operators.plusmove;
 import display.rectangle;
-import representTerms.image;
+import representTerms.Image;
 import tree.*;
 public class minus extends operator{
 	
@@ -26,12 +26,12 @@ public class minus extends operator{
 		return a;
 	}
 	
-	public image inTermMoves(image im, term sel, int IntermIndex){
+	public Image inTermMoves(Image im, term sel, int IntermIndex){
 		plus p = new plus();
 		im = p.inTermMoves(im, sel, IntermIndex);
 		return im;
 	}
-	public image overEqualsMoves(image im, term sel, int IntermIndex, double xsel){
+	public Image overEqualsMoves(Image im, term sel, int IntermIndex, double xsel){
 		plus p = new plus();
 		im = p.overEqualsMoves(im, sel, IntermIndex, xsel);
 		return im;
