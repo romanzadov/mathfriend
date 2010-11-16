@@ -19,20 +19,25 @@ public class GhostScreen implements AbstractedScreen{
 		height = h;
 	}
 	
-	public void updateGhost(String newGhost){
-		Ghost = new Image(newGhost, UserPrefferences.PREFFERED_FONT, width, height);
-	}
 
 	@Override
-	public void updateMouse(int x, int y, boolean down) {
+	public int getBackgroundColor() {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
+
 	@Override
-	public ArrayList<stringrect> getThingsToDraw() {
+	public ArrayList<stringrect> getRelativeRectangles() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void changeEquation() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

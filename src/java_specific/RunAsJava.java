@@ -5,19 +5,16 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import parse.path;
-import representTerms.GUIMath;
-import representTerms.PlaceAndFont;
 import representTerms.Image;
-import representTerms.stringrect;
+import representTerms.LogicEngine;
 import user.UserPrefferences;
 
 public class RunAsJava {
 	
 	int width = 500;
 	int height = 300;
+	public static LogicEngine LOGIC_ENGINE;
 	
-
 	public static void main(String[] args) {
 		String st = "2x-5=7";
 		
@@ -27,18 +24,12 @@ public class RunAsJava {
 	
 	public void startFrame(String st){
 		
+		LOGIC_ENGINE = new LogicEngine();
+		
 		Image im = new Image(st, UserPrefferences.PREFFERED_FONT, width, height);
 		System.out.println(im);
 		
-		JFrame f = new JFrame();
-		JPanel p = new JPanel();
-		
-		p.setBackground(Color.blue);
-		
-		f.setSize(width,height);
-		f.add(p);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
+	
 		
 	}
 }

@@ -17,16 +17,23 @@ public class MainScreen implements AbstractedScreen{
 		width = w;
 		height = h;
 	}
-	
+
 	@Override
-	public void updateMouse(int x, int y, boolean down) {
+	public int getBackgroundColor() {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
+
 	@Override
-	public ArrayList<stringrect> getThingsToDraw() {
+	public ArrayList<stringrect> getRelativeRectangles() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void changeEquation() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
