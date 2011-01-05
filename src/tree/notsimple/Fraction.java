@@ -1,43 +1,43 @@
 package tree.notsimple;
-import tree.term;
+import tree.Term;
 import tree.operators.divide;
-import tree.operators.minus;
+import tree.operators.Minus;
 import tree.simple.Number;
 import display.rectangle;
 
 public class Fraction extends NotSimple{
 
 	
-	term top;
-	term bottom;
+	Term top;
+	Term bottom;
 	
 	public Fraction(){
 		divide dv = new divide();
 		this.operator = dv;}
 	
-	public Fraction(term tr){
+	public Fraction(Term tr){
 		divide dv = new divide();
 		this.operator = dv;
 		general(tr.getChilds().get(0), tr.getChilds().get(2));
 		hasparen = tr.hasparen;
 	}	
 	
-	public Fraction(term t, term b){
+	public Fraction(Term t, Term b){
 		divide dv = new divide();
 		this.operator = dv;
 		general(t,  b);
 	}
 	
-	public Fraction FractionOverOne(term tr){
+	public Fraction FractionOverOne(Term tr){
 		
 		Fraction f = new Fraction();
 		
 		Number one = new Number(1);
 		divide dv = new divide();
 		
-		term second =  new term();
+		Term second =  new Term();
 		try {
-			 second = (term)tr.clone();
+			 second = (Term)tr.clone();
 		} catch (CloneNotSupportedException e) {}
 		
 		f.top = tr;
@@ -56,13 +56,13 @@ public class Fraction extends NotSimple{
 		return f;
 	}
 	
-	public void general(term t, term b){
+	public void general(Term t, Term b){
 		divide dv = new divide();
 		divide op = new divide();
 		this.operator = op;	
 		try {
-			top = (term)t.clone();
-			bottom = (term)b.clone();
+			top = (Term)t.clone();
+			bottom = (Term)b.clone();
 		} catch (CloneNotSupportedException e) {}
 		
 		this.getChilds().add(top);
@@ -74,7 +74,7 @@ public class Fraction extends NotSimple{
 		bottom.parent = this;
 	}
 	
-	public boolean isNaturalFraction(term tr){
+	public boolean isNaturalFraction(Term tr){
 		boolean ans = false;
 		if(((Fraction)tr).isNegative(tr)){
 			if(tr.getChilds().get(0).NaturalNumber() && tr.getChilds().get(2).NaturalNumber()){
@@ -85,7 +85,7 @@ public class Fraction extends NotSimple{
 		return ans;
 	}
 	
-	public boolean isNegative(term tr){
+	public boolean isNegative(Term tr){
 		boolean ans = false;
 		
 		try {
@@ -96,11 +96,11 @@ public class Fraction extends NotSimple{
 		return ans;
 	}
 	
-	public Fraction multiply(term tr){
+	public Fraction multiply(Term tr){
 		return null;
 	}
 	
-	public Fraction add(term tr){
+	public Fraction add(Term tr){
 		Fraction f = new Fraction();
 		
 		
@@ -126,7 +126,7 @@ public class Fraction extends NotSimple{
 		return f;
 	}
 	
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 	
 		rectangle a = new rectangle();
 		float xmax= 0;
@@ -142,7 +142,7 @@ public class Fraction extends NotSimple{
 		return a;
 	}
 	
-	public double topnum(term tr){
+	public double topnum(Term tr){
 		//will give the true number of the top of the fraction
 		//noticing the +/- in front or negative
 		
@@ -153,7 +153,7 @@ public class Fraction extends NotSimple{
 		if(tr.parent != null){
 			int place = tr.parent.getChilds().indexOf(tr);
 			if(place>0){
-				if(tr.parent.getChilds().get(place-1) instanceof minus){negcount++;}
+				if(tr.parent.getChilds().get(place-1) instanceof Minus){negcount++;}
 			}
 		}
 		

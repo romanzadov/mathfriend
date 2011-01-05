@@ -1,18 +1,18 @@
 package container.walks;
 
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 
 public class allignbls  implements TreeFunction{
 
 	static final String TAG = "allignbls";
 	
-	public allignbls(term tr){
+	public allignbls(Term tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		try {
 			tr.container.bl.x +=tr.parent.container.bl.x;
 			tr.container.bl.y +=tr.parent.container.bl.y;

@@ -2,12 +2,12 @@ package tree.operators.calculate;
 
 import java.util.ArrayList;
 
-import move.identify.FindSel;
+import move.identify.TermMath;
 import move.identify.ReturnSel;
 
-import tree.term;
-import tree.operators.minus;
-import tree.operators.plus;
+import tree.Term;
+import tree.operators.Minus;
+import tree.operators.Plus;
 import tree.operators.times;
 import tree.simple.Number;
 
@@ -15,21 +15,21 @@ public class PlusMinus {
 
 
 
-	public term Add(term tr){
-		term second = likenumbers(tr);
+	public Term Add(Term tr){
+		Term second = likenumbers(tr);
 
 		return second;
 	}
 
-	public term likenumbers(term tr){
-		ArrayList<term> nums =  new ArrayList<term>();
-		term second = new term();
+	public Term likenumbers(Term tr){
+		ArrayList<Term> nums =  new ArrayList<Term>();
+		Term second = new Term();
 		try {
-			 second = (term)tr.clone();
+			 second = (Term)tr.clone();
 		} catch (CloneNotSupportedException e) {}
 		
 		for (int i = 0; i<tr.getChilds().size(); i++){
-			term kid = tr.getChilds().get(i);
+			Term kid = tr.getChilds().get(i);
 
 			if(kid instanceof Number){
 				nums.add(kid);
@@ -42,16 +42,14 @@ public class PlusMinus {
 		}
 
 		if(nums.size()>1){
-			term one = nums.get(0);
-			term two = nums.get(1);
+			Term one = nums.get(0);
+			Term two = nums.get(1);
 			
-			FindSel fs = new FindSel();
-			 ArrayList<Integer> key = fs.FindSelected(tr, one);
-			 ReturnSel rs = new ReturnSel();
-			 one = rs.Return(second, key);
+			 ArrayList<Integer> key = TermMath.findTreePositionOfSelected(tr, one);
+			 one = TermMath.findTermUsingKey(second, key);
 			 
-			 key = fs.FindSelected(tr, two);
-			 two = rs.Return(second, key);
+			 key = TermMath.findTreePositionOfSelected(tr, two);
+			 two = TermMath.findTermUsingKey(second, key);
 			
 			
 			
@@ -61,26 +59,26 @@ public class PlusMinus {
 			if(one.isNegative()){onepositive = false;}
 			
 			int twopos = two.parent.getChilds().indexOf(two);
-			if(two.parent.getChilds().get(twopos-1) instanceof minus||two.isNegative()){
+			if(two.parent.getChilds().get(twopos-1) instanceof Minus||two.isNegative()){
 				twopositive = false;
 			}
-			if(two.parent.getChilds().get(twopos-1) instanceof minus&&two.isNegative()){
+			if(two.parent.getChilds().get(twopos-1) instanceof Minus&&two.isNegative()){
 				twopositive = true;
 			}
 			
 			double onenum;
 			double twonum; 
 			
-			if(one instanceof Number){ onenum = ((Number) one).getvalue(); }
-			else{onenum =((Number) one.getChilds().get(2)).getvalue();}
+			if(one instanceof Number){ onenum = ((Number) one).getValue(); }
+			else{onenum =((Number) one.getChilds().get(2)).getValue();}
 			if(!onepositive){onenum*=(-1);}
 			
-			twonum = ((Number)two).getvalue();
+			twonum = ((Number)two).getValue();
 			if(!twopositive){twonum*=(-1);}
 			
 			double sum = onenum + twonum;
 			
-			term mid;
+			Term mid;
 			if(sum>0){
 				 mid = new Number(sum);
 			}
@@ -99,13 +97,13 @@ public class PlusMinus {
 			}
 			else{
 				if(!mid.isNegative()){
-					plus pl = new plus();
+					Plus pl = new Plus();
 					pl.parent = one.parent;
 					one.parent.getChilds().set(onepos-1, pl);
 					one.parent.getChilds().set(onepos, mid);
 				}
 				if(mid.isNegative()){
-					minus mn = new minus();
+					Minus mn = new Minus();
 					mn.parent = one.parent;
 					mid.toggleNegative();
 					one.parent.getChilds().set(onepos-1, mn);

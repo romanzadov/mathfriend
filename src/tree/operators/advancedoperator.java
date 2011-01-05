@@ -1,11 +1,11 @@
 package tree.operators;
 
-import tree.term;
+import tree.Term;
 
-public class advancedoperator extends operator{
+public class advancedoperator extends Operator{
 
 	@Override
-	public representTerms.Image inTermMoves(representTerms.Image im, term sel,
+	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
@@ -13,7 +13,7 @@ public class advancedoperator extends operator{
 
 	@Override
 	public representTerms.Image overEqualsMoves(representTerms.Image im,
-			term sel, int IntermIndex, double xsel) {
+			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

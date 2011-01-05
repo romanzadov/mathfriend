@@ -2,7 +2,7 @@ package ghosts;
 
 import representTerms.Image;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 //import android.util.Log;
 
@@ -21,7 +21,7 @@ public class SanitizeGhost  implements TreeFunction{
 			int kids = Ghost.tr.getChilds().size();
 			for(int i = 0; i<kids; i++){
 				if(!Ghost.tr.getChilds().get(i).issimple && Ghost.tr.getChilds().get(i).getChilds().size()==1){
-					term mid = Ghost.tr.getChilds().get(i).getChilds().get(0);
+					Term mid = Ghost.tr.getChilds().get(i).getChilds().get(0);
 					mid.parent = Ghost.tr;
 					Ghost.tr.getChilds().set(i, mid);
 				}
@@ -36,7 +36,7 @@ public class SanitizeGhost  implements TreeFunction{
 
 	}
 
-	public void performAction(term tr){
+	public void performAction(Term tr){
 		SanitizePlus sp = new SanitizePlus(tr);
 	}
 

@@ -5,11 +5,20 @@ import display.rectangle;
 
 public class stringrect implements Cloneable{
 
-	public String term =  new String();
-	public String todraw = "";
+	@Override
+	public String toString() {
+		return "stringrect [container=" + container + ", fontscale="
+				+ fontscale + ", hasParens=" + hasParens + ", myType=" + myType
+				+ ", term=" + term + ", todraw=" + todraw + "]";
+	}
+
 	public rectangle container = new rectangle();
+	public type myType;
+	public String todraw = "";
 	public float fontscale;
 	public boolean hasParens = false;
+	public enum type {MAIN, SELECTED, GHOST, HISTORY, SELECT_COVER}
+	public String term =  new String();
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {

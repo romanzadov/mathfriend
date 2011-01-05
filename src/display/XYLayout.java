@@ -16,7 +16,7 @@ public class XYLayout extends ViewGroup {
 		super(context);
 		con = context;
 	
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stu
 	}
 
 	public static class LayoutParams extends

@@ -11,7 +11,7 @@ import representTerms.Image;
 import display.rectangle;
 import tree.*;
 
-public class times extends operator{
+public class times extends Operator{
 
 	public boolean visible = false;
 	
@@ -29,7 +29,7 @@ public class times extends operator{
 		valuestring = "*";
 		
 	}
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		
 
 		rectangle rect = new rectangle();
@@ -70,7 +70,7 @@ public class times extends operator{
 			for(int i = 0; i<tr.getChilds().size(); i++){
 				if(tr.getChilds().get(i) instanceof times && ((times)tr.getChilds().get(i)).visible){
 				
-					term kid = tr.getChilds().get(i);
+					Term kid = tr.getChilds().get(i);
 					kid.container.height = (float) .3;
 					kid.container.width = (float) .3;
 					kid.todraw = ".";
@@ -85,7 +85,7 @@ public class times extends operator{
 	}
 	
 		
-	public rectangle makefractions(term tr){
+	public rectangle makefractions(Term tr){
 	
 		//set which terms are bottoms
 		for(int i = 0; i<tr.getChilds().size(); i++){
@@ -125,7 +125,7 @@ public class times extends operator{
 	}
 	timesmove tm = new timesmove();
 	@Override
-	public Image inTermMoves(Image im, term sel,
+	public Image inTermMoves(Image im, Term sel,
 			int IntermIndex) {
 		
 		Image Ghost = tm.inTermMoves(im, sel, IntermIndex);
@@ -133,10 +133,15 @@ public class times extends operator{
 	}
 	@Override
 	public representTerms.Image overEqualsMoves(representTerms.Image im,
-			term sel, int IntermIndex, double xsel) {
+			Term sel, int IntermIndex, double xsel) {
 		
 		Image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);	
 		return Ghost;
+	}
+	@Override
+	public Term simpleOperation(Term term) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

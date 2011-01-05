@@ -2,7 +2,7 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import tree.term;
+import tree.Term;
 
 import display.point;
 import display.rectangle;

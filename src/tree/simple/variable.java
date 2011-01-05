@@ -1,6 +1,6 @@
 package tree.simple;
 
-import tree.term;
+import tree.Term;
 import display.rectangle;
 
 public class variable extends simpleterm{
@@ -33,7 +33,7 @@ public class variable extends simpleterm{
 		return v;
 	}
 
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		tr.todraw = value;
 		a.height = 1;

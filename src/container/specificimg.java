@@ -1,7 +1,7 @@
 package container;
 
-import tree.term;
-import tree.operators.operator;
+import tree.Term;
+import tree.operators.Operator;
 import tree.simple.simpleterm;
 //import android.util.Log;
 import display.rectangle;
@@ -10,7 +10,7 @@ public class specificimg {
 	
 	static final String TAG = "specificimg";
 	
-	public rectangle specificimage(term ter){
+	public rectangle specificimage(Term ter){
 		
 		
 		rectangle rect = new rectangle();
@@ -23,7 +23,7 @@ public class specificimg {
 			}
 			//if not simple, and not rectangled, dig in
 			else if(!ter.getChilds().get(i).issimple){
-				term t2 = ter.getChilds().get(i);
+				Term t2 = ter.getChilds().get(i);
 				ter.getChilds().get(i).container = specificimage(t2);
 			}
 			else{System.out.println("not all terms are rectangles!");}
@@ -34,7 +34,7 @@ public class specificimg {
 		//once all terms are rectangled, call
 		//the operation to make superrectangle
 		
-		operator op = ter.operator;
+		Operator op = ter.operator;
 		if(op!=null){
 		rect = op.giverect(ter);}
 		else {
@@ -54,7 +54,7 @@ public class specificimg {
 		return rect;
 	}
 		
-	public void addParentheses(term tr){
+	public void addParentheses(Term tr){
 		//these will be the width and height of the parentheses
 		float height = tr.container.height;
 		float width = height/2;

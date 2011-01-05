@@ -13,8 +13,8 @@ public class preorganized {
 		if(st instanceof tree.simple.Number){
 		st.valuestring = ""+(((tree.simple.Number) st).value);
 		}
-		if(st instanceof tree.simple.constants){
-			st.valuestring =""+(((tree.simple.constants) st).value);
+		if(st instanceof tree.simple.Constant){
+			st.valuestring =""+(((tree.simple.Constant) st).value);
 			}
 		if(st instanceof tree.operators.parens){
 			st.valuestring = ""+(((tree.operators.parens) st).value);
@@ -22,8 +22,8 @@ public class preorganized {
 		if(st instanceof tree.simple.variable){
 			st.valuestring = ""+(((tree.simple.variable) st).value);
 			}
-		if(st instanceof tree.operators.operator){
-			st.valuestring = ""+(((tree.operators.operator) st).thisvalue);
+		if(st instanceof tree.operators.Operator){
+			st.valuestring = ""+(((tree.operators.Operator) st).thisvalue);
 			}
 		
 		

@@ -19,15 +19,18 @@ public class path {
 	public preorganized preorg = new preorganized();
 	public treegen tr = new treegen();
 
-	public term getTermFromString(String st)
+	public Term getTermFromString(String st)
 	{
-		term firstterm;
+		Term firstterm;
 		ArrayList<Character> formula =tochars(st);
 		boolean good = grammarcheck(formula);
 		if(good){
 			ArrayList<simpleterm> simp = tosimpleterms(formula);
 
-			firstterm = toterms(simp);
+			if(simp.size() == 1){firstterm = simp.get(0);}
+			
+			else{firstterm = toterms(simp);}
+			
 			GroupFractions GF = new GroupFractions(firstterm);
 			CastToNonSimple CT = new CastToNonSimple(firstterm);
 			
@@ -60,16 +63,16 @@ public class path {
 		return simp;
 	}
 
-	public term toterms(ArrayList<simpleterm> simp)
+	public Term toterms(ArrayList<simpleterm> simp)
 	{
-		term firstterm = tr.generatetree(simp);
+		Term firstterm = tr.generatetree(simp);
 //		Log.d(TAG, ""+firstterm.getChilds().get(0).toString()+firstterm.getChilds().get(0).hasparen);
 		testdraw(firstterm);
 		return firstterm;
 
 	}
 
-	public void testdraw(term tr){
+	public void testdraw(Term tr){
 		for(int i = 0; i<tr.getChilds().size();i++){
 			if(tr.getChilds().get(i).issimple){
 				for(int j = 0; j<tr.getChilds().get(i).simples.size();j++){

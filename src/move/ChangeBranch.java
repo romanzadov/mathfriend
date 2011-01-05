@@ -2,24 +2,22 @@ package move;
 
 import java.util.ArrayList;
 
-import move.identify.FindSel;
+import move.identify.TermMath;
 import move.identify.ReturnSel;
-import tree.term;
+import tree.Term;
 
 public class ChangeBranch {
 
-	public term Change(term tree, term current, term future){
-		term second = new term();
+	public Term Change(Term tree, Term current, Term future){
+		Term second = new Term();
 		try {
-			second = (term) tree.clone();
+			second = (Term) tree.clone();
 		} catch (CloneNotSupportedException e) {
 		}
 		
-		FindSel fs = new FindSel();
-		ArrayList<Integer> key = fs.FindSelected(tree, current);
-		
-		ReturnSel rs = new ReturnSel();
-		term moveto = rs.Return(second, key);
+	
+		ArrayList<Integer> key = TermMath.findTreePositionOfSelected(tree, current);
+		Term moveto = TermMath.findTermUsingKey(second, key);
 		
 		future.parent = moveto.parent;
 		int moveint = moveto.parent.getChilds().indexOf(moveto);

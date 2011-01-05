@@ -3,7 +3,7 @@ package tree.operators;
 import display.rectangle;
 import tree.*;
 
-public class divide extends operator{
+public class divide extends Operator{
 
 	public String todraw = "/";
 	
@@ -19,7 +19,7 @@ public class divide extends operator{
 		rmult = false;
 		valuestring = "/";
 	}
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		times ti = new times();
 		a = ti.giverect(tr);
@@ -33,14 +33,14 @@ public class divide extends operator{
 		return c;
 	}
 	@Override
-	public representTerms.Image inTermMoves(representTerms.Image im, term sel,
+	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public representTerms.Image overEqualsMoves(representTerms.Image im,
-			term sel, int IntermIndex, double xsel) {
+			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

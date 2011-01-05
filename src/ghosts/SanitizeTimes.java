@@ -1,11 +1,11 @@
 package ghosts;
 
-import tree.term;
+import tree.Term;
 
 public class SanitizeTimes {
 
 	
-	public SanitizeTimes(term tr){
+	public SanitizeTimes(Term tr){
 		
 	}
 }

@@ -4,7 +4,7 @@ import display.rectangle;
 import tree.*;
 
 
-public class negative extends operator{
+public class negative extends Operator{
 	
 	
 	public negative(){
@@ -20,7 +20,7 @@ public class negative extends operator{
 		valuestring = "-";
 	}
 	
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		float xsofar = 0;
 		float heightmax = 0;
 		rectangle a = new rectangle();
@@ -29,14 +29,14 @@ public class negative extends operator{
 		}
 	
 		else{
-			plus pl = new plus();
+			Plus pl = new Plus();
 			a = pl.giverect(tr);
 		}
 		
 		return a;
 	}
 
-	public rectangle justnegative(term tr){
+	public rectangle justnegative(Term tr){
 		rectangle a = new rectangle();
 		tr.todraw = "-";
 		a.height = 1;
@@ -52,7 +52,7 @@ public class negative extends operator{
 	}
 
 	@Override
-	public representTerms.Image inTermMoves(representTerms.Image im, term sel,
+	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
@@ -60,7 +60,7 @@ public class negative extends operator{
 
 	@Override
 	public representTerms.Image overEqualsMoves(representTerms.Image im,
-			term sel, int IntermIndex, double xsel) {
+			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

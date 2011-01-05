@@ -1,27 +1,27 @@
 package move.operators;
 
-import tree.term;
+import tree.Term;
 import tree.operators.divide;
-import tree.operators.minus;
-import tree.operators.operator;
-import tree.operators.plus;
+import tree.operators.Minus;
+import tree.operators.Operator;
+import tree.operators.Plus;
 import tree.operators.times;
 
 public class TimesTerm {
 	
-	public void Times(term tr, term sel){
+	public void Times(Term tr, Term sel){
 	
 		if(tr.operator instanceof times || tr.operator instanceof divide){
 			regularTimes(tr, sel);
 		}
 		
-		else if(tr.operator instanceof plus || tr.operator instanceof minus){
+		else if(tr.operator instanceof Plus || tr.operator instanceof Minus){
 			for(int i = 0; i< tr.getChilds().size(); i++){
-				if(!(tr.getChilds().get(i) instanceof operator)){
+				if(!(tr.getChilds().get(i) instanceof Operator)){
 					
-					term resel = null;
+					Term resel = null;
 					try {
-						resel = (term)sel.clone();
+						resel = (Term)sel.clone();
 					} catch (CloneNotSupportedException e) {}
 					resel.parent = sel.parent;
 					regularTimes(tr.getChilds().get(i), resel);
@@ -35,7 +35,7 @@ public class TimesTerm {
 		
 	}
 	
-	public void regularTimes(term tr, term sel){
+	public void regularTimes(Term tr, Term sel){
 		times tm = new times();
 		if(tr.operator instanceof times || tr.operator instanceof divide){
 			sel.parent = tr;
@@ -44,7 +44,7 @@ public class TimesTerm {
 			tr.getChilds().add(0,sel);
 		}
 		else{
-			term mid = new term();
+			Term mid = new Term();
 			mid.operator = new times();
 			mid.parent = tr.parent;
 			

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import display.point;
 import representTerms.Image;
-import tree.term;
+import tree.Term;
 
 public class equationlevel {
 

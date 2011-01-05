@@ -7,7 +7,7 @@ import parse.path;
 import representTerms.PlaceAndFont;
 import representTerms.Image;
 import representTerms.stringrect;
-import tree.term;
+import tree.Term;
 import android.util.Log;
 
 public class ImagePositionManager {
@@ -112,7 +112,7 @@ public class ImagePositionManager {
 		for(int i = 0; i<history.size(); i++){
 			//create image
 			path pa = new path();
-			term tr = pa.getTermFromString(history.get(i));
+			Term tr = pa.getTermFromString(history.get(i));
 			Image step = new Image(tr, new point(0,0), null);
 			
 			//figure out new font if we have to scale it

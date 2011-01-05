@@ -5,14 +5,14 @@ import parse.parenthesize;
 import tree.operators.divide;
 import tree.operators.equals;
 import tree.operators.exponent;
-import tree.operators.minus;
+import tree.operators.Minus;
 import tree.operators.negative;
-import tree.operators.operator;
+import tree.operators.Operator;
 import tree.operators.parens;
-import tree.operators.plus;
+import tree.operators.Plus;
 import tree.operators.times;
 import tree.simple.Number;
-import tree.simple.constants;
+import tree.simple.Constant;
 import tree.simple.simpleterm;
 import tree.simple.variable;
 //import android.util.Log;
@@ -23,15 +23,15 @@ public class treegen {
 	
 	static final String TAG = "treegen";
 
-	public ArrayList<term> orgconts = new ArrayList<term>();		//where we store simple terms to organize them before putting them in terms.
-	public ArrayList<operator> ops = new ArrayList<operator>();			//highest level operators
-	public ArrayList<term> contents = new ArrayList<term>();
+	public ArrayList<Term> orgconts = new ArrayList<Term>();		//where we store simple terms to organize them before putting them in terms.
+	public ArrayList<Operator> ops = new ArrayList<Operator>();			//highest level operators
+	public ArrayList<Term> contents = new ArrayList<Term>();
 
 
-	public term generatetree(ArrayList<simpleterm> simp) {
+	public Term generatetree(ArrayList<simpleterm> simp) {
 
-		term firstterm = generatenode(simp);
-		term parent = new term();
+		Term firstterm = generatenode(simp);
+		Term parent = new Term();
 		rectangle cont = new rectangle();
 		parent.container = cont;
 		parent.getChilds().add(firstterm);
@@ -42,7 +42,7 @@ public class treegen {
 		return firstterm;
 	}
 
-	public term simplecheck(term tr){
+	public Term simplecheck(Term tr){
 		
 		if(tr.getChilds().size()==1&&tr.getChilds().get(0).getChilds().size()==0){
 			tr.getChilds().get(0).issimple = true;
@@ -51,10 +51,10 @@ public class treegen {
 		return tr;
 	}
 	
-	public term generatenode(ArrayList<simpleterm> simp){
+	public Term generatenode(ArrayList<simpleterm> simp){
 
 
-		term thisterm = new term();
+		Term thisterm = new Term();
 
 		thisterm = fullyreduced(simp, thisterm);
 
@@ -71,7 +71,7 @@ public class treegen {
 		simp = removeexcessparens(simp, pns);
 		pns = checkparens(simp);		
 
-		operator primary = pickhighestpriority(simp,pns);
+		Operator primary = pickhighestpriority(simp,pns);
 
 		thisterm.operator = primary;
 
@@ -85,7 +85,7 @@ public class treegen {
 	}
 
 
-	public term fullyreduced(ArrayList<simpleterm> simp, term tr2){
+	public Term fullyreduced(ArrayList<simpleterm> simp, Term tr2){
 
 		if(simp.size() == 1){
 			simp.get(0).parent = tr2;
@@ -127,7 +127,7 @@ public class treegen {
 		return simp;
 	}
 
-	public void rephrase(ArrayList<simpleterm> simp, operator primary){
+	public void rephrase(ArrayList<simpleterm> simp, Operator primary){
 		
 		
 		int start = 0;
@@ -140,7 +140,7 @@ public class treegen {
 		}
 		else{
 			for(int i=0;i<ops.size();i++){
-				term ph = new term();
+				Term ph = new Term();
 				
 				for(int j=start;j<ops.get(i).charpos;j++){
 					ph.simples.add(simp.get(j));
@@ -148,7 +148,7 @@ public class treegen {
 				
 				
 				orgconts.add(ph);
-				term pho = new term();
+				Term pho = new Term();
 				pho.simples.add(ops.get(i));
 				orgconts.add(pho);
 				start = ops.get(i).charpos+1;
@@ -157,7 +157,7 @@ public class treegen {
 			if(ops.size()>0){
 				int last = ops.size()-1;
 				if(ops.get(last).charpos<simp.size()){
-					term ph = new term();
+					Term ph = new Term();
 					for(int i = ops.get(last).charpos+1; i<simp.size();i++){
 						ph.simples.add(simp.get(i));
 					}
@@ -173,12 +173,12 @@ public class treegen {
 		return paren;
 	}
 
-	public operator pickhighestpriority(ArrayList<simpleterm> simp,ArrayList<int[]> parens){
+	public Operator pickhighestpriority(ArrayList<simpleterm> simp,ArrayList<int[]> parens){
 		int primaryspot = 0;
 		double orderofoperation = -10;
 		for(int i=0; i<simp.size();i++){
-			if(simp.get(i) instanceof operator){
-				operator a = (operator)simp.get(i);
+			if(simp.get(i) instanceof Operator){
+				Operator a = (Operator)simp.get(i);
 				if(a.orderofoperation> orderofoperation){
 					primaryspot = i;
 					orderofoperation = a.orderofoperation;
@@ -193,11 +193,11 @@ public class treegen {
 
 
 		}
-		operator primary;
+		Operator primary;
 		try {
-			primary = (operator)simp.get(primaryspot);
+			primary = (Operator)simp.get(primaryspot);
 		} catch (Exception e) {
-			primary = new plus();
+			primary = new Plus();
 		}
 		
 		for(int i=0; i<simp.size();i++){
@@ -206,8 +206,8 @@ public class treegen {
 					if(parens.get(j)[0]==i){ i=parens.get(j)[1]; }
 				}		
 			}
-			else if(simp.get(i) instanceof operator){
-				operator a = (operator)simp.get(i);
+			else if(simp.get(i) instanceof Operator){
+				Operator a = (Operator)simp.get(i);
 				if(a.orderofoperation==primary.orderofoperation){
 					a.charpos=i;
 					ops.add(a);
@@ -220,10 +220,10 @@ public class treegen {
 	}
 
 
-	public void digdown(term thisterm){
+	public void digdown(Term thisterm){
 		for(int i = 0;i< contents.size();i++){		//for any non simple term
 
-			term child = new term();
+			Term child = new Term();
 			treegen tr = new treegen();
 
 			if(contents.get(i).issimple==false){
@@ -237,7 +237,7 @@ public class treegen {
 
 	}
 
-	public void checksimples(term thisterm){
+	public void checksimples(Term thisterm){
 		if(thisterm.operator instanceof negative){
 			thisterm.setNegative(true);
 		}
@@ -280,49 +280,49 @@ public class treegen {
 		//then override minuses with negatives as needed
 
 		for(int i = 0; i<simp.size(); i++){
-			if(simp.get(i) instanceof operator){
+			if(simp.get(i) instanceof Operator){
 
 				if(simp.get(i).equals("+")){
-					plus a = new plus();
-					a.charpos = ((operator)simp.get(i)).charpos;
-					a.thisvalue = ((operator)simp.get(i)).thisvalue;
-					a.valuestring =  ((operator)simp.get(i)).valuestring;
+					Plus a = new Plus();
+					a.charpos = ((Operator)simp.get(i)).charpos;
+					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
+					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("-")){
-					minus a = new minus();
-					a.charpos = ((operator)simp.get(i)).charpos;
-					a.thisvalue = ((operator)simp.get(i)).thisvalue;
-					a.valuestring =  ((operator)simp.get(i)).valuestring;
+					Minus a = new Minus();
+					a.charpos = ((Operator)simp.get(i)).charpos;
+					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
+					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("*")){
 					times a = new times();
-					a.charpos = ((operator)simp.get(i)).charpos;
-					a.thisvalue = ((operator)simp.get(i)).thisvalue;
-					a.valuestring =  ((operator)simp.get(i)).valuestring;
+					a.charpos = ((Operator)simp.get(i)).charpos;
+					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
+					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("/")){
 					divide a = new divide();
-					a.charpos = ((operator)simp.get(i)).charpos;
-					a.thisvalue = ((operator)simp.get(i)).thisvalue;
-					a.valuestring =  ((operator)simp.get(i)).valuestring;
+					a.charpos = ((Operator)simp.get(i)).charpos;
+					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
+					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("^")){
 					exponent a = new exponent();
-					a.charpos = ((operator)simp.get(i)).charpos;
-					a.thisvalue = ((operator)simp.get(i)).thisvalue;
-					a.valuestring =  ((operator)simp.get(i)).valuestring;
+					a.charpos = ((Operator)simp.get(i)).charpos;
+					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
+					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 
 				if(simp.get(i).equals("=")){
 					equals a = new equals();
-					a.charpos = ((operator)simp.get(i)).charpos;
-					a.thisvalue = ((operator)simp.get(i)).thisvalue;
-					a.valuestring =  ((operator)simp.get(i)).valuestring;
+					a.charpos = ((Operator)simp.get(i)).charpos;
+					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
+					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 			}
@@ -331,14 +331,14 @@ public class treegen {
 		}
 		//reset minuses to negatives
 		for(int i = 0; i<simp.size(); i++){
-			if(simp.get(i) instanceof minus){
+			if(simp.get(i) instanceof Minus){
 
 				if(i==0||simp.get(i-1) instanceof equals
 						||simp.get(i-1).equals("(")
-						||simp.get(i-1) instanceof operator){
+						||simp.get(i-1) instanceof Operator){
 
 					negative neg = new negative();
-					neg.charpos = ((operator)simp.get(i)).charpos;
+					neg.charpos = ((Operator)simp.get(i)).charpos;
 					neg.valuestring = "-";
 					simp.set(i, neg);
 					
@@ -408,7 +408,7 @@ public class treegen {
 	}
 
 
-	public term setnode(term thisterm){
+	public Term setnode(Term thisterm){
 
 		contents = orgconts;
 		return thisterm;
@@ -476,7 +476,7 @@ public class treegen {
 			simp.add(end+2, right);
 		}
 		else if(simp.get(st) instanceof Number || simp.get(st) instanceof variable
-				|| simp.get(st) instanceof constants){
+				|| simp.get(st) instanceof Constant){
 			parens left = new parens();
 			left.value = '(';
 			left.valuestring = "(";

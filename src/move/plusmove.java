@@ -1,30 +1,30 @@
 package move;
 
 import move.identify.selectterm;
-import tree.term;
+import tree.Term;
 import tree.notsimple.NegativeTerm;
 import tree.operators.equals;
-import tree.operators.operator;
-import tree.operators.plus;
+import tree.operators.Operator;
+import tree.operators.Plus;
 import display.point;
 
 public class plusmove {
 
-	public term plmomve(term main, term selected, int x, int y){
+	public Term plmomve(Term main, Term selected, int x, int y){
 		System.out.println("plus move");
 		selectterm st = new selectterm();		
-		term endterm = st.whichterm(selected.parent, x, y, new point(0,0), 0);
+		Term endterm = st.whichterm(selected.parent, x, y, new point(0,0), 0);
 		
 		if(endterm == null){
 			
 			if(selected.parent.parent.operator instanceof equals){
-				term higherterm = st.whichterm(selected.parent.parent, x, y, new point(0,0), 0);
+				Term higherterm = st.whichterm(selected.parent.parent, x, y, new point(0,0), 0);
 				endterm = st.whichterm(higherterm, x, y, new point(0,0), 0);
 			
 			}
 		}
-		if(!(selected instanceof operator) && 
-				!(endterm instanceof operator))
+		if(!(selected instanceof Operator) && 
+				!(endterm instanceof Operator))
 		   	{
 			System.out.println("try to move");
 			main = move(main, selected, endterm);}
@@ -34,7 +34,7 @@ public class plusmove {
 		return main;
 	}
 	
-	public term move(term main, term selected, term endterm){
+	public Term move(Term main, Term selected, Term endterm){
 		
 		int splace = selected.parent.getChilds().indexOf(selected);
 		int eplace = endterm.parent.getChilds().indexOf(endterm);
@@ -49,9 +49,9 @@ public class plusmove {
 					System.out.println("start or end = 0");
 					if(splace==0){
 						System.out.println("start = 0");
-						if(selected.parent.getChilds().get(1) instanceof plus){
-							plus pl = new plus();
-							term hold = selected.parent.getChilds().get(splace);
+						if(selected.parent.getChilds().get(1) instanceof Plus){
+							Plus pl = new Plus();
+							Term hold = selected.parent.getChilds().get(splace);
 							selected.parent.getChilds().set(splace,
 									selected.parent.getChilds().get(eplace));
 							selected.parent.getChilds().set(splace-1,
@@ -64,8 +64,8 @@ public class plusmove {
 					
 				}
 				else{
-					term hold1 = selected.parent.getChilds().get(splace-1);
-					term hold2 = selected.parent.getChilds().get(splace);
+					Term hold1 = selected.parent.getChilds().get(splace-1);
+					Term hold2 = selected.parent.getChilds().get(splace);
 					selected.parent.getChilds().set(splace,
 							selected.parent.getChilds().get(eplace));
 					selected.parent.getChilds().set(splace-1,

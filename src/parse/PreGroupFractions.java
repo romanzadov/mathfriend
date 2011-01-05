@@ -3,10 +3,10 @@ package parse;
 import java.util.ArrayList;
 
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.divide;
-import tree.operators.operator;
+import tree.operators.Operator;
 import tree.operators.parens;
 import tree.operators.times;
 import tree.simple.Placeholder;
@@ -15,27 +15,27 @@ import tree.simple.Number;
 public class PreGroupFractions implements TreeFunction{
 
 
-	public PreGroupFractions(term tr){
+	public PreGroupFractions(Term tr){
 		downwalk walk = new downwalk(tr, this);
 
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 
 
 		if(tr != null && tr.operator != null){
 			if(tr.operator instanceof times || tr.operator instanceof divide){
 
-				term[][] stacked = PutIntoMatrix(tr);
+				Term[][] stacked = PutIntoMatrix(tr);
 
-				term mid = new term();
+				Term mid = new Term();
 				if(stacked.length>0 && stacked[0][0]!=null){
 					mid = ChangeMid(stacked);
 				}
 
 
 				if(mid.getChilds().size()>0){	
-					tr.setChilds(new ArrayList<term>());
+					tr.setChilds(new ArrayList<Term>());
 					for(int i = 0; i<mid.getChilds().size(); i++){
 						tr.getChilds().add(mid.getChilds().get(i));
 					}
@@ -50,11 +50,11 @@ public class PreGroupFractions implements TreeFunction{
 	}
 
 
-	public term[][] PutIntoMatrix(term tr){
+	public Term[][] PutIntoMatrix(Term tr){
 
 
 
-		term[][] stacked = new term[tr.getChilds().size()][3];
+		Term[][] stacked = new Term[tr.getChilds().size()][3];
 		int[] position = new int[]{0,0};
 
 
@@ -70,7 +70,7 @@ public class PreGroupFractions implements TreeFunction{
 		if(hasdivide){
 			for(int i = 0; i< tr.getChilds().size(); i++){
 				Placeholder one = new Placeholder(1);
-				term piece = tr.getChilds().get(i);
+				Term piece = tr.getChilds().get(i);
 				
 
 				if(position[1]==0){
@@ -145,9 +145,9 @@ public class PreGroupFractions implements TreeFunction{
 		return stacked;
 	}
 
-	public term ChangeMid(term[][] stacked){
+	public Term ChangeMid(Term[][] stacked){
 
-		term mid = new term();
+		Term mid = new Term();
 
 
 		for(int i = 0; i< stacked.length; i++){

@@ -1,6 +1,6 @@
 package tree.simple;
 
-import tree.term;
+import tree.Term;
 import tree.notsimple.NotSimple;
 import display.rectangle;
 
@@ -18,7 +18,7 @@ public class simpleterm extends NotSimple{
 	
 	public String image;
 	
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		System.out.println("error: giverect was run on simpleterm");
 		rectangle a = new rectangle();
 		
@@ -32,7 +32,7 @@ public class simpleterm extends NotSimple{
 	}
 
 	@Override
-	public boolean isNegative(term tr) {
+	public boolean isNegative(Term tr) {
 		// TODO Auto-generated method stub
 		return false;
 	}

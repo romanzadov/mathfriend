@@ -3,73 +3,86 @@ package representTerms;
 import java.util.ArrayList;
 
 import display.point;
+import display.rectangle;
 
 public class GUIMath {
+	
+	
+	public static rectangle scaleFloat(rectangle a, float f){
+		rectangle b = new rectangle();
+		b.height = a.height*f;
+		b.width = a.width*f;
+		b.bl.x = a.bl.x*f;
+		b.bl.y = a.bl.y*f;
+		return b;
+	}
 
-	public static int MIN_FONT = 0;
-	public static int MAX_FONT = 40;
-	int xDisplay;
-	int yDisplay;
-	
-	public void updateScreen(int xDisp, int yDisp){
-		xDisplay = xDisp;
-		yDisplay = yDisp;
+	public static rectangle translateXY(rectangle a, float x, float y){
+		rectangle b = new rectangle();
+		b.height = a.height;
+		b.width = a.width;
+		b.bl.x = a.bl.x+x;
+		b.bl.y = a.bl.y+y;
+		return b;
+	}
+
+	public static rectangle flipYVals(rectangle a){
+		rectangle b = new rectangle();
+		b.height = a.height;
+		b.width = a.width;
+		b.bl.x = a.bl.x;
+		b.bl.y = a.bl.y + a.height;
+		return b;
 	}
 	
-	public GUIMath(int minF, int maxF, int displayWidth, int displayHeight){
-		MIN_FONT = minF;
-		MAX_FONT = maxF;
-		xDisplay = displayWidth;
-		yDisplay = displayHeight;
-	}
-	
-	public PlaceAndFont getCenteredPlaceAndFont(float xTerm, float yTerm, int prefferedFont){
+	public static PlaceAndFont getCenteredPlaceAndFont(float xTerm, float yTerm, float prefferedFont, int xDisplay, int yDisplay){
 
 		point bl = new point();
 		
-		if(justFits(xTerm, yTerm, prefferedFont)){
-			bl = scaledBl(xTerm, yTerm, prefferedFont);
+		if(justFits(xTerm, yTerm, prefferedFont, xDisplay, yDisplay)){
+			bl = scaledBl(xTerm, yTerm, prefferedFont, xDisplay, yDisplay);
 			return new PlaceAndFont(bl, prefferedFont);
 		}
 		else {
-			int reducedFont = reducedFont(xTerm, yTerm);
-			if(reducedFont > MIN_FONT){
-				bl = scaledBl(xTerm, yTerm, reducedFont);
+			int reducedFont = reducedFont(xTerm, yTerm, xDisplay, yDisplay);
+			if(reducedFont > Settings.MIN_FONT){
+				bl = scaledBl(xTerm, yTerm, reducedFont, xDisplay, yDisplay);
 				return new PlaceAndFont(bl, reducedFont);
 			}
 			
 			else{
-				bl = scaledBl(xTerm, yTerm, MIN_FONT);
-				return new PlaceAndFont(bl, MIN_FONT);
+				bl = scaledBl(xTerm, yTerm, Settings.MIN_FONT, xDisplay, yDisplay);
+				return new PlaceAndFont(bl, Settings.MIN_FONT);
 			}
 		}
 	}
 	
-	private point scaledBl(float xTerm, float yTerm, int font){
-		int xNew = (int) (xTerm*font);
-		int yNew = (int) (yTerm*font);
+	private static point scaledBl(float xTerm, float yTerm, float font, int xDisplay, int yDisplay){
+		float xNew = (int) (xTerm*font);
+		float yNew = (int) (yTerm*font);
 		
-		int xDisplayMiddle = xDisplay/2;
-		int yDisplayMiddle = yDisplay/2;
+		float xDisplayMiddle = xDisplay/2;
+		float yDisplayMiddle = yDisplay/2;
 		
-		int xPos = xDisplayMiddle - xNew;
-		int yPos = yDisplayMiddle + yNew;
+		float xPos = xDisplayMiddle - xNew/2;
+		float yPos = yDisplayMiddle - yNew/2;
 		
 		return new point(xPos, yPos);
 	}
 	
-	private int reducedFont(float xTerm, float yTerm){ 
-		int xFontMinimum = (int) ((xDisplay - MIN_FONT - MIN_FONT)/(xTerm));
-		int yFontMinimum = (int) ((yDisplay - MIN_FONT - MIN_FONT)/(yTerm));
+	private static int reducedFont(float xTerm, float yTerm, int xDisplay, int yDisplay){ 
+		int xFontMinimum = (int) ((xDisplay - Settings.MIN_FONT - Settings.MIN_FONT)/(xTerm));
+		int yFontMinimum = (int) ((yDisplay - Settings.MIN_FONT - Settings.MIN_FONT)/(yTerm));
 		
 		return Math.min(xFontMinimum, yFontMinimum);
 	}
 	
-	private boolean justFits(float xTerm, float yTerm, int prefferedFont){
+	private static boolean justFits(float xTerm, float yTerm, float prefferedFont, int xDisplay, int yDisplay){
 		boolean fits = true;
-		if((prefferedFont * xTerm) > (xDisplay-MIN_FONT-MIN_FONT)){fits = false;}
-		if((prefferedFont * yTerm) > (yDisplay - MIN_FONT - MIN_FONT)){fits = false;}
+		if((prefferedFont * xTerm) > (xDisplay-Settings.MIN_FONT-Settings.MIN_FONT)){fits = false;}
+		if((prefferedFont * yTerm) > (yDisplay - Settings.MIN_FONT - Settings.MIN_FONT)){fits = false;}
 		return fits;
 	}
+	
 	
 }

@@ -4,7 +4,7 @@ import display.rectangle;
 import tree.*;
 import tree.downwalk.TreeFunction;
 
-public class exponent extends operator{
+public class exponent extends Operator{
 	
 	public exponent()
 	{
@@ -21,7 +21,7 @@ public class exponent extends operator{
 		
 	}
 	
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		float xsofar = 0;
 		float ysofar = 0;
@@ -67,7 +67,7 @@ public class exponent extends operator{
 		return a;
 	}
 
-	public rectangle justexp(term tr){
+	public rectangle justexp(Term tr){
 		rectangle a = new rectangle();
 		tr.container = a;
 		return a;
@@ -80,7 +80,7 @@ public class exponent extends operator{
 	}
 
 	@Override
-	public representTerms.Image inTermMoves(representTerms.Image im, term sel,
+	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
@@ -88,7 +88,7 @@ public class exponent extends operator{
 
 	@Override
 	public representTerms.Image overEqualsMoves(representTerms.Image im,
-			term sel, int IntermIndex, double xsel) {
+			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

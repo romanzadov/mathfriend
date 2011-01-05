@@ -1,6 +1,6 @@
 package tree.operators;
 
-import move.operators.plusmove;
+import move.operators.PlusMove;
 
 import container.RelativeContainer;
 
@@ -10,7 +10,7 @@ import representTerms.Image;
 import tree.*;
 import tree.simple.Number;
 
-public class equals extends operator{
+public class equals extends Operator{
 
 	String name = "=";
 
@@ -25,7 +25,7 @@ public class equals extends operator{
 		rmult = false;
 		todraw = "=";
 	}
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		if(tr.getChilds().size() == 0){
 			rectangle cont = tr.container;
@@ -77,7 +77,7 @@ public class equals extends operator{
 		return c;
 	}
 
-	public Image inTermMoves(Image im, term sel, int IntermIndex){
+	public Image inTermMoves(Image im, Term sel, int IntermIndex){
 
 		int selindex = sel.parent.getChilds().indexOf(sel);
 		Image Ghost = im;
@@ -87,21 +87,21 @@ public class equals extends operator{
 
 	}
 
-	public Image MoveFocus(Image im, term sel, int selindex, int IntermIndex){
+	public Image MoveFocus(Image im, Term sel, int selindex, int IntermIndex){
 		Image Ghost = new Image();
-		term second = new term();
+		Term second = new Term();
 		try {
-			second = (term) im.tr.clone();
+			second = (Term) im.tr.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		term secondsel = second.getChilds().get(selindex);
-		term moveto = second.getChilds().get(IntermIndex);
+		Term secondsel = second.getChilds().get(selindex);
+		Term moveto = second.getChilds().get(IntermIndex);
 
-		if((moveto.operator instanceof plus)||(moveto.operator instanceof minus)){
-			if(!(secondsel.operator instanceof plus)&&!(secondsel.operator instanceof minus)){
+		if((moveto.operator instanceof Plus)||(moveto.operator instanceof Minus)){
+			if(!(secondsel.operator instanceof Plus)&&!(secondsel.operator instanceof Minus)){
 				
 				Number zero = new Number(0);
 				zero.parent = secondsel.parent;
@@ -109,14 +109,14 @@ public class equals extends operator{
 
 				if (secondsel.isNegative()){
 					secondsel = secondsel.toggleNegative();
-					plus pl = new plus();
+					Plus pl = new Plus();
 					moveto.getChilds().add(pl);
 					moveto.getChilds().add(secondsel);
 					pl.parent = moveto;
 					secondsel.parent = moveto;
 				}
 				else{
-					minus mn = new minus();
+					Minus mn = new Minus();
 					moveto.getChilds().add(mn);
 					moveto.getChilds().add(secondsel);
 					mn.parent = moveto;
@@ -127,16 +127,16 @@ public class equals extends operator{
 			}
 		}
 
-		else if(!(secondsel.operator instanceof plus)&&!(secondsel.operator instanceof minus)
-				&&!(moveto.operator instanceof plus)&&!(moveto.operator instanceof minus)
+		else if(!(secondsel.operator instanceof Plus)&&!(secondsel.operator instanceof Minus)
+				&&!(moveto.operator instanceof Plus)&&!(moveto.operator instanceof Minus)
 				&&!(selindex == IntermIndex)){
 		
 			if(secondsel.isNegative()){
 				secondsel = secondsel.toggleNegative();
-				plus pl = new plus();
-				minus mn = new minus();
+				Plus pl = new Plus();
+				Minus mn = new Minus();
 				Number zero = new Number(0);
-				term mid = new term();
+				Term mid = new Term();
 				pl.parent = mid;
 				mn.parent = mid;
 				mid.parent = secondsel.parent;
@@ -152,10 +152,10 @@ public class equals extends operator{
 				
 			}
 			else{
-				plus pl = new plus();
-				minus mn = new minus();
+				Plus pl = new Plus();
+				Minus mn = new Minus();
 				Number zero = new Number(0);
-				term mid = new term();
+				Term mid = new Term();
 				pl.parent = mid;
 				mn.parent = mid;
 				mid.parent = secondsel.parent;
@@ -189,8 +189,13 @@ public class equals extends operator{
 
 	}
 	@Override
-	public Image overEqualsMoves(Image im, term sel, int IntermIndex,
+	public Image overEqualsMoves(Image im, Term sel, int IntermIndex,
 			double xsel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Term simpleOperation(Term term) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 import tree.*;
 import tree.operators.advancedoperator;
-import tree.operators.operator;
+import tree.operators.Operator;
 import tree.operators.parens;
-import tree.simple.constants;
+import tree.simple.Constant;
 import tree.simple.Number;
 import tree.simple.simpleterm;
 import tree.simple.variable;
@@ -37,7 +37,7 @@ public class presimple {
 
 	public int isconstant(int i,ArrayList<Character> formula){
 
-		constants c = new constants();
+		Constant c = new Constant();
 		int out = i;
 
 		for(int j = 0; j<c.CONSTANTS.length;j++){
@@ -58,7 +58,7 @@ public class presimple {
 				}
 
 				if(falses == 0){
-					constants thiscon = new constants();
+					Constant thiscon = new Constant();
 					thiscon.value = thiscon.values[j];
 					thiscon.charpos = i;
 					simp.add(thiscon);
@@ -79,8 +79,8 @@ public class presimple {
 		//operator op = new operator();
 		int out = i;
 		
-		for(int j = 0; j<operator.KNOWNFUNCTIONS.length;j++){
-			String con = operator.KNOWNFUNCTIONS[j];
+		for(int j = 0; j<Operator.KNOWNFUNCTIONS.length;j++){
+			String con = Operator.KNOWNFUNCTIONS[j];
 			char[] cons = con.toCharArray();
 			int falses = 0;                         
 
@@ -99,11 +99,11 @@ public class presimple {
 				if(falses == 0){
 					advancedoperator thisop = new advancedoperator();
 					
-					thisop.thisvalue = operator.KNOWNFUNCTIONS[j];
+					thisop.thisvalue = Operator.KNOWNFUNCTIONS[j];
 					thisop.charpos = i;
 					simp.add(thisop);
 					out=i+cons.length-1;
-					j = operator.KNOWNFUNCTIONS.length;
+					j = Operator.KNOWNFUNCTIONS.length;
 					done = true;
 				
 				}

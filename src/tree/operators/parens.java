@@ -1,6 +1,6 @@
 package tree.operators;
 
-import tree.term;
+import tree.Term;
 import tree.simple.simpleterm;
 import display.rectangle;
 
@@ -34,7 +34,7 @@ public class parens extends simpleterm{
 
 
 
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		
 
 		

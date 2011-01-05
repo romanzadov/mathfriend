@@ -1,10 +1,10 @@
 package ghosts;
 
-import tree.term;
+import tree.Term;
 
 public class SanitizeParens {
 	
-	public SanitizeParens(term tr){
+	public SanitizeParens(Term tr){
 		
 	}
 

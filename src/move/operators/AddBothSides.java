@@ -1,23 +1,23 @@
 package move.operators;
 
-import tree.term;
-import tree.operators.minus;
-import tree.operators.operator;
-import tree.operators.plus;
+import tree.Term;
+import tree.operators.Minus;
+import tree.operators.Operator;
+import tree.operators.Plus;
 
 public class AddBothSides {
 
-	public term AddX(term tr, term sel, operator op){
-		term second = null;
+	public Term AddX(Term tr, Term sel, Operator op){
+		Term second = null;
 		
 		try {
-			second = (term) tr.clone();
+			second = (Term) tr.clone();
 		} catch (CloneNotSupportedException e) {}
 		
-		if(op instanceof minus){
+		if(op instanceof Minus){
 			sel = sel.toggleNegative();
 		}
-		else if(op instanceof plus){
+		else if(op instanceof Plus){
 			
 			//add the number to both sides.
 			

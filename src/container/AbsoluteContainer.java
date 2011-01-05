@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import representTerms.Image;
 import representTerms.stringrect;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 import display.point;
 
@@ -43,7 +43,7 @@ public class AbsoluteContainer implements TreeFunction{
 		return sr;
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		tr.container = sr.get(j).container;
 		j++;
 		

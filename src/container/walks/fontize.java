@@ -1,14 +1,14 @@
 package container.walks;
 
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 
 public class fontize  implements TreeFunction{
 
 	double font;
 	
-	public fontize(term tr, double fontsize){
+	public fontize(Term tr, double fontsize){
 		
 		if(tr.container.width*fontsize>270){
 			fontsize = (int)270/tr.container.width;
@@ -20,7 +20,7 @@ public class fontize  implements TreeFunction{
 		
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 
 		tr.container.height *=font;
 		tr.container.width *=font;

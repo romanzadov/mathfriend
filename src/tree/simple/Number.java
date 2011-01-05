@@ -1,7 +1,7 @@
 package tree.simple;
 
 import parse.path;
-import tree.term;
+import tree.Term;
 import display.rectangle;
 
 public class Number extends simpleterm{
@@ -37,7 +37,7 @@ public class Number extends simpleterm{
 		todraw = "0";
 	}
 	
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 			
 			if(isNegative())
@@ -74,7 +74,7 @@ public class Number extends simpleterm{
 		value = a;
 	}
 	
-	public double getvalue(){
+	public double getValue(){
 		return value;
 	}
 	

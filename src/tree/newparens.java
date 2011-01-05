@@ -1,25 +1,25 @@
 package tree;
 
 import tree.operators.exponent;
-import tree.operators.minus;
+import tree.operators.Minus;
 import tree.operators.negative;
 import tree.operators.parens;
-import tree.operators.plus;
+import tree.operators.Plus;
 import tree.operators.times;
 import tree.downwalk.TreeFunction;
 
 public class newparens implements TreeFunction {
 
-	public newparens(term tr){
+	public newparens(Term tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 	
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 	
 		//parentheses around multiplied terms
 		if(tr.parent.operator instanceof times||tr.parent.operator instanceof negative){
 			
-			if(tr.operator instanceof plus||tr.operator instanceof minus){
+			if(tr.operator instanceof Plus||tr.operator instanceof Minus){
 					tr.hasparen = true;
 			}
 		}
@@ -30,8 +30,8 @@ public class newparens implements TreeFunction {
 			}
 		}
 		//parentheses around subtraction
-		else if(tr.parent.operator instanceof plus || tr.parent.operator instanceof minus){
-			if(tr.operator instanceof plus || tr.operator instanceof minus){
+		else if(tr.parent.operator instanceof Plus || tr.parent.operator instanceof Minus){
+			if(tr.operator instanceof Plus || tr.operator instanceof Minus){
 				if(!tr.issimple){tr.hasparen = true;}
 			}
 		}

@@ -1,6 +1,6 @@
 package tree.notsimple;
 
-import tree.term;
+import tree.Term;
 import tree.operators.divide;
 import tree.operators.times;
 import tree.simple.Number;
@@ -8,9 +8,9 @@ import tree.simple.Number;
 public class MultiplyFractions {
 
 	
-	public term times(term a, term b){
+	public Term times(Term a, Term b){
 		
-		term ans = null;
+		Term ans = null;
 		
 		
 		
@@ -29,15 +29,15 @@ public class MultiplyFractions {
 		return ans;
 	}
 	
-	public term fractimesnumber(term A, term B){
+	public Term fractimesnumber(Term A, Term B){
 
-		term sel = A;
-		term tr = B;
+		Term sel = A;
+		Term tr = B;
 		
 			double a = sel.truenum(sel.getChilds().get(0));
 			double b = sel.truenum(tr);
 			double c = a*b;
-			term n = new term();
+			Term n = new Term();
 			if(c>=0){
 				n = new Number(c);
 			}
@@ -45,9 +45,9 @@ public class MultiplyFractions {
 				n = new Number(-c);
 				n = n.toggleNegative();
 			}
-			term second = null;
+			Term second = null;
 			try {
-				 second = (term)sel.clone();
+				 second = (Term)sel.clone();
 			} catch (CloneNotSupportedException e) {}
 			
 			n.parent = second;
@@ -57,15 +57,15 @@ public class MultiplyFractions {
 		
 	}
 	
-	public term fractimesfrac(term A, term B){
+	public Term fractimesfrac(Term A, Term B){
 		
-		term sel = A;
-		term tr = B;
+		Term sel = A;
+		Term tr = B;
 		
 		double a = sel.truenum(sel.getChilds().get(0));
 		double b = tr.truenum(tr.getChilds().get(0));
 		double toptimes = a*b;
-		term top = new term();
+		Term top = new Term();
 		if(toptimes>=0){
 			top = new Number(toptimes);
 		}
@@ -78,7 +78,7 @@ public class MultiplyFractions {
 		double d = tr.truenum(tr.getChilds().get(2));
 		double bottomtimes = c*d;
 		
-		term bottom = new term();
+		Term bottom = new Term();
 		if(bottomtimes >=0){
 			bottom = new Number(bottomtimes);
 		}

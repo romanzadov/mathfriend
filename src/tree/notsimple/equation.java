@@ -1,15 +1,15 @@
 package tree.notsimple;
 
-import tree.term;
+import tree.Term;
 import tree.operators.equals;
-import tree.operators.operator;
+import tree.operators.Operator;
 
 public class equation extends NotSimple{
 
-	term left;
-	term right;
+	Term left;
+	Term right;
 
-	public equation(term tr){
+	public equation(Term tr){
 
 		boolean okay = true;
 
@@ -34,7 +34,7 @@ public class equation extends NotSimple{
 	//One of the properties of an equation is that if we apply an arbitrary
 	//function to both sides of the equation, equality is preserved.
 
-	public equation Operation(equation eq, operator op, term sel){
+	public equation Operation(equation eq, Operator op, Term sel){
 
 		eq = op.ToBothSides(eq, op, sel);
 
@@ -42,7 +42,7 @@ public class equation extends NotSimple{
 	}
 
 	@Override
-	public boolean isNegative(term tr) {
+	public boolean isNegative(Term tr) {
 
 		boolean okay = true;
 

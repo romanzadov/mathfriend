@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ghosts.GhostImage;
 import move.identify.selectterm;
 import representTerms.Image;
-import tree.term;
+import tree.Term;
 import android.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -100,20 +100,20 @@ public class DisplayScreen extends Activity{
 				
 				Log.d(TAG, "iSel: "+a.iSel.toString()+" isel SP: "+a.iSel.tr.ScreenPosition.container.bl.x+","+a.iSel.tr.ScreenPosition.container.bl.y);
 				selectterm se = new selectterm();
-				term newSelect = se.whichterm(a.iSel.tr, (int)down.x, (int)down.y, a.iMain.bel, 5);
+				Term newSelect = se.whichterm(a.iSel.tr, (int)down.x, (int)down.y, a.iMain.bel, 5);
 				try {
 					if(newSelect !=null){
 						selsBottomLeft.x = newSelect.ScreenPosition.container.bl.x;
 						selsBottomLeft.y = newSelect.ScreenPosition.container.bl.y;
 
-						a.selTerm = (term)newSelect.clone();
+						a.selTerm = (Term)newSelect.clone();
 						a.iSel = new Image(a.selTerm, a.selTerm.container.bl, null );
 					}
 					else{
 						selsBottomLeft.x = a.iMain.bel.x;
 						selsBottomLeft.y = a.iMain.bel.y;
 						
-						a.selTerm = (term)a.mainTerm.clone();
+						a.selTerm = (Term)a.mainTerm.clone();
 						a.iSel = new Image(a.selTerm, a.iMain.bel, null );
 					}
 

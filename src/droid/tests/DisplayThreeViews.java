@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import move.identify.selectterm;
 import parse.path;
 import representTerms.Image;
-import tree.term;
+import tree.Term;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -146,7 +146,7 @@ public class DisplayThreeViews extends Activity implements OnClickListener, OnTo
 				
 				if(!moved){
 					selectterm se = new selectterm();
-					term newSelect = se.whichterm(mainView.selectedImage.tr, (int)down.x, (int)down.y, mainCorner, 5);
+					Term newSelect = se.whichterm(mainView.selectedImage.tr, (int)down.x, (int)down.y, mainCorner, 5);
 					
 				//	Log.d(TAG, "oldselect: " +mainView.selectedImage + " @: "+mainView.selectedImage.tr.ScreenPosition.container);
 				//	Log.d(TAG, "newselect: "+newSelect);
@@ -161,7 +161,7 @@ public class DisplayThreeViews extends Activity implements OnClickListener, OnTo
 						else{
 							selsBottomLeft = mainCorner;
 							path pa = new path();
-							term sel = pa.getTermFromString(mainView.myEquation);
+							Term sel = pa.getTermFromString(mainView.myEquation);
 							mainView.selectedImage = new Image(sel, mainCorner, null );
 						}
 

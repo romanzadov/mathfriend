@@ -19,8 +19,8 @@ public class point implements Cloneable {
 			y = Y;
 		}
 		public point(float X, float Y ){
-			x = (int)X;
-			y = (int)Y;
+			x = X;
+			y = Y;
 			
 		}
 		

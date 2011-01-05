@@ -1,43 +1,58 @@
 package representTerms.screens;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import representTerms.Image;
+import representTerms.TouchData;
 import representTerms.stringrect;
+import representTerms.Settings.ScreenType;
 import user.UserPrefferences;
 
 
 public class GhostScreen implements AbstractedScreen{
 
-	public int width;
-	public int height;
+	final static int backgroundColor = Color.lightGray.getRGB();
+	public Image ghost;
 	
-	Image Ghost;
 	
-	public GhostScreen(int w, int h){
-		width = w;
-		height = h;
+	@Override 
+	public ScreenType getScreenType(){
+		return ScreenType.GHOST;
 	}
 	
-
+	@Override
+	public void updateMainImage(Image main) {
+		ghost = main;
+	}
+	
 	@Override
 	public int getBackgroundColor() {
-		// TODO Auto-generated method stub
-		return 0;
+		return backgroundColor;
 	}
-
 
 	@Override
 	public ArrayList<stringrect> getRelativeRectangles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		
+		ArrayList<stringrect> relatives = new ArrayList<stringrect>();
+		
+		if(ghost != null){
+			relatives = ghost.getRelativeContainers();
 
+		}
+		
+		return relatives;
+	}
 
 	@Override
-	public void changeEquation() {
-		// TODO Auto-generated method stub
+	public void updateAbstractRectangles(ArrayList<stringrect> drawn) {
 		
 	}
+
+	@Override
+	public void updateLogic() {}
+
+	@Override
+	public void updateTouch(ArrayList<TouchData> touch) {}
 	
 }

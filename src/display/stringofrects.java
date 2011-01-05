@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import representTerms.stringrect;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.divide;
 
@@ -13,7 +13,7 @@ public class stringofrects implements TreeFunction{
 	public ArrayList<rectangle> todraw = new ArrayList<rectangle>();
 	public ArrayList<stringrect> a = new ArrayList<stringrect>();
 
-	public ArrayList<rectangle> listme(term main, String argument){
+	public ArrayList<rectangle> listme(Term main, String argument){
 
 		if(argument == null){
 			rectangle rt = main.container;
@@ -35,7 +35,7 @@ public class stringofrects implements TreeFunction{
 
 		else if(argument == "magnet"){
 
-			term top = main;
+			Term top = main;
 
 			rectangle rt = top.container;
 			int width = (int)(rt.width);
@@ -65,13 +65,13 @@ public class stringofrects implements TreeFunction{
 		return todraw;
 	}
 
-	public ArrayList<stringrect> writeme(term tr){
+	public ArrayList<stringrect> writeme(Term tr){
 		a = new ArrayList<stringrect>();
 		downwalk wk = new downwalk(tr, this);
 		return a;
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		
 		
 		rectangle sr = new rectangle();

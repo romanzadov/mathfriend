@@ -4,7 +4,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 import parse.path;
-import tree.term;
+import tree.Term;
 import tree.operators.times;
 //import android.graphics.Color;
 //import android.util.Log;
@@ -19,7 +19,7 @@ public class Image implements Cloneable{
 
 	public static final String TAG = "image";
 	public String st;
-	public term tr;
+	public Term tr;
 
 	public ArrayList<stringrect>relativeContainers  = new ArrayList<stringrect>();
 	public ArrayList<stringrect>historyContainers =  new ArrayList<stringrect>();
@@ -27,7 +27,7 @@ public class Image implements Cloneable{
 	//	public int wordcolor = Color.BLACK;
 
 	public point bel =  new point();
-	public int font;
+	public float font;
 
 	public double rotation =0 ;
 	public double scalefactor =1;
@@ -39,7 +39,7 @@ public class Image implements Cloneable{
 		Image clone = (Image)super.clone();
 
 		if(this.tr != null){
-			clone.tr = (term) this.tr.clone();
+			clone.tr = (Term) this.tr.clone();
 		}
 
 		clone.bel = (point)this.bel.clone();
@@ -49,10 +49,10 @@ public class Image implements Cloneable{
 	@Override
 	public String toString(){
 		String st="";
-		if(tr == null ){return null;}
+		if(tr == null ){return "tr is null";}
 		st+="font: "+font;
-		st+=" h "+getAbsoluteContainers(font, bel).get(0).container.height+
-		" w "+getAbsoluteContainers(font, bel).get(0).container.width+"|";
+		st+=" h "+getAbsoluteContainers().get(0).container.height+
+		" w "+getAbsoluteContainers().get(0).container.width+"|";
 
 		st += "bel: "+bel.toString()+" term: "+tr.toString();
 		return st;
@@ -61,26 +61,21 @@ public class Image implements Cloneable{
 
 
 
-	public Image(term term, point bl,  String argument){
+	public Image(Term term, point bl,  String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
 		st = tr.toString();
 	}
 
-	public Image(String myst,   int myFont, int screenWidth, int screenHeight){
+	public Image(String myst,   float myFont, float screenWidth, float screenHeight){
+		
 		path pa = new path();
 		tr = pa.getTermFromString(myst);
 		st = myst;
 		setRelativeContainers();
 
-		GUIMath gm = new GUIMath(5, 40, screenWidth, screenHeight);
-		PlaceAndFont pf = gm.getCenteredPlaceAndFont(relativeContainers.get(0).container.width,
-												relativeContainers.get(0).container.height, myFont);
-
-		font = pf.font;
-		bel = pf.bl;
-	}
+		}
 
 
 	public Image(String myst, point bl){
@@ -90,7 +85,7 @@ public class Image implements Cloneable{
 		st = myst;
 	}
 
-	public void imagemove(term term, point bl, String argument){
+	public void imagemove(Term term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
@@ -109,7 +104,7 @@ public class Image implements Cloneable{
 		relativeContainers = sp.writeme(tr);
 	}
 
-	public ArrayList<stringrect> getAbsoluteContainers(int myFont, point bel){
+	public ArrayList<stringrect> getAbsoluteContainers(){
 		
 		reset();
 		ArrayList<stringrect> relativeContainers = getRelativeContainers();
@@ -117,13 +112,13 @@ public class Image implements Cloneable{
 		for(int i =0; i<relativeContainers.size(); i++){
 			rectangle rc = relativeContainers.get(i).container;
 			stringrect ac = new stringrect();
-			ac.container.bl.x    = rc.bl.x*myFont;
-			ac.container.bl.y    = rc.bl.y*myFont;
-			ac.container.width   = rc.width*myFont;
-			ac.container.height  = rc.height*myFont;
+			ac.container.bl.x    = rc.bl.x*font;
+			ac.container.bl.y    = rc.bl.y*font;
+			ac.container.width   = rc.width*font;
+			ac.container.height  = rc.height*font;
 
-			ac.container.bl.x    = rc.bl.x*myFont+bel.x;
-			ac.container.bl.y    = -rc.bl.y*myFont+bel.y;
+			ac.container.bl.x    = rc.bl.x*font+bel.x;
+			ac.container.bl.y    = -rc.bl.y*font+bel.y;
 
 			ac.fontscale = relativeContainers.get(i).fontscale;
 			ac.hasParens = relativeContainers.get(i).hasParens;
@@ -137,13 +132,9 @@ public class Image implements Cloneable{
 	}
 
 	private void reset(){
-		path pa = new path();
-		tr = pa.getTermFromString(st);
+	//	path pa = new path();
+	//	tr = pa.getTermFromString(st);
 		relativeContainers  = new ArrayList<stringrect>();
-		//		background = Color.WHITE;
-		//		wordcolor = Color.BLACK;
-
-		//bel =  new point();
 
 		rotation = 0;
 		scalefactor= 1;

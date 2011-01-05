@@ -1,7 +1,7 @@
 package tree.notsimple;
 
 import parse.path;
-import tree.term;
+import tree.Term;
 import tree.operators.negative;
 import tree.simple.Number;
 import display.rectangle;
@@ -10,7 +10,7 @@ public class NegativeTerm extends NotSimple{
 
 	public NegativeTerm(){}
 
-	public NegativeTerm(term tr){
+	public NegativeTerm(Term tr){
 		if(isNegative(tr)){
 			negative n = new negative();
 			this.operator = n;
@@ -34,7 +34,7 @@ public class NegativeTerm extends NotSimple{
 		}
 	}
 
-	public void makeNegative(term tr){
+	public void makeNegative(Term tr){
 		negative n = new negative();
 		this.operator = n;
 		n = new negative();
@@ -44,7 +44,7 @@ public class NegativeTerm extends NotSimple{
 		this.getChilds().add(tr);
 	}
 
-	public boolean isNegative(term tr){
+	public boolean isNegative(Term tr){
 		boolean ans = false;
 		if(tr.isNegative() && tr.getChilds().size() == 3){
 			ans = true;
@@ -57,11 +57,11 @@ public class NegativeTerm extends NotSimple{
 	public String toString(){
 		String st = "(-";
 		if(this.getChilds().size()==3){
-			term tr = this.getChilds().get(2);
+			Term tr = this.getChilds().get(2);
 			st +=tr.toString();
 		}
 		else if(this.getChilds().size()==2){
-			term tr = this.getChilds().get(1);
+			Term tr = this.getChilds().get(1);
 			st +=tr.toString();
 		}
 		st+=")";
@@ -69,7 +69,7 @@ public class NegativeTerm extends NotSimple{
 
 	}
 
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 
 		rectangle a = new rectangle();
 		float xmax= 0;

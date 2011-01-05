@@ -3,14 +3,14 @@ package ghosts;
 import container.walks.FindSel;
 import representTerms.Image;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.divide;
 import tree.operators.equals;
-import tree.operators.minus;
-import tree.operators.operator;
+import tree.operators.Minus;
+import tree.operators.Operator;
 import tree.operators.parens;
-import tree.operators.plus;
+import tree.operators.Plus;
 import tree.operators.times;
 //import android.util.Log;
 import display.point;
@@ -19,10 +19,10 @@ import display.rectangle;
 public class GhostImage {
 	//when you drag around a term, this class returns what the new 
 	//image should look like once you let go
-	term SwitchMe;
+	Term SwitchMe;
 	static final String TAG = "GhostImage";
 
-	public Image newImage(Image im, term sel, point current, point tapped){
+	public Image newImage(Image im, Term sel, point current, point tapped){
 
 
 		Image Ghost = im;
@@ -54,9 +54,9 @@ public class GhostImage {
 			if(IntermIndex!=Integer.MAX_VALUE  && selIndex != IntermIndex){
 
 				SwitchMe = sel.parent.getChilds().get(IntermIndex);
-				if(!(SwitchMe instanceof operator)
+				if(!(SwitchMe instanceof Operator)
 						&& !(SwitchMe instanceof parens)){
-					operator op = sel.parent.operator;
+					Operator op = sel.parent.operator;
 					Ghost = op.inTermMoves(im, sel, IntermIndex);
 					//					Log.d(TAG, "index: "+IntermIndex+" sel: "+sel.toString()+" Ghost: "+Ghost);
 				}
@@ -78,7 +78,7 @@ public class GhostImage {
 
 
 
-	public Image CheckEquals(Image im, term sel, double xsel, int IntermIndex ){
+	public Image CheckEquals(Image im, Term sel, double xsel, int IntermIndex ){
 		Image Ghost = new Image();
 		int selindex = 0;
 		if((sel.parent!=null)&&
@@ -99,7 +99,7 @@ public class GhostImage {
 //			Log.d(TAG, "sel: "+selindex+" interm: "+IntermIndex);
 			if(IntermIndex != Integer.MAX_VALUE && selindex!=IntermIndex){
 				SwitchMe = sel.parent.parent.getChilds().get(IntermIndex);
-				operator op = sel.parent.operator;
+				Operator op = sel.parent.operator;
 				Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 			}
@@ -109,8 +109,8 @@ public class GhostImage {
 
 		if(sel.parent !=null && 
 				(sel.parent.operator instanceof times || sel.parent.operator instanceof divide)){
-			if(sel.parent.parent != null && (sel.parent.parent.operator instanceof plus
-					|| sel.parent.parent.operator instanceof minus)){
+			if(sel.parent.parent != null && (sel.parent.parent.operator instanceof Plus
+					|| sel.parent.parent.operator instanceof Minus)){
 				if(sel.parent.parent.parent != null && sel.parent.parent.parent.operator instanceof equals){
 
 					for (int i = 0; i<sel.parent.parent.parent.getChilds().size(); i++){
@@ -123,7 +123,7 @@ public class GhostImage {
 					}
 					if(IntermIndex != Integer.MAX_VALUE){
 						SwitchMe = sel.parent.parent.parent.getChilds().get(IntermIndex);
-						operator op = sel.parent.operator;
+						Operator op = sel.parent.operator;
 						Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 					}
@@ -143,7 +143,7 @@ public class GhostImage {
 		return Ghost;
 	}
 
-	public term findSel(Image main, term sel, point tapped){
+	public Term findSel(Image main, Term sel, point tapped){
 
 		FindSel fs = new FindSel(main, sel, tapped);
 		if(fs.found==null){

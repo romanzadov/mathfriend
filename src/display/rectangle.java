@@ -7,10 +7,11 @@ public class rectangle implements Cloneable {
 	public float width;
 	public float height;
 	public point bl = new point();
-	public point topleft(point bl, float height){
+	
+	public point topleft(){
 		point tl=new point();
 		tl.x = bl.x;
-		tl.y = bl.y-height;
+		tl.y = bl.y+height;
 		return tl;
 	}
 	
@@ -29,4 +30,31 @@ public class rectangle implements Cloneable {
 		return st;
 	}
 	
+	public void scaleAndTranslate(float f){
+		width  *= f;
+		height *= f;
+		bl.x   *= f;
+		bl.y   *= f;
+	}
+	
+	public void translate(float x, float y){
+		bl.x += x;
+		bl.y += y;
+	}
+	
+	public void flipY(float screenHeight){
+		bl.y = screenHeight-bl.y-height;
+	}
+	
+	public boolean isPointInsideRectangle(point a){
+		
+		boolean inside = true;
+		
+		if(a.x<bl.x){inside = false;}
+		if(a.x>bl.x+width){inside = false;}
+		if(a.y<bl.y){inside = false;}
+		if(a.y>bl.y+height){inside = false;}
+		
+		return inside;
+	}
 }

@@ -4,37 +4,37 @@ import java.util.ArrayList;
 
 import container.RelativeContainer;
 
-import move.identify.FindSel;
+import move.identify.TermMath;
 import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.minus;
-import tree.operators.plus;
+import tree.operators.Minus;
+import tree.operators.Plus;
 import display.point;
 
 public class LikeTermsGhost implements TreeFunction{
 
-	term a = null;
-	term b = null;
-	term aPLUSb = null;
+	Term a = null;
+	Term b = null;
+	Term aPLUSb = null;
 	Image im;
 
 	public Image Like(){
 		Image Ghost =null;
-		term second = null;
+		Term second = null;
 		if(aPLUSb != null){
 			try {
-				second = (term) im.tr.clone();
+				second = (Term) im.tr.clone();
 			} catch (CloneNotSupportedException e) {}
 
-			FindSel fs = new FindSel();
-			ArrayList<Integer> key = fs.FindSelected(im.tr, a);
-			ReturnSel rs = new ReturnSel();
-			term as = rs.Return(second, key);
-			key = fs.FindSelected(im.tr, b);
-			term bs = rs.Return(second, key);
+			
+			ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, a);
+			
+			Term as = TermMath.findTermUsingKey(second, key);
+			key = TermMath.findTreePositionOfSelected(im.tr, b);
+			Term bs = TermMath.findTermUsingKey(second, key);
 
 			int smallest = Integer.MAX_VALUE;
 
@@ -61,13 +61,13 @@ public class LikeTermsGhost implements TreeFunction{
 			}
 			else{
 				if(!aPLUSb.isNegative()){
-					plus pl = new plus();
+					Plus pl = new Plus();
 					pl.parent = aPLUSb.parent;
 					aPLUSb.parent.getChilds().add(smallest,aPLUSb);
 					aPLUSb.parent.getChilds().add(smallest,pl);
 				}
 				else{
-					minus mn = new minus();
+					Minus mn = new Minus();
 					mn.parent = aPLUSb.parent;
 					aPLUSb.parent.getChilds().add(smallest,aPLUSb);
 					aPLUSb.parent.getChilds().add(smallest,mn);
@@ -86,11 +86,11 @@ public class LikeTermsGhost implements TreeFunction{
 		downwalk walk = new downwalk(img.tr, this);
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		if(aPLUSb == null){
-			if(tr.operator !=null && (tr.operator instanceof plus || tr.operator instanceof minus)){
+			if(tr.operator !=null && (tr.operator instanceof Plus || tr.operator instanceof Minus)){
 
-				term ans = null;
+				Term ans = null;
 				boolean stop = false;
 				for(int i = 0; i<tr.getChilds().size()-1; i++){
 					for(int j = i+1; j<tr.getChilds().size(); j++){

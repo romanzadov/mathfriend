@@ -6,7 +6,7 @@ import parse.path;
 import representTerms.PlaceAndFont;
 import representTerms.Image;
 import representTerms.stringrect;
-import tree.term;
+import tree.Term;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,9 +35,9 @@ public class PaintDisplayScreen extends View {
 	public int fontsize = 32;
 	int backgroundcolor = Color.rgb(227, 204, 115);
 
-	term mainTerm;
-	term selTerm;
-	term ghostTerm;
+	Term mainTerm;
+	Term selTerm;
+	Term ghostTerm;
 
 	Image iMain;
 	Image iSel;
@@ -48,7 +48,7 @@ public class PaintDisplayScreen extends View {
 	String pt = "no pt";
 	String pt2 = "..";
 
-	public ArrayList<term> Steps = new ArrayList<term>();
+	public ArrayList<Term> Steps = new ArrayList<Term>();
 
 	public boolean fingdonw = false;
 
@@ -111,7 +111,7 @@ public class PaintDisplayScreen extends View {
 
 	public void createImage(String st){
 		path pa = new path();
-		term tr = pa.getTermFromString(st);
+		Term tr = pa.getTermFromString(st);
 
 	//	Log.d(TAG, ""+tr.getChilds().get(0).toString()+tr.getChilds().get(0).hasparen);
 

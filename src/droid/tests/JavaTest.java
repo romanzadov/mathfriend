@@ -3,7 +3,7 @@ package droid.tests;
 import display.point;
 import parse.path;
 import representTerms.Image;
-import tree.term;
+import tree.Term;
 import android.util.Log;
 
 public class JavaTest {
@@ -15,9 +15,9 @@ public class JavaTest {
 	
 	public void printTerms(){
 		path pa = new path();
-		term mainTerm = pa.getTermFromString(main);
+		Term mainTerm = pa.getTermFromString(main);
 		pa = new path();
-		term selTerm = pa.getTermFromString(sel);
+		Term selTerm = pa.getTermFromString(sel);
 		
 		Image mainImage = new Image(mainTerm, new point(0,0), null);
 			

@@ -5,36 +5,34 @@ import java.util.ArrayList;
 import container.RelativeContainer;
 import display.point;
 
-import move.identify.FindSel;
+import move.identify.TermMath;
 import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.times;
 
 public class MultiplyGhost implements TreeFunction{
 
-	term a = null;
-	term b = null;
-	term aTIMESb = null;
+	Term a = null;
+	Term b = null;
+	Term aTIMESb = null;
 	Image im;
 
 	public Image Like(){
 		
 		Image Ghost =null;
-		term second = null;
+		Term second = null;
 		if(aTIMESb != null){
 			try {
-				second = (term) im.tr.clone();
+				second = (Term) im.tr.clone();
 			} catch (CloneNotSupportedException e) {}
 
-			FindSel fs = new FindSel();
-			ArrayList<Integer> key = fs.FindSelected(im.tr, a);
-			ReturnSel rs = new ReturnSel();
-			term as = rs.Return(second, key);
-			key = fs.FindSelected(im.tr, b);
-			term bs = rs.Return(second, key);
+			ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, a);
+			Term as = TermMath.findTermUsingKey(second, key);
+			key = TermMath.findTreePositionOfSelected(im.tr, b);
+			Term bs = TermMath.findTermUsingKey(second, key);
 
 			int smallest = Integer.MAX_VALUE;
 
@@ -71,11 +69,11 @@ public class MultiplyGhost implements TreeFunction{
 	}
 
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		if(aTIMESb == null){
 			if(tr.operator !=null && (tr.operator instanceof times)){
 
-				term ans = null;
+				Term ans = null;
 				boolean stop = false;
 				for(int i = 0; i<tr.getChilds().size()-1; i++){
 					for(int j = i+1; j<tr.getChilds().size(); j++){

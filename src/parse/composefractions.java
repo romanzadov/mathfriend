@@ -2,7 +2,7 @@ package parse;
 
 import display.rectangle;
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.operators.divide;
 import tree.operators.times;
 import tree.simple.Number;
@@ -13,13 +13,13 @@ public class composefractions implements TreeFunction{
 	float ysofar=0;
 	public float fractionheight = (float) 0.3;
 	
-	public composefractions(term tr){
+	public composefractions(Term tr){
 		//take an upwalk through the tree
 		downwalk walk = new downwalk(tr, this);
 		
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		//sets terms to be down or up terms in a division situtation
 		if(tr.operator instanceof times || tr.operator instanceof divide){
 		
@@ -33,7 +33,7 @@ public class composefractions implements TreeFunction{
 	}
 	
 	
-	public rectangle tofracs(term tr, int[][] places, float barheight){
+	public rectangle tofracs(Term tr, int[][] places, float barheight){
 		
 		int stop=0;
 		//find stop place
@@ -89,9 +89,9 @@ public class composefractions implements TreeFunction{
 				if(mid.height>ysofar){ysofar = mid.height;}
 			}
 			else{
-				term top = tr.getChilds().get(places[i][0]);
-				term bar = tr.getChilds().get(places[i][0]+1);
-				term bottom = 	tr.getChilds().get(places[i][0]+2);
+				Term top = tr.getChilds().get(places[i][0]);
+				Term bar = tr.getChilds().get(places[i][0]+1);
+				Term bottom = 	tr.getChilds().get(places[i][0]+2);
 				total = properfraction(top, bar, bottom, barheight);
 			}
 		}
@@ -102,7 +102,7 @@ public class composefractions implements TreeFunction{
 		
 	}
 	
-	public rectangle properfraction(term top, term bar, term bottom, float barheight){
+	public rectangle properfraction(Term top, Term bar, Term bottom, float barheight){
 		rectangle a = new rectangle();
 		
 		float maxwidth = Math.max(top.container.width, bottom.container.width);
@@ -124,7 +124,7 @@ public class composefractions implements TreeFunction{
 		return a; 
 	}
 	
-	public Number makeone(Number tr, term term){
+	public Number makeone(Number tr, Term term){
 		Number num = new Number();
 		num.parent = term;
 		num.issimple = true;
@@ -141,7 +141,7 @@ public class composefractions implements TreeFunction{
 		return tr;
 	}
 	
-	public int[][] fracmatrix(term tr){
+	public int[][] fracmatrix(Term tr){
 
 		int[][] places = new int[tr.getChilds().size()][2];
 		int place = 0;

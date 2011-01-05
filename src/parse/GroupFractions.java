@@ -3,7 +3,7 @@ package parse;
 import java.util.ArrayList;
 
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.divide;
 import tree.operators.times;
@@ -12,13 +12,13 @@ public class GroupFractions  implements TreeFunction{
 
 	ArrayList<Integer> dividespots;
 	
-	public GroupFractions(term tr){
+	public GroupFractions(Term tr){
 		
 		PreGroupFractions pf = new PreGroupFractions(tr);
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		
 		//this should run anytime there's more than one fraction
 		//in a term. We'll seperate them into seperate terms.
@@ -39,7 +39,7 @@ public class GroupFractions  implements TreeFunction{
 				int i = dividespots.get(j);
 					tr.operator = new times();
 				
-					term mid = new term();
+					Term mid = new Term();
 					mid.operator = new divide();
 					mid.parent = tr;
 					mid.getChilds().add(tr.getChilds().get(i-1));

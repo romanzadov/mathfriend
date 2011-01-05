@@ -1,10 +1,10 @@
 package tree.notsimple;
 
-import tree.term;
+import tree.Term;
 import tree.simple.simpleterm;
 
-public abstract class NotSimple extends term{
+public abstract class NotSimple extends Term{
 		
-	public abstract boolean isNegative(term tr);
+	public abstract boolean isNegative(Term tr);
 	
 }

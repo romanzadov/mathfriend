@@ -1,17 +1,17 @@
 package container.walks;
 
 import tree.downwalk;
-import tree.term;
+import tree.Term;
 import tree.downwalk.TreeFunction;
 
 public class invert  implements TreeFunction{
 
 	
-	public invert(term tr){
+	public invert(Term tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(term tr) {
+	public void performAction(Term tr) {
 		tr.container.bl.y*=-1;
 	}
 	

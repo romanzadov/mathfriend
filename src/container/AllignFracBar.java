@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import display.rectangle;
 
-import tree.term;
+import tree.Term;
 import tree.operators.divide;
 
 public class AllignFracBar {
 
-	public AllignFracBar(term tr){
+	public AllignFracBar(Term tr){
 		//check to see that all the kids are containered
 		boolean allgood = true;
 		
@@ -22,7 +22,7 @@ public class AllignFracBar {
 		// if all are containered, find highest barheight
 		float barheight =0;
 		for(int i = 0; i<tr.getChilds().size(); i++){
-			term kid = tr.getChilds().get(i);
+			Term kid = tr.getChilds().get(i);
 			if(kid.operator instanceof divide && kid.getChilds().size() == 3){
 				if(kid.getChilds().get(2).container.height>barheight){
 					barheight = kid.getChilds().get(2).container.height;
@@ -37,7 +37,7 @@ public class AllignFracBar {
 
 		//allign y's
 		for(int i = 0; i<tr.getChilds().size(); i++){
-			term kid = tr.getChilds().get(i);
+			Term kid = tr.getChilds().get(i);
 			if(kid.operator instanceof divide && kid.getChilds().size() == 3){
 				kid.container.bl.y = barheight - kid.getChilds().get(2).container.height;
 			}
@@ -49,7 +49,7 @@ public class AllignFracBar {
 		//allign x's
 		float xsofar = 0;
 		for(int i = 0; i<tr.getChilds().size(); i++){
-			term kid = tr.getChilds().get(i);
+			Term kid = tr.getChilds().get(i);
 			kid.container.bl.x = xsofar;
 			xsofar+=kid.container.width;
 		}
@@ -58,7 +58,7 @@ public class AllignFracBar {
 		//find biggest height overall
 		float ysofar = 0;
 		for(int i = 0; i<tr.getChilds().size(); i++){
-			term kid = tr.getChilds().get(i);
+			Term kid = tr.getChilds().get(i);
 			if((kid.container.height + kid.container.bl.y)> ysofar){
 				ysofar = kid.container.height+kid.container.bl.y;
 			}
