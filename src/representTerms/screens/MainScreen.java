@@ -2,11 +2,13 @@ package representTerms.screens;
 
 import ghosts.GhostImage;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
 import move.identify.selectterm;
 import representTerms.Image;
+import representTerms.LogicEngine;
 import representTerms.Settings;
 import representTerms.TouchData;
 import representTerms.stringrect;
@@ -27,7 +29,7 @@ public class MainScreen implements AbstractedScreen{
 	point down = new point();
 	double taptime = 0;
 	boolean moved = false;
-	boolean moving = false;
+	public boolean moving = false;
 	point selsBottomLeft = new point();
 	ArrayList<stringrect> drawn = new ArrayList<stringrect>();
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
@@ -48,7 +50,6 @@ public class MainScreen implements AbstractedScreen{
 		Image mainClone = null;
 		
 		Term compound = sel.tr.getResultOfOperation();
-		System.out.println("compound: "+compound);
 		if(compound != null) {
 			try {
 				mainClone = (Image) main.clone();
@@ -64,8 +65,9 @@ public class MainScreen implements AbstractedScreen{
 			Term parentHolder = selClone.parent;
 			compound.parent = parentHolder;
 			int selPlace = parentHolder.getChilds().indexOf(selClone);
-			parentHolder.getChilds().set(selPlace, compound);
-			
+			ArrayList<Term> kids= parentHolder.getChilds();
+			kids.set(selPlace, compound);
+			parentHolder.setChilds(kids);
 		}
 		
 		if(mainClone != null){
@@ -76,7 +78,6 @@ public class MainScreen implements AbstractedScreen{
 	
 	@Override
 	public int getBackgroundColor() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -238,8 +239,10 @@ public class MainScreen implements AbstractedScreen{
 
 	@Override
 	public void updateAbstractRectangles(ArrayList<stringrect> drawn) {
+		if(main.getRelativeContainers().size() == drawn.size()){
 		this.drawn = drawn;
 		main.tr.setScreenPositions(drawn);
+		}
 	}
 
 	public point scaleIdealPointToRelativeOne(point a, rectangle relativeContainer, rectangle idealContainer){

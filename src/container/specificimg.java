@@ -26,7 +26,7 @@ public class specificimg {
 				Term t2 = ter.getChilds().get(i);
 				ter.getChilds().get(i).container = specificimage(t2);
 			}
-			else{System.out.println("not all terms are rectangles!");}
+			else{}
 		}
 
 		//some low level terms aren't simple, but have no contents.

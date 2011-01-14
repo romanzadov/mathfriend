@@ -1,8 +1,8 @@
 package tree.notsimple;
 
 import tree.Term;
-import tree.operators.divide;
-import tree.operators.times;
+import tree.operators.Divide;
+import tree.operators.Times;
 import tree.simple.Number;
 
 public class MultiplyFractions {
@@ -14,13 +14,13 @@ public class MultiplyFractions {
 		
 		
 		
-		if( a.Fraction() && b.NaturalNumber()){
+		if( a.isSimpleFraction() && b.isInteger()){
 			ans = fractimesnumber(a, b);
 		}
-		else if( a.NaturalNumber() && b.Fraction()){
+		else if( a.isInteger() && b.isSimpleFraction()){
 			ans = fractimesnumber(b, a);
 		}
-		else if( a.Fraction() && b.Fraction()){
+		else if( a.isSimpleFraction() && b.isSimpleFraction()){
 			ans = fractimesfrac(a, b);
 		}
 		
@@ -34,8 +34,8 @@ public class MultiplyFractions {
 		Term sel = A;
 		Term tr = B;
 		
-			double a = sel.truenum(sel.getChilds().get(0));
-			double b = sel.truenum(tr);
+			double a = sel.getNumericValue(sel.getChilds().get(0));
+			double b = sel.getNumericValue(tr);
 			double c = a*b;
 			Term n = new Term();
 			if(c>=0){
@@ -62,8 +62,8 @@ public class MultiplyFractions {
 		Term sel = A;
 		Term tr = B;
 		
-		double a = sel.truenum(sel.getChilds().get(0));
-		double b = tr.truenum(tr.getChilds().get(0));
+		double a = sel.getNumericValue(sel.getChilds().get(0));
+		double b = tr.getNumericValue(tr.getChilds().get(0));
 		double toptimes = a*b;
 		Term top = new Term();
 		if(toptimes>=0){
@@ -74,8 +74,8 @@ public class MultiplyFractions {
 			top = top.toggleNegative();
 		}
 		
-		double c = sel.truenum(sel.getChilds().get(2));
-		double d = tr.truenum(tr.getChilds().get(2));
+		double c = sel.getNumericValue(sel.getChilds().get(2));
+		double d = tr.getNumericValue(tr.getChilds().get(2));
 		double bottomtimes = c*d;
 		
 		Term bottom = new Term();

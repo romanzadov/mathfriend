@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.divide;
+import tree.operators.Divide;
 import tree.operators.Operator;
 import tree.operators.parens;
-import tree.operators.times;
+import tree.operators.Times;
 import tree.simple.Placeholder;
 import tree.simple.Number;
 
@@ -24,7 +24,7 @@ public class PreGroupFractions implements TreeFunction{
 
 
 		if(tr != null && tr.operator != null){
-			if(tr.operator instanceof times || tr.operator instanceof divide){
+			if(tr.operator instanceof Times || tr.operator instanceof Divide){
 
 				Term[][] stacked = PutIntoMatrix(tr);
 
@@ -61,7 +61,7 @@ public class PreGroupFractions implements TreeFunction{
 		
 		boolean hasdivide = false;
 		for(int i = 0; i< tr.getChilds().size(); i++){
-			if(tr.getChilds().get(i) instanceof divide){
+			if(tr.getChilds().get(i) instanceof Divide){
 				hasdivide = true;
 			}
 
@@ -75,10 +75,10 @@ public class PreGroupFractions implements TreeFunction{
 
 				if(position[1]==0){
 
-					if(piece instanceof times){ 
+					if(piece instanceof Times){ 
 					}
 
-					else if(piece instanceof divide){
+					else if(piece instanceof Divide){
 						stacked[position[0]][position[1]] = one;
 						stacked[position[0]][1] = piece;
 						position[1]=2;
@@ -87,8 +87,8 @@ public class PreGroupFractions implements TreeFunction{
 					else{
 						stacked[position[0]][position[1]] = piece;
 						position[1]=1;
-						if(i!=tr.getChilds().size()-1 && (tr.getChilds().get(i+1) instanceof times)){
-							divide div = new divide();
+						if(i!=tr.getChilds().size()-1 && (tr.getChilds().get(i+1) instanceof Times)){
+							Divide div = new Divide();
 							stacked[position[0]][1] = div;
 							stacked[position[0]][2] = one;
 							position[0]++;
@@ -96,7 +96,7 @@ public class PreGroupFractions implements TreeFunction{
 						}
 						else if(i == tr.getChilds().size()-1){
 							
-							divide div = new divide();
+							Divide div = new Divide();
 							stacked[position[0]][1] = div;
 							stacked[position[0]][2] = one;
 							position[0]++;
@@ -106,14 +106,14 @@ public class PreGroupFractions implements TreeFunction{
 				}
 
 				else if(position[1]==1){
-					if(piece instanceof times){
-						divide div = new divide();
+					if(piece instanceof Times){
+						Divide div = new Divide();
 						stacked[position[0]][1] = div;
 						stacked[position[0]][2] = one;
 						position[0]++;
 						position[1]=0;
 					}
-					else if (piece instanceof divide){
+					else if (piece instanceof Divide){
 						stacked[position[0]][position[1]] = piece;
 						position[1]=2;
 					}
@@ -124,10 +124,10 @@ public class PreGroupFractions implements TreeFunction{
 				}
 
 				else if (position[1]==2){
-					if(piece instanceof times){
+					if(piece instanceof Times){
 						System.out.println("error in pregroupfractions: times");
 					}
-					else if(piece instanceof divide){
+					else if(piece instanceof Divide){
 						System.out.println("error in pregroupfractions: div");
 					}
 					else{
@@ -156,8 +156,8 @@ public class PreGroupFractions implements TreeFunction{
 				if(stacked[i][0] instanceof Placeholder){
 
 					Number one = new Number(1);
-					divide div = new divide();
-					times tm = new times();
+					Divide div = new Divide();
+					Times tm = new Times();
 					mid.getChilds().add(one);
 					mid.getChilds().add(div);
 					mid.getChilds().add(stacked[i][2]);
@@ -165,20 +165,20 @@ public class PreGroupFractions implements TreeFunction{
 				}
 				else if(stacked[i][2] instanceof Placeholder){
 					mid.getChilds().add(stacked[i][0]);
-					times tm = new times();
+					Times tm = new Times();
 					mid.getChilds().add(tm);
 				}
 				else{
 					mid.getChilds().add(stacked[i][0]);
 					mid.getChilds().add(stacked[i][1]);
 					mid.getChilds().add(stacked[i][2]);
-					times tm = new times();
+					Times tm = new Times();
 					mid.getChilds().add(tm);
 				}
 
 			}
 			else{
-				if(mid.getChilds().get(mid.getChilds().size()-1) instanceof times){
+				if(mid.getChilds().get(mid.getChilds().size()-1) instanceof Times){
 					mid.getChilds().remove(mid.getChilds().size()-1);
 				}
 			}

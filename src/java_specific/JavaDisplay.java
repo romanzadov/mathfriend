@@ -1,6 +1,9 @@
 package java_specific;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -19,7 +22,7 @@ import display.rectangle;
 
 public class JavaDisplay extends DisplayInterfaceTemplate {
 
-	JFrame f;
+	static JFrame f;
 	Panel myPanel;
 	AbstractedScreen myScreen;
 	ArrayList<TouchData> touches  = new ArrayList<TouchData>();
@@ -27,13 +30,20 @@ public class JavaDisplay extends DisplayInterfaceTemplate {
 	
 	
 	public JavaDisplay(AbstractedScreen screen){
-		f = new JFrame();
+		Container cp = null;
+		if(f == null){
+			f = new JFrame();
+			f.setSize(700, 700);
+			cp = f.getContentPane();
+			cp.setLayout(new GridLayout(3, 1));
+		}
+		
 		myPanel = new Panel(this);
 		myScreen = screen;
 		f.add(myPanel);
-		f.setSize(getWidth(), getHeight());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		setBackgroundColor(screen.getScreenType().color);
 		setSize(myScreen.getScreenType().width, myScreen.getScreenType().height);
 	}
 
@@ -56,7 +66,7 @@ public class JavaDisplay extends DisplayInterfaceTemplate {
 	@Override
 	public void setSize(int x, int y){
 		myPanel.setSize(x, y);
-		f.setSize(x, y);
+	//	f.setSize(x, y);
 	}
 
 	

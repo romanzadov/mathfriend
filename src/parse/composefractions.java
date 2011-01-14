@@ -3,8 +3,8 @@ package parse;
 import display.rectangle;
 import tree.downwalk;
 import tree.Term;
-import tree.operators.divide;
-import tree.operators.times;
+import tree.operators.Divide;
+import tree.operators.Times;
 import tree.simple.Number;
 import tree.downwalk.TreeFunction;
 
@@ -21,10 +21,10 @@ public class composefractions implements TreeFunction{
 
 	public void performAction(Term tr) {
 		//sets terms to be down or up terms in a division situtation
-		if(tr.operator instanceof times || tr.operator instanceof divide){
+		if(tr.operator instanceof Times || tr.operator instanceof Divide){
 		
 			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i) instanceof divide){
+				if(tr.getChilds().get(i) instanceof Divide){
 					tr.getChilds().get(i+1).isbottom = true;
 				}
 			}
@@ -48,9 +48,8 @@ public class composefractions implements TreeFunction{
 		for (int i =0; i<stop; i++){
 			
 			if(places[i][0]==1000){
-				Number top = new Number();
-			    top = makeone(top,tr);
-				times tm = new times();
+				Number top = makeone(tr);
+				Times tm = new Times();
 				tm.issimple = true;
 				rectangle cont = new rectangle();
 				cont.height = 0;
@@ -124,8 +123,8 @@ public class composefractions implements TreeFunction{
 		return a; 
 	}
 	
-	public Number makeone(Number tr, Term term){
-		Number num = new Number();
+	public Number makeone( Term term){
+		Number num = new Number(1);
 		num.parent = term;
 		num.issimple = true;
 		num.value = 1;
@@ -137,8 +136,7 @@ public class composefractions implements TreeFunction{
 		cont.bl.y =0;
 		num.container = cont;
 		num.simples.add(num);
-		tr = num;
-		return tr;
+		return num;
 	}
 	
 	public int[][] fracmatrix(Term tr){
@@ -151,19 +149,19 @@ public class composefractions implements TreeFunction{
 		for(int i=0; i<tr.getChilds().size();i++){
 
 			if(!tr.getChilds().get(i).issimple||
-					!(tr.getChilds().get(i) instanceof times)
-					&&!(tr.getChilds().get(i) instanceof divide)){
+					!(tr.getChilds().get(i) instanceof Times)
+					&&!(tr.getChilds().get(i) instanceof Divide)){
 				int side = place/2;
 				int top = place%2;
 				places[side][top] = i;
 				//stick normal terms where they fall
 			}
 
-			else if(tr.getChilds().get(i) instanceof times){
+			else if(tr.getChilds().get(i) instanceof Times){
 				if(place%2==0){place = place+2;}
 				if(place%2==1){place++; }
 			}
-			else if(tr.getChilds().get(i) instanceof divide){
+			else if(tr.getChilds().get(i) instanceof Divide){
 				if(place%2==0){place++;}
 				else if(place%2==1){
 					//1000 is code for 1/x

@@ -70,7 +70,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 			
 
 
-
+					// write the text in the correct squares
 				if(!a.todraw.equals("")){
 					g.drawString(a.todraw, (int)(c.bl.x+c.width/4), (int)(c.topleft().y-c.height/8));
 				}

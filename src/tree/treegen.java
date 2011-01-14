@@ -2,7 +2,7 @@ package tree;
 import java.util.ArrayList;
 
 import parse.parenthesize;
-import tree.operators.divide;
+import tree.operators.Divide;
 import tree.operators.equals;
 import tree.operators.exponent;
 import tree.operators.Minus;
@@ -10,7 +10,7 @@ import tree.operators.negative;
 import tree.operators.Operator;
 import tree.operators.parens;
 import tree.operators.Plus;
-import tree.operators.times;
+import tree.operators.Times;
 import tree.simple.Number;
 import tree.simple.Constant;
 import tree.simple.simpleterm;
@@ -297,14 +297,14 @@ public class treegen {
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("*")){
-					times a = new times();
+					Times a = new Times();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
 					a.valuestring =  ((Operator)simp.get(i)).valuestring;
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("/")){
-					divide a = new divide();
+					Divide a = new Divide();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
 					a.valuestring =  ((Operator)simp.get(i)).valuestring;
@@ -397,7 +397,7 @@ public class treegen {
 		//add invisible multiplication
 		for(int i = 0; i<simp.size()-1; i++){
 			if(simp.get(i).rmult==true&&simp.get(i+1).lmult==true){
-				times a = new times();
+				Times a = new Times();
 				a.valuestring = "*";
 				simp.add(i+1,a);
 			}

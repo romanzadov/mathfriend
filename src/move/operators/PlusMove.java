@@ -9,6 +9,7 @@ import tree.Term;
 import tree.operators.Minus;
 import tree.operators.Operator;
 import tree.operators.Plus;
+import tree.simple.simpleterm;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
@@ -203,6 +204,8 @@ public class PlusMove {
 		if(op instanceof Plus || op instanceof Minus){ checksout = false;}
 		else{ System.out.println("replace addition run on a term without addition. In PlusMove. ");  return null; }
 		
+		
+		
 		Term result = null;
 		try {
 			 result = (Term) main.clone();
@@ -211,7 +214,16 @@ public class PlusMove {
 			e.printStackTrace();
 		}
 		
-		if(positionOfReplacement == 0 && result.getChilds().size()>0){
+		if(result instanceof simpleterm){
+			result = sum;
+			
+		}
+		
+		else if(result.isNegative()){
+			result = sum;
+		}
+		
+		else if(positionOfReplacement == 0 && result.getChilds().size()>0){
 			result.getChilds().set(0, sum);
 		}
 		
@@ -222,7 +234,7 @@ public class PlusMove {
 				minus.parent = result;
 				result.getChilds().set(positionOfReplacement-1, minus);
 				
-				sum.toggleNegative();
+				sum = sum.toggleNegative();
 				sum.parent = result;
 				result.getChilds().set(positionOfReplacement, sum);
 			}

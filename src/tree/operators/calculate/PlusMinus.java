@@ -8,7 +8,7 @@ import move.identify.ReturnSel;
 import tree.Term;
 import tree.operators.Minus;
 import tree.operators.Plus;
-import tree.operators.times;
+import tree.operators.Times;
 import tree.simple.Number;
 
 public class PlusMinus {

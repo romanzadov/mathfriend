@@ -11,7 +11,7 @@ import representTerms.Image;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.times;
+import tree.operators.Times;
 
 public class MultiplyGhost implements TreeFunction{
 
@@ -71,7 +71,7 @@ public class MultiplyGhost implements TreeFunction{
 
 	public void performAction(Term tr) {
 		if(aTIMESb == null){
-			if(tr.operator !=null && (tr.operator instanceof times)){
+			if(tr.operator !=null && (tr.operator instanceof Times)){
 
 				Term ans = null;
 				boolean stop = false;

@@ -5,13 +5,13 @@ import representTerms.Image;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.divide;
+import tree.operators.Divide;
 import tree.operators.equals;
 import tree.operators.Minus;
 import tree.operators.Operator;
 import tree.operators.parens;
 import tree.operators.Plus;
-import tree.operators.times;
+import tree.operators.Times;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
@@ -108,7 +108,7 @@ public class GhostImage {
 
 
 		if(sel.parent !=null && 
-				(sel.parent.operator instanceof times || sel.parent.operator instanceof divide)){
+				(sel.parent.operator instanceof Times || sel.parent.operator instanceof Divide)){
 			if(sel.parent.parent != null && (sel.parent.parent.operator instanceof Plus
 					|| sel.parent.parent.operator instanceof Minus)){
 				if(sel.parent.parent.parent != null && sel.parent.parent.parent.operator instanceof equals){
@@ -147,7 +147,7 @@ public class GhostImage {
 
 		FindSel fs = new FindSel(main, sel, tapped);
 		if(fs.found==null){
-			fs.found = new times();
+			fs.found = new Times();
 		}
 		return fs.found;
 	}

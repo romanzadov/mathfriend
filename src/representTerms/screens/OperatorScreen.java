@@ -15,7 +15,7 @@ import user.UserPrefferences;
 
 public class OperatorScreen implements AbstractedScreen{
 
-	final static int backgroundColor = Color.lightGray.getRGB();
+	
 	public Operator operator;
 	Image sel;
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
@@ -37,7 +37,7 @@ public class OperatorScreen implements AbstractedScreen{
 
 	@Override
 	public int getBackgroundColor() {
-		return backgroundColor;
+		return 0;
 	}
 	
 	private Image getImage(){
@@ -92,13 +92,6 @@ public class OperatorScreen implements AbstractedScreen{
 		
 		if(touch.myType == TouchType.RELEASED){
 			timesTapped++;
-			if(timesTapped == 1){
-				//change ghost
-			}
-			else if(timesTapped == 2){
-				//change main
-			}
-			System.out.println(timesTapped);
 		}
 	}
 	

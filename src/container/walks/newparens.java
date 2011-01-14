@@ -7,7 +7,7 @@ import tree.operators.exponent;
 import tree.operators.Minus;
 import tree.operators.negative;
 import tree.operators.Plus;
-import tree.operators.times;
+import tree.operators.Times;
 //import android.util.Log;
 
 public class newparens implements TreeFunction {
@@ -21,7 +21,7 @@ public class newparens implements TreeFunction {
 	public void performAction(Term tr) {
 		
 		//parentheses around multiplied terms
-		if(tr.parent.operator instanceof times||tr.parent.operator instanceof negative){
+		if(tr.parent.operator instanceof Times||tr.parent.operator instanceof negative){
 			
 			if(tr.operator instanceof Plus||tr.operator instanceof Minus){
 					tr.hasparen = true;

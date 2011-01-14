@@ -1,133 +1,102 @@
 package tree.notsimple;
+import java.util.ArrayList;
+
+import parse.path;
+
+import representTerms.Image;
 import tree.Term;
-import tree.operators.divide;
+import tree.operators.Divide;
 import tree.operators.Minus;
 import tree.simple.Number;
 import display.rectangle;
 
 public class Fraction extends NotSimple{
 
-	
 	Term top;
+	Divide divide = new Divide();
 	Term bottom;
+
+	public Term getTop(){
+		return getChilds().get(0);
+	}
+
+	public Term getBottom(){
+		return getChilds().get(2);
+	}
+
+	@Override
+	public ArrayList<Term> getChilds(){
+		ArrayList<Term> kids = new ArrayList<Term>();
+		kids.add(top);
+		kids.add(divide);
+		kids.add(bottom);
+		return kids;
+	}
 	
-	public Fraction(){
-		divide dv = new divide();
-		this.operator = dv;}
-	
-	public Fraction(Term tr){
-		divide dv = new divide();
-		this.operator = dv;
-		general(tr.getChilds().get(0), tr.getChilds().get(2));
-		hasparen = tr.hasparen;
-	}	
-	
+	public void setChilds(ArrayList<Term> childs) {
+		if(childs.size() != 3){System.out.println("wrong number of childs for fraction");}
+		top = childs.get(0);
+		bottom = childs.get(2);
+	}
+
 	public Fraction(Term t, Term b){
-		divide dv = new divide();
+
+		Divide dv = new Divide();
 		this.operator = dv;
-		general(t,  b);
+
+			top = t;
+			bottom = b;
+
+		this.top.parent = this;
+		this.divide.parent = this;
+		this.bottom.parent = this;
 	}
-	
-	public Fraction FractionOverOne(Term tr){
-		
-		Fraction f = new Fraction();
-		
-		Number one = new Number(1);
-		divide dv = new divide();
-		
-		Term second =  new Term();
-		try {
-			 second = (Term)tr.clone();
-		} catch (CloneNotSupportedException e) {}
-		
-		f.top = tr;
-		f.bottom = one;
-		
-		f.parent = tr.parent;
-		
-		second.parent = f;
-		dv.parent = f;
-		one.parent = f;
-		
-		f.getChilds().add(second);
-		f.getChilds().add(dv);
-		f.getChilds().add(one);
-		
-		return f;
+
+
+
+
+
+
+	public Fraction() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public void general(Term t, Term b){
-		divide dv = new divide();
-		divide op = new divide();
-		this.operator = op;	
-		try {
-			top = (Term)t.clone();
-			bottom = (Term)b.clone();
-		} catch (CloneNotSupportedException e) {}
-		
-		this.getChilds().add(top);
-		this.getChilds().add(dv); 	
-		this.getChilds().add(bottom);
-		
-		top.parent = this;
-		dv.parent = this;
-		bottom.parent = this;
-	}
-	
-	public boolean isNaturalFraction(Term tr){
+
+	public boolean isNaturalFraction(){
 		boolean ans = false;
-		if(((Fraction)tr).isNegative(tr)){
-			if(tr.getChilds().get(0).NaturalNumber() && tr.getChilds().get(2).NaturalNumber()){
-				ans = true;
-			}
-		}
-		
+
+		if(this.getTop().isDecimal() && this.getBottom().isDecimal()){ans = true;}
+
 		return ans;
 	}
-	
-	public boolean isNegative(Term tr){
-		boolean ans = false;
-		
-		try {
-			if(!tr.issimple && tr.getChilds().size()==3 && tr.getChilds().get(1) instanceof divide){
-				ans = true;
-			}
-		} catch (Exception e) {}
-		return ans;
-	}
-	
-	public Fraction multiply(Term tr){
-		return null;
-	}
-	
+
+
 	public Fraction add(Term tr){
-		Fraction f = new Fraction();
-		
-		
-		if(tr.NaturalNumber()){
-			
+
+
+		if(tr.isInteger()){
+
 			int place = tr.parent.getChilds().indexOf(tr);
-			Fraction fr = FractionOverOne(tr);
+			Fraction fr = fractionOverOne(tr);
 			tr.parent.getChilds().set(place, fr);
 			tr = fr;
-			
+
 		}
 		// the fractions will be a/b and c/d
-		
+
 		double a = topnum(this);
-		double b = truenum(this.getChilds().get(2));
+		double b = getNumericValue(this.getChilds().get(2));
 		double c = topnum(tr);
-		double d = truenum(tr.getChilds().get(2));
-		
+		double d = getNumericValue(tr.getChilds().get(2));
+
 		double lcd = LCD(b, d);
-		
-		f = new Fraction(new Number(lcd/b*a+lcd/d*c), new Number(lcd));
-		
+
+		Fraction f = new Fraction(new Number(lcd/b*a+lcd/d*c), new Number(lcd));
+
 		return f;
 	}
-	
+
 	public rectangle giverect(Term tr){
-	
+
 		rectangle a = new rectangle();
 		float xmax= 0;
 		float ymax = 0;
@@ -141,13 +110,13 @@ public class Fraction extends NotSimple{
 		tr.container = a;
 		return a;
 	}
-	
+
 	public double topnum(Term tr){
 		//will give the true number of the top of the fraction
 		//noticing the +/- in front or negative
-		
+
 		int negcount = 0;
-		
+
 		if(tr.isNegative()){negcount++;}
 		if(tr.getChilds().get(0).isNegative()){negcount++;}
 		if(tr.parent != null){
@@ -156,35 +125,125 @@ public class Fraction extends NotSimple{
 				if(tr.parent.getChilds().get(place-1) instanceof Minus){negcount++;}
 			}
 		}
-		
+
 		double ans;
 		double val = 0;
 		if(tr.getChilds().get(0) instanceof Number){
-			 val = ((Number)tr.getChilds().get(0)).value;
-			
+			val = ((Number)tr.getChilds().get(0)).value;
+
 		}
 		else if(tr.getChilds().get(0).getChilds().get(2) instanceof Number){
 			val = ((Number)tr.getChilds().get(0).getChilds().get(2)).value;
 		}
 		ans = Math.pow(-1, negcount)*val;
-		
+
 		return ans;
 	}
 
-	public double LCD(double A, double B){
-		
+	public static double LCD(double A, double B){
+
 		int a = (int)A;
 		int b = (int)B;
-		
+
 		int c = Math.max(a, b);
 		int d = Math.min(a, b);
-		
+
 		int LCD = c;
-		
+
 		while(LCD%d != 0){
 			LCD += c;
 		}
-		
+
 		return LCD;
 	}
+
+	public static Term productOfNaturalFractions(Term a, Term b){
+
+		Term result = null;
+		
+		
+		if(a instanceof Fraction && b instanceof Fraction){
+			result = fractionTimesFraction((Fraction)a, (Fraction)b);
+			return result;
+		}
+		else{
+			result = fractionTimesNumber(a,b);
+		}
+		
+		
+		
+		return result;
+
+	}
+
+	private static Term fractionTimesNumber(Term a, Term b){
+		boolean onefraction = false;
+		if(a.isFraction() || b.isFraction()){
+			if(a.isDecimal() || b.isDecimal()){
+				onefraction = true;
+			}
+		}
+		if(!onefraction){return null;}
+
+		Term fraction = null;
+		Term number = null;
+		if(a.isFraction()){fraction = a; number = b;}
+		else{fraction = b; number = a;}
+
+		String newTop = "";
+		
+		if(fraction == a ){
+			newTop = fraction.getChilds().get(0).toString()+"*("+number.toString()+")";
+		}
+		else{
+			newTop = number.toString()+"*("+fraction.getChilds().get(0).toString()+")";
+		}
+		
+		String newBottom = fraction.getChilds().get(2).toString();
+
+		String multipliedFraction = "("+newTop+")/("+newBottom+")";
+		Image img = new Image(multipliedFraction, 2,2,2);	
+		
+
+		return img.tr;
+	}
+
+	private static Fraction fractionTimesFraction(Fraction a, Fraction b){
+
+		//check to see that both terms are natural fractions
+		boolean bothfractions = false;
+	//	if(a.isNaturalFraction() && b.isNaturalFraction()){ bothfractions = true;}
+	//	if(!bothfractions){return null;}
+
+		//
+		String newTop = a.getChilds().get(0).toString()+"*("+b.getChilds().get(0).toString()+")";
+		String newBottom = a.getChilds().get(2).toString()+"*("+b.getChilds().get(2).toString()+")";
+
+		path pa = new path();
+		Term top = pa.getTermFromString(newTop);
+
+		pa = new path();
+		Term bottom = pa.getTermFromString(newBottom);
+
+		
+		Fraction result = new Fraction(top, bottom);
+
+
+		return result;
+	}
+
+	@Override
+	public boolean canConstruct(Term tr) {
+
+		boolean fraction = false;
+
+		if(tr.getChilds().size() == 3){
+			if(tr.getChilds().get(1) instanceof Divide){
+				fraction = true;
+			}
+		}
+
+		return fraction;
+	}
+
 }

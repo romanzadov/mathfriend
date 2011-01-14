@@ -25,16 +25,14 @@ public class Number extends simpleterm{
 		return na;
 	}
 	
-	public  Number(){
-		rmult = true;
-		lmult = true;
-	}
-	
 	public Number(double a){
 		rmult = true;
 		lmult = true;
 		value = a;
 		todraw = "0";
+		if(a<0){
+			isnegative = true;
+		}
 	}
 	
 	public rectangle giverect(Term tr){

@@ -13,21 +13,22 @@ public class TestPaternity implements TreeFunction{
 
 	public void performAction(Term tr) {
 
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			if(tr.getChilds().get(i).parent != tr){
-				tr.getChilds().get(i).parent = tr;
-			
-			}
-			if(tr.parent != null){
-				int place = tr.parent.getChilds().indexOf(tr);
+		if(tr != null){
+			for(int i = 0; i<tr.getChilds().size(); i++){
+				if(tr.getChilds().get(i).parent != tr){
+					tr.getChilds().get(i).parent = tr;
 
-				if(place == -1){
+				}
+				if(tr.parent != null){
+					int place = tr.parent.getChilds().indexOf(tr);
+
+					if(place == -1){
+					}
+				}
+				if(tr.operator == null){
 				}
 			}
-			if(tr.operator == null){
-			}
+
 		}
-
 	}
-
 }

@@ -12,7 +12,7 @@ import user.UserPrefferences;
 
 public class GhostScreen implements AbstractedScreen{
 
-	final static int backgroundColor = Color.lightGray.getRGB();
+
 	public Image ghost;
 	
 	
@@ -28,7 +28,7 @@ public class GhostScreen implements AbstractedScreen{
 	
 	@Override
 	public int getBackgroundColor() {
-		return backgroundColor;
+		return 0;
 	}
 
 	@Override

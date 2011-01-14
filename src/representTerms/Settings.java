@@ -10,16 +10,18 @@ public class Settings {
 
 	
 	public static enum ScreenType {
-		MAIN (700, 300),
-		GHOST   (300, 100),
-		OPERATOR (100, 100),
-		HISTORY   (300, 500);
+		MAIN (700, 300,10896163),
+		GHOST   (300, 100, 7831377),
+		OPERATOR (100, 100,16774570),
+		HISTORY   (300, 500, 0);
 
 		public final int width;  
 		public final int height; 
-		ScreenType(int width, int height) {
+		public final int color;
+		ScreenType(int width, int height, int color) {
 			this.width = width;
 			this.height = height;
+			this.color = color;
 		}
 
 	}

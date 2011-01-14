@@ -13,7 +13,7 @@ import display.point;
 
 public class LogicEngine {
 
-	public float prefferedFont = 1;
+	//public float prefferedFont = 1;
 	ArrayList<String> equations = new ArrayList<String>();
 	DisplayInterface mainInterface;
 	DisplayInterface ghostInterface;
@@ -42,8 +42,8 @@ public class LogicEngine {
 		}
 
 		LOGIC_ENGINE = new LogicEngine(st);
-		LOGIC_ENGINE.initMain();
 		LOGIC_ENGINE.initGhost();
+		LOGIC_ENGINE.initMain();
 		LOGIC_ENGINE.initOperator();
 
 		LOGIC_ENGINE.initTimer();
@@ -78,7 +78,7 @@ public class LogicEngine {
 
 
 		if(mainScreen.resultTerm != null){ updateEquation(mainScreen.resultTerm); }
-
+		if(mainScreen.moving){ operatorScreen.resetTimesTapped(); }
 
 		if(operatorScreen.getTimesTapped() == 1){
 			mainScreen.performOperationOnSel();
@@ -114,7 +114,7 @@ public class LogicEngine {
 
 		//clear ghost
 		GhostScreen ghostScreen = (GhostScreen)ghostInterface.getAbstractScreen();
-		ghostScreen.updateMainImage(next);
+		ghostScreen.updateMainImage(null);
 
 		//update operator, clear timer
 		OperatorScreen operatorScreen = (OperatorScreen)operatorInterface.getAbstractScreen();

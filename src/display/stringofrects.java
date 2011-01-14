@@ -6,7 +6,7 @@ import representTerms.stringrect;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.divide;
+import tree.operators.Divide;
 
 public class stringofrects implements TreeFunction{
 
@@ -19,9 +19,7 @@ public class stringofrects implements TreeFunction{
 			rectangle rt = main.container;
 			int width = (int)(rt.width);
 			int height = (int)(rt.height);
-			point tl = rt.topleft(
-					rt.bl, 
-					rt.height);
+			point tl = rt.topleft();
 			rectangle outline = new rectangle();
 
 	//		outline.color = new Color(210,210,210,175);
@@ -40,9 +38,7 @@ public class stringofrects implements TreeFunction{
 			rectangle rt = top.container;
 			int width = (int)(rt.width);
 			int height = (int)(rt.height);
-			point tl = rt.topleft(
-					rt.bl, 
-					rt.height);
+			point tl = rt.topleft();
 
 			rectangle black = new rectangle();
 			rectangle white = new rectangle();
@@ -85,7 +81,7 @@ public class stringofrects implements TreeFunction{
 		StR.term = tr.toString();
 		StR.fontscale = tr.scalefactor;
 		if(tr.todraw!=null){StR.todraw = tr.todraw;}
-		if(tr instanceof divide){StR.todraw = "/";}
+		if(tr instanceof Divide){StR.todraw = "/";}
 	//	StR.container.color = tr.wordcolor;
 		StR.hasParens = tr.hasparen;
 		a.add(StR);

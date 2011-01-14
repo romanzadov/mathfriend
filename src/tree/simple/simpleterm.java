@@ -32,8 +32,10 @@ public class simpleterm extends NotSimple{
 	}
 
 	@Override
-	public boolean isNegative(Term tr) {
+	public boolean canConstruct(Term tr) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 }

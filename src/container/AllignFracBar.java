@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import display.rectangle;
 
 import tree.Term;
-import tree.operators.divide;
+import tree.operators.Divide;
 
 public class AllignFracBar {
 
@@ -23,7 +23,7 @@ public class AllignFracBar {
 		float barheight =0;
 		for(int i = 0; i<tr.getChilds().size(); i++){
 			Term kid = tr.getChilds().get(i);
-			if(kid.operator instanceof divide && kid.getChilds().size() == 3){
+			if(kid.operator instanceof Divide && kid.getChilds().size() == 3){
 				if(kid.getChilds().get(2).container.height>barheight){
 					barheight = kid.getChilds().get(2).container.height;
 				}
@@ -38,7 +38,7 @@ public class AllignFracBar {
 		//allign y's
 		for(int i = 0; i<tr.getChilds().size(); i++){
 			Term kid = tr.getChilds().get(i);
-			if(kid.operator instanceof divide && kid.getChilds().size() == 3){
+			if(kid.operator instanceof Divide && kid.getChilds().size() == 3){
 				kid.container.bl.y = barheight - kid.getChilds().get(2).container.height;
 			}
 			else{

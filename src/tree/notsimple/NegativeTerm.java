@@ -9,7 +9,7 @@ import display.rectangle;
 public class NegativeTerm extends NotSimple{
 
 	public NegativeTerm(){}
-
+	
 	public NegativeTerm(Term tr){
 		if(isNegative(tr)){
 			negative n = new negative();

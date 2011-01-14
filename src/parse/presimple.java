@@ -37,11 +37,11 @@ public class presimple {
 
 	public int isconstant(int i,ArrayList<Character> formula){
 
-		Constant c = new Constant();
+	
 		int out = i;
 
-		for(int j = 0; j<c.CONSTANTS.length;j++){
-			String con = c.CONSTANTS[j];
+		for(int j = 0; j<Constant.CONSTANTS.length;j++){
+			String con = Constant.CONSTANTS[j];
 			char[] cons = con.toCharArray();
 			int falses = 0;                         
 
@@ -58,12 +58,12 @@ public class presimple {
 				}
 
 				if(falses == 0){
-					Constant thiscon = new Constant();
-					thiscon.value = thiscon.values[j];
+					Constant thiscon = new Constant(Constant.values[j]);
+					thiscon.value = Constant.values[j];
 					thiscon.charpos = i;
 					simp.add(thiscon);
 					out = i+cons.length-1;
-					j = c.CONSTANTS.length;
+					j = Constant.CONSTANTS.length;
 					done = true;
 				}
 
@@ -148,7 +148,7 @@ public class presimple {
 					number=number+formula.get(i+k);
 				}
 			double n = Double.parseDouble(number);
-			Number numobj = new Number();
+			Number numobj = new Number(n);
 			numobj.value = n;
 			numobj.charpos = i;
 			simp.add(numobj);

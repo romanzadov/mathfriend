@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.divide;
-import tree.operators.times;
+import tree.operators.Divide;
+import tree.operators.Times;
 
 public class GroupFractions  implements TreeFunction{
 
@@ -29,7 +29,7 @@ public class GroupFractions  implements TreeFunction{
 
 			
 			for(int i = 0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i) instanceof divide){
+				if(tr.getChilds().get(i) instanceof Divide){
 					dividespots.add(i);
 				}
 			}
@@ -37,10 +37,10 @@ public class GroupFractions  implements TreeFunction{
 			for(int j = 0; j<dividespots.size(); j++){
 				
 				int i = dividespots.get(j);
-					tr.operator = new times();
+					tr.operator = new Times();
 				
 					Term mid = new Term();
-					mid.operator = new divide();
+					mid.operator = new Divide();
 					mid.parent = tr;
 					mid.getChilds().add(tr.getChilds().get(i-1));
 					mid.getChilds().add(tr.getChilds().get(i));

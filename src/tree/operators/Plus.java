@@ -3,11 +3,15 @@ import java.util.ArrayList;
 
 import javax.print.attribute.standard.Fidelity;
 
+import container.walks.TestPaternity;
+
+import move.plusmove;
 import move.identify.TermMath;
 import move.identify.ReturnSel;
 import move.operators.PlusMove;
 import representTerms.Image;
 import tree.Term;
+import tree.notsimple.NegativeTerm;
 import tree.simple.Number;
 import tree.simple.Constant;
 import tree.simple.variable;
@@ -114,7 +118,7 @@ public class Plus extends Operator{
 
 		ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, sel);
 		Term secondsel = TermMath.findTermUsingKey(second, key);
-		
+
 		if(!secondsel.parent.hasparen){
 			changeterm(secondsel, IntermIndex);
 		}
@@ -131,7 +135,7 @@ public class Plus extends Operator{
 
 	public Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel){
 
-		
+
 		Image Ghost = new Image();
 		if(!(sel.parent.parent.getChilds().get(IntermIndex) instanceof Operator)){
 			Ghost = PlusMove.overEquals(im, sel, IntermIndex, xsel);}
@@ -225,52 +229,54 @@ public class Plus extends Operator{
 	@Override
 	public Term simpleOperation(Term term) {
 		
-
 		//find first two numbers that can be added and add them.
 		Term resultingTerm = null;
-		Number firstAddent = null;
+		Term firstAddent = null;
+		Term secondAddent = null;
 		double firstValue = 0;
 		boolean done = false;
 		for(int i = 0; i<term.getChilds().size(); i++){
 			if(!done){
-				
+
 				Term child = term.getChilds().get(i);
-				if(child instanceof Number){
+
+				if(child.isDecimal()){
 					if(firstAddent == null){
-						firstAddent = (Number) child;
-						firstValue = firstAddent.getValue();
-						if( i>0 && (term.getChilds().get(i-1) instanceof Minus)){
-							firstValue *= -1;
-						}
+						firstAddent = child;
+						firstValue = Term.getNumericValue(child);
 					}
 					else{
-						Number secondAddent = (Number) child;
-						double secondValue = secondAddent.getValue();
-						if(i>0 && term.getChilds().get(i-1) instanceof Minus){
-							secondValue *=-1;
-						}
-						Number result = new Number(firstValue + secondValue);
+						secondAddent = child;
+						double secondValue = Term.getNumericValue(child);
+							
+						String val = String.valueOf(firstValue+secondValue);
+						Image img = new Image(val,2,2,2);
+						Term result = img.tr;
 						
 						
 						try {
-							 resultingTerm = (Term) term.clone();
+							resultingTerm = (Term) term.clone();
 						} catch (CloneNotSupportedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
+
 						//remove the second addent and replace the first addent with our result
 						resultingTerm = PlusMove.removeAdditiveChild(resultingTerm, term.getChilds().indexOf(secondAddent));
-						
+
 						resultingTerm = PlusMove.replaceAdditiveTerm(resultingTerm, result, term.getChilds().indexOf(firstAddent));
-						
+
 						done = true;
-					//	System.out.println("first:"+firstValue+ " second: "+secondValue+" result: "+result+" rt: "+resultingTerm);
+						//	System.out.println("first:"+firstValue+ " second: "+secondValue+" result: "+result+" rt: "+resultingTerm);
 					}
 				}
 			}
 		}
+
+		TestPaternity tp = new TestPaternity(resultingTerm);
 		
 		return resultingTerm;
 	}
+
+
 }

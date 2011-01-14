@@ -26,20 +26,23 @@ public class path {
 		boolean good = grammarcheck(formula);
 		if(good){
 			ArrayList<simpleterm> simp = tosimpleterms(formula);
-
-			if(simp.size() == 1){firstterm = simp.get(0);}
 			
-			else{firstterm = toterms(simp);}
+			if(simp.size() == 1){firstterm = simp.get(0);}
+			else if(simp.size() == 3 && simp.get(0) instanceof parens && simp.get(2) instanceof parens){
+				firstterm = simp.get(1);
+			}
+		
+			
+			else{firstterm = toTerms(simp);}
 			
 			GroupFractions GF = new GroupFractions(firstterm);
 			CastToNonSimple CT = new CastToNonSimple(firstterm);
 			
 		}
 		else{
-			firstterm = new times();
+			firstterm = new Times();
 		}
 		TestPaternity tp = new TestPaternity(firstterm);
-		
 		return firstterm;
 	}
 
@@ -63,7 +66,7 @@ public class path {
 		return simp;
 	}
 
-	public Term toterms(ArrayList<simpleterm> simp)
+	public Term toTerms(ArrayList<simpleterm> simp)
 	{
 		Term firstterm = tr.generatetree(simp);
 //		Log.d(TAG, ""+firstterm.getChilds().get(0).toString()+firstterm.getChilds().get(0).hasparen);

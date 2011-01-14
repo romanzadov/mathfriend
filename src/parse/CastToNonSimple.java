@@ -24,9 +24,9 @@ public class CastToNonSimple implements TreeFunction{
 		//go through subclasses of "notsimple" and see  we can cast our term as one of them.
 		if(n == 0){
 			Fraction f = new Fraction();
-			if(f.isNegative(tr)){
+			if(f.canConstruct(tr)){
 				int place = tr.parent.getChilds().indexOf(tr);
-				f = new Fraction(tr);
+				f = new Fraction(tr.getChilds().get(0), tr.getChilds().get(2));
 
 				f.parent = tr.parent;
 				tr.parent.getChilds().set(place, f);

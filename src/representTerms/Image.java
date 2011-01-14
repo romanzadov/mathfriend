@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import parse.path;
 import tree.Term;
-import tree.operators.times;
+import tree.operators.Times;
 //import android.graphics.Color;
 //import android.util.Log;
 import container.AbsoluteContainer;

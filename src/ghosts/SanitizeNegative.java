@@ -1,14 +1,14 @@
 package ghosts;
 
 import tree.Term;
-import tree.operators.divide;
-import tree.operators.times;
+import tree.operators.Divide;
+import tree.operators.Times;
 
 public class SanitizeNegative {
 
 	public SanitizeNegative(Term tr){
 
-		if(tr.operator instanceof times || tr.operator instanceof divide){
+		if(tr.operator instanceof Times || tr.operator instanceof Divide){
 			for(int i = 0; i<tr.getChilds().size(); i++){
 
 				
