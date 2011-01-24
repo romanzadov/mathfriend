@@ -56,8 +56,8 @@ public class TestStrings {
 	final static String[] decimalDivision = {
 		
 		"6/3=2",
-		"-6/2=-3"
-		
+		"-6/2=-3",
+		"1.5/.1=15"
 	};
 	
 	public static ArrayList<String> getStrings(){

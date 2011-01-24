@@ -16,6 +16,7 @@ import representTerms.Settings.ScreenType;
 import representTerms.TouchData.TouchType;
 import representTerms.stringrect.type;
 import tree.Term;
+import tree.notsimple.Fraction;
 import tree.simple.Number;
 import display.point;
 import display.rectangle;
@@ -129,6 +130,18 @@ public class MainScreen implements AbstractedScreen{
 		}
 		else{
 
+		}
+		
+		//go through the rectangles and if there's any fractions, redraw the fraction bar.
+		
+		for(int i = 0; i<relatives.size(); i++){
+			
+			stringrect a = relatives.get(i);
+			if(a.todraw.equals("/")){
+				a.todraw = "";
+				a.myType = type.FRACTION;
+			}
+			
 		}
 		
 		return relatives;

@@ -3,7 +3,7 @@ package move;
 import move.identify.selectterm;
 import representTerms.Image;
 import tree.Term;
-import tree.operators.equals;
+import tree.operators.Equality;
 import tree.operators.Operator;
 
 public class equalmove {
@@ -13,7 +13,7 @@ public class equalmove {
 		
 		Term tr = im.tr;
 		
-		if(!(tr.operator instanceof equals)){
+		if(!(tr.operator instanceof Equality)){
 			System.out.println("error: equalmove run on non equal term");
 		}
 		else{

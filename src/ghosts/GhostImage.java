@@ -6,7 +6,7 @@ import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.Divide;
-import tree.operators.equals;
+import tree.operators.Equality;
 import tree.operators.Minus;
 import tree.operators.Operator;
 import tree.operators.parens;
@@ -84,7 +84,7 @@ public class GhostImage {
 		if((sel.parent!=null)&&
 				(sel.parent.parent!=null)&&
 				(sel.parent.parent.operator!=null)&&
-				(sel.parent.parent.operator instanceof equals)){
+				(sel.parent.parent.operator instanceof Equality)){
 
 			selindex = sel.parent.parent.getChilds().indexOf(sel.parent);
 			
@@ -111,7 +111,7 @@ public class GhostImage {
 				(sel.parent.operator instanceof Times || sel.parent.operator instanceof Divide)){
 			if(sel.parent.parent != null && (sel.parent.parent.operator instanceof Plus
 					|| sel.parent.parent.operator instanceof Minus)){
-				if(sel.parent.parent.parent != null && sel.parent.parent.parent.operator instanceof equals){
+				if(sel.parent.parent.parent != null && sel.parent.parent.parent.operator instanceof Equality){
 
 					for (int i = 0; i<sel.parent.parent.parent.getChilds().size(); i++){
 						rectangle a = sel.parent.parent.parent.getChilds().get(i).container;

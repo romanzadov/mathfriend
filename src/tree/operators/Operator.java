@@ -3,7 +3,7 @@ package tree.operators;
 
 import representTerms.Image;
 import tree.Term;
-import tree.notsimple.equation;
+import tree.notsimple.Equation;
 import tree.simple.simpleterm;
 import display.rectangle;
 
@@ -91,7 +91,7 @@ public abstract class Operator extends simpleterm{
 
 	public abstract Term simpleOperation(Term term);
 	
-	public equation ToBothSides(equation eq, Operator op, Term sel) {
+	public Equation ToBothSides(Equation eq, Operator op, Term sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}

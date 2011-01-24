@@ -16,6 +16,7 @@ import representTerms.TouchData;
 import representTerms.stringrect;
 import representTerms.TouchData.TouchType;
 import representTerms.stringrect.type;
+import tree.notsimple.Fraction;
 import display.rectangle;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener{
@@ -64,9 +65,14 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 				}
 				g.setColor(Color.black);
 
+				if(toDraw.get(i).myType == type.FRACTION){
+					rectangle fractionBar = Fraction.getFractionBarToDraw(c);
+					g.fillRect((int)fractionBar.bl.x,(int)fractionBar.bl.y, (int)fractionBar.width, (int)fractionBar.height);	
+				}
 
-				g.drawRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
-
+				if(i == 0){
+					g.drawRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
+				}
 			
 
 
@@ -74,7 +80,6 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 				if(!a.todraw.equals("")){
 					g.drawString(a.todraw, (int)(c.bl.x+c.width/4), (int)(c.topleft().y-c.height/8));
 				}
-
 
 			}
 		}

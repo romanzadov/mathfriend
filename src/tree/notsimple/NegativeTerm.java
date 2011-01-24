@@ -11,7 +11,7 @@ public class NegativeTerm extends NotSimple{
 	public NegativeTerm(){}
 	
 	public NegativeTerm(Term tr){
-		if(isNegative(tr)){
+		if(canConstruct(tr)){
 			negative n = new negative();
 			this.operator = n;
 			n = new negative();
@@ -44,14 +44,6 @@ public class NegativeTerm extends NotSimple{
 		this.getChilds().add(tr);
 	}
 
-	public boolean isNegative(Term tr){
-		boolean ans = false;
-		if(tr.isNegative() && tr.getChilds().size() == 3){
-			ans = true;
-		}
-
-		return ans;
-	}
 
 	@Override
 	public String toString(){
@@ -83,5 +75,15 @@ public class NegativeTerm extends NotSimple{
 		a.width = xmax;
 		tr.container = a;
 		return a;
+	}
+
+	@Override
+	public boolean canConstruct(Term tr) {
+		boolean ans = false;
+		if(tr.isNegative() && tr.getChilds().size() == 3){
+			ans = true;
+		}
+
+		return ans;
 	}
 }

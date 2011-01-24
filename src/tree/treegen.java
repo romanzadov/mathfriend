@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import parse.parenthesize;
 import tree.operators.Divide;
-import tree.operators.equals;
+import tree.operators.Equality;
 import tree.operators.exponent;
 import tree.operators.Minus;
 import tree.operators.negative;
@@ -319,7 +319,7 @@ public class treegen {
 				}
 
 				if(simp.get(i).equals("=")){
-					equals a = new equals();
+					Equality a = new Equality();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
 					a.valuestring =  ((Operator)simp.get(i)).valuestring;
@@ -333,7 +333,7 @@ public class treegen {
 		for(int i = 0; i<simp.size(); i++){
 			if(simp.get(i) instanceof Minus){
 
-				if(i==0||simp.get(i-1) instanceof equals
+				if(i==0||simp.get(i-1) instanceof Equality
 						||simp.get(i-1).equals("(")
 						||simp.get(i-1) instanceof Operator){
 

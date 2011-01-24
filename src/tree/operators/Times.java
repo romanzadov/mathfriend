@@ -11,6 +11,7 @@ import representTerms.Image;
 
 import display.rectangle;
 import tree.*;
+import tree.simple.variable;
 
 public class Times extends Operator{
 
@@ -72,8 +73,8 @@ public class Times extends Operator{
 				if(tr.getChilds().get(i) instanceof Times && ((Times)tr.getChilds().get(i)).visible){
 				
 					Term kid = tr.getChilds().get(i);
-					kid.container.height = (float) .3;
-					kid.container.width = (float) .3;
+					kid.container.height =  .3f;
+					kid.container.width = .3f;
 					kid.todraw = ".";
 				}
 			}
@@ -147,5 +148,34 @@ public class Times extends Operator{
 		return back;
 	}
 	
-	
+	public static void makeVisible(Term tr){
+		
+		if(tr.operator instanceof Times || tr.operator instanceof Divide){
+			
+			ArrayList<Term> kids = tr.getChilds();
+			
+			for(int i = 0; i<kids.size(); i++){
+				Term kid = kids.get(i);
+				
+				if(kid instanceof Times){
+					
+					int positin = i;
+					boolean makeVisible = true;
+					
+					if(i > 0 && i<kids.size()){
+						
+						if(kids.get(i-1) instanceof variable || kids.get(i+1) instanceof variable){
+							makeVisible = false;
+						}
+							
+						
+					}
+					if(makeVisible){((Times)kid).visible = true;}
+				}
+				
+			}
+			
+		}
+		
+	}
 }

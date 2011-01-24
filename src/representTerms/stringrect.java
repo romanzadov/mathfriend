@@ -17,7 +17,7 @@ public class stringrect implements Cloneable{
 	public String todraw = "";
 	public float fontscale;
 	public boolean hasParens = false;
-	public enum type {MAIN, SELECTED, GHOST, HISTORY, SELECT_COVER}
+	public enum type {MAIN, SELECTED, GHOST, HISTORY, SELECT_COVER, FRACTION}
 	public String term =  new String();
 
 	@Override

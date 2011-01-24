@@ -3,7 +3,7 @@ package move;
 import move.identify.selectterm;
 import tree.Term;
 import tree.notsimple.NegativeTerm;
-import tree.operators.equals;
+import tree.operators.Equality;
 import tree.operators.Operator;
 import tree.operators.Plus;
 import display.point;
@@ -17,7 +17,7 @@ public class plusmove {
 		
 		if(endterm == null){
 			
-			if(selected.parent.parent.operator instanceof equals){
+			if(selected.parent.parent.operator instanceof Equality){
 				Term higherterm = st.whichterm(selected.parent.parent, x, y, new point(0,0), 0);
 				endterm = st.whichterm(higherterm, x, y, new point(0,0), 0);
 			

@@ -246,4 +246,26 @@ public class Fraction extends NotSimple{
 		return fraction;
 	}
 
+	public static rectangle getFractionBarToDraw(rectangle a){
+		
+		int minHeight = 1;
+		int barHeight = (int)(0.5*a.height);
+		
+		barHeight = Math.max(minHeight, barHeight);
+		
+		int minWidth = 6;
+		int barWidth = (int)(0.8*a.width);
+		barWidth = Math.max(minWidth, barWidth);
+		
+		rectangle fractionBar = new rectangle();
+		
+		fractionBar.height = barHeight;
+		fractionBar.width = barWidth;
+		
+		fractionBar.bl.x = a.bl.x + a.width*0.1f;
+		fractionBar.bl.y = a.bl.y + a.height*0.25f;
+		
+		return fractionBar;
+	}
+	
 }

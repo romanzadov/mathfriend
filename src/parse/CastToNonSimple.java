@@ -3,8 +3,10 @@ package parse;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
+import tree.notsimple.Equation;
 import tree.notsimple.Fraction;
 import tree.notsimple.NegativeTerm;
+import tree.operators.Times;
 import tree.operators.negative;
 //import android.util.Log;
 
@@ -14,7 +16,7 @@ public class CastToNonSimple implements TreeFunction{
 	int n = 0;
 
 	public CastToNonSimple(Term tr){
-		for(int i = 0; i<2; i++){
+		for(int i = 0; i<3; i++){
 			n = i;
 			downwalk walk = new downwalk(tr, this);
 		}
@@ -33,7 +35,7 @@ public class CastToNonSimple implements TreeFunction{
 			}}
 		else if(n == 1){
 			NegativeTerm n = new NegativeTerm();
-			if(n.isNegative(tr)){
+			if(n.canConstruct(tr)){
 				int place = tr.parent.getChilds().indexOf(tr);
 				n = new NegativeTerm(tr);
 				
@@ -42,7 +44,23 @@ public class CastToNonSimple implements TreeFunction{
 		
 			}
 		}
+		
+		else if(n == 2){
+			Equation equation = new Equation();
+			if(equation.canConstruct(tr)){
+				int place = tr.parent.getChilds().indexOf(tr);
+				equation = new Equation(tr);
 
+				equation.parent = tr.parent;
+				tr.parent.getChilds().set(place, equation);
+			}
+			
+		}
+
+		
+		//make times visible if needed. 
+		 Times.makeVisible(tr);
+		
 	}
 
 }

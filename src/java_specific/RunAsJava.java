@@ -15,7 +15,7 @@ public class RunAsJava {
 
 	public static void main(String[] args) {
 
-		String st = "2x-5=7";
+		String st = "1.5x-3=7";
 
 		RunAsJava raj = new RunAsJava();
 		//  raj.testNumbers();

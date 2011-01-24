@@ -10,7 +10,7 @@ import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.Term;
 import tree.operators.Divide;
-import tree.operators.equals;
+import tree.operators.Equality;
 import tree.operators.Minus;
 import tree.operators.Operator;
 import tree.operators.Plus;
@@ -217,7 +217,7 @@ public class TimesMove {
 		}
 
 		// next, do the other side of the equals
-		if(recip.parent.parent.parent!=null && recip.parent.parent.parent.operator instanceof equals){
+		if(recip.parent.parent.parent!=null && recip.parent.parent.parent.operator instanceof Equality){
 			Term eq = recip.parent.parent.parent;
 			for(int i = 0; i<eq.getChilds().size(); i++){
 				if(!(eq.getChilds().get(i) instanceof Operator)&&i!=eqindex){
@@ -231,7 +231,7 @@ public class TimesMove {
 			}
 		}
 
-		else if(regular.parent.parent!=null && regular.parent.parent.operator instanceof equals){
+		else if(regular.parent.parent!=null && regular.parent.parent.operator instanceof Equality){
 
 			Term eq = regular.parent.parent;
 			for(int i = 0; i<eq.getChilds().size(); i++){
