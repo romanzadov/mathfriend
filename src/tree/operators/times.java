@@ -1,9 +1,8 @@
 package tree.operators;
-import java.util.ArrayList;
 
 import container.AllignFracBar;
 
-import move.operators.timesmove;
+import move.operators.TimesMove;
 
 import parse.composefractions;
 import representTerms.Image;
@@ -11,12 +10,12 @@ import representTerms.Image;
 import display.rectangle;
 import tree.*;
 
-public class times extends Operator{
+public class Times extends Operator{
 
 	public boolean visible = false;
 	
 	
-	public times(){
+	public Times(){
 		inputs=2;
 		invertable=true;
 		commutative=true;
@@ -36,7 +35,7 @@ public class times extends Operator{
 		
 		//rectangle any simpleterm
 		if(	tr.getChilds().size()==1	){
-			if( tr instanceof times){
+			if( tr instanceof Times){
 
 				rectangle a = new rectangle();
 				a.width = 1;
@@ -45,7 +44,7 @@ public class times extends Operator{
 				tr.todraw = "*";
 				rect = a;
 			}
-			if( tr instanceof divide){
+			if( tr instanceof Divide){
 				rectangle a = new rectangle();
 				a.width = 1;
 				a.height = 1;
@@ -61,14 +60,14 @@ public class times extends Operator{
 		else if(tr.getChilds().size()>1){
 			//strip parens from previous time. They'll be added later.
 			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr instanceof parens){
+				if(tr instanceof Parens){
 					tr.getChilds().remove(0);
 					tr.getChilds().remove(tr.getChilds().size()-1);
 				}
 			}
 			//make times visible as needed
 			for(int i = 0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i) instanceof times && ((times)tr.getChilds().get(i)).visible){
+				if(tr.getChilds().get(i) instanceof Times && ((Times)tr.getChilds().get(i)).visible){
 				
 					Term kid = tr.getChilds().get(i);
 					kid.container.height = (float) .3;
@@ -90,7 +89,7 @@ public class times extends Operator{
 		//set which terms are bottoms
 		for(int i = 0; i<tr.getChilds().size(); i++){
 			if(tr.getChilds().size()>0){
-			if(tr.getChilds().get(i) instanceof divide)
+			if(tr.getChilds().get(i) instanceof Divide)
 			{tr.getChilds().get(i+1).isbottom = true;}
 			}
 		}
@@ -111,7 +110,7 @@ public class times extends Operator{
 		rectangle thiscont = cf.tofracs(tr, places, barheight);
 		tr.container = thiscont;
 		boolean thisfrac = false;
-		if(tr.getChilds().size() == 3 && tr.operator instanceof divide ){
+		if(tr.getChilds().size() == 3 && tr.operator instanceof Divide){
 			thisfrac = true;
 		}
 		if(!thisfrac){
@@ -123,7 +122,7 @@ public class times extends Operator{
 		
 		
 	}
-	timesmove tm = new timesmove();
+	TimesMove tm = new TimesMove();
 	@Override
 	public Image inTermMoves(Image im, Term sel,
 			int IntermIndex) {
@@ -137,11 +136,6 @@ public class times extends Operator{
 		
 		Image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);	
 		return Ghost;
-	}
-	@Override
-	public Term simpleOperation(Term term) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	

@@ -1,12 +1,12 @@
 package tree.operators;
-import move.operators.plusmove;
 import display.rectangle;
 import representTerms.Image;
-import tree.*;
-public class minus extends operator{
+import tree.Term;
+
+public class Minus extends Operator {
 	
 	
-	public minus(){
+	public Minus(){
 		inputs =2;
 	    invertable=true;
 		commutative=true;
@@ -19,20 +19,20 @@ public class minus extends operator{
 		todraw = "-";
 		valuestring = "-";
 	}
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
-		plus p = new plus();
+		Plus p = new Plus();
 		a = p.giverect(tr);
 		return a;
 	}
 	
-	public Image inTermMoves(Image im, term sel, int IntermIndex){
-		plus p = new plus();
+	public Image inTermMoves(Image im, Term sel, int IntermIndex){
+		Plus p = new Plus();
 		im = p.inTermMoves(im, sel, IntermIndex);
 		return im;
 	}
-	public Image overEqualsMoves(Image im, term sel, int IntermIndex, double xsel){
-		plus p = new plus();
+	public Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel){
+		Plus p = new Plus();
 		im = p.overEqualsMoves(im, sel, IntermIndex, xsel);
 		return im;
 	}

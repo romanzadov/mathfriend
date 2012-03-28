@@ -2,22 +2,15 @@ package java_specific;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import representTerms.DisplayInterface;
 import representTerms.DisplayInterfaceTemplate;
-import representTerms.GUIMath;
-import representTerms.LogicEngine;
-import representTerms.PlaceAndFont;
-import representTerms.Settings;
 import representTerms.TouchData;
 import representTerms.stringrect;
 import representTerms.screens.AbstractedScreen;
-import display.point;
 import display.rectangle;
 
 public class JavaDisplay extends DisplayInterfaceTemplate {

@@ -2,6 +2,7 @@ package parse;
 
 import java.util.ArrayList;
 
+import tree.operators.Parens;
 import tree.simple.simpleterm;
 
 public class preorganized {
@@ -16,8 +17,8 @@ public class preorganized {
 		if(st instanceof tree.simple.Constant){
 			st.valuestring =""+(((tree.simple.Constant) st).value);
 			}
-		if(st instanceof tree.operators.parens){
-			st.valuestring = ""+(((tree.operators.parens) st).value);
+		if(st instanceof Parens){
+			st.valuestring = ""+(((Parens) st).value);
 			}
 		if(st instanceof tree.simple.variable){
 			st.valuestring = ""+(((tree.simple.variable) st).value);

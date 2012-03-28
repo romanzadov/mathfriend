@@ -1,7 +1,7 @@
 package tree.notsimple;
 
 import tree.Term;
-import tree.operators.equals;
+import tree.operators.Equals;
 import tree.operators.Operator;
 
 public class equation extends NotSimple{
@@ -15,8 +15,8 @@ public class equation extends NotSimple{
 
 		try {
 			if(tr.getChilds().size()!=3){okay = false;}
-			if(!(tr.operator instanceof equals )){okay = false;}
-			if(tr.getChilds().get(1) instanceof equals){okay = false;}
+			if(!(tr.operator instanceof Equals)){okay = false;}
+			if(tr.getChilds().get(1) instanceof Equals){okay = false;}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 
@@ -48,8 +48,8 @@ public class equation extends NotSimple{
 
 		try {
 			if(tr.getChilds().size()!=3){okay = false;}
-			if(!(tr.operator instanceof equals )){okay = false;}
-			if(tr.getChilds().get(1) instanceof equals){okay = false;}
+			if(!(tr.operator instanceof Equals)){okay = false;}
+			if(tr.getChilds().get(1) instanceof Equals){okay = false;}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 

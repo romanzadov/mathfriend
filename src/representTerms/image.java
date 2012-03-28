@@ -1,25 +1,22 @@
 package representTerms;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 
 import parse.path;
-import tree.term;
-import tree.operators.times;
+import tree.Term;
 //import android.graphics.Color;
 //import android.util.Log;
-import container.AbsoluteContainer;
 import container.RelativeContainer;
 import display.point;
 import display.rectangle;
 import display.stringofrects;
 
 
-public class image implements Cloneable{
+public class Image implements Cloneable{
 
 	public static final String TAG = "image";
 	public String st;
-	public term tr;
+	public Term tr;
 
 	public ArrayList<stringrect>relativeContainers  = new ArrayList<stringrect>();
 	public ArrayList<stringrect>historyContainers =  new ArrayList<stringrect>();
@@ -33,13 +30,13 @@ public class image implements Cloneable{
 	public double scalefactor =1;
 	String arg = null;
 
-	public image(){}
+	public Image(){}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		image clone = (image)super.clone();
+		Image clone = (Image)super.clone();
 
 		if(this.tr != null){
-			clone.tr = (term) this.tr.clone();
+			clone.tr = (Term) this.tr.clone();
 		}
 
 		clone.bel = (point)this.bel.clone();
@@ -61,14 +58,14 @@ public class image implements Cloneable{
 
 
 
-	public image(term term, point bl,  String argument){
+	public Image(Term term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
 		st = tr.toString();
 	}
 
-	public image(String myst,   int myFont, int screenWidth, int screenHeight){
+	public Image(String myst, int myFont, int screenWidth, int screenHeight){
 		path pa = new path();
 		tr = pa.getTermFromString(myst);
 		st = myst;
@@ -83,14 +80,14 @@ public class image implements Cloneable{
 	}
 
 
-	public image(String myst, point bl){
+	public Image(String myst, point bl){
 		path pa = new path();
 		tr = pa.getTermFromString(myst);
 		bel = bl;
 		st = myst;
 	}
 
-	public void imagemove(term term, point bl, String argument){
+	public void imagemove(Term term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;

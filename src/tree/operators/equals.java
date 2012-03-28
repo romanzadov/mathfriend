@@ -1,20 +1,16 @@
 package tree.operators;
 
-import move.operators.PlusMove;
-
-import container.RelativeContainer;
-
 import display.point;
 import display.rectangle;
 import representTerms.Image;
 import tree.*;
 import tree.simple.Number;
 
-public class equals extends Operator{
+public class Equals extends Operator{
 
 	String name = "=";
 
-	public equals(){
+	public Equals(){
 		inputs=2;
 		invertable=false;
 		commutative=true;
@@ -191,11 +187,6 @@ public class equals extends Operator{
 	@Override
 	public Image overEqualsMoves(Image im, Term sel, int IntermIndex,
 			double xsel) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Term simpleOperation(Term term) {
 		// TODO Auto-generated method stub
 		return null;
 	}

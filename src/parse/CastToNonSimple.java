@@ -7,7 +7,6 @@ import tree.notsimple.Equation;
 import tree.notsimple.Fraction;
 import tree.notsimple.NegativeTerm;
 import tree.operators.Times;
-import tree.operators.negative;
 //import android.util.Log;
 
 public class CastToNonSimple implements TreeFunction{

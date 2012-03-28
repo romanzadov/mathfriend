@@ -2,9 +2,6 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import tree.Term;
-
-import display.point;
 import display.rectangle;
 
 public class todrawtowrite implements Cloneable{

@@ -3,7 +3,7 @@ package container.walks;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.parens;
+import tree.operators.Parens;
 
 public class killparens  implements TreeFunction{
 
@@ -14,7 +14,7 @@ public class killparens  implements TreeFunction{
 	}
 
 	public void performAction(Term tr) {
-		if(tr instanceof parens){
+		if(tr instanceof Parens){
 			tr.parent.hasparen = true;
 			int n = tr.parent.getChilds().size();
 			for(int i = 0; i<n ;i++){

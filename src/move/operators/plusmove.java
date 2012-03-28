@@ -5,24 +5,24 @@ import java.util.ArrayList;
 import move.identify.FindSel;
 import move.identify.ReturnSel;
 import representTerms.Image;
-import tree.term;
-import tree.operators.minus;
-import tree.operators.operator;
-import tree.operators.plus;
+import tree.Term;
+import tree.operators.Minus;
+import tree.operators.Operator;
+import tree.operators.Plus;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
 
-public class plusmove {
+public class PlusMove {
 
 	static final String TAG = "plusmove";
 
-	public Image overEquals(Image im, term sel, int equalsIndex, double xsel){
+	public Image overEquals(Image im, Term sel, int equalsIndex, double xsel){
 		//path pa = new path();
 		//term second = pa.pathway(im.ft.originalstring);
-		term second = new term();
+		Term second = new Term();
 		try {
-			second = (term)im.tr.clone();
+			second = (Term)im.tr.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,22 +31,22 @@ public class plusmove {
 		FindSel fs = new FindSel();
 		ArrayList<Integer> key = fs.FindSelected(im.tr, sel);
 		ReturnSel rs = new ReturnSel();
-		term holder = rs.Return(second, key);
+		Term holder = rs.Return(second, key);
 
 //		ColorText ct = new ColorText(holder, Color.red);
 
-		term moveto = holder.parent.parent.getChilds().get(equalsIndex);
+		Term moveto = holder.parent.parent.getChilds().get(equalsIndex);
 		key = fs.FindSelected(second, moveto);
-		term originalmoveto = rs.Return(im.tr, key);
+		Term originalmoveto = rs.Return(im.tr, key);
 
 		int selindex = holder.parent.getChilds().indexOf(holder);
-		operator op =  null;
-		term mid = new term();
+		Operator op =  null;
+		Term mid = new Term();
 
 //		Log.d(TAG, "moveto: "+moveto+" selindex: "+selindex+ " sel: "+sel+" equalsIndex: "+equalsIndex);
 		
-		if(!(moveto.operator instanceof plus)&&!(moveto.operator instanceof minus)){
-			plus pl = new plus();
+		if(!(moveto.operator instanceof Plus)&&!(moveto.operator instanceof Minus)){
+			Plus pl = new Plus();
 			int num = second.getChilds().indexOf(moveto);
 			mid.parent = moveto.parent;
 			mid.operator = pl;
@@ -59,12 +59,12 @@ public class plusmove {
 
 		if(selindex > 0){ 
 			
-			op = (operator)holder.parent.getChilds().get(selindex-1);
+			op = (Operator)holder.parent.getChilds().get(selindex-1);
 			holder.parent.getChilds().remove(selindex-1);
 			holder.parent.getChilds().remove(selindex-1);
-			if((moveto.operator instanceof plus)||(moveto.operator instanceof minus)){
-				if(op instanceof plus){op = new minus();}
-				else if(op instanceof minus){op = new plus();}
+			if((moveto.operator instanceof Plus)||(moveto.operator instanceof Minus)){
+				if(op instanceof Plus){op = new Minus();}
+				else if(op instanceof Minus){op = new Plus();}
 				op.parent = moveto;
 				holder.parent = moveto;
 				moveto.getChilds().add(op);
@@ -73,7 +73,7 @@ public class plusmove {
 		}
 		if(selindex == 0 ){
 
-			if(holder.parent.getChilds().get(1) instanceof minus){
+			if(holder.parent.getChilds().get(1) instanceof Minus){
 				holder.parent.getChilds().set(2, holder.parent.getChilds().get(2).toggleNegative());
 			}
 
@@ -82,14 +82,14 @@ public class plusmove {
 				holder.parent.getChilds().remove(0);
 				holder.parent.getChilds().remove(0);
 
-				plus pl = new plus();
+				Plus pl = new Plus();
 				pl.parent = moveto;
 				holder.parent = moveto;
 				moveto.getChilds().add(pl);
 				moveto.getChilds().add(holder);
 			}
 			else{
-				minus mn = new minus();
+				Minus mn = new Minus();
 				holder.parent.getChilds().remove(0);
 				holder.parent.getChilds().remove(0);
 				mn.parent = moveto;
@@ -118,10 +118,10 @@ public class plusmove {
 
 	}
 
-	public void inTermFocus(term originalmoveto, term moveto, term holder, double xsel){
+	public void inTermFocus(Term originalmoveto, Term moveto, Term holder, double xsel){
 
 		int IntermIndex = Integer.MAX_VALUE;
-		plus Plus = new plus();
+		Plus Plus = new Plus();
 
 		for(int i = 0; i< originalmoveto.getChilds().size(); i++){
 			rectangle container =originalmoveto.getChilds().get(i).container;
@@ -139,7 +139,7 @@ public class plusmove {
 			else if(IntermIndex != originalmoveto.getChilds().size()-1){
 
 
-				if(!(originalmoveto.getChilds().get(IntermIndex) instanceof operator)){
+				if(!(originalmoveto.getChilds().get(IntermIndex) instanceof Operator)){
 					Plus.changeterm(holder, IntermIndex);
 				}
 				else{	

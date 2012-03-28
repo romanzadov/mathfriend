@@ -6,9 +6,7 @@ import parse.path;
 
 import representTerms.PlaceAndFont;
 import representTerms.Image;
-import representTerms.stringrect;
 import tree.Term;
-import android.util.Log;
 
 public class ImagePositionManager {
 
@@ -62,7 +60,6 @@ public class ImagePositionManager {
 
 		}
 		
-		Log.d(TAG, "scr: "+screenWidth+" gho: "+ghostWidth);
 			//center and give bl
 			bl.x = (screenWidth-ghostWidth)/2;
 			bl.y = ghostHeight+20;
@@ -98,7 +95,7 @@ public class ImagePositionManager {
 		
 		bl.x = screenWidth/2-mainWidth/2;
 		bl.y = screenHeight/3+20 + mainHeight;
-		Log.d(TAG, ""+myMain.scalefactor);
+	//	Log.d(TAG, ""+myMain.scalefactor);
 
 		return new PlaceAndFont(bl, scale);
 	}
@@ -127,9 +124,9 @@ public class ImagePositionManager {
 				int fonty = (int)((screenHeight-20)/step.getRelativeContainers().get(0).container.height);
 				int fontx = (int)((screenWidth-20)/step.getRelativeContainers().get(0).container.width);
 				int newFont =  Math.min(fontx, fonty);
-				Log.d(TAG, "Newfont: "+newFont + " preffont: "+prefferedFont);
+				//Log.d(TAG, "Newfont: "+newFont + " preffont: "+prefferedFont);
 				scale = (0f+newFont)/(0f+prefferedFont);
-				Log.d(TAG, ""+step.scalefactor);
+				//Log.d(TAG, ""+step.scalefactor);
 				mainHeight = (int)(newFont*step.getRelativeContainers().get(0).container.height);
 				mainWidth = (int)(newFont*step.getRelativeContainers().get(0).container.width);
 				

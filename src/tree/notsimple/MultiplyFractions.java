@@ -1,8 +1,6 @@
 package tree.notsimple;
 
 import tree.Term;
-import tree.operators.Divide;
-import tree.operators.Times;
 import tree.simple.Number;
 
 public class MultiplyFractions {

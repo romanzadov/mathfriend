@@ -3,20 +3,20 @@ import java.util.ArrayList;
 
 import move.identify.FindSel;
 import move.identify.ReturnSel;
-import move.operators.plusmove;
+import move.operators.PlusMove;
 import representTerms.Image;
-import tree.term;
+import tree.Term;
 import display.point;
 import display.rectangle;
 //import android.util.Log;
 
-public class plus extends operator{
+public class Plus extends Operator {
 
 	public boolean invisible;
 
 	static final String TAG = "plus";
 	
-	public plus(){
+	public Plus(){
 		inputs =2;
 		invertable=true;
 		commutative=true;
@@ -31,17 +31,17 @@ public class plus extends operator{
 		valuestring = "+";
 	}
 	//draws the rectangle that goes around terms with a plus operator
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 
 		if(tr.getChilds().size()==0){
 
-			if(tr instanceof plus){
+			if(tr instanceof Plus){
 				a.height = 1; 
 				a.width = 1;
 				tr.todraw = "+";
 				tr.container = a;}
-			if(tr instanceof minus){
+			if(tr instanceof Minus){
 				a.height = 1;
 				a.width = 1;
 				tr.todraw = "-";
@@ -74,7 +74,7 @@ public class plus extends operator{
 		return a;
 	}
 
-	public rectangle justplus(term tr){
+	public rectangle justplus(Term tr){
 		rectangle a = new rectangle();
 		a.width = 1;
 		a.height = 1;
@@ -82,7 +82,7 @@ public class plus extends operator{
 		tr.container = a;
 		return a;
 	}
-	public rectangle justminus(term tr){
+	public rectangle justminus(Term tr){
 		rectangle a = new rectangle();
 		a.width = 1;
 		a.height = 1;
@@ -97,11 +97,11 @@ public class plus extends operator{
 		return c;
 	}
 
-	public Image inTermMoves(Image im, term sel, int IntermIndex){
+	public Image inTermMoves(Image im, Term sel, int IntermIndex){
 
-		term second = new term();
+		Term second = new Term();
 		try {
-			second = (term)im.tr.clone();
+			second = (Term)im.tr.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,7 +111,7 @@ public class plus extends operator{
 
 		ArrayList<Integer> key = fs.FindSelected(im.tr, sel);
 		ReturnSel rs = new ReturnSel();
-		term secondsel = rs.Return(second, key);
+		Term secondsel = rs.Return(second, key);
 		if(!secondsel.parent.hasparen){
 			changeterm(secondsel, IntermIndex);
 		}
@@ -126,24 +126,24 @@ public class plus extends operator{
 		return Ghost;
 	}
 
-	public Image overEqualsMoves(Image im, term sel, int IntermIndex, double xsel){
+	public Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel){
 		
-		plusmove pm = new plusmove();
+		PlusMove pm = new PlusMove();
 		Image Ghost = new Image();
-		if(!(sel.parent.parent.getChilds().get(IntermIndex) instanceof operator)){
+		if(!(sel.parent.parent.getChilds().get(IntermIndex) instanceof Operator)){
 			Ghost = pm.overEquals(im, sel, IntermIndex, xsel);}
 		
 		return Ghost;
 	}
 
 
-	public void changeterm( term sel, int IntermIndex){
+	public void changeterm( Term sel, int IntermIndex){
 	
 		int selindex = sel.parent.getChilds().indexOf(sel);
 
 
-		term holder = sel;
-		term moveto = sel.parent.getChilds().get(IntermIndex);
+		Term holder = sel;
+		Term moveto = sel.parent.getChilds().get(IntermIndex);
 	//	ColorText CT = new ColorText(holder, Color.red);
 		
 
@@ -155,33 +155,33 @@ public class plus extends operator{
 			if(selindex == 0 ){
 				if(holder.isNegative()){
 					holder = holder.toggleNegative();
-					minus mn = new minus();
+					Minus mn = new Minus();
 					mn.parent = holder.parent;
 	//				mn.wordcolor = Color.red;
 					holder.parent.getChilds().add(IntermIndex+1, holder);
 					holder.parent.getChilds().add(IntermIndex+1, mn);
 				}
 				else{
-					plus pl = new plus();
+					Plus pl = new Plus();
 					pl.parent = holder.parent;
 	//				pl.wordcolor = Color.red;
 					holder.parent.getChilds().add(IntermIndex+1, holder);
 					holder.parent.getChilds().add(IntermIndex+1, pl);
 				}
 				holder.parent.getChilds().remove(0);
-				term op = holder.parent.getChilds().get(0);
-				if(op instanceof plus){
+				Term op = holder.parent.getChilds().get(0);
+				if(op instanceof Plus){
 					holder.parent.getChilds().remove(0);
 				}
-				if(op instanceof minus){
+				if(op instanceof Minus){
 					holder.parent.getChilds().remove(0);
 					holder.parent.getChilds().get(0).toggleNegative();
 				}
 			}
 			else if(IntermIndex == 0){
 
-				if(holder.parent.getChilds().get(selindex-1) instanceof minus){
-					term mid = holder.toggleNegative();
+				if(holder.parent.getChilds().get(selindex-1) instanceof Minus){
+					Term mid = holder.toggleNegative();
 		//			Log.d(TAG, "mid: "+mid);
 					mid.parent = holder.parent;
 					holder = mid;
@@ -194,12 +194,12 @@ public class plus extends operator{
 
 				if(moveto.isNegative()){
 					moveto.toggleNegative();
-					minus mn = new minus();
+					Minus mn = new Minus();
 					mn.parent = holder.parent;
 					holder.parent.getChilds().add(0,mn);
 				}
 				else{
-					plus pl = new plus();
+					Plus pl = new Plus();
 					pl.parent = holder.parent;
 					holder.parent.getChilds().add(0, pl);
 				}
@@ -208,7 +208,7 @@ public class plus extends operator{
 
 			}
 			else{
-				term op = holder.parent.getChilds().get(selindex-1);
+				Term op = holder.parent.getChilds().get(selindex-1);
 				holder.parent.getChilds().remove(selindex-1);
 				holder.parent.getChilds().remove(selindex-1);
 				holder.parent.getChilds().add(IntermIndex-1, holder);

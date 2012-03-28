@@ -3,12 +3,10 @@ package tree.operators.calculate;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
-import move.identify.ReturnSel;
 
 import tree.Term;
 import tree.operators.Minus;
 import tree.operators.Plus;
-import tree.operators.Times;
 import tree.simple.Number;
 
 public class PlusMinus {

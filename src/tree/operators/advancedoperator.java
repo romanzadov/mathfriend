@@ -2,7 +2,7 @@ package tree.operators;
 
 import tree.Term;
 
-public class advancedoperator extends Operator{
+public class AdvancedOperator extends Operator{
 
 	@Override
 	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,

@@ -1,9 +1,8 @@
 package tree;
 
-import tree.operators.exponent;
+import tree.operators.Exponent;
 import tree.operators.Minus;
-import tree.operators.negative;
-import tree.operators.parens;
+import tree.operators.Negative;
 import tree.operators.Plus;
 import tree.operators.Times;
 import tree.downwalk.TreeFunction;
@@ -17,14 +16,14 @@ public class newparens implements TreeFunction {
 	public void performAction(Term tr) {
 	
 		//parentheses around multiplied terms
-		if(tr.parent.operator instanceof Times||tr.parent.operator instanceof negative){
+		if(tr.parent.operator instanceof Times||tr.parent.operator instanceof Negative){
 			
 			if(tr.operator instanceof Plus||tr.operator instanceof Minus){
 					tr.hasparen = true;
 			}
 		}
 		//parentheses around exponents
-		else if(tr.parent.operator instanceof exponent){
+		else if(tr.parent.operator instanceof Exponent){
 			if(!tr.parent.getChilds().get(0).issimple){
 				tr.parent.getChilds().get(0).hasparen = true;
 			}

@@ -2,13 +2,11 @@ package representTerms.screens;
 
 import ghosts.GhostImage;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
 import move.identify.selectterm;
 import representTerms.Image;
-import representTerms.LogicEngine;
 import representTerms.Settings;
 import representTerms.TouchData;
 import representTerms.stringrect;
@@ -16,8 +14,6 @@ import representTerms.Settings.ScreenType;
 import representTerms.TouchData.TouchType;
 import representTerms.stringrect.type;
 import tree.Term;
-import tree.notsimple.Fraction;
-import tree.simple.Number;
 import display.point;
 import display.rectangle;
 

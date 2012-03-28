@@ -6,8 +6,6 @@ import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.operators.Divide;
-import tree.operators.Operator;
-import tree.operators.parens;
 import tree.operators.Times;
 import tree.simple.Placeholder;
 import tree.simple.Number;

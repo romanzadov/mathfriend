@@ -1,7 +1,5 @@
 package container;
 
-import java.util.ArrayList;
-
 import display.rectangle;
 
 import tree.Term;

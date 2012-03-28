@@ -1,9 +1,7 @@
 package tree.notsimple;
 
-import parse.path;
 import tree.Term;
-import tree.operators.negative;
-import tree.simple.Number;
+import tree.operators.Negative;
 import display.rectangle;
 
 public class NegativeTerm extends NotSimple{
@@ -12,9 +10,9 @@ public class NegativeTerm extends NotSimple{
 	
 	public NegativeTerm(Term tr){
 		if(canConstruct(tr)){
-			negative n = new negative();
+			Negative n = new Negative();
 			this.operator = n;
-			n = new negative();
+			n = new Negative();
 
 	//		Number minusone = new Number(-1);
 
@@ -35,9 +33,9 @@ public class NegativeTerm extends NotSimple{
 	}
 
 	public void makeNegative(Term tr){
-		negative n = new negative();
+		Negative n = new Negative();
 		this.operator = n;
-		n = new negative();
+		n = new Negative();
 		
 		this.setNegative(true);
 		this.getChilds().add(n);

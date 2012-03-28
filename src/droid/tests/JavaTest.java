@@ -4,7 +4,6 @@ import display.point;
 import parse.path;
 import representTerms.Image;
 import tree.Term;
-import android.util.Log;
 
 public class JavaTest {
 

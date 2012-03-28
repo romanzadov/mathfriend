@@ -1,15 +1,12 @@
 package java_specific;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import droid.tests.TestStrings;
 
 import representTerms.Image;
 import representTerms.LogicEngine;
 import tree.Term;
-import tree.notsimple.Fraction;
 
 public class RunAsJava {
 
@@ -113,7 +110,7 @@ public class RunAsJava {
 			if(tr.isNegative()){type+=" isnegative |";}
 			if(tr.issimple){type+=" issimple |";}
 
-			type += " val: "+Term.getNumericValue(tr);
+			type += " val: "+ Term.getNumericValue(tr);
 
 			System.out.println(type);
 		}

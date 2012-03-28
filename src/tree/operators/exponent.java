@@ -2,11 +2,10 @@ package tree.operators;
 import container.walks.fontize;
 import display.rectangle;
 import tree.*;
-import tree.downwalk.TreeFunction;
 
-public class exponent extends Operator{
+public class Exponent extends Operator{
 	
-	public exponent()
+	public Exponent()
 	{
 		
 			inputs=2;
@@ -35,7 +34,7 @@ public class exponent extends Operator{
 			}
 			//remove parens if any
 			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(0) instanceof parens){
+				if(tr.getChilds().get(0) instanceof Parens){
 					tr.getChilds().remove(0);
 					tr.getChilds().remove(tr.getChilds().size()-1);
 				}

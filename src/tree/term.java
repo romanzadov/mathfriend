@@ -6,41 +6,44 @@ import container.walks.AssignScreenPositions;
 
 import parse.path;
 import representTerms.stringrect;
+import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
 import tree.notsimple.MultiplyFractions;
 import tree.notsimple.NegativeTerm;
-import tree.operators.divide;
-import tree.operators.minus;
-import tree.operators.negative;
-import tree.operators.operator;
-import tree.operators.times;
+import tree.operators.Divide;
+import tree.operators.Minus;
+import tree.operators.Negative;
+import tree.operators.Operator;
+import tree.operators.Times;
 import tree.simple.Number;
+import tree.simple.Constant;
 import tree.simple.simpleterm;
 //import android.util.Log;
 import display.rectangle;
 
-public class term implements Cloneable{
+public class Term implements Cloneable, TreeFunction{
 
 	static final String TAG = "term";
-	
-	public term parent;
-	public operator operator;
-	protected ArrayList<term> childs = new ArrayList<term>();
+
+	public Term parent;
+	public Operator operator;
+	protected ArrayList<Term> childs = new ArrayList<Term>();
 	public rectangle container = new rectangle();
 	public String todraw;
 	public boolean hasparen;
 	public boolean issimple;
-	private boolean isnegative = false;
+	protected boolean isnegative = false;
 	public boolean isbottom = false;
 	public String valuestring;
 	public float scalefactor =1;
 	public ArrayList<simpleterm> simples = new ArrayList<simpleterm>();
 	ArrayList<int[]> parens;
-	operator[] ops;
+	Operator[] ops;
 	int numofterms;
 	public double font = 1;
 
 	public stringrect ScreenPosition = new stringrect();
+
 
 	@Override
 	public String toString(){
@@ -48,9 +51,9 @@ public class term implements Cloneable{
 		if(this instanceof simpleterm){
 			st+=this.todraw;
 		} 
-		
-		else if(truenum(this)<0){
-			st+=truenum(this);
+
+		else if(this.isInteger() && getNumericValue(this)<0){
+			st+=getNumericValue(this);
 		}
 		else if(isNegative()){
 			st+="-";
@@ -71,35 +74,38 @@ public class term implements Cloneable{
 	public Object clone() throws CloneNotSupportedException {
 		String st = this.toString();
 		path pa = new path();
-		term clone = pa.getTermFromString(st);
+		Term clone = pa.getTermFromString(st);
 		clone.font = this.font;
 		clone.container.bl.x = this.container.bl.x;
 		clone.container.bl.y = this.container.bl.y;
+
 		return clone;
 	}
+	
+	
 	@Deprecated
-	public term toggleNegative(term tr){
+	public Term toggleNegative(Term tr){
 		tr.toggleNegative();
 		return tr;
 	}
 
-	public term MultiplyLikeTerms(term tr){
-		term ans = null;
-		term sel = this;
+	public Term MultiplyLikeTerms(Term tr){
+		Term ans = null;
+		Term sel = this;
 
 		if(sel.SimpleCompound() && tr.SimpleCompound()){
 
 		}
 
-		else if (sel.Fraction() || tr.Fraction()){
+		else if (sel.isSimpleFraction() || tr.isSimpleFraction()){
 			MultiplyFractions mf = new MultiplyFractions();
 			ans = mf.times(sel, tr);
 
 		}
-		else if (sel.NaturalNumber() && tr.NaturalNumber()){
-			term n = new term();
-			double a = truenum(sel);
-			double b = truenum(tr);
+		else if (sel.isInteger() && tr.isInteger()){
+			Term n = new Term();
+			double a = getNumericValue(sel);
+			double b = getNumericValue(tr);
 			double c = a*b;
 			if(c>=0){
 				n = new Number(c);
@@ -113,11 +119,11 @@ public class term implements Cloneable{
 		return ans;
 	}
 
-	public term AddLikeTerms(term tr){
+	public Term AddLikeTerms(Term tr){
 
-		term ans = null;
+		Term ans = null;
 
-		term sel = this;
+		Term sel = this;
 		if(sel.SimpleCompound()  && tr.SimpleCompound()){
 			//add like terms that have variables
 		}
@@ -125,19 +131,19 @@ public class term implements Cloneable{
 
 
 			if(sel instanceof Fraction &&(tr instanceof Fraction
-					|| tr.NaturalNumber())){
+					|| tr.isInteger())){
 				ans = ((Fraction)sel).add(tr);
 			}
-			else if(sel.NaturalNumber() && (tr instanceof Fraction
-					|| tr.NaturalNumber())) {
+			else if(sel.isInteger() && (tr instanceof Fraction
+					|| tr.isInteger())) {
 				ans = ((Fraction)tr).add(sel);
 			}
 		}
 
-		else if(sel.NaturalNumber() && tr.NaturalNumber()){
-			term n = new term();
-			double a = truenum(sel);
-			double b = truenum(tr);
+		else if(sel.isInteger() && tr.isInteger()){
+			Term n = new Term();
+			double a = getNumericValue(sel);
+			double b = getNumericValue(tr);
 			double c = a+b;
 			if(c>=0){
 				n = new Number(c);
@@ -153,40 +159,103 @@ public class term implements Cloneable{
 		return ans;
 	}
 
-	public double truenum(term tr){
-		//this should only work for natural numbers
+	public Fraction getReciprical(){
+		
+		Term a = new Term();
+		try {
+			a = (Term)this.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(a.isFraction()){
+			Fraction input = (Fraction)a;
+			Fraction output = new Fraction(input.getBottom(), input.getTop());
+			return output;
+		}
+		else{
+			Fraction input = fractionOverOne(a);
+			Fraction output = new Fraction(input.getBottom(), input.getTop());
+			return output;
+		}
+		
+	}
+	
+	
+	public static Fraction fractionOverOne(Term tr){
+		
+		//take a term and put it over one
+		
+		Number one = new Number(1);
+		Fraction f = new Fraction(tr, one);
+		return f;
+		
+	}
+	
+	public static double getNumericValue(Term tr){
 		//it should give the value of the number in the equation - considering a +/- in front of it
-	//	Log.d(TAG, "Truenum: "+tr.getClass().getName().toString());
-		if(!tr.NaturalNumber()){return 0;}
-		double x = 0;
+		//	Log.d(TAG, "Truenum: "+tr.getClass().getName().toString());
+		//return Double.Min if there's no answer
+		double x = Double.MIN_VALUE;
+
+		if(!tr.isRealNumber()){
+			return Double.MIN_VALUE;
+		}
+
+		if(tr.isSimpleFraction()){
+			return Double.MIN_VALUE;
+		}
+
+
+
+		if(tr.issimple){
+			
+			if(tr instanceof Number){
+
+				x = ((Number)tr).value;
+				int positionOfX = tr.parent.getChilds().indexOf(tr);
+				
+				if(positionOfX == 0){
+					
+					if(tr.isNegative()){
+						x*= -1;
+					}
+					
+					return x;
+				}
+				else{
+					if(tr.parent.getChilds().get(positionOfX - 1) instanceof Minus){
+						x*= -1;
+					}
+				}
+
+			}
+		}
+
+
+
 		if(!tr.isNegative()){
-			if(tr.parent.getChilds().indexOf(tr) == 0){
+			if( tr.parent.getChilds().indexOf(tr) == 0){
 				if(tr instanceof Number){
 					x = ((Number)tr).value;
-				}
-				else if(tr.isNegative()){
-					x = -(((Number)tr.getChilds().get(2)).value);
 				}
 			}
 			else{
 				int index = tr.parent.getChilds().indexOf(tr);
 				x = ((Number)tr).value;
-				term kid = tr.parent.getChilds().get(index-1);
-				if(kid instanceof minus){
+				Term kid = tr.parent.getChilds().get(index-1);
+				if(kid instanceof Minus){
 					x *= -1;
 				}
 			}
 		}
 		else{
-			if(tr.getChilds().get(2) instanceof Number){
-				x = -((Number)tr.getChilds().get(2)).value;
+			if(tr.getChilds().get(1) instanceof Number){
+				x = -((Number)tr.getChilds().get(1)).value;
 			}
-			if(tr.parent.getChilds().indexOf(tr)!=0){
-				int index = tr.parent.getChilds().indexOf(tr);
-				term kid = tr.parent.getChilds().get(index-1);
-				if(kid instanceof minus){
-					x *= -1;
-				}
+			else if(tr.getChilds().size()>2 && tr.getChilds().get(2) instanceof Number){
+				x = -((Number)tr.getChilds().get(2)).value;
 			}
 		}
 
@@ -194,11 +263,10 @@ public class term implements Cloneable{
 		return x;
 	}
 
-
 	public boolean SimpleCompound(){
-		term tr = this;
+		Term tr = this;
 		boolean simp = false;
-		if((tr.operator !=null)&&(tr.operator instanceof times)&&(tr.getChilds().size()>2)&&!(tr.RationalNumber())){ 
+		if((tr.operator !=null)&&(tr.operator instanceof Times)&&(tr.getChilds().size()>2)&&!(tr.isRationalNumber())){ 
 			boolean insidessimp = true;
 			for(int i =0; i<tr.getChilds().size(); i++){
 				if(!tr.getChilds().get(i).issimple){
@@ -211,48 +279,147 @@ public class term implements Cloneable{
 		return simp;
 	}
 
-	public boolean NaturalNumber(){
-		term tr = this;
-		boolean natural = false;
-	//	Log.d(TAG, "this is: "+tr.getClass().getName().toString());
-		try {
-			if(tr instanceof Number){natural = true;}
 
-			else if(tr.getChilds().size() == 2 && tr.getChilds().get(0) instanceof negative
-					&& tr.getChilds().get(1) instanceof Number && tr.isNegative()){
+	public boolean isNatural(){
+		boolean natural = false;
+		Term tr = this;
+
+		if(tr instanceof Number){
+
+			Number n = (Number) tr;
+
+			if(Math.floor(n.value) == n.value  && n.value>0){
 				natural = true;
+			}
+
+		}
+
+		return natural;
+	}
+
+	public boolean isWhole(){
+		boolean whole = false;
+		Term tr = this;
+
+		if(tr.isNatural()){
+			whole = true;
+		}
+		if(tr instanceof Number){
+
+			Number n = (Number)tr;
+			if(n.value == 0 ){ whole = true;}
+
+		}
+		return whole;
+	}
+
+	public boolean isInteger(){
+		boolean isint = false;
+		Term tr = this;
+
+		try {
+			if(tr.isWhole()){isint = true;}
+
+			else if(tr.getChilds().size() == 2 && tr.getChilds().get(0) instanceof Negative
+					&& tr.getChilds().get(1) instanceof Number && tr.isNegative()){
+				isint = true;
+			}
+			else if(tr.getChilds().size() == 3 && tr.getChilds().get(1) instanceof Negative
+					&& tr.getChilds().get(2) instanceof Number && tr.isNegative()){
+				isint = true;
+			}
+			if(tr instanceof Constant){
+				Number n = (Number) tr;
+
+				if(Math.floor(n.value) == n.value  && n.value>0){
+					isint = true;
+				}
+				else{
+					isint = false;
+				}
+
 			}
 		} catch (Exception e) {}
 
-		return natural;
+		return isint;
 
 	}
 
-	public boolean RationalNumber(){
-		term tr = this;
+	public boolean isDecimal(){
+		Term tr = this;
+		boolean decimal = false;
+		if(tr.isRealNumber()){
+			if(!(tr instanceof Fraction)){
+				decimal = true;
+			}
+		}
+		else if(tr instanceof Number ||
+				(tr instanceof NegativeTerm && tr.getAbsoluteValue() instanceof Number)){
+			decimal = true;
+		}
+		if(tr instanceof Constant){
+			decimal = false;
+		}
+		return decimal;
+	}
+
+	public boolean isRealNumber(){
+		Term tr = this;
+		boolean real = false;
+		if(tr.isRationalNumber()){
+			real = true;
+		}
+		else if(tr instanceof Constant){
+			real = true;
+		}
+		else if(tr instanceof Number){
+			real = true;
+		}
+
+		return real;
+	}
+
+	public boolean isRationalNumber(){
+		Term tr = this;
 		boolean rational = false;
-		if(tr.NaturalNumber()){
+		if(tr.isInteger()){
 			rational = true;
 		}
-		else if (tr.operator instanceof divide && tr.getChilds().size() == 3 &&
-				tr.getChilds().get(0).NaturalNumber() && tr.getChilds().get(2).NaturalNumber()){
+		else if (tr.operator instanceof Divide && tr.getChilds().size() == 3 &&
+				tr.getChilds().get(0).isInteger() && tr.getChilds().get(2).isInteger()){
 			rational = true;
 		}
 		return rational;
 	}
 
-	public boolean Fraction(){
-		term tr = this;
+	public boolean isSimpleFraction(){
+		Term tr = this;
 		boolean fraction = false;
-		if (tr.operator instanceof divide && tr.getChilds().size() == 3 &&
-				tr.getChilds().get(0).NaturalNumber() && tr.getChilds().get(2).NaturalNumber()){
+		if (tr.operator instanceof Divide && tr.getChilds().size() == 3 &&
+				tr.getChilds().get(0).isInteger() && tr.getChilds().get(2).isInteger()){
 			fraction = true;
 		}
 		return fraction;
 	}
+	
+	public boolean isFraction(){
+		Term tr = this;
+		boolean fraction = false;
+		if(tr.isSimpleFraction()){
+			fraction = true;
+		}
+		else if(tr instanceof Fraction){
+			fraction = true;
+		}
+		else if(tr.operator instanceof Divide && tr.getChilds().size() == 3 ){
+			fraction = true;
+		}
+		
+		return fraction;
+	}
 
-	public term toggleNegative(){
-		term mid;
+	public Term toggleNegative(){
+		Term mid;
 
 		if(!this.isNegative()){
 			NegativeTerm nt = new NegativeTerm(this);
@@ -265,9 +432,9 @@ public class term implements Cloneable{
 		return mid;
 	}
 
-	public term getAbsoluteValue(){
-		term mid;
-		
+	public Term getAbsoluteValue(){
+		Term mid;
+
 		if(isNegative()){
 			if(this.getChilds().size()==2){
 				mid = this.getChilds().get(1);
@@ -278,18 +445,21 @@ public class term implements Cloneable{
 			else{
 				mid = null;
 			}
+
 		}
 		else{
 			mid = this;
 		}
+
+
 		return mid;
 	}
-	
-	public void setChilds(ArrayList<term> childs) {
+
+	public void setChilds(ArrayList<Term> childs) {
 		this.childs = childs;
 	}
 
-	public ArrayList<term> getChilds() {
+	public ArrayList<Term> getChilds() {
 		return childs;
 	}
 
@@ -300,7 +470,7 @@ public class term implements Cloneable{
 	public boolean isNegative() {
 		boolean ans = false;
 		if(this.operator != null){
-			if(this.operator instanceof negative){
+			if(this.operator instanceof Negative){
 				ans= true;
 			}
 
@@ -311,10 +481,61 @@ public class term implements Cloneable{
 		return ans;
 	}
 
-	
+
 	public void setScreenPositions(ArrayList<stringrect> screenPositions){
+		//set the position of the containers of the term as they are drawn on a screen.
+
 		AssignScreenPositions asp = new AssignScreenPositions(this, screenPositions);
 	}
+
+
+
+
+	private int steps = 0;
+	private Term innerTerm;
+	private boolean found = false;
+	@Override
+	public void performAction(Term tr ) {
+
+		if(innerTerm.container.bl.x == tr.container.bl.x &&
+				innerTerm.container.bl.y == tr.container.bl.y &&
+				innerTerm.container.width == tr.container.width &&
+				innerTerm.container.height == tr.container.height ){
+			found = true;
+		}
+		if(!found){
+			steps++;}
+	}
+
+
+	public int positionOfInnerTermDown(Term innerTerm){
+		//if the term tree is laid out as a downwalk, this will return the integer position of any term.
+
+		this.steps = 0;
+		this.found = false;
+		this.innerTerm = innerTerm;
+		downwalk walk = new downwalk(this, this);
+		if(!found){return -1;}
+		else { return steps;}
+	}
+
+	public Term getResultOfOperation(){
+
+		return getResultOfBasicOperation();
+
+	}
+
+	private Term getResultOfBasicOperation(){
+
+		if(!this.issimple){
+			Term result = this.operator.simpleOperation(this);
+
+			return result;}
+		else{
+			return null;
+		}
+	}
+
 
 }
 

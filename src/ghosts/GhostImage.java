@@ -2,14 +2,12 @@ package ghosts;
 
 import container.walks.FindSel;
 import representTerms.Image;
-import tree.downwalk;
 import tree.Term;
-import tree.downwalk.TreeFunction;
 import tree.operators.Divide;
 import tree.operators.Equality;
 import tree.operators.Minus;
 import tree.operators.Operator;
-import tree.operators.parens;
+import tree.operators.Parens;
 import tree.operators.Plus;
 import tree.operators.Times;
 //import android.util.Log;
@@ -55,7 +53,7 @@ public class GhostImage {
 
 				SwitchMe = sel.parent.getChilds().get(IntermIndex);
 				if(!(SwitchMe instanceof Operator)
-						&& !(SwitchMe instanceof parens)){
+						&& !(SwitchMe instanceof Parens)){
 					Operator op = sel.parent.operator;
 					Ghost = op.inTermMoves(im, sel, IntermIndex);
 					//					Log.d(TAG, "index: "+IntermIndex+" sel: "+sel.toString()+" Ghost: "+Ghost);

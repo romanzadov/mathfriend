@@ -1,10 +1,9 @@
 package tree.simple;
 
-import representTerms.stringrect;
-import tree.term;
+import tree.Term;
 import display.rectangle;
 
-public class constants extends Number{
+public class Constants extends Number{
 
 	public static String[] CONSTANTS = {"pi","e"};
 	
@@ -19,9 +18,9 @@ public class constants extends Number{
 		return todraw;
 	}
 	
-	public constants clone(){
+	public Constants clone(){
 	//	constants clone = (constants)super.clone();
-		constants c = new constants();
+		Constants c = new Constants();
 		c.value = this.value;
 		c.charpos = this.charpos;
 		c.font = this.font;
@@ -31,12 +30,12 @@ public class constants extends Number{
 		return c;
 	}
 	
-	public constants(){
+	public Constants(){
 	rmult = true;
 	lmult = true;
 	}
 	
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		if(value == Math.E)
 		{

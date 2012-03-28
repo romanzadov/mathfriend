@@ -1,6 +1,5 @@
 package move.operators;
 
-import container.walks.TestPaternity;
 import representTerms.Image;
 import tree.Term;
 import tree.notsimple.Fraction;

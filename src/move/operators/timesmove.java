@@ -2,19 +2,18 @@ package move.operators;
 
 import java.util.ArrayList;
 
-import container.RelativeContainer;
 import display.point;
 
 import move.identify.TermMath;
 import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.Term;
-import tree.operators.divide;
-import tree.operators.equals;
+import tree.operators.Divide;
+import tree.operators.Equals;
 import tree.operators.Minus;
 import tree.operators.Operator;
 import tree.operators.Plus;
-import tree.operators.times;
+import tree.operators.Times;
 import tree.simple.Number;
 
 public class timesmove {
@@ -93,9 +92,9 @@ public class timesmove {
 		Image Ghost = null;
 		
 		boolean selfraction =  false;
-		if(sel.operator instanceof times || sel.operator instanceof divide){
+		if(sel.operator instanceof Times || sel.operator instanceof Divide){
 			if(sel.getChilds().size() == 3){
-				if(sel.getChilds().get(1) instanceof divide){
+				if(sel.getChilds().get(1) instanceof Divide){
 					selfraction = true;
 				}
 			}
@@ -138,7 +137,7 @@ public class timesmove {
 			Term mid = new Term();
 			mid.parent = ghostsel.parent;
 			Number one = new Number(1);
-			divide div = new divide();
+			Divide div = new Divide();
 			mid.getChilds().add(one);
 			mid.getChilds().add(div);
 			mid.getChilds().add(recip);
@@ -218,7 +217,7 @@ public class timesmove {
 		}
 		
 		// next, do the other side of the equals
-		if(recip.parent.parent.parent!=null && recip.parent.parent.parent.operator instanceof equals){
+		if(recip.parent.parent.parent!=null && recip.parent.parent.parent.operator instanceof Equals){
 			Term eq = recip.parent.parent.parent;
 			for(int i = 0; i<eq.getChilds().size(); i++){
 				if(!(eq.getChilds().get(i) instanceof Operator)&&i!=eqindex){
@@ -232,7 +231,7 @@ public class timesmove {
 			}
 		}
 		
-		else if(regular.parent.parent!=null && regular.parent.parent.operator instanceof equals){
+		else if(regular.parent.parent!=null && regular.parent.parent.operator instanceof Equals){
 			
 			Term eq = regular.parent.parent;
 			for(int i = 0; i<eq.getChilds().size(); i++){

@@ -4,7 +4,7 @@ import tree.Term;
 import tree.simple.simpleterm;
 import display.rectangle;
 
-public class parens extends simpleterm{
+public class Parens extends simpleterm{
 
 	public Character value;
 	
@@ -38,7 +38,7 @@ public class parens extends simpleterm{
 		
 
 		
-		if(tr instanceof parens){
+		if(tr instanceof Parens){
 			
 		}
 		
@@ -47,13 +47,13 @@ public class parens extends simpleterm{
 		}
 		
 		else if(tr.getChilds().size()>0){
-			if((tr.getChilds().get(0) instanceof parens)&&
-					(tr.getChilds().get(tr.getChilds().size()-1) instanceof parens)){
+			if((tr.getChilds().get(0) instanceof Parens)&&
+					(tr.getChilds().get(tr.getChilds().size()-1) instanceof Parens)){
 
 			}
 
 			else{
-				parens left = new parens();
+				Parens left = new Parens();
 				rectangle rect = new rectangle();
 				left.container = rect;
 				left.container.height = tr.container.height;
@@ -69,7 +69,7 @@ public class parens extends simpleterm{
 					tr.getChilds().get(i).container.bl.x += left.container.width;	
 				}
 
-				parens right = new parens();
+				Parens right = new Parens();
 				rectangle rect2 = new rectangle();
 				right.container = rect2;
 				right.container.height = tr.container.height;

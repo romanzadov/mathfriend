@@ -4,10 +4,10 @@ import display.rectangle;
 import tree.*;
 
 
-public class negative extends Operator{
+public class Negative extends Operator{
 	
 	
-	public negative(){
+	public Negative(){
 		inputs =1;
 	    invertable=true;
 		commutative=true;

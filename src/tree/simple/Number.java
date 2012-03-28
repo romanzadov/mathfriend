@@ -1,6 +1,5 @@
 package tree.simple;
 
-import parse.path;
 import tree.Term;
 import display.rectangle;
 

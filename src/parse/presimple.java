@@ -1,10 +1,9 @@
 package parse;
 import java.util.ArrayList;
 
-import tree.*;
-import tree.operators.advancedoperator;
+import tree.operators.AdvancedOperator;
 import tree.operators.Operator;
-import tree.operators.parens;
+import tree.operators.Parens;
 import tree.simple.Constant;
 import tree.simple.Number;
 import tree.simple.simpleterm;
@@ -97,7 +96,7 @@ public class presimple {
 				}
 
 				if(falses == 0){
-					advancedoperator thisop = new advancedoperator();
+					AdvancedOperator thisop = new AdvancedOperator();
 					
 					thisop.thisvalue = Operator.KNOWNFUNCTIONS[j];
 					thisop.charpos = i;
@@ -163,13 +162,13 @@ public class presimple {
 	public int isparen(int i, ArrayList<Character> formula){
 		int out = i;
 			if(Character.valueOf(formula.get(i))=='('){
-				parens lp = new parens();
+				Parens lp = new Parens();
 				lp.setvalue('(');
 				simp.add(lp);
 				done = true;
 			}
 			else if(Character.valueOf(formula.get(i))==')'){
-				parens rp = new parens();
+				Parens rp = new Parens();
 				rp.setvalue(')');
 				simp.add(rp);
 				done = true;

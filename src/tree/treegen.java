@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import parse.parenthesize;
 import tree.operators.Divide;
 import tree.operators.Equality;
-import tree.operators.exponent;
+import tree.operators.Exponent;
 import tree.operators.Minus;
-import tree.operators.negative;
+import tree.operators.Negative;
 import tree.operators.Operator;
-import tree.operators.parens;
+import tree.operators.Parens;
 import tree.operators.Plus;
 import tree.operators.Times;
 import tree.simple.Number;
@@ -185,7 +185,7 @@ public class treegen {
 				}
 			}
 			//don't look for operators inside parens
-			else if(simp.get(i) instanceof parens){
+			else if(simp.get(i) instanceof Parens){
 				for(int j=0;j<parens.size();j++){
 					if(parens.get(j)[0]==i){ i=parens.get(j)[1]; }
 				}
@@ -201,7 +201,7 @@ public class treegen {
 		}
 		
 		for(int i=0; i<simp.size();i++){
-			if(simp.get(i) instanceof parens){
+			if(simp.get(i) instanceof Parens){
 				for(int j=0;j<parens.size();j++){
 					if(parens.get(j)[0]==i){ i=parens.get(j)[1]; }
 				}		
@@ -238,7 +238,7 @@ public class treegen {
 	}
 
 	public void checksimples(Term thisterm){
-		if(thisterm.operator instanceof negative){
+		if(thisterm.operator instanceof Negative){
 			thisterm.setNegative(true);
 		}
 		
@@ -249,8 +249,8 @@ public class treegen {
 				orgconts.get(i).issimple = true;
 			}
 			else if(orgconts.get(i).simples.size()==3 &&
-					orgconts.get(i).simples.get(0) instanceof parens &&
-					orgconts.get(i).simples.get(2) instanceof parens ){
+					orgconts.get(i).simples.get(0) instanceof Parens &&
+					orgconts.get(i).simples.get(2) instanceof Parens){
 				
 				simpleterm a = orgconts.get(i).simples.get(1);
 				a.issimple = true;
@@ -311,7 +311,7 @@ public class treegen {
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("^")){
-					exponent a = new exponent();
+					Exponent a = new Exponent();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
 					a.valuestring =  ((Operator)simp.get(i)).valuestring;
@@ -337,7 +337,7 @@ public class treegen {
 						||simp.get(i-1).equals("(")
 						||simp.get(i-1) instanceof Operator){
 
-					negative neg = new negative();
+					Negative neg = new Negative();
 					neg.charpos = ((Operator)simp.get(i)).charpos;
 					neg.valuestring = "-";
 					simp.set(i, neg);
@@ -348,19 +348,19 @@ public class treegen {
 					
 					
 					if(simp.size()>i+2){
-						if(simp.get(i+2) instanceof exponent){
+						if(simp.get(i+2) instanceof Exponent){
 							add = false;
 						}
 						
 					}
 					if(i>0){
-						if(simp.get(i-1) instanceof exponent){
+						if(simp.get(i-1) instanceof Exponent){
 							add = true;
 						}
 					}
 					
 					if(simp.size()>i+2){
-						if(simp.get(i+2) instanceof parens){
+						if(simp.get(i+2) instanceof Parens){
 							//if parens, find end
 							int end = 0;
 							ArrayList<int[]> pans = checkparens(simp);
@@ -373,13 +373,13 @@ public class treegen {
 								if(simp.size()>end+1){
 									//the the one after parens is an exponent
 									//check that the one before isn't
-									if(simp.get(end+1) instanceof exponent){
+									if(simp.get(end+1) instanceof Exponent){
 										add = false;
 									}
 								}
 							}
 							if(i-1>0){
-								if(simp.get(i-1) instanceof exponent){
+								if(simp.get(i-1) instanceof Exponent){
 									add = true;
 								}
 							}
@@ -417,11 +417,11 @@ public class treegen {
 	public ArrayList<simpleterm> addParensAroundNegatives(ArrayList<simpleterm> simp, ArrayList<int[]> pns, int positionOfNegative){
 		pns = checkparens(simp);
 		
-		parens left = new parens();
+		Parens left = new Parens();
 		left.value = '(';
 		left.valuestring = "(";
 		left.lmult = true;
-		parens right = new parens();
+		Parens right = new Parens();
 		right.value = ')';
 		right.valuestring = ")";
 		right.rmult = true;
@@ -434,7 +434,7 @@ public class treegen {
 		//add right parens after the term the negative applies to
 			
 			//if it applies to a parens, find its end
-		if(simp.get(newPositionOfNegative+1) instanceof parens){	
+		if(simp.get(newPositionOfNegative+1) instanceof Parens){
 			int end = 0;
 			for(int i = 0; i<pns.size(); i++){
 				if(pns.get(i)[0] == positionOfNegative+1){
@@ -457,18 +457,18 @@ public class treegen {
 
 		//if we start with a parens, find its end
 
-		if(simp.get(st) instanceof parens){
+		if(simp.get(st) instanceof Parens){
 			int end = 0;
 			for(int i = 0; i<pns.size(); i++){
 				if(pns.get(i)[0]==st){
 					end = pns.get(i)[1];
 				}
 			}
-			parens left = new parens();
+			Parens left = new Parens();
 			left.value = '(';
 			left.valuestring = "(";
 			left.lmult = true;
-			parens right = new parens();
+			Parens right = new Parens();
 			right.value = ')';
 			right.valuestring = ")";
 			right.rmult = true;
@@ -477,11 +477,11 @@ public class treegen {
 		}
 		else if(simp.get(st) instanceof Number || simp.get(st) instanceof variable
 				|| simp.get(st) instanceof Constant){
-			parens left = new parens();
+			Parens left = new Parens();
 			left.value = '(';
 			left.valuestring = "(";
 			left.lmult = true;
-			parens right = new parens();
+			Parens right = new Parens();
 			right.value = ')';
 			right.valuestring = ")";
 			right.rmult = true;

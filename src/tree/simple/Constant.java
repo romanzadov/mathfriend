@@ -1,6 +1,5 @@
 package tree.simple;
 
-import representTerms.stringrect;
 import tree.Term;
 import display.rectangle;
 

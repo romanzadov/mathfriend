@@ -2,8 +2,6 @@ package tree.operators;
 
 import move.operators.PlusMove;
 
-import container.RelativeContainer;
-
 import display.point;
 import display.rectangle;
 import representTerms.Image;

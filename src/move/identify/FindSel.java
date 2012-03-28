@@ -2,16 +2,16 @@ package move.identify;
 
 import java.util.ArrayList;
 
-import tree.term;
+import tree.Term;
 
 public class FindSel {
 
 
 
-	public ArrayList<Integer> FindSelected(term tr, term sel){
+	public ArrayList<Integer> FindSelected(Term tr, Term sel){
 		ArrayList<Integer> key = new ArrayList<Integer>();
 
-		term middle = sel;
+		Term middle = sel;
 		while(middle != tr){
 			for(int i = 0; i<middle.parent.getChilds().size(); i++){
 				if(middle.parent.getChilds().get(i)==middle){

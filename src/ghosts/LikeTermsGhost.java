@@ -2,10 +2,7 @@ package ghosts;
 
 import java.util.ArrayList;
 
-import container.RelativeContainer;
-
 import move.identify.TermMath;
-import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.downwalk;
 import tree.Term;

@@ -1,7 +1,5 @@
 package tree;
 
-import tree.upwalk.TreeFunction;
-
 
 public class downwalk {
 	//walk through all the nodes in down order and change things

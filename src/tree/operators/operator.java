@@ -2,13 +2,13 @@ package tree.operators;
 
 
 import representTerms.Image;
-import tree.term;
+import tree.Term;
 import tree.notsimple.equation;
 import tree.simple.simpleterm;
 import display.rectangle;
 
 
-public abstract class operator extends simpleterm{
+public abstract class Operator extends simpleterm{
 
 
 
@@ -31,7 +31,7 @@ public abstract class operator extends simpleterm{
 	
 	@Override
 	public String toString(){
-		if(this instanceof negative){
+		if(this instanceof Negative){
 			return "*";
 		}
 		else{
@@ -40,7 +40,7 @@ public abstract class operator extends simpleterm{
 	}
 
 
-	public operator setconstants(operator a){
+	public Operator setconstants(Operator a){
 		a.thisvalue = thisvalue;
 		a.charpos = charpos;
 		return a;
@@ -58,7 +58,7 @@ public abstract class operator extends simpleterm{
 		return a;
 	}
 
-	public rectangle giverect(term tr){
+	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		if(tr.getChilds().size() == 0){
 			a.bl.x = 0;
@@ -85,11 +85,11 @@ public abstract class operator extends simpleterm{
 		return a;
 	}
 
-	public abstract Image inTermMoves(Image im, term sel, int IntermIndex);
+	public abstract Image inTermMoves(Image im, Term sel, int IntermIndex);
 	
-	public abstract Image overEqualsMoves(Image im, term sel, int IntermIndex, double xsel);
+	public abstract Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel);
 
-	public equation ToBothSides(equation eq, operator op, term sel) {
+	public equation ToBothSides(equation eq, Operator op, Term sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}

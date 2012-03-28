@@ -5,7 +5,6 @@ import container.walks.TestPaternity;
 
 //import android.util.Log;
 
-import parse.*;
 import tree.*;
 import tree.operators.*;
 import tree.simple.simpleterm;
@@ -28,7 +27,7 @@ public class path {
 			ArrayList<simpleterm> simp = tosimpleterms(formula);
 			
 			if(simp.size() == 1){firstterm = simp.get(0);}
-			else if(simp.size() == 3 && simp.get(0) instanceof parens && simp.get(2) instanceof parens){
+			else if(simp.size() == 3 && simp.get(0) instanceof Parens && simp.get(2) instanceof Parens){
 				firstterm = simp.get(1);
 			}
 		

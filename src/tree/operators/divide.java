@@ -3,11 +3,11 @@ package tree.operators;
 import display.rectangle;
 import tree.*;
 
-public class divide extends Operator{
+public class Divide extends Operator{
 
 	public String todraw = "/";
 	
-	public divide(){
+	public Divide(){
 		inputs=2;
 	    invertable=true;
 		commutative=true;
@@ -21,7 +21,7 @@ public class divide extends Operator{
 	}
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
-		times ti = new times();
+		Times ti = new Times();
 		a = ti.giverect(tr);
 		return a;
 	}
