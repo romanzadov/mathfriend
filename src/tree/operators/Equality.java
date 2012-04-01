@@ -23,7 +23,13 @@ public class Equality extends Operator{
 		rmult = false;
 		todraw = "=";
 	}
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		if(tr.getChilds().size() == 0){
 			rectangle cont = tr.container;
@@ -189,11 +195,6 @@ public class Equality extends Operator{
 	@Override
 	public Image overEqualsMoves(Image im, Term sel, int IntermIndex,
 			double xsel) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Term simpleOperation(Term term) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -33,7 +33,7 @@ public class MainScreen implements AbstractedScreen{
 	public String resultTerm = null;
 	
 	public MainScreen(String st){
-		main = new Image(st, Settings.PREFFERED_FONT, 1, 1);
+		main = new Image(st, (int)Settings.PREFFERED_FONT, 1, 1);
 		sel = main;
 	}
 
@@ -44,7 +44,7 @@ public class MainScreen implements AbstractedScreen{
 	
 	public void performOperationOnSel(){
 		
-		Image mainClone = null;
+/*		Image mainClone = null;
 		
 		Term compound = sel.tr.getResultOfOperation();
 		if(compound != null) {
@@ -68,8 +68,8 @@ public class MainScreen implements AbstractedScreen{
 		}
 		
 		if(mainClone != null){
-			ghost = new Image(mainClone.tr.toString(), Settings.PREFFERED_FONT, 1,1);
-		}
+			ghost = new Image(mainClone.tr.toString(), (int)Settings.PREFFERED_FONT, 1,1);
+		}*/
 		
 	}
 	
@@ -231,7 +231,7 @@ public class MainScreen implements AbstractedScreen{
 				ghost = gm.newImage(main, sel.tr, new point (x, y), down);
 			
 					if(ghost != null){
-						ghost.font = Settings.PREFFERED_FONT;
+						ghost.font = (int)Settings.PREFFERED_FONT;
 					}
 					if(ghost != null && ghost.tr == null){
 						ghost = null;

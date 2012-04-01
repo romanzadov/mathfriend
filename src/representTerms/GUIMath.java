@@ -7,7 +7,10 @@ import display.rectangle;
 
 public class GUIMath {
 	
-	
+	public GUIMath(float st, float fontSize, float screenWidth, float screenHeight){
+
+    }
+
 	public static rectangle scaleFloat(rectangle a, float f){
 		rectangle b = new rectangle();
 		b.height = a.height*f;

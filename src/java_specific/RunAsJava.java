@@ -32,7 +32,7 @@ public class RunAsJava {
 			Term first = equation.tr.getChilds().get(0);
 			Term second = equation.tr.getChilds().get(2);
 
-			Term result = first.getResultOfOperation();
+			Term result = first;
 			
 			if(equality(result, second)){}
 			else{

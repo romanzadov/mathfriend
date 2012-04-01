@@ -30,7 +30,13 @@ public class Plus extends Operator {
 		todraw = "+";
 		valuestring = "+";
 	}
-	//draws the rectangle that goes around terms with a plus operator
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    //draws the rectangle that goes around terms with a plus operator
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 
@@ -131,8 +137,8 @@ public class Plus extends Operator {
 		PlusMove pm = new PlusMove();
 		Image Ghost = new Image();
 		if(!(sel.parent.parent.getChilds().get(IntermIndex) instanceof Operator)){
-			Ghost = pm.overEquals(im, sel, IntermIndex, xsel);}
-		
+		//	Ghost = pm.overEquals(im, sel, IntermIndex, xsel);
+		}
 		return Ghost;
 	}
 

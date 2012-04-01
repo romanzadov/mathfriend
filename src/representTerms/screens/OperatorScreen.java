@@ -43,7 +43,7 @@ public class OperatorScreen implements AbstractedScreen{
 	private Image getImage(){
 		if(operator == null){return null;}
 		else{
-			Image img = new Image(operator.valuestring, Settings.PREFFERED_FONT, 1, 1);
+			Image img = new Image(operator.valuestring, (int)Settings.PREFFERED_FONT, 1, 1);
 			return img;
 		}
 	}

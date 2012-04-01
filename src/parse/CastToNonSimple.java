@@ -3,7 +3,6 @@ package parse;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.notsimple.Equation;
 import tree.notsimple.Fraction;
 import tree.notsimple.NegativeTerm;
 import tree.operators.Times;
@@ -44,6 +43,7 @@ public class CastToNonSimple implements TreeFunction{
 			}
 		}
 		
+/*
 		else if(n == 2){
 			Equation equation = new Equation();
 			if(equation.canConstruct(tr)){
@@ -55,11 +55,12 @@ public class CastToNonSimple implements TreeFunction{
 			}
 			
 		}
+*/
 
-		
+/*
 		//make times visible if needed. 
 		 Times.makeVisible(tr);
-		
+		*/
 	}
 
 }

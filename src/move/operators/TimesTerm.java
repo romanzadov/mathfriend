@@ -1,14 +1,9 @@
 package move.operators;
 
-import container.walks.TestPaternity;
 import representTerms.Image;
 import tree.Term;
 import tree.notsimple.Fraction;
-import tree.operators.Divide;
-import tree.operators.Minus;
-import tree.operators.Operator;
-import tree.operators.Plus;
-import tree.operators.Times;
+import tree.operators.*;
 
 public class TimesTerm {
 
@@ -109,9 +104,11 @@ public class TimesTerm {
 							}
 
 							//remove the second addent and replace the first addent with our result
+/*
 							resultingTerm = TimesMove.removeChild(resultingTerm, tr.getChilds().indexOf(secondMultiple));
 
 							resultingTerm = TimesMove.replaceMultiplicativeTerm(resultingTerm, result, tr.getChilds().indexOf(firstMultiple));
+*/
 
 							done = true;
 						}
@@ -153,9 +150,9 @@ public class TimesTerm {
 								}
 
 								//remove the second addent and replace the first addent with our result
-								resultingTerm = TimesMove.removeChild(resultingTerm, tr.getChilds().indexOf(secondMultiple));
+	/*							resultingTerm = TimesMove.removeChild(resultingTerm, tr.getChilds().indexOf(secondMultiple));
 								resultingTerm = TimesMove.replaceMultiplicativeTerm(resultingTerm, result, tr.getChilds().indexOf(firstMultiple));
-
+*/
 								done = true;
 							}
 						}

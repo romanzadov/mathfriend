@@ -2,15 +2,7 @@ package tree;
 import java.util.ArrayList;
 
 import parse.parenthesize;
-import tree.operators.Divide;
-import tree.operators.Equality;
-import tree.operators.Exponent;
-import tree.operators.Minus;
-import tree.operators.Negative;
-import tree.operators.Operator;
-import tree.operators.Parens;
-import tree.operators.Plus;
-import tree.operators.Times;
+import tree.operators.*;
 import tree.simple.Number;
 import tree.simple.Constant;
 import tree.simple.simpleterm;

@@ -10,11 +10,7 @@ import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
 import tree.notsimple.MultiplyFractions;
 import tree.notsimple.NegativeTerm;
-import tree.operators.Divide;
-import tree.operators.Minus;
-import tree.operators.Negative;
-import tree.operators.Operator;
-import tree.operators.Times;
+import tree.operators.*;
 import tree.simple.Number;
 import tree.simple.Constant;
 import tree.simple.simpleterm;
@@ -518,7 +514,6 @@ public class Term implements Cloneable, TreeFunction{
 		if(!found){return -1;}
 		else { return steps;}
 	}
-/*
 
 	public Term getResultOfOperation(){
 
@@ -536,7 +531,6 @@ public class Term implements Cloneable, TreeFunction{
 			return null;
 		}
 	}
-*/
 
 
 }

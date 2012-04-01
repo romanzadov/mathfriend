@@ -72,11 +72,11 @@ public class Image implements Cloneable{
 		setRelativeContainers();
 
 		GUIMath gm = new GUIMath(5, 40, screenWidth, screenHeight);
-		PlaceAndFont pf = gm.getPlaceAndFont(relativeContainers.get(0).container.width,
+/*		PlaceAndFont pf = gm.getPlaceAndFont(relativeContainers.get(0).container.width,
 												relativeContainers.get(0).container.height, myFont);
 
 		font = pf.font;
-		bel = pf.bl;
+		bel = pf.bl;*/
 	}
 
 

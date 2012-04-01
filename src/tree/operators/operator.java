@@ -39,6 +39,7 @@ public abstract class Operator extends simpleterm{
 		}
 	}
 
+    public abstract Term simpleOperation(Term term);
 
 	public Operator setconstants(Operator a){
 		a.thisvalue = thisvalue;

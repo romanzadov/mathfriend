@@ -8,12 +8,7 @@ import move.identify.TermMath;
 import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.Term;
-import tree.operators.Divide;
-import tree.operators.Equals;
-import tree.operators.Minus;
-import tree.operators.Operator;
-import tree.operators.Plus;
-import tree.operators.Times;
+import tree.operators.*;
 import tree.simple.Number;
 
 public class TimesMove {
