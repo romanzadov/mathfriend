@@ -16,7 +16,7 @@ import tree.operators.Plus;
 import tree.operators.Times;
 import tree.simple.Number;
 
-public class timesmove {
+public class TimesMove {
 
 	public Image inTermMoves(Image im, Term sel,
 			int IntermIndex) {

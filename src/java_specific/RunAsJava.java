@@ -15,9 +15,9 @@ public class RunAsJava {
 		String st = "1.5x-3=7";
 
 		RunAsJava raj = new RunAsJava();
-		//  raj.testNumbers();
-		//	raj.testAddtion();
-		//	raj.testMultiplication();
+		    raj.testNumbers();
+			raj.testAddtion();
+			raj.testMultiplication();
 			raj.startFrame(st);
 		    raj.testEquations();
 	}

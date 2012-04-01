@@ -518,6 +518,7 @@ public class Term implements Cloneable, TreeFunction{
 		if(!found){return -1;}
 		else { return steps;}
 	}
+/*
 
 	public Term getResultOfOperation(){
 
@@ -535,6 +536,7 @@ public class Term implements Cloneable, TreeFunction{
 			return null;
 		}
 	}
+*/
 
 
 }

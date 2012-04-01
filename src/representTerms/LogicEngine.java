@@ -106,7 +106,7 @@ public class LogicEngine {
 
 
 
-		Image next = new Image(nextEquation, Settings.PREFFERED_FONT, 1,1);
+		Image next = new Image(nextEquation, (int)Settings.PREFFERED_FONT, 1,1);
 
 		//change main
 		MainScreen mainScreen = (MainScreen)mainInterface.getAbstractScreen();

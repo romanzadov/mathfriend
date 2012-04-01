@@ -13,7 +13,7 @@ import tree.operators.Plus;
 import display.point;
 import display.rectangle;
 
-public class PlusMove {
+public class PlusMove {/*
 
 	static final String TAG = "plusmove";
 
@@ -155,7 +155,7 @@ public class PlusMove {
 	}
 
 
-
+*/
 
 }
 
