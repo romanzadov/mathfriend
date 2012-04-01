@@ -1,7 +1,7 @@
 package tree.notsimple;
 import java.util.ArrayList;
 
-import parse.path;
+import parse.ParseUtil;
 
 import representTerms.Image;
 import tree.Term;
@@ -218,10 +218,10 @@ public class Fraction extends NotSimple{
 		String newTop = a.getChildren().get(0).toString()+"*("+b.getChildren().get(0).toString()+")";
 		String newBottom = a.getChildren().get(2).toString()+"*("+b.getChildren().get(2).toString()+")";
 
-		path pa = new path();
+		ParseUtil pa = new ParseUtil();
 		Term top = pa.getTermFromString(newTop);
 
-		pa = new path();
+		pa = new ParseUtil();
 		Term bottom = pa.getTermFromString(newBottom);
 
 		

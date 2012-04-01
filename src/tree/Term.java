@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import container.walks.AssignScreenPositions;
 
-import parse.path;
+import parse.ParseUtil;
 import representTerms.StringRectangle;
 import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
@@ -71,7 +71,7 @@ public class Term implements Cloneable, TreeFunction{
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		String st = this.toString();
-		path pa = new path();
+		ParseUtil pa = new ParseUtil();
 		Term clone = pa.getTermFromString(st);
 		clone.getContainer().bl.x = this.getContainer().bl.x;
 		clone.getContainer().bl.y = this.getContainer().bl.y;

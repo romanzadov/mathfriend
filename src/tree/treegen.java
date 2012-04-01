@@ -11,7 +11,7 @@ import tree.simple.variable;
 import container.walks.newparens;
 import display.rectangle;
 
-public class treegen {
+public class TreeGen {
 	
 	static final String TAG = "treegen";
 
@@ -216,7 +216,7 @@ public class treegen {
 		for(int i = 0;i< contents.size();i++){		//for any non simple term
 
 			Term child = new Term();
-			treegen tr = new treegen();
+			TreeGen tr = new TreeGen();
 
 			if(contents.get(i).isSimple()==false){
 				child = tr.generatenode(contents.get(i).simples);}

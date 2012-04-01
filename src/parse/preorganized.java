@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import tree.operators.Parens;
 import tree.simple.SimpleTerm;
 
-public class preorganized {
+public class PreOrganized {
 
 	public ArrayList<SimpleTerm> simplify(ArrayList<SimpleTerm> asimp){
 	
@@ -26,15 +26,8 @@ public class preorganized {
 		if(st instanceof tree.operators.Operator){
 			st.setValueString(""+(((tree.operators.Operator) st).thisvalue));
 			}
-		
-		
-		
-		
-		
 		}
-		
-		
-		
+
 		return asimp;
 		
 	}

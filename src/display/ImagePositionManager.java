@@ -2,7 +2,7 @@ package display;
 
 import java.util.ArrayList;
 
-import parse.path;
+import parse.ParseUtil;
 
 import representTerms.PlaceAndFont;
 import representTerms.Image;
@@ -108,7 +108,7 @@ public class ImagePositionManager {
 		
 		for(int i = 0; i<history.size(); i++){
 			//create image
-			path pa = new path();
+			ParseUtil pa = new ParseUtil();
 			Term tr = pa.getTermFromString(history.get(i));
 			Image step = new Image(tr, new point(0,0), null);
 			

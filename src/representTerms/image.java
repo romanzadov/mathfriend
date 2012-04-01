@@ -2,7 +2,7 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import parse.path;
+import parse.ParseUtil;
 import tree.Term;
 //import android.graphics.Color;
 //import android.util.Log;
@@ -66,7 +66,7 @@ public class Image implements Cloneable{
 	}
 
 	public Image(String myst, int myFont, int screenWidth, int screenHeight){
-		path pa = new path();
+		ParseUtil pa = new ParseUtil();
 		tr = pa.getTermFromString(myst);
 		st = myst;
 		setRelativeContainers();
@@ -81,7 +81,7 @@ public class Image implements Cloneable{
 
 
 	public Image(String myst, point bl){
-		path pa = new path();
+		ParseUtil pa = new ParseUtil();
 		tr = pa.getTermFromString(myst);
 		bel = bl;
 		st = myst;
@@ -134,7 +134,7 @@ public class Image implements Cloneable{
 	}
 
 	private void reset(){
-		path pa = new path();
+		ParseUtil pa = new ParseUtil();
 		tr = pa.getTermFromString(st);
 		relativeContainers  = new ArrayList<StringRectangle>();
 		//		background = Color.WHITE;

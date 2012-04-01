@@ -9,7 +9,7 @@ import tree.operators.Operator;
 public class GrammarCheck {
 
 	
-	public boolean CheckChars(ArrayList<Character> formula){
+	public static boolean CheckChars(ArrayList<Character> formula){
 		boolean good = true;
 		ArrayList<Character> bad = new ArrayList<Character>();
 		
