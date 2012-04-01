@@ -56,11 +56,11 @@ public class PlusMinus {
 			
 			if(one.isNegative()){onepositive = false;}
 			
-			int twopos = two.parent.getChildren().indexOf(two);
-			if(two.parent.getChildren().get(twopos-1) instanceof Minus||two.isNegative()){
+			int twopos = two.getParent().getChildren().indexOf(two);
+			if(two.getParent().getChildren().get(twopos-1) instanceof Minus||two.isNegative()){
 				twopositive = false;
 			}
-			if(two.parent.getChildren().get(twopos-1) instanceof Minus&&two.isNegative()){
+			if(two.getParent().getChildren().get(twopos-1) instanceof Minus&&two.isNegative()){
 				twopositive = true;
 			}
 			
@@ -84,28 +84,28 @@ public class PlusMinus {
 				 mid = new Number(-sum);
 				mid.toggleNegative();
 			}
-			mid.parent = one.parent;
+			mid.setParent(one.getParent());
 			
-			two.parent.getChildren().remove(twopos-1);
-			two.parent.getChildren().remove(twopos-1);
+			two.getParent().getChildren().remove(twopos-1);
+			two.getParent().getChildren().remove(twopos-1);
 			
-			int onepos = one.parent.getChildren().indexOf(one);
+			int onepos = one.getParent().getChildren().indexOf(one);
 			if(onepos ==0){
-				one.parent.getChildren().set(0, mid);
+				one.getParent().getChildren().set(0, mid);
 			}
 			else{
 				if(!mid.isNegative()){
 					Plus pl = new Plus();
-					pl.parent = one.parent;
-					one.parent.getChildren().set(onepos-1, pl);
-					one.parent.getChildren().set(onepos, mid);
+					pl.setParent(one.getParent());
+					one.getParent().getChildren().set(onepos-1, pl);
+					one.getParent().getChildren().set(onepos, mid);
 				}
 				if(mid.isNegative()){
 					Minus mn = new Minus();
-					mn.parent = one.parent;
+					mn.setParent(one.getParent());
 					mid.toggleNegative();
-					one.parent.getChildren().set(onepos-1, mn);
-					one.parent.getChildren().set(onepos, mid);
+					one.getParent().getChildren().set(onepos-1, mn);
+					one.getParent().getChildren().set(onepos, mid);
 				}
 			}
 			

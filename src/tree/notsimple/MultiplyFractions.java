@@ -48,7 +48,7 @@ public class MultiplyFractions {
 				 second = (Term)sel.clone();
 			} catch (CloneNotSupportedException e) {}
 			
-			n.parent = second;
+			n.setParent(second);
 			second.getChildren().set(0, n);
 			
 			return second;

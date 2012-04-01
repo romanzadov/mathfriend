@@ -16,7 +16,7 @@ public class stringofrects implements TreeFunction{
 	public ArrayList<rectangle> listme(Term main, String argument){
 
 		if(argument == null){
-			rectangle rt = main.container;
+			rectangle rt = main.getContainer();
 			int width = (int)(rt.width);
 			int height = (int)(rt.height);
 			point tl = rt.topleft();
@@ -35,7 +35,7 @@ public class stringofrects implements TreeFunction{
 
 			Term top = main;
 
-			rectangle rt = top.container;
+			rectangle rt = top.getContainer();
 			int width = (int)(rt.width);
 			int height = (int)(rt.height);
 			point tl = rt.topleft();
@@ -71,19 +71,19 @@ public class stringofrects implements TreeFunction{
 		
 		
 		rectangle sr = new rectangle();
-		sr.bl.x = tr.container.bl.x;
-		sr.bl.y = tr.container.bl.y;
-		sr.height = tr.container.height;
-		sr.width = tr.container.width;
+		sr.bl.x = tr.getContainer().bl.x;
+		sr.bl.y = tr.getContainer().bl.y;
+		sr.height = tr.getContainer().height;
+		sr.width = tr.getContainer().width;
 		
 		StringRectangle StR = new StringRectangle();
 		StR.container = sr;
 		StR.term = tr.toString();
-		StR.fontscale = tr.scaleFactor;
+		StR.fontscale = tr.getScaleFactor();
 		if(tr.toDraw !=null){StR.todraw = tr.toDraw;}
 		if(tr instanceof Divide){StR.todraw = "/";}
 	//	StR.container.color = tr.wordcolor;
-		StR.hasParens = tr.hasParentheses;
+		StR.hasParens = tr.isHasParentheses();
 		a.add(StR);
 	}
 

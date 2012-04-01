@@ -21,7 +21,7 @@ public class composefractions implements TreeFunction{
 
 	public void performAction(Term tr) {
 		//sets terms to be down or up terms in a division situtation
-		if(tr.operator instanceof Times || tr.operator instanceof Divide){
+		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
 		
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i) instanceof Divide){
@@ -54,8 +54,8 @@ public class composefractions implements TreeFunction{
 				rectangle cont = new rectangle();
 				cont.height = 0;
 				cont.width = 0;
-				tm.parent = tr;
-				tm.container = cont;
+				tm.setParent(tr);
+				tm.setContainer(cont);
 				tm.simples.add(tm);
 				tr.getChildren().add(places[i][1]+sofar-1, tm);
 				tr.getChildren().add(places[i][1]+sofar, top);
@@ -78,7 +78,7 @@ public class composefractions implements TreeFunction{
 		for(int i = 0; i<stop ; i++){
 		
 			 if(places[i][1]==0){
-				rectangle mid = tr.getChildren().get(places[i][0]).container;
+				rectangle mid = tr.getChildren().get(places[i][0]).getContainer();
 				mid.bl.x = xsofar;
 				if(barheight!=0){
 				mid.bl.y = barheight - mid.height/2;
@@ -104,19 +104,19 @@ public class composefractions implements TreeFunction{
 	public rectangle properfraction(Term top, Term bar, Term bottom, float barheight){
 		rectangle a = new rectangle();
 		
-		float maxwidth = Math.max(top.container.width, bottom.container.width);
+		float maxwidth = Math.max(top.getContainer().width, bottom.getContainer().width);
 		
-		bottom.container.bl.y = barheight - bottom.container.height;
-		bottom.container.bl.x = xsofar + maxwidth/2 - bottom.container.width/2;
-		bar.container.bl.x = xsofar;
-		bar.container.width = maxwidth;
-		bar.container.height = fractionheight;
-		top.container.bl.y = barheight + fractionheight;
-		top.container.bl.x = xsofar + maxwidth/2-top.container.width/2;
-		bar.container.bl.y = barheight;
+		bottom.getContainer().bl.y = barheight - bottom.getContainer().height;
+		bottom.getContainer().bl.x = xsofar + maxwidth/2 - bottom.getContainer().width/2;
+		bar.getContainer().bl.x = xsofar;
+		bar.getContainer().width = maxwidth;
+		bar.getContainer().height = fractionheight;
+		top.getContainer().bl.y = barheight + fractionheight;
+		top.getContainer().bl.x = xsofar + maxwidth/2- top.getContainer().width/2;
+		bar.getContainer().bl.y = barheight;
 					
 		xsofar += maxwidth;
-		float h = top.container.height+top.container.bl.y;
+		float h = top.getContainer().height+ top.getContainer().bl.y;
 		a.width = maxwidth;
 		a.height = h;
 		if(h>ysofar){ysofar = h;}
@@ -125,7 +125,7 @@ public class composefractions implements TreeFunction{
 	
 	public Number makeone( Term term){
 		Number num = new Number(1);
-		num.parent = term;
+		num.setParent(term);
 		num.issimple = true;
 		num.value = 1;
 		num.toDraw = "1";
@@ -134,7 +134,7 @@ public class composefractions implements TreeFunction{
 		cont.width = 1;
 		cont.bl.x = 0;
 		cont.bl.y =0;
-		num.container = cont;
+		num.setContainer(cont);
 		num.simples.add(num);
 		return num;
 	}

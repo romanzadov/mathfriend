@@ -21,8 +21,8 @@ public class PreGroupFractions implements TreeFunction{
 	public void performAction(Term tr) {
 
 
-		if(tr != null && tr.operator != null){
-			if(tr.operator instanceof Times || tr.operator instanceof Divide){
+		if(tr != null && tr.getOperator() != null){
+			if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
 
 				Term[][] stacked = PutIntoMatrix(tr);
 

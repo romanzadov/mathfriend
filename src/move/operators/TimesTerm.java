@@ -9,11 +9,11 @@ public class TimesTerm {
 
 	public void Times(Term tr, Term sel){
 
-		if(tr.operator instanceof Times || tr.operator instanceof Divide){
+		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
 			regularTimes(tr, sel);
 		}
 
-		else if(tr.operator instanceof Plus || tr.operator instanceof Minus){
+		else if(tr.getOperator() instanceof Plus || tr.getOperator() instanceof Minus){
 			for(int i = 0; i< tr.getChildren().size(); i++){
 				if(!(tr.getChildren().get(i) instanceof Operator)){
 
@@ -21,7 +21,7 @@ public class TimesTerm {
 					try {
 						resel = (Term)sel.clone();
 					} catch (CloneNotSupportedException e) {}
-					resel.parent = sel.parent;
+					resel.setParent(sel.getParent());
 					regularTimes(tr.getChildren().get(i), resel);
 				}
 			}
@@ -35,28 +35,28 @@ public class TimesTerm {
 
 	public void regularTimes(Term tr, Term sel){
 		Times tm = new Times();
-		if(tr.operator instanceof Times || tr.operator instanceof Divide){
-			sel.parent = tr;
-			tm.parent = tr;
+		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
+			sel.setParent(tr);
+			tm.setParent(tr);
 			tr.getChildren().add(0,tm);
 			tr.getChildren().add(0,sel);
 		}
 		else{
 			Term mid = new Term();
-			mid.operator = new Times();
-			mid.parent = tr.parent;
+			mid.setOperator(new Times());
+			mid.setParent(tr.getParent());
 
-			int trplace = tr.parent.getChildren().indexOf(tr);
+			int trplace = tr.getParent().getChildren().indexOf(tr);
 
 			mid.getChildren().add(sel);
 			mid.getChildren().add(tm);
 			mid.getChildren().add(tr);
 
-			tr.parent = mid;
-			tm.parent = mid;
-			sel.parent = mid;
+			tr.setParent(mid);
+			tm.setParent(mid);
+			sel.setParent(mid);
 
-			mid.parent.getChildren().set(trplace, mid);
+			mid.getParent().getChildren().set(trplace, mid);
 		}
 
 	}

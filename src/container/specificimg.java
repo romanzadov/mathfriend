@@ -19,12 +19,12 @@ public class specificimg {
 			//if simple, make rectangle
 			if(ter.getChildren().get(i) instanceof SimpleTerm){
 				SimpleTerm st = (SimpleTerm)ter.getChildren().get(i);
-				ter.getChildren().get(i).container = st.giverect(ter.getChildren().get(i));
+				ter.getChildren().get(i).setContainer(st.giverect(ter.getChildren().get(i)));
 			}
 			//if not simple, and not rectangled, dig in
 			else if(!ter.getChildren().get(i).issimple){
 				Term t2 = ter.getChildren().get(i);
-				ter.getChildren().get(i).container = specificimage(t2);
+				ter.getChildren().get(i).setContainer(specificimage(t2));
 			}
 			else{}
 		}
@@ -34,7 +34,7 @@ public class specificimg {
 		//once all terms are rectangled, call
 		//the operation to make superrectangle
 		
-		Operator op = ter.operator;
+		Operator op = ter.getOperator();
 		if(op!=null){
 		rect = op.giverect(ter);}
 		else {
@@ -43,9 +43,9 @@ public class specificimg {
 			rect = pop.giverect(ter);
 		}
 		
-		ter.container = rect;
+		ter.setContainer(rect);
 		//add parentheses as needed
-		if(ter.hasParentheses){
+		if(ter.isHasParentheses()){
 			addParentheses(ter);
 //			Log.d(TAG, "tr: "+ter.toString()+ "  true");
 		}
@@ -56,14 +56,14 @@ public class specificimg {
 		
 	public void addParentheses(Term tr){
 		//these will be the width and height of the parentheses
-		float height = tr.container.height;
+		float height = tr.getContainer().height;
 		float width = height/2;
 		
-		tr.container.width += width+width;
+		tr.getContainer().width += width+width;
 		
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			//move all the contents over by the width of the parens
-			tr.getChildren().get(i).container.bl.x+=width;
+			tr.getChildren().get(i).getContainer().bl.x+=width;
 		}
 	}
 

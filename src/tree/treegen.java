@@ -25,9 +25,9 @@ public class treegen {
 		Term firstterm = generatenode(simp);
 		Term parent = new Term();
 		rectangle cont = new rectangle();
-		parent.container = cont;
+		parent.setContainer(cont);
 		parent.getChildren().add(firstterm);
-		firstterm.parent = parent;
+		firstterm.setParent(parent);
 		newparens np =new newparens(firstterm);
 //		killparens kp = new killparens(firstterm);
 		firstterm = simplecheck(firstterm);
@@ -65,7 +65,7 @@ public class treegen {
 
 		Operator primary = pickhighestpriority(simp,pns);
 
-		thisterm.operator = primary;
+		thisterm.setOperator(primary);
 
 		rephrase(simp,primary);
 		thisterm = setnode(thisterm);
@@ -80,7 +80,7 @@ public class treegen {
 	public Term fullyreduced(ArrayList<SimpleTerm> simp, Term tr2){
 
 		if(simp.size() == 1){
-			simp.get(0).parent = tr2;
+			simp.get(0).setParent(tr2);
 			tr2.getChildren().add(simp.get(0));
 			simp.get(0).simples.add(simp.get(0));
 		}
@@ -223,14 +223,14 @@ public class treegen {
 			else if(contents.get(i).issimple){
 				child = contents.get(i);
 			}
-			child.parent = thisterm;
+			child.setParent(thisterm);
 			thisterm.getChildren().add(child);
 		}
 
 	}
 
 	public void checksimples(Term thisterm){
-		if(thisterm.operator instanceof Negative){
+		if(thisterm.getOperator() instanceof Negative){
 			thisterm.setNegative(true);
 		}
 		
@@ -246,7 +246,7 @@ public class treegen {
 				
 				SimpleTerm a = orgconts.get(i).simples.get(1);
 				a.issimple = true;
-				a.hasParentheses = true;
+				a.setHasParentheses(true);
 				orgconts.set(i, a);
 				
 			}
@@ -278,35 +278,35 @@ public class treegen {
 					Plus a = new Plus();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.valueString =  ((Operator)simp.get(i)).valueString;
+					a.setValueString(((Operator)simp.get(i)).getValueString());
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("-")){
 					Minus a = new Minus();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.valueString =  ((Operator)simp.get(i)).valueString;
+					a.setValueString(((Operator)simp.get(i)).getValueString());
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("*")){
 					Times a = new Times();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.valueString =  ((Operator)simp.get(i)).valueString;
+					a.setValueString(((Operator)simp.get(i)).getValueString());
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("/")){
 					Divide a = new Divide();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.valueString =  ((Operator)simp.get(i)).valueString;
+					a.setValueString(((Operator)simp.get(i)).getValueString());
 					simp.set(i,a);
 				}
 				if(simp.get(i).equals("^")){
 					Exponent a = new Exponent();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.valueString =  ((Operator)simp.get(i)).valueString;
+					a.setValueString(((Operator)simp.get(i)).getValueString());
 					simp.set(i,a);
 				}
 
@@ -314,7 +314,7 @@ public class treegen {
 					Equality a = new Equality();
 					a.charpos = ((Operator)simp.get(i)).charpos;
 					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.valueString =  ((Operator)simp.get(i)).valueString;
+					a.setValueString(((Operator)simp.get(i)).getValueString());
 					simp.set(i,a);
 				}
 			}
@@ -331,7 +331,7 @@ public class treegen {
 
 					Negative neg = new Negative();
 					neg.charpos = ((Operator)simp.get(i)).charpos;
-					neg.valueString = "-";
+					neg.setValueString("-");
 					simp.set(i, neg);
 					
 					//add parens around negative
@@ -390,7 +390,7 @@ public class treegen {
 		for(int i = 0; i<simp.size()-1; i++){
 			if(simp.get(i).rmult==true&&simp.get(i+1).lmult==true){
 				Times a = new Times();
-				a.valueString = "*";
+				a.setValueString("*");
 				simp.add(i+1,a);
 			}
 
@@ -411,11 +411,11 @@ public class treegen {
 		
 		Parens left = new Parens();
 		left.value = '(';
-		left.valueString = "(";
+		left.setValueString("(");
 		left.lmult = true;
 		Parens right = new Parens();
 		right.value = ')';
-		right.valueString = ")";
+		right.setValueString(")");
 		right.rmult = true;
 		
 		//add left parens before the negative
@@ -458,11 +458,11 @@ public class treegen {
 			}
 			Parens left = new Parens();
 			left.value = '(';
-			left.valueString = "(";
+			left.setValueString("(");
 			left.lmult = true;
 			Parens right = new Parens();
 			right.value = ')';
-			right.valueString = ")";
+			right.setValueString(")");
 			right.rmult = true;
 			simp.add(st-2,left);
 			simp.add(end+2, right);
@@ -471,11 +471,11 @@ public class treegen {
 				|| simp.get(st) instanceof Constant){
 			Parens left = new Parens();
 			left.value = '(';
-			left.valueString = "(";
+			left.setValueString("(");
 			left.lmult = true;
 			Parens right = new Parens();
 			right.value = ')';
-			right.valueString = ")";
+			right.setValueString(")");
 			right.rmult = true;
 			simp.add(st-2,left);
 			simp.add(st+2, right);

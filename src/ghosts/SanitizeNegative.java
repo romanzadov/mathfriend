@@ -8,7 +8,7 @@ public class SanitizeNegative {
 
 	public SanitizeNegative(Term tr){
 
-		if(tr.operator instanceof Times || tr.operator instanceof Divide){
+		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
 			for(int i = 0; i<tr.getChildren().size(); i++){
 
 				

@@ -13,7 +13,7 @@ public class equalmove {
 		
 		Term tr = im.tr;
 		
-		if(!(tr.operator instanceof Equality)){
+		if(!(tr.getOperator() instanceof Equality)){
 			System.out.println("error: equalmove run on non equal term");
 		}
 		else{

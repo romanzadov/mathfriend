@@ -37,18 +37,18 @@ public class GroupFractions  implements TreeFunction{
 			for(int j = 0; j<dividespots.size(); j++){
 				
 				int i = dividespots.get(j);
-					tr.operator = new Times();
+					tr.setOperator(new Times());
 				
 					Term mid = new Term();
-					mid.operator = new Divide();
-					mid.parent = tr;
+					mid.setOperator(new Divide());
+					mid.setParent(tr);
 					mid.getChildren().add(tr.getChildren().get(i-1));
 					mid.getChildren().add(tr.getChildren().get(i));
 					mid.getChildren().add(tr.getChildren().get(i+1));
 					
-					tr.getChildren().get(i+1).parent = mid;
-					tr.getChildren().get(i).parent = mid;
-					tr.getChildren().get(i-1).parent = mid;
+					tr.getChildren().get(i+1).setParent(mid);
+					tr.getChildren().get(i).setParent(mid);
+					tr.getChildren().get(i-1).setParent(mid);
 					
 					tr.getChildren().remove(i-1);
 					tr.getChildren().remove(i-1);

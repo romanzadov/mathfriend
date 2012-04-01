@@ -42,14 +42,14 @@ public class Fraction extends NotSimple{
 	public Fraction(Term t, Term b){
 
 		Divide dv = new Divide();
-		this.operator = dv;
+		this.setOperator(dv);
 
 			top = t;
 			bottom = b;
 
-		this.top.parent = this;
-		this.divide.parent = this;
-		this.bottom.parent = this;
+		this.top.setParent(this);
+		this.divide.setParent(this);
+		this.bottom.setParent(this);
 	}
 
 
@@ -75,9 +75,9 @@ public class Fraction extends NotSimple{
 
 		if(tr.isInteger()){
 
-			int place = tr.parent.getChildren().indexOf(tr);
+			int place = tr.getParent().getChildren().indexOf(tr);
 			Fraction fr = fractionOverOne(tr);
-			tr.parent.getChildren().set(place, fr);
+			tr.getParent().getChildren().set(place, fr);
 			tr = fr;
 
 		}
@@ -101,13 +101,13 @@ public class Fraction extends NotSimple{
 		float xmax= 0;
 		float ymax = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			rectangle b = tr.getChildren().get(i).container;
+			rectangle b = tr.getChildren().get(i).getContainer();
 			if(b.width>xmax){xmax = b.width;}
 			ymax += b.height;
 		}
 		a.height = ymax;
 		a.width = xmax;
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 
@@ -119,10 +119,10 @@ public class Fraction extends NotSimple{
 
 		if(tr.isNegative()){negcount++;}
 		if(tr.getChildren().get(0).isNegative()){negcount++;}
-		if(tr.parent != null){
-			int place = tr.parent.getChildren().indexOf(tr);
+		if(tr.getParent() != null){
+			int place = tr.getParent().getChildren().indexOf(tr);
 			if(place>0){
-				if(tr.parent.getChildren().get(place-1) instanceof Minus){negcount++;}
+				if(tr.getParent().getChildren().get(place-1) instanceof Minus){negcount++;}
 			}
 		}
 

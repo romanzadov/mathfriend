@@ -12,7 +12,7 @@ public class AllignFracBar {
 		boolean allgood = true;
 		
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			if(tr.getChildren().get(i).container == null){
+			if(tr.getChildren().get(i).getContainer() == null){
 				allgood = false;
 			}
 		}
@@ -21,14 +21,14 @@ public class AllignFracBar {
 		float barheight =0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			Term kid = tr.getChildren().get(i);
-			if(kid.operator instanceof Divide && kid.getChildren().size() == 3){
-				if(kid.getChildren().get(2).container.height>barheight){
-					barheight = kid.getChildren().get(2).container.height;
+			if(kid.getOperator() instanceof Divide && kid.getChildren().size() == 3){
+				if(kid.getChildren().get(2).getContainer().height>barheight){
+					barheight = kid.getChildren().get(2).getContainer().height;
 				}
 			}
 			else{
-				if(kid.container.height/2>barheight){
-					barheight = kid.container.height/2;
+				if(kid.getContainer().height/2>barheight){
+					barheight = kid.getContainer().height/2;
 				}
 			}
 		}
@@ -36,11 +36,11 @@ public class AllignFracBar {
 		//allign y's
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			Term kid = tr.getChildren().get(i);
-			if(kid.operator instanceof Divide && kid.getChildren().size() == 3){
-				kid.container.bl.y = barheight - kid.getChildren().get(2).container.height;
+			if(kid.getOperator() instanceof Divide && kid.getChildren().size() == 3){
+				kid.getContainer().bl.y = barheight - kid.getChildren().get(2).getContainer().height;
 			}
 			else{
-				kid.container.bl.y = barheight - kid.container.height/2;
+				kid.getContainer().bl.y = barheight - kid.getContainer().height/2;
 			}
 		}
 		
@@ -48,8 +48,8 @@ public class AllignFracBar {
 		float xsofar = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			Term kid = tr.getChildren().get(i);
-			kid.container.bl.x = xsofar;
-			xsofar+=kid.container.width;
+			kid.getContainer().bl.x = xsofar;
+			xsofar+= kid.getContainer().width;
 		}
 
 
@@ -57,8 +57,8 @@ public class AllignFracBar {
 		float ysofar = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			Term kid = tr.getChildren().get(i);
-			if((kid.container.height + kid.container.bl.y)> ysofar){
-				ysofar = kid.container.height+kid.container.bl.y;
+			if((kid.getContainer().height + kid.getContainer().bl.y)> ysofar){
+				ysofar = kid.getContainer().height+ kid.getContainer().bl.y;
 			}
 		}
 		
@@ -66,7 +66,7 @@ public class AllignFracBar {
 		thiscont.width = xsofar;
 		thiscont.height = ysofar;
 		
-		tr.container = thiscont;
+		tr.setContainer(thiscont);
 	}
 	
 }

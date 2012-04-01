@@ -35,22 +35,22 @@ public class MultiplyGhost implements TreeFunction{
 
 			int smallest = Integer.MAX_VALUE;
 
-			int ap = as.parent.getChildren().indexOf(as);
-			int bp = bs.parent.getChildren().indexOf(bs);
+			int ap = as.getParent().getChildren().indexOf(as);
+			int bp = bs.getParent().getChildren().indexOf(bs);
 			
 			smallest = Math.min(ap, bp);
 			int biggest = Math.max(ap, bp);
 			
-			if(as.parent.getChildren().size()==3){
-				int place = as.parent.parent.getChildren().indexOf(as.parent);
-				as.parent.parent.getChildren().set(place, aTIMESb);
-				aTIMESb.parent = as.parent.parent;
+			if(as.getParent().getChildren().size()==3){
+				int place = as.getParent().getParent().getChildren().indexOf(as.getParent());
+				as.getParent().getParent().getChildren().set(place, aTIMESb);
+				aTIMESb.setParent(as.getParent().getParent());
 			}
 			else{
-				as.parent.getChildren().remove(biggest-1);
-				as.parent.getChildren().remove(biggest-1);
-				as.parent.getChildren().set(smallest, aTIMESb);
-				aTIMESb.parent = as.parent;
+				as.getParent().getChildren().remove(biggest-1);
+				as.getParent().getChildren().remove(biggest-1);
+				as.getParent().getChildren().set(smallest, aTIMESb);
+				aTIMESb.setParent(as.getParent());
 			}
 			
 			RelativeContainer dc = new RelativeContainer();
@@ -70,7 +70,7 @@ public class MultiplyGhost implements TreeFunction{
 
 	public void performAction(Term tr) {
 		if(aTIMESb == null){
-			if(tr.operator !=null && (tr.operator instanceof Times)){
+			if(tr.getOperator() !=null && (tr.getOperator() instanceof Times)){
 
 				Term ans = null;
 				boolean stop = false;

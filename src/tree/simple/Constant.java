@@ -28,8 +28,8 @@ public class Constant extends Number{
 		c.charpos = this.charpos;
 		c.font = this.font;
 		c.toDraw = this.toDraw;
-		c.container.bl.x = this.container.bl.x;
-		c.container.bl.y = this.container.bl.y;
+		c.getContainer().bl.x = this.getContainer().bl.x;
+		c.getContainer().bl.y = this.getContainer().bl.y;
 		return c;
 	}
 
@@ -41,13 +41,13 @@ public class Constant extends Number{
 			a.height = 1; 
 			a.width = 1;
 			tr.toDraw = "e";
-			tr.container = a;}
+			tr.setContainer(a);}
 		if(value == Math.PI)
 		{
 			a.height = 1; 
 			a.width = 2;
 			tr.toDraw = "pi";
-			tr.container = a;}
+			tr.setContainer(a);}
 		return a;
 	}
 

@@ -24,14 +24,14 @@ public class GhostImage {
 
 	//	Log.d(TAG, "im: "+im.tr+" sel: "+sel+" curr: "+current+" tapped: "+tapped);
 		
-		if(sel.parent!=null){
-			selIndex = sel.parent.getChildren().indexOf(sel);
+		if(sel.getParent() !=null){
+			selIndex = sel.getParent().getChildren().indexOf(sel);
 			double xsel = current.x;
 			int IntermIndex = Integer.MAX_VALUE;
 			//	Log.d(TAG, "kids: "+sel.parent.getChilds().size()+" parent: "+sel.parent.toString());
-			for (int i = 0; i<sel.parent.getChildren().size(); i++){
+			for (int i = 0; i< sel.getParent().getChildren().size(); i++){
 				//		Log.d(TAG, "i: "+i+" over: "+sel.parent.getChilds().get(i).toString());
-				rectangle a = sel.parent.getChildren().get(i).ScreenPosition.container;
+				rectangle a = sel.getParent().getChildren().get(i).ScreenPosition.container;
 				//		Log.d(TAG, xsel+" tr: "+sel.parent.getChilds().get(i).toString()+"  bl.x: "+a.bl.x+" w: "+a.width);
 
 				if(xsel>=(a.bl.x) && xsel<=(a.bl.x+a.width)){
@@ -45,10 +45,10 @@ public class GhostImage {
 			// move terms around within term's parent
 			if(IntermIndex!=Integer.MAX_VALUE  && selIndex != IntermIndex){
 
-				SwitchMe = sel.parent.getChildren().get(IntermIndex);
+				SwitchMe = sel.getParent().getChildren().get(IntermIndex);
 				if(!(SwitchMe instanceof Operator)
 						&& !(SwitchMe instanceof Parens)){
-					Operator op = sel.parent.operator;
+					Operator op = sel.getParent().getOperator();
 					Ghost = op.inTermMoves(im, sel, IntermIndex);
 					//					Log.d(TAG, "index: "+IntermIndex+" sel: "+sel.toString()+" Ghost: "+Ghost);
 				}
@@ -73,15 +73,15 @@ public class GhostImage {
 	public Image CheckEquals(Image im, Term sel, double xsel, int IntermIndex ){
 		Image Ghost = new Image();
 		int selindex = 0;
-		if((sel.parent!=null)&&
-				(sel.parent.parent!=null)&&
-				(sel.parent.parent.operator!=null)&&
-				(sel.parent.parent.operator instanceof Equality)){
+		if((sel.getParent() !=null)&&
+				(sel.getParent().getParent() !=null)&&
+				(sel.getParent().getParent().getOperator() !=null)&&
+				(sel.getParent().getParent().getOperator() instanceof Equality)){
 
-			selindex = sel.parent.parent.getChildren().indexOf(sel.parent);
+			selindex = sel.getParent().getParent().getChildren().indexOf(sel.getParent());
 			
-			for (int i = 0; i<sel.parent.parent.getChildren().size(); i++){
-				rectangle a = sel.parent.parent.getChildren().get(i).ScreenPosition.container;
+			for (int i = 0; i< sel.getParent().getParent().getChildren().size(); i++){
+				rectangle a = sel.getParent().getParent().getChildren().get(i).ScreenPosition.container;
 				if(xsel>(a.bl.x) && xsel<(a.bl.x+a.width)){
 					IntermIndex = i;
 					break;
@@ -90,8 +90,8 @@ public class GhostImage {
 			}
 //			Log.d(TAG, "sel: "+selindex+" interm: "+IntermIndex);
 			if(IntermIndex != Integer.MAX_VALUE && selindex!=IntermIndex){
-				SwitchMe = sel.parent.parent.getChildren().get(IntermIndex);
-				Operator op = sel.parent.operator;
+				SwitchMe = sel.getParent().getParent().getChildren().get(IntermIndex);
+				Operator op = sel.getParent().getOperator();
 				Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 			}
@@ -99,14 +99,14 @@ public class GhostImage {
 		}
 
 
-		if(sel.parent !=null && 
-				(sel.parent.operator instanceof Times || sel.parent.operator instanceof Divide)){
-			if(sel.parent.parent != null && (sel.parent.parent.operator instanceof Plus
-					|| sel.parent.parent.operator instanceof Minus)){
-				if(sel.parent.parent.parent != null && sel.parent.parent.parent.operator instanceof Equality){
+		if(sel.getParent() !=null &&
+				(sel.getParent().getOperator() instanceof Times || sel.getParent().getOperator() instanceof Divide)){
+			if(sel.getParent().getParent() != null && (sel.getParent().getParent().getOperator() instanceof Plus
+					|| sel.getParent().getParent().getOperator() instanceof Minus)){
+				if(sel.getParent().getParent().getParent() != null && sel.getParent().getParent().getParent().getOperator() instanceof Equality){
 
-					for (int i = 0; i<sel.parent.parent.parent.getChildren().size(); i++){
-						rectangle a = sel.parent.parent.parent.getChildren().get(i).container;
+					for (int i = 0; i< sel.getParent().getParent().getParent().getChildren().size(); i++){
+						rectangle a = sel.getParent().getParent().getParent().getChildren().get(i).getContainer();
 						if(xsel>(a.bl.x) && xsel<(a.bl.x+a.width)){
 							IntermIndex = i;
 							break;
@@ -114,8 +114,8 @@ public class GhostImage {
 
 					}
 					if(IntermIndex != Integer.MAX_VALUE){
-						SwitchMe = sel.parent.parent.parent.getChildren().get(IntermIndex);
-						Operator op = sel.parent.operator;
+						SwitchMe = sel.getParent().getParent().getParent().getChildren().get(IntermIndex);
+						Operator op = sel.getParent().getOperator();
 						Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 					}

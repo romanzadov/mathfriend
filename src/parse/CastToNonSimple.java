@@ -24,20 +24,20 @@ public class CastToNonSimple implements TreeFunction{
 		if(n == 0){
 			Fraction f = new Fraction();
 			if(f.canConstruct(tr)){
-				int place = tr.parent.getChildren().indexOf(tr);
+				int place = tr.getParent().getChildren().indexOf(tr);
 				f = new Fraction(tr.getChildren().get(0), tr.getChildren().get(2));
 
-				f.parent = tr.parent;
-				tr.parent.getChildren().set(place, f);
+				f.setParent(tr.getParent());
+				tr.getParent().getChildren().set(place, f);
 			}}
 		else if(n == 1){
 			NegativeTerm n = new NegativeTerm();
 			if(n.canConstruct(tr)){
-				int place = tr.parent.getChildren().indexOf(tr);
+				int place = tr.getParent().getChildren().indexOf(tr);
 				n = new NegativeTerm(tr);
 				
-				n.parent = tr.parent;
-				tr.parent.getChildren().set(place, n);
+				n.setParent(tr.getParent());
+				tr.getParent().getChildren().set(place, n);
 		
 			}
 		}

@@ -19,8 +19,8 @@ public class Number extends SimpleTerm {
 		
 		Number na = new Number(this.value);
 		na.font = this.font;
-		na.container.bl.x = this.container.bl.x;
-		na.container.bl.y = this.container.bl.y;
+		na.getContainer().bl.x = this.getContainer().bl.x;
+		na.getContainer().bl.y = this.getContainer().bl.y;
 		return na;
 	}
 	
@@ -30,7 +30,7 @@ public class Number extends SimpleTerm {
 		value = a;
 		toDraw = "0";
 		if(a<0){
-			isNegative = true;
+			setNegative(true);
 		}
 	}
 	
@@ -42,19 +42,19 @@ public class Number extends SimpleTerm {
 				tr.toDraw = "-";
 				a.height = 1;
 				a.width = (float) .5;
-				tr.container = a;
+				tr.setContainer(a);
 			}
 			else if(value%1==0)
 			{int b = (int)value;
 			 tr.toDraw = ""+b;
 			 a.height = 1;
 			 a.width = tr.toDraw.length();
-			 tr.container = a;}
+			 tr.setContainer(a);}
 			else if((value*1000)%1==0)
 			{tr.toDraw = ""+value;
 			 a.height = 1;
 			 a.width = tr.toDraw.length();
-			 tr.container = a;}
+			 tr.setContainer(a);}
 			
 			else
 			{   double trunkated = (int)(value*1000);
@@ -62,7 +62,7 @@ public class Number extends SimpleTerm {
 				tr.toDraw = ""+trunkated+"...";
 				a.height = 1;
 				a.width = tr.toDraw.length();
-				tr.container = a;
+				tr.setContainer(a);
 			}
 		return a;
 	}

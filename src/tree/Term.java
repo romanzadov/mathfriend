@@ -19,16 +19,16 @@ import display.rectangle;
 
 public class Term implements Cloneable, TreeFunction{
 
-	public Term parent;
-	public Operator operator;
-	protected ArrayList<Term> children = new ArrayList<Term>();
-	public rectangle container = new rectangle();
-
-	public boolean hasParentheses;
-	protected boolean isNegative = false;
-	public String valueString;
-	public float scaleFactor =1;
+	private Term parent;
+	private Operator operator;
+	private ArrayList<Term> children = new ArrayList<Term>();
+	private rectangle container = new rectangle();
+	private boolean hasParentheses;
+	private boolean isNegative = false;
+	private String valueString;
+	private float scaleFactor =1;
 	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
+
 
 	public StringRectangle ScreenPosition = new StringRectangle();
 
@@ -48,7 +48,7 @@ public class Term implements Cloneable, TreeFunction{
 	public String toString(){
 		String st = "";
 		if(this instanceof SimpleTerm){
-			st+=this.valueString;
+			st+= this.getValueString();
 		} 
 
 		else if(this.isInteger() && getNumericValue(this)<0){
@@ -74,8 +74,8 @@ public class Term implements Cloneable, TreeFunction{
 		String st = this.toString();
 		path pa = new path();
 		Term clone = pa.getTermFromString(st);
-		clone.container.bl.x = this.container.bl.x;
-		clone.container.bl.y = this.container.bl.y;
+		clone.getContainer().bl.x = this.getContainer().bl.x;
+		clone.getContainer().bl.y = this.getContainer().bl.y;
 
 		return clone;
 	}
@@ -212,7 +212,7 @@ public class Term implements Cloneable, TreeFunction{
 			if(tr instanceof Number){
 
 				x = ((Number)tr).value;
-				int positionOfX = tr.parent.getChildren().indexOf(tr);
+				int positionOfX = tr.getParent().getChildren().indexOf(tr);
 				
 				if(positionOfX == 0){
 					
@@ -223,7 +223,7 @@ public class Term implements Cloneable, TreeFunction{
 					return x;
 				}
 				else{
-					if(tr.parent.getChildren().get(positionOfX - 1) instanceof Minus){
+					if(tr.getParent().getChildren().get(positionOfX - 1) instanceof Minus){
 						x*= -1;
 					}
 				}
@@ -234,15 +234,15 @@ public class Term implements Cloneable, TreeFunction{
 
 
 		if(!tr.isNegative()){
-			if( tr.parent.getChildren().indexOf(tr) == 0){
+			if( tr.getParent().getChildren().indexOf(tr) == 0){
 				if(tr instanceof Number){
 					x = ((Number)tr).value;
 				}
 			}
 			else{
-				int index = tr.parent.getChildren().indexOf(tr);
+				int index = tr.getParent().getChildren().indexOf(tr);
 				x = ((Number)tr).value;
-				Term kid = tr.parent.getChildren().get(index-1);
+				Term kid = tr.getParent().getChildren().get(index-1);
 				if(kid instanceof Minus){
 					x *= -1;
 				}
@@ -264,7 +264,7 @@ public class Term implements Cloneable, TreeFunction{
 	public boolean SimpleCompound(){
 		Term tr = this;
 		boolean simp = false;
-		if((tr.operator !=null)&&(tr.operator instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
+		if((tr.getOperator() !=null)&&(tr.getOperator() instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
 			boolean insidessimp = true;
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(!tr.getChildren().get(i).isSimple()){
@@ -383,7 +383,7 @@ public class Term implements Cloneable, TreeFunction{
 		if(tr.isInteger()){
 			rational = true;
 		}
-		else if (tr.operator instanceof Divide && tr.getChildren().size() == 3 &&
+		else if (tr.getOperator() instanceof Divide && tr.getChildren().size() == 3 &&
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			rational = true;
 		}
@@ -393,7 +393,7 @@ public class Term implements Cloneable, TreeFunction{
 	public boolean isSimpleFraction(){
 		Term tr = this;
 		boolean fraction = false;
-		if (tr.operator instanceof Divide && tr.getChildren().size() == 3 &&
+		if (tr.getOperator() instanceof Divide && tr.getChildren().size() == 3 &&
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			fraction = true;
 		}
@@ -409,7 +409,7 @@ public class Term implements Cloneable, TreeFunction{
 		else if(tr instanceof Fraction){
 			fraction = true;
 		}
-		else if(tr.operator instanceof Divide && tr.getChildren().size() == 3 ){
+		else if(tr.getOperator() instanceof Divide && tr.getChildren().size() == 3 ){
 			fraction = true;
 		}
 		
@@ -467,8 +467,8 @@ public class Term implements Cloneable, TreeFunction{
 
 	public boolean isNegative() {
 		boolean ans = false;
-		if(this.operator != null){
-			if(this.operator instanceof Negative){
+		if(this.getOperator() != null){
+			if(this.getOperator() instanceof Negative){
 				ans= true;
 			}
 
@@ -495,10 +495,10 @@ public class Term implements Cloneable, TreeFunction{
 	@Override
 	public void performAction(Term tr ) {
 
-		if(innerTerm.container.bl.x == tr.container.bl.x &&
-				innerTerm.container.bl.y == tr.container.bl.y &&
-				innerTerm.container.width == tr.container.width &&
-				innerTerm.container.height == tr.container.height ){
+		if(innerTerm.getContainer().bl.x == tr.getContainer().bl.x &&
+				innerTerm.getContainer().bl.y == tr.getContainer().bl.y &&
+				innerTerm.getContainer().width == tr.getContainer().width &&
+				innerTerm.getContainer().height == tr.getContainer().height ){
 			found = true;
 		}
 		if(!found){
@@ -526,7 +526,7 @@ public class Term implements Cloneable, TreeFunction{
 	private Term getResultOfBasicOperation(){
 
 		if(!this.isSimple()){
-			Term result = this.operator.simpleOperation(this);
+			Term result = this.getOperator().simpleOperation(this);
 
 			return result;}
 		else{
@@ -535,5 +535,52 @@ public class Term implements Cloneable, TreeFunction{
 	}
 
 
+    public Term getParent() {
+        return parent;
+    }
+
+    public void setParent(Term parent) {
+        this.parent = parent;
+    }
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
+    }
+
+    public rectangle getContainer() {
+        return container;
+    }
+
+    public void setContainer(rectangle container) {
+        this.container = container;
+    }
+
+    public boolean isHasParentheses() {
+        return hasParentheses;
+    }
+
+    public void setHasParentheses(boolean hasParentheses) {
+        this.hasParentheses = hasParentheses;
+    }
+
+    public String getValueString() {
+        return valueString;
+    }
+
+    public void setValueString(String valueString) {
+        this.valueString = valueString;
+    }
+
+    public float getScaleFactor() {
+        return scaleFactor;
+    }
+
+    public void setScaleFactor(float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
 }
 

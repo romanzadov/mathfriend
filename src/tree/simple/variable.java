@@ -28,8 +28,8 @@ public class variable extends SimpleTerm {
 	public variable clone(){
 		variable v = new variable(this.value);
 		v.font = this.font;
-		v.container.bl.x = this.container.bl.x;
-		v.container.bl.y = this.container.bl.y;
+		v.getContainer().bl.x = this.getContainer().bl.x;
+		v.getContainer().bl.y = this.getContainer().bl.y;
 		return v;
 	}
 
@@ -38,7 +38,7 @@ public class variable extends SimpleTerm {
 		tr.toDraw = value;
 		a.height = 1;
 		a.width = value.length();
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 	

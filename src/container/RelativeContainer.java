@@ -20,7 +20,7 @@ public class RelativeContainer {
 		specificimg current = new specificimg();
 
 		container = current.specificimage(ter);
-		ter.container = container;
+		ter.setContainer(container);
 		resize rs = new resize(ter);
 		//fontize fs = new fontize(ter, fontsize);
 		//invert it = new invert(ter);

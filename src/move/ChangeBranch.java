@@ -18,9 +18,9 @@ public class ChangeBranch {
 		ArrayList<Integer> key = TermMath.findTreePositionOfSelected(tree, current);
 		Term moveto = TermMath.findTermUsingKey(second, key);
 		
-		future.parent = moveto.parent;
-		int moveint = moveto.parent.getChildren().indexOf(moveto);
-		moveto.parent.getChildren().set(moveint, future);
+		future.setParent(moveto.getParent());
+		int moveint = moveto.getParent().getChildren().indexOf(moveto);
+		moveto.getParent().getChildren().set(moveint, future);
 		
 		return second;
 	}

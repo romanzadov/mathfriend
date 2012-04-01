@@ -12,7 +12,7 @@ public class invert  implements TreeFunction{
 	}
 
 	public void performAction(Term tr) {
-		tr.container.bl.y*=-1;
+		tr.getContainer().bl.y*=-1;
 	}
 	
 

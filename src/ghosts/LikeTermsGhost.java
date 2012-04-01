@@ -35,39 +35,40 @@ public class LikeTermsGhost implements TreeFunction{
 
 			int smallest = Integer.MAX_VALUE;
 
-			int ap = as.parent.getChildren().indexOf(as);
-			int bp = bs.parent.getChildren().indexOf(bs);
+			int ap = as.getParent().getChildren().indexOf(as);
+			int bp = bs.getParent().getChildren().indexOf(bs);
 			
 			smallest = Math.min(ap, bp);
 			int biggest = Math.max(ap, bp);
 			
-			as.parent.getChildren().remove(biggest-1);
-			as.parent.getChildren().remove(biggest-1);
-			if(smallest == 0){as.parent.getChildren().remove(smallest);}
+			as.getParent().getChildren().remove(biggest-1);
+			as.getParent().getChildren().remove(biggest-1);
+			if(smallest == 0){
+                as.getParent().getChildren().remove(smallest);}
 			else{
-				as.parent.getChildren().remove(smallest-1);
-				as.parent.getChildren().remove(smallest-1);
+				as.getParent().getChildren().remove(smallest-1);
+				as.getParent().getChildren().remove(smallest-1);
 			}
 			
 			
 			if(smallest>0){smallest --;}
 			
-			aPLUSb.parent = as.parent;
+			aPLUSb.setParent(as.getParent());
 			if(smallest == 0){
-				as.parent.getChildren().add(0,aPLUSb);
+				as.getParent().getChildren().add(0,aPLUSb);
 			}
 			else{
 				if(!aPLUSb.isNegative()){
 					Plus pl = new Plus();
-					pl.parent = aPLUSb.parent;
-					aPLUSb.parent.getChildren().add(smallest,aPLUSb);
-					aPLUSb.parent.getChildren().add(smallest,pl);
+					pl.setParent(aPLUSb.getParent());
+					aPLUSb.getParent().getChildren().add(smallest,aPLUSb);
+					aPLUSb.getParent().getChildren().add(smallest,pl);
 				}
 				else{
 					Minus mn = new Minus();
-					mn.parent = aPLUSb.parent;
-					aPLUSb.parent.getChildren().add(smallest,aPLUSb);
-					aPLUSb.parent.getChildren().add(smallest,mn);
+					mn.setParent(aPLUSb.getParent());
+					aPLUSb.getParent().getChildren().add(smallest,aPLUSb);
+					aPLUSb.getParent().getChildren().add(smallest,mn);
 					aPLUSb.toggleNegative();
 				}
 			}
@@ -85,7 +86,7 @@ public class LikeTermsGhost implements TreeFunction{
 
 	public void performAction(Term tr) {
 		if(aPLUSb == null){
-			if(tr.operator !=null && (tr.operator instanceof Plus || tr.operator instanceof Minus)){
+			if(tr.getOperator() !=null && (tr.getOperator() instanceof Plus || tr.getOperator() instanceof Minus)){
 
 				Term ans = null;
 				boolean stop = false;

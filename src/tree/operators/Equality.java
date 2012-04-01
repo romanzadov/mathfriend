@@ -30,14 +30,14 @@ public class Equality extends Operator{
     public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		if(tr.getChildren().size() == 0){
-			rectangle cont = tr.container;
+			rectangle cont = tr.getContainer();
 			tr.toDraw = "=";
 			a = justequal(cont);
 		}
 		else{
 			//check to see that everything is rectangled
 			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).container == null){
+				if(tr.getChildren().get(i).getContainer() == null){
 					System.out.println("error: equal called when not all terms are rectangled");
 				}
 			}
@@ -45,14 +45,14 @@ public class Equality extends Operator{
 			float ysofar = 0;
 			float xsofar = 0;
 			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).container.height>ysofar){
-					ysofar = tr.getChildren().get(i).container.height;
+				if(tr.getChildren().get(i).getContainer().height>ysofar){
+					ysofar = tr.getChildren().get(i).getContainer().height;
 				}
 			}
 
 			//allign
 			for(int i =0; i<tr.getChildren().size(); i++){
-				rectangle cont = tr.getChildren().get(i).container;
+				rectangle cont = tr.getChildren().get(i).getContainer();
 				cont.bl.x = xsofar;
 				xsofar +=cont.width;
 				cont.bl.y = ysofar/2-cont.height/2;
@@ -81,7 +81,7 @@ public class Equality extends Operator{
 
 	public Image inTermMoves(Image im, Term sel, int IntermIndex){
 
-		int selindex = sel.parent.getChildren().indexOf(sel);
+		int selindex = sel.getParent().getChildren().indexOf(sel);
 		Image Ghost = im;
 		Ghost = MoveFocus(im, sel, selindex, IntermIndex);
 		
@@ -102,11 +102,11 @@ public class Equality extends Operator{
 		Term secondsel = second.getChildren().get(selindex);
 		Term moveto = second.getChildren().get(IntermIndex);
 
-		if((moveto.operator instanceof Plus)||(moveto.operator instanceof Minus)){
-			if(!(secondsel.operator instanceof Plus)&&!(secondsel.operator instanceof Minus)){
+		if((moveto.getOperator() instanceof Plus)||(moveto.getOperator() instanceof Minus)){
+			if(!(secondsel.getOperator() instanceof Plus)&&!(secondsel.getOperator() instanceof Minus)){
 				
 				Number zero = new Number(0);
-				zero.parent = secondsel.parent;
+				zero.setParent(secondsel.getParent());
 
 
 				if (secondsel.isNegative()){
@@ -114,23 +114,23 @@ public class Equality extends Operator{
 					Plus pl = new Plus();
 					moveto.getChildren().add(pl);
 					moveto.getChildren().add(secondsel);
-					pl.parent = moveto;
-					secondsel.parent = moveto;
+					pl.setParent(moveto);
+					secondsel.setParent(moveto);
 				}
 				else{
 					Minus mn = new Minus();
 					moveto.getChildren().add(mn);
 					moveto.getChildren().add(secondsel);
-					mn.parent = moveto;
-					secondsel.parent = moveto;
+					mn.setParent(moveto);
+					secondsel.setParent(moveto);
 				}
-				zero.parent.getChildren().set(selindex, zero);
+				zero.getParent().getChildren().set(selindex, zero);
 				
 			}
 		}
 
-		else if(!(secondsel.operator instanceof Plus)&&!(secondsel.operator instanceof Minus)
-				&&!(moveto.operator instanceof Plus)&&!(moveto.operator instanceof Minus)
+		else if(!(secondsel.getOperator() instanceof Plus)&&!(secondsel.getOperator() instanceof Minus)
+				&&!(moveto.getOperator() instanceof Plus)&&!(moveto.getOperator() instanceof Minus)
 				&&!(selindex == IntermIndex)){
 		
 			if(secondsel.isNegative()){
@@ -139,18 +139,18 @@ public class Equality extends Operator{
 				Minus mn = new Minus();
 				Number zero = new Number(0);
 				Term mid = new Term();
-				pl.parent = mid;
-				mn.parent = mid;
-				mid.parent = secondsel.parent;
-				mid.operator = pl;
-				zero.parent = secondsel.parent;
-				secondsel.parent = moveto.parent = mid;
-				mid.parent.getChildren().set(selindex, zero);
+				pl.setParent(mid);
+				mn.setParent(mid);
+				mid.setParent(secondsel.getParent());
+				mid.setOperator(pl);
+				zero.setParent(secondsel.getParent());
+				secondsel.setParent(moveto.setParent(mid));
+				mid.getParent().getChildren().set(selindex, zero);
 				mid.getChildren().add(secondsel);
 				mid.getChildren().add(pl);
 				mid.getChildren().add(moveto);
 				
-				mid.parent.getChildren().set(IntermIndex, mid);
+				mid.getParent().getChildren().set(IntermIndex, mid);
 				
 			}
 			else{
@@ -158,19 +158,19 @@ public class Equality extends Operator{
 				Minus mn = new Minus();
 				Number zero = new Number(0);
 				Term mid = new Term();
-				pl.parent = mid;
-				mn.parent = mid;
-				mid.parent = secondsel.parent;
-				mid.operator = pl;
-				zero.parent = secondsel.parent;
-				secondsel.parent = moveto.parent = mid;
-				mid.parent.getChildren().set(selindex, zero);
+				pl.setParent(mid);
+				mn.setParent(mid);
+				mid.setParent(secondsel.getParent());
+				mid.setOperator(pl);
+				zero.setParent(secondsel.getParent());
+				secondsel.setParent(moveto.setParent(mid));
+				mid.getParent().getChildren().set(selindex, zero);
 				
 				mid.getChildren().add(moveto);
 				mid.getChildren().add(mn);
 				mid.getChildren().add(secondsel);
 				
-				mid.parent.getChildren().set(IntermIndex, mid);
+				mid.getParent().getChildren().set(IntermIndex, mid);
 				
 			}
 		}
@@ -183,7 +183,7 @@ public class Equality extends Operator{
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second);
 	//	ColorText CT = new ColorText(secondsel, /.red);
-		Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
 
 

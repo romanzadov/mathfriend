@@ -42,7 +42,7 @@ public class selectterm {
 			}
 			else{
 				boolean in = true;
-				rectangle ours = tr.container;
+				rectangle ours = tr.getContainer();
 				point tl = ours.topleft();
 				//go through the four corners of a rectangle
 				if(tl.x>x){in = false;}
@@ -80,7 +80,7 @@ public class selectterm {
 				for (int i = 0; i< tr.getChildren().size(); i++){
 					if(!(tr.getChildren().get(i)==exclude)){
 						boolean in = true;
-						rectangle ours = tr.getChildren().get(i).container;
+						rectangle ours = tr.getChildren().get(i).getContainer();
 						point tl = ours.topleft();
 						//go through the four corners of a rectangle
 						if(tl.x>x){in = false;}
@@ -94,7 +94,7 @@ public class selectterm {
 			}
 			else{
 				boolean in = true;
-				rectangle ours = tr.container;
+				rectangle ours = tr.getContainer();
 				point tl = ours.topleft();
 				//go through the four corners of a rectangle
 				if(tl.x>x){in = false;}

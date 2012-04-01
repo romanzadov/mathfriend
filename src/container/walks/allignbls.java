@@ -14,8 +14,8 @@ public class allignbls  implements TreeFunction{
 
 	public void performAction(Term tr) {
 		try {
-			tr.container.bl.x +=tr.parent.container.bl.x;
-			tr.container.bl.y +=tr.parent.container.bl.y;
+			tr.getContainer().bl.x += tr.getParent().getContainer().bl.x;
+			tr.getContainer().bl.y += tr.getParent().getContainer().bl.y;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		//	e.printStackTrace();

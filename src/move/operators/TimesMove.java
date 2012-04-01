@@ -23,9 +23,9 @@ public class TimesMove {
 		ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, sel);
 		Term tomove = TermMath.findTermUsingKey(second, key);
 //		ColorText ct = new ColorText(tomove, Color.red);
-		Term parent = tomove.parent;
-		Term switched = tomove.parent.getChildren().get(IntermIndex);
-		int spottomove = tomove.parent.getChildren().indexOf(tomove);
+		Term parent = tomove.getParent();
+		Term switched = tomove.getParent().getChildren().get(IntermIndex);
+		int spottomove = tomove.getParent().getChildren().indexOf(tomove);
 		
 		if(spottomove == 0 && (IntermIndex != parent.getChildren().size()-1)){
 			
@@ -74,7 +74,7 @@ public class TimesMove {
 		 
 	
 
-		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 		Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		return Ghost;
 	}
@@ -87,7 +87,7 @@ public class TimesMove {
 		Image Ghost = null;
 		
 		boolean selfraction =  false;
-		if(sel.operator instanceof Times || sel.operator instanceof Divide){
+		if(sel.getOperator() instanceof Times || sel.getOperator() instanceof Divide){
 			if(sel.getChildren().size() == 3){
 				if(sel.getChildren().get(1) instanceof Divide){
 					selfraction = true;
@@ -123,25 +123,25 @@ public class TimesMove {
 			recip.getChildren().set(0, recip.getChildren().get(2));
 			recip.getChildren().set(2, top);
 			
-			regular.parent = ghostsel.parent;
-			recip.parent = ghostsel.parent;
+			regular.setParent(ghostsel.getParent());
+			recip.setParent(ghostsel.getParent());
 		}
 		
 		if(!selfraction){
 			
 			Term mid = new Term();
-			mid.parent = ghostsel.parent;
+			mid.setParent(ghostsel.getParent());
 			Number one = new Number(1);
 			Divide div = new Divide();
 			mid.getChildren().add(one);
 			mid.getChildren().add(div);
 			mid.getChildren().add(recip);
-			mid.operator = div;
+			mid.setOperator(div);
 			
-			one.parent = div.parent = recip.parent = mid;
+			one.setParent(div.setParent(recip.setParent(mid)));
 			
 			recip = mid;
-			regular.parent = ghostsel.parent;
+			regular.setParent(ghostsel.getParent());
 			
 			
 		}
@@ -152,7 +152,7 @@ public class TimesMove {
 //			RelativeContainer dt = new RelativeContainer();
 //			dt.drawelement(second, (int)im.tr.font);
 			
-			Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+			Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 			Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		
 		
@@ -167,30 +167,30 @@ public class TimesMove {
 		//start with out own side
 		
 			//remove the term being moved
-		int posregular = regular.parent.getChildren().indexOf(regular);
+		int posregular = regular.getParent().getChildren().indexOf(regular);
 		
 		int eqindex =0;
 		try {
-			eqindex = recip.parent.parent.parent.getChildren().indexOf(recip.parent.parent);
+			eqindex = recip.getParent().getParent().getParent().getChildren().indexOf(recip.getParent().getParent());
 		} catch (Exception e1) {}
 		
-		int eqindex2 = regular.parent.parent.getChildren().indexOf(regular.parent);
+		int eqindex2 = regular.getParent().getParent().getChildren().indexOf(regular.getParent());
 		
 		if(posregular== 0){
-			regular.parent.getChildren().remove(0);
-			regular.parent.getChildren().remove(0);
+			regular.getParent().getChildren().remove(0);
+			regular.getParent().getChildren().remove(0);
 		}
 		else{
-			regular.parent.getChildren().remove(posregular-1);
-			regular.parent.getChildren().remove(posregular-1);
+			regular.getParent().getChildren().remove(posregular-1);
+			regular.getParent().getChildren().remove(posregular-1);
 		}
 		
 	
 		
-		if(recip.parent.parent.operator instanceof Plus || recip.parent.parent.operator instanceof Minus){
-			for(int i = 0; i<recip.parent.parent.getChildren().size(); i++){
-				Term kid = recip.parent.parent.getChildren().get(i);
-				if(!(kid instanceof Operator) && (kid != recip.parent)){
+		if(recip.getParent().getParent().getOperator() instanceof Plus || recip.getParent().getParent().getOperator() instanceof Minus){
+			for(int i = 0; i< recip.getParent().getParent().getChildren().size(); i++){
+				Term kid = recip.getParent().getParent().getChildren().get(i);
+				if(!(kid instanceof Operator) && (kid != recip.getParent())){
 					
 					Term clrecip = new Term();
 					try {
@@ -203,17 +203,17 @@ public class TimesMove {
 			}
 		}
 		
-		if(regular.parent.getChildren().size()==1){
-			Term top = regular.parent.parent;
-			Term bottom = regular.parent.getChildren().get(0);
-			int place = top.getChildren().indexOf(bottom.parent);
-			bottom.parent = top;
+		if(regular.getParent().getChildren().size()==1){
+			Term top = regular.getParent().getParent();
+			Term bottom = regular.getParent().getChildren().get(0);
+			int place = top.getChildren().indexOf(bottom.getParent());
+			bottom.setParent(top);
 			top.getChildren().set(place, bottom);
 		}
 		
 		// next, do the other side of the equals
-		if(recip.parent.parent.parent!=null && recip.parent.parent.parent.operator instanceof Equals){
-			Term eq = recip.parent.parent.parent;
+		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getOperator() instanceof Equals){
+			Term eq = recip.getParent().getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
 				if(!(eq.getChildren().get(i) instanceof Operator)&&i!=eqindex){
 					Term recipcl =null;
@@ -226,9 +226,9 @@ public class TimesMove {
 			}
 		}
 		
-		else if(regular.parent.parent!=null && regular.parent.parent.operator instanceof Equals){
+		else if(regular.getParent().getParent() !=null && regular.getParent().getParent().getOperator() instanceof Equals){
 			
-			Term eq = regular.parent.parent;
+			Term eq = regular.getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
 				if(!(eq.getChildren().get(i) instanceof Operator)&&i!=eqindex2){
 					Term recipcl =null;

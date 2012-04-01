@@ -44,7 +44,7 @@ public class AbsoluteContainer implements TreeFunction{
 	}
 
 	public void performAction(Term tr) {
-		tr.container = sr.get(j).container;
+		tr.setContainer(sr.get(j).container);
 		j++;
 		
 	}

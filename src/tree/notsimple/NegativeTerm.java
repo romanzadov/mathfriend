@@ -11,18 +11,18 @@ public class NegativeTerm extends NotSimple{
 	public NegativeTerm(Term tr){
 		if(canConstruct(tr)){
 			Negative n = new Negative();
-			this.operator = n;
+			this.setOperator(n);
 			n = new Negative();
 
 	//		Number minusone = new Number(-1);
 
 			this.setNegative(true);
-			this.hasParentheses = tr.hasParentheses;
+			this.setHasParentheses(tr.isHasParentheses());
 	//		this.childs.add(minusone);
-			this.children.add(n);
-			this.children.add(tr.getChildren().get(2));
+			this.getChildren().add(n);
+			this.getChildren().add(tr.getChildren().get(2));
 			for(int i = 0; i<this.getChildren().size(); i++){
-				this.getChildren().get(i).parent = this;
+				this.getChildren().get(i).setParent(this);
 			}
 		}
 		
@@ -34,7 +34,7 @@ public class NegativeTerm extends NotSimple{
 
 	public void makeNegative(Term tr){
 		Negative n = new Negative();
-		this.operator = n;
+		this.setOperator(n);
 		n = new Negative();
 		
 		this.setNegative(true);
@@ -65,13 +65,13 @@ public class NegativeTerm extends NotSimple{
 		float xmax= 0;
 		float ymax = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			rectangle b = tr.getChildren().get(i).container;
+			rectangle b = tr.getChildren().get(i).getContainer();
 			if(b.width>xmax){xmax = b.width;}
 			ymax += b.height;
 		}
 		a.height = ymax;
 		a.width = xmax;
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 

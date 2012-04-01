@@ -15,17 +15,17 @@ public class TestPaternity implements TreeFunction{
 
 		if(tr != null){
 			for(int i = 0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).parent != tr){
-					tr.getChildren().get(i).parent = tr;
+				if(tr.getChildren().get(i).getParent() != tr){
+					tr.getChildren().get(i).setParent(tr);
 
 				}
-				if(tr.parent != null){
-					int place = tr.parent.getChildren().indexOf(tr);
+				if(tr.getParent() != null){
+					int place = tr.getParent().getChildren().indexOf(tr);
 
 					if(place == -1){
 					}
 				}
-				if(tr.operator == null){
+				if(tr.getOperator() == null){
 				}
 			}
 

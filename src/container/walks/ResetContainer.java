@@ -12,7 +12,7 @@ public class ResetContainer  implements TreeFunction{
 	}
 
 	public void performAction(Term tr) {
-		tr.container = new rectangle();
+		tr.setContainer(new rectangle());
 	}
 	
 	

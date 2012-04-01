@@ -10,8 +10,8 @@ public class fontize  implements TreeFunction{
 	
 	public fontize(Term tr, double fontsize){
 		
-		if(tr.container.width*fontsize>270){
-			fontsize = (int)270/tr.container.width;
+		if(tr.getContainer().width*fontsize>270){
+			fontsize = (int)270/ tr.getContainer().width;
 		}
 		
 		
@@ -22,10 +22,10 @@ public class fontize  implements TreeFunction{
 
 	public void performAction(Term tr) {
 
-		tr.container.height *=font;
-		tr.container.width *=font;
-		tr.container.bl.x *=font;
-		tr.container.bl.y *=font;
+		tr.getContainer().height *=font;
+		tr.getContainer().width *=font;
+		tr.getContainer().bl.x *=font;
+		tr.getContainer().bl.y *=font;
 		tr.font = font;
 	}
 	
