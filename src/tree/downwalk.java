@@ -15,7 +15,7 @@ public class downwalk {
 		
 		f.performAction(tr);
 		
-		if(tr != null && !tr.issimple){
+		if(tr != null && !tr.isSimple()){
 			for(int i = 0; i<tr.getChildren().size(); i++){
 			downwalk tree = new downwalk(tr.getChildren().get(i),f);
 			}

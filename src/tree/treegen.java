@@ -36,9 +36,9 @@ public class treegen {
 
 	public Term simplecheck(Term tr){
 		
-		if(tr.getChildren().size()==1&&tr.getChildren().get(0).getChildren().size()==0){
+	/*	if(tr.getChildren().size()==1&&tr.getChildren().get(0).getChildren().size()==0){
 			tr.getChildren().get(0).issimple = true;
-		}
+		}*/
 		
 		return tr;
 	}
@@ -218,9 +218,9 @@ public class treegen {
 			Term child = new Term();
 			treegen tr = new treegen();
 
-			if(contents.get(i).issimple==false){
+			if(contents.get(i).isSimple()==false){
 				child = tr.generatenode(contents.get(i).simples);}
-			else if(contents.get(i).issimple){
+			else if(contents.get(i).isSimple()){
 				child = contents.get(i);
 			}
 			child.setParent(thisterm);
@@ -238,14 +238,14 @@ public class treegen {
 			if(orgconts.get(i).simples.size()==1){
 				SimpleTerm a = orgconts.get(i).simples.get(0);
 				orgconts.set(i, a);
-				orgconts.get(i).issimple = true;
+		//		orgconts.get(i).isSimple() = true;
 			}
 			else if(orgconts.get(i).simples.size()==3 &&
 					orgconts.get(i).simples.get(0) instanceof Parens &&
 					orgconts.get(i).simples.get(2) instanceof Parens){
 				
 				SimpleTerm a = orgconts.get(i).simples.get(1);
-				a.issimple = true;
+		//		a.isSimple() = true;
 				a.setHasParentheses(true);
 				orgconts.set(i, a);
 				
@@ -259,9 +259,9 @@ public class treegen {
 						parennumber++;
 					}
 				}
-				if(orgconts.get(i).simples.size()-parennumber<2){
+/*				if(orgconts.get(i).simples.size()-parennumber<2){
 					orgconts.get(i).issimple = true;
-				}
+				}*/
 			}
 		}
 	}

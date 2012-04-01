@@ -28,10 +28,9 @@ public class Term implements Cloneable, TreeFunction{
 	private String valueString;
 	private float scaleFactor =1;
 	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
-
+    
 
 	public StringRectangle ScreenPosition = new StringRectangle();
-
 
     public boolean isSimple() {
         if (this instanceof SimpleTerm) {

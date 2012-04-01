@@ -58,8 +58,7 @@ public class Parens extends SimpleTerm {
 				left.setContainer(rect);
 				left.getContainer().height = tr.getContainer().height;
 				left.getContainer().width = tr.getContainer().height/2;
-				left.toDraw = "(";
-				left.issimple = true;
+				left.setValueString("(");
 				left.simples.add(left);
 				left.setParent(tr);
 				left.value = '(';
@@ -74,9 +73,8 @@ public class Parens extends SimpleTerm {
 				right.setContainer(rect2);
 				right.getContainer().height = tr.getContainer().height;
 				right.getContainer().width = tr.getContainer().height/2;
-				right.toDraw = ")";
+                right.setValueString(")");
 				right.value = ')';
-				right.issimple = true;
 				right.getContainer().bl.x = left.getContainer().width + tr.getContainer().width;
 				right.simples.add(right);
 				right.setParent(tr);

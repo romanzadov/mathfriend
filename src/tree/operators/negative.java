@@ -29,26 +29,13 @@ public class Negative extends Operator{
 		float xsofar = 0;
 		float heightmax = 0;
 		rectangle a = new rectangle();
-		if(tr.getChildren().size()==0){
-			a = justnegative(tr);
-		}
-	
-		else{
+
 			Plus pl = new Plus();
 			a = pl.giverect(tr);
-		}
-		
+
 		return a;
 	}
 
-	public rectangle justnegative(Term tr){
-		rectangle a = new rectangle();
-		tr.getToDraw() = "-";
-		a.height = 1;
-		a.width = 0.5f;
-		tr.setContainer(a);
-		return a;
-	}
 	
 	public double function(double a)
 	{

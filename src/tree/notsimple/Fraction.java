@@ -25,10 +25,9 @@ public class Fraction extends NotSimple{
 	}
 
 	@Override
-	public ArrayList<Term> getChilds(){
+	public ArrayList<Term> getChildren(){
 		ArrayList<Term> kids = new ArrayList<Term>();
 		kids.add(top);
-		kids.add(divide);
 		kids.add(bottom);
 		return kids;
 	}

@@ -25,7 +25,7 @@ public class composefractions implements TreeFunction{
 		
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i) instanceof Divide){
-					tr.getChildren().get(i+1).isbottom = true;
+		//			tr.getChildren().get(i+1).isbottom = true;
 				}
 			}
 			
@@ -50,7 +50,7 @@ public class composefractions implements TreeFunction{
 			if(places[i][0]==1000){
 				Number top = makeone(tr);
 				Times tm = new Times();
-				tm.issimple = true;
+		//		tm.issimple = true;
 				rectangle cont = new rectangle();
 				cont.height = 0;
 				cont.width = 0;
@@ -126,9 +126,9 @@ public class composefractions implements TreeFunction{
 	public Number makeone( Term term){
 		Number num = new Number(1);
 		num.setParent(term);
-		num.issimple = true;
+//		num.issimple = true;
 		num.value = 1;
-		num.toDraw = "1";
+//		num.toDraw = "1";
 		rectangle cont = new rectangle();
 		cont.height = 1;
 		cont.width = 1;
@@ -148,7 +148,7 @@ public class composefractions implements TreeFunction{
 
 		for(int i=0; i<tr.getChildren().size();i++){
 
-			if(!tr.getChildren().get(i).issimple||
+			if(!tr.getChildren().get(i).isSimple()||
 					!(tr.getChildren().get(i) instanceof Times)
 					&&!(tr.getChildren().get(i) instanceof Divide)){
 				int side = place/2;

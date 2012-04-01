@@ -27,7 +27,6 @@ public class Plus extends Operator {
 		invisible = false;
 		lmult = false;
 		rmult = false;
-		toDraw = "+";
 		setValueString("+");
 	}
 
@@ -40,21 +39,7 @@ public class Plus extends Operator {
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 
-		if(tr.getChildren().size()==0){
-
-			if(tr instanceof Plus){
-				a.height = 1; 
-				a.width = 1;
-				tr.toDraw = "+";
-				tr.setContainer(a);}
-			if(tr instanceof Minus){
-				a.height = 1;
-				a.width = 1;
-				tr.toDraw = "-";
-				tr.setContainer(a);
-			}
-		}
-		else if(tr.getChildren().size()>=1){
+        if(tr.getChildren().size()>=1){
 			//check rectangled and get max height
 			float maxheight = 0;
 			for(int i =0; i<tr.getChildren().size();i++){
@@ -77,23 +62,6 @@ public class Plus extends Operator {
 		}
 
 
-		return a;
-	}
-
-	public rectangle justplus(Term tr){
-		rectangle a = new rectangle();
-		a.width = 1;
-		a.height = 1;
-		tr.toDraw = "+";
-		tr.setContainer(a);
-		return a;
-	}
-	public rectangle justminus(Term tr){
-		rectangle a = new rectangle();
-		a.width = 1;
-		a.height = 1;
-		tr.toDraw = "-";
-		tr.setContainer(a);
 		return a;
 	}
 

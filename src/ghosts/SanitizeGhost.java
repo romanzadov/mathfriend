@@ -20,7 +20,7 @@ public class SanitizeGhost  implements TreeFunction{
 		try {
 			int kids = Ghost.tr.getChildren().size();
 			for(int i = 0; i<kids; i++){
-				if(!Ghost.tr.getChildren().get(i).issimple && Ghost.tr.getChildren().get(i).getChildren().size()==1){
+				if(!Ghost.tr.getChildren().get(i).isSimple() && Ghost.tr.getChildren().get(i).getChildren().size()==1){
 					Term mid = Ghost.tr.getChildren().get(i).getChildren().get(0);
 					mid.setParent(Ghost.tr);
 					Ghost.tr.getChildren().set(i, mid);

@@ -21,7 +21,7 @@ public class selectterm {
 		boolean found = false;
 
 		try {
-			if(!tr.issimple ){
+			if(!tr.isSimple() ){
 				for (int i = 0; i< tr.getChildren().size(); i++){
 					if(!(tr.getChildren().get(i) instanceof Operator)){
 						boolean in = true;
@@ -76,7 +76,7 @@ public class selectterm {
 		x-=termbl.x;
 
 		try {
-			if(!tr.issimple){
+			if(!tr.isSimple()){
 				for (int i = 0; i< tr.getChildren().size(); i++){
 					if(!(tr.getChildren().get(i)==exclude)){
 						boolean in = true;

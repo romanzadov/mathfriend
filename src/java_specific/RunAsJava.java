@@ -108,7 +108,7 @@ public class RunAsJava {
 			if(tr.isRationalNumber()){type+= " isRational |";}
 			if(tr.isRealNumber()){type += " isReal |";}
 			if(tr.isNegative()){type+=" isnegative |";}
-			if(tr.issimple){type+=" issimple |";}
+			if(tr.isSimple()){type+=" issimple |";}
 
 			type += " val: "+ Term.getNumericValue(tr);
 

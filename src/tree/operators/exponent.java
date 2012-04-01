@@ -29,7 +29,7 @@ public class Exponent extends Operator{
 		rectangle a = new rectangle();
 		float xsofar = 0;
 		float ysofar = 0;
-		if(tr.issimple){a=justexp(tr);}
+		if(tr.isSimple()){a=justexp(tr);}
 		else{
 			//check that all things are containered
 			for(int i =0; i<tr.getChildren().size(); i++){

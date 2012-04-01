@@ -16,7 +16,6 @@ public class Minus extends Operator {
 		orderofoperation=5;
 		lmult = false;
 		rmult = false;
-		toDraw = "-";
 		setValueString("-");
 	}
 
