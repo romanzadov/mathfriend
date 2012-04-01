@@ -17,7 +17,7 @@ public class Negative extends Operator{
 		orderofoperation=3.5;
 		lmult = false;
 		rmult = false;
-		valueString = "-";
+		setValueString("-");
 	}
 
     @Override
@@ -43,10 +43,10 @@ public class Negative extends Operator{
 
 	public rectangle justnegative(Term tr){
 		rectangle a = new rectangle();
-		tr.toDraw = "-";
+		tr.getToDraw() = "-";
 		a.height = 1;
 		a.width = 0.5f;
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 	

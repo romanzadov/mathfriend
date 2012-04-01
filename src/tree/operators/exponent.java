@@ -33,7 +33,7 @@ public class Exponent extends Operator{
 		else{
 			//check that all things are containered
 			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).container == null){
+				if(tr.getChildren().get(i).getContainer() == null){
 					System.out.println("error: exponent was run on non-containered terms");
 				}
 			}
@@ -46,8 +46,8 @@ public class Exponent extends Operator{
 			}
 			
 			
-			 xsofar = tr.getChildren().get(0).container.width;
-			 ysofar = tr.getChildren().get(0).container.height;
+			 xsofar = tr.getChildren().get(0).getContainer().width;
+			 ysofar = tr.getChildren().get(0).getContainer().height;
 			 
 			for(int i = 2; i<tr.getChildren().size(); i+=2){
 				fontize ft = new fontize(tr.getChildren().get(i), .7);
@@ -55,7 +55,7 @@ public class Exponent extends Operator{
 			}
 			 
 			for(int i = 2; i<tr.getChildren().size(); i+=2){
-				rectangle cn = tr.getChildren().get(i).container;
+				rectangle cn = tr.getChildren().get(i).getContainer();
 			 	
 				cn.bl.x = xsofar;
 				cn.bl.y = ysofar;
@@ -73,7 +73,7 @@ public class Exponent extends Operator{
 
 	public rectangle justexp(Term tr){
 		rectangle a = new rectangle();
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 	

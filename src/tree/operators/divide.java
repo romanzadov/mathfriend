@@ -17,7 +17,7 @@ public class Divide extends Operator{
 		orderofoperation=4;
 		lmult = false;
 		rmult = false;
-		valueString = "/";
+		setValueString("/");
 	}
 
     @Override

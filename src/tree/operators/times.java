@@ -25,7 +25,7 @@ public class Times extends Operator{
 		orderofoperation=4;
 		lmult = false;
 		rmult = false;
-		valueString = "*";
+		setValueString("*");
 		
 	}
 
@@ -46,7 +46,7 @@ public class Times extends Operator{
 				rectangle a = new rectangle();
 				a.width = 1;
 				a.height = 1;
-				tr.container = a;
+				tr.setContainer(a);
 				tr.toDraw = "*";
 				rect = a;
 			}
@@ -54,7 +54,7 @@ public class Times extends Operator{
 				rectangle a = new rectangle();
 				a.width = 1;
 				a.height = 1;
-				tr.container = a;
+				tr.setContainer(a);
 				rect = a;
 
 			}
@@ -76,14 +76,14 @@ public class Times extends Operator{
 				if(tr.getChildren().get(i) instanceof Times && ((Times)tr.getChildren().get(i)).visible){
 				
 					Term kid = tr.getChildren().get(i);
-					kid.container.height = (float) .3;
-					kid.container.width = (float) .3;
+					kid.getContainer().height = (float) .3;
+					kid.getContainer().width = (float) .3;
 					kid.toDraw = ".";
 				}
 			}
 			
-			tr.container = makefractions(tr);
-			rect = tr.container;
+			tr.setContainer(makefractions(tr));
+			rect = tr.getContainer();
 		}
 		
 		return rect;
@@ -103,8 +103,8 @@ public class Times extends Operator{
 		float tallestbottom = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			if(tr.getChildren().get(i).isbottom){
-				if(tr.getChildren().get(i).container.height>tallestbottom)
-				{tallestbottom = tr.getChildren().get(i).container.height;}
+				if(tr.getChildren().get(i).getContainer().height>tallestbottom)
+				{tallestbottom = tr.getChildren().get(i).getContainer().height;}
 			}
 		}
 		//now that we have the tallest bottom, set bar height
@@ -114,15 +114,15 @@ public class Times extends Operator{
 		composefractions cf = new composefractions(tr);
 		int[][] places = cf.fracmatrix(tr);
 		rectangle thiscont = cf.tofracs(tr, places, barheight);
-		tr.container = thiscont;
+		tr.setContainer(thiscont);
 		boolean thisfrac = false;
-		if(tr.getChildren().size() == 3 && tr.operator instanceof Divide){
+		if(tr.getChildren().size() == 3 && tr.getOperator() instanceof Divide){
 			thisfrac = true;
 		}
 		if(!thisfrac){
 		AllignFracBar al = new AllignFracBar(tr);
 		}
-		thiscont = tr.container;
+		thiscont = tr.getContainer();
 		return thiscont;
 		
 		

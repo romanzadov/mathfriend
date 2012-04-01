@@ -42,7 +42,7 @@ public class Parens extends SimpleTerm {
 			
 		}
 		
-		if(tr.container == null){
+		if(tr.getContainer() == null){
 			System.out.println("error in parens: not containered");
 		}
 		
@@ -55,38 +55,38 @@ public class Parens extends SimpleTerm {
 			else{
 				Parens left = new Parens();
 				rectangle rect = new rectangle();
-				left.container = rect;
-				left.container.height = tr.container.height;
-				left.container.width = tr.container.height/2;
+				left.setContainer(rect);
+				left.getContainer().height = tr.getContainer().height;
+				left.getContainer().width = tr.getContainer().height/2;
 				left.toDraw = "(";
 				left.issimple = true;
 				left.simples.add(left);
-				left.parent = tr;
+				left.setParent(tr);
 				left.value = '(';
 				tr.getChildren().add(0,left);
 
 				for(int i = 1; i< tr.getChildren().size(); i++){
-					tr.getChildren().get(i).container.bl.x += left.container.width;
+					tr.getChildren().get(i).getContainer().bl.x += left.getContainer().width;
 				}
 
 				Parens right = new Parens();
 				rectangle rect2 = new rectangle();
-				right.container = rect2;
-				right.container.height = tr.container.height;
-				right.container.width = tr.container.height/2;
+				right.setContainer(rect2);
+				right.getContainer().height = tr.getContainer().height;
+				right.getContainer().width = tr.getContainer().height/2;
 				right.toDraw = ")";
 				right.value = ')';
 				right.issimple = true;
-				right.container.bl.x = left.container.width + tr.container.width;
+				right.getContainer().bl.x = left.getContainer().width + tr.getContainer().width;
 				right.simples.add(right);
-				right.parent = tr;
+				right.setParent(tr);
 				tr.getChildren().add(right);
 
-				tr.container.width +=2*left.container.width;
+				tr.getContainer().width +=2* left.getContainer().width;
 			}
 		}
 		
-		return tr.container;
+		return tr.getContainer();
 	}
 	
 

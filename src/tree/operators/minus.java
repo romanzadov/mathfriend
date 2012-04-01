@@ -17,7 +17,7 @@ public class Minus extends Operator {
 		lmult = false;
 		rmult = false;
 		toDraw = "-";
-		valueString = "-";
+		setValueString("-");
 	}
 
     @Override

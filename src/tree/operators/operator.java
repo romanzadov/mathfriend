@@ -35,7 +35,7 @@ public abstract class Operator extends SimpleTerm {
 			return "*";
 		}
 		else{
-			return valueString;
+			return getValueString();
 		}
 	}
 
@@ -71,14 +71,14 @@ public abstract class Operator extends SimpleTerm {
 			
 			//check that all are rectangled
 			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).container == null){
+				if(tr.getChildren().get(i).getContainer() == null){
 					System.out.println("error: equal called when not all terms are rectangled");
 				}
 			}
-			a.bl.x = tr.getChildren().get(0).container.bl.x;
-			a.bl.y = tr.getChildren().get(0).container.bl.y;
-			a.width = tr.getChildren().get(0).container.width;
-			a.height = tr.getChildren().get(0).container.height;
+			a.bl.x = tr.getChildren().get(0).getContainer().bl.x;
+			a.bl.y = tr.getChildren().get(0).getContainer().bl.y;
+			a.width = tr.getChildren().get(0).getContainer().width;
+			a.height = tr.getChildren().get(0).getContainer().height;
 			
 			
 

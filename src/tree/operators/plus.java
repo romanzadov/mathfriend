@@ -28,7 +28,7 @@ public class Plus extends Operator {
 		lmult = false;
 		rmult = false;
 		toDraw = "+";
-		valueString = "+";
+		setValueString("+");
 	}
 
     @Override
@@ -46,28 +46,28 @@ public class Plus extends Operator {
 				a.height = 1; 
 				a.width = 1;
 				tr.toDraw = "+";
-				tr.container = a;}
+				tr.setContainer(a);}
 			if(tr instanceof Minus){
 				a.height = 1;
 				a.width = 1;
 				tr.toDraw = "-";
-				tr.container = a;
+				tr.setContainer(a);
 			}
 		}
 		else if(tr.getChildren().size()>=1){
 			//check rectangled and get max height
 			float maxheight = 0;
 			for(int i =0; i<tr.getChildren().size();i++){
-				if(tr.getChildren().get(i).container==null){
+				if(tr.getChildren().get(i).getContainer() ==null){
 					System.out.println("error: plus called on non-rectangled");
 				}
-				if(tr.getChildren().get(i).container.height>maxheight){
-					maxheight = tr.getChildren().get(i).container.height;
+				if(tr.getChildren().get(i).getContainer().height>maxheight){
+					maxheight = tr.getChildren().get(i).getContainer().height;
 				}
 			}
 			float xsofar = 0;
 			for(int i =0; i<tr.getChildren().size();i++){
-				rectangle left = tr.getChildren().get(i).container;
+				rectangle left = tr.getChildren().get(i).getContainer();
 				left.bl.y = maxheight/2-left.height/2;
 				left.bl.x = xsofar;
 				xsofar = left.bl.x+left.width;
@@ -85,7 +85,7 @@ public class Plus extends Operator {
 		a.width = 1;
 		a.height = 1;
 		tr.toDraw = "+";
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 	public rectangle justminus(Term tr){
@@ -93,7 +93,7 @@ public class Plus extends Operator {
 		a.width = 1;
 		a.height = 1;
 		tr.toDraw = "-";
-		tr.container = a;
+		tr.setContainer(a);
 		return a;
 	}
 
@@ -118,7 +118,7 @@ public class Plus extends Operator {
 		ArrayList<Integer> key = fs.FindSelected(im.tr, sel);
 		ReturnSel rs = new ReturnSel();
 		Term secondsel = rs.Return(second, key);
-		if(!secondsel.parent.hasParentheses){
+		if(!secondsel.getParent().isHasParentheses()){
 			changeterm(secondsel, IntermIndex);
 		}
 		else{
@@ -127,7 +127,7 @@ public class Plus extends Operator {
 
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second, (int)im.tr.font);
-		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int)im.tr.container.height/2+100));
+		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
 		return Ghost;
 	}
@@ -136,7 +136,7 @@ public class Plus extends Operator {
 		
 		PlusMove pm = new PlusMove();
 		Image Ghost = new Image();
-		if(!(sel.parent.parent.getChildren().get(IntermIndex) instanceof Operator)){
+		if(!(sel.getParent().getParent().getChildren().get(IntermIndex) instanceof Operator)){
 		//	Ghost = pm.overEquals(im, sel, IntermIndex, xsel);
 		}
 		return Ghost;
@@ -145,80 +145,80 @@ public class Plus extends Operator {
 
 	public void changeterm( Term sel, int IntermIndex){
 	
-		int selindex = sel.parent.getChildren().indexOf(sel);
+		int selindex = sel.getParent().getChildren().indexOf(sel);
 
 
 		Term holder = sel;
-		Term moveto = sel.parent.getChildren().get(IntermIndex);
+		Term moveto = sel.getParent().getChildren().get(IntermIndex);
 	//	ColorText CT = new ColorText(holder, Color.red);
 		
 
 
 
 		if(selindex != IntermIndex){
-			if(sel.parent.hasParentheses){IntermIndex++; selindex++;}  // in parens still doesn't work
+			if(sel.getParent().isHasParentheses()){IntermIndex++; selindex++;}  // in parens still doesn't work
 
 			if(selindex == 0 ){
 				if(holder.isNegative()){
 					holder = holder.toggleNegative();
 					Minus mn = new Minus();
-					mn.parent = holder.parent;
+					mn.setParent(holder.getParent());
 	//				mn.wordcolor = Color.red;
-					holder.parent.getChildren().add(IntermIndex+1, holder);
-					holder.parent.getChildren().add(IntermIndex+1, mn);
+					holder.getParent().getChildren().add(IntermIndex+1, holder);
+					holder.getParent().getChildren().add(IntermIndex+1, mn);
 				}
 				else{
 					Plus pl = new Plus();
-					pl.parent = holder.parent;
+					pl.setParent(holder.getParent());
 	//				pl.wordcolor = Color.red;
-					holder.parent.getChildren().add(IntermIndex+1, holder);
-					holder.parent.getChildren().add(IntermIndex+1, pl);
+					holder.getParent().getChildren().add(IntermIndex+1, holder);
+					holder.getParent().getChildren().add(IntermIndex+1, pl);
 				}
-				holder.parent.getChildren().remove(0);
-				Term op = holder.parent.getChildren().get(0);
+				holder.getParent().getChildren().remove(0);
+				Term op = holder.getParent().getChildren().get(0);
 				if(op instanceof Plus){
-					holder.parent.getChildren().remove(0);
+					holder.getParent().getChildren().remove(0);
 				}
 				if(op instanceof Minus){
-					holder.parent.getChildren().remove(0);
-					holder.parent.getChildren().get(0).toggleNegative();
+					holder.getParent().getChildren().remove(0);
+					holder.getParent().getChildren().get(0).toggleNegative();
 				}
 			}
 			else if(IntermIndex == 0){
 
-				if(holder.parent.getChildren().get(selindex-1) instanceof Minus){
+				if(holder.getParent().getChildren().get(selindex-1) instanceof Minus){
 					Term mid = holder.toggleNegative();
 		//			Log.d(TAG, "mid: "+mid);
-					mid.parent = holder.parent;
+					mid.setParent(holder.getParent());
 					holder = mid;
 		//			Log.d(TAG, "holder: "+holder);
 				}
 		//		Log.d(TAG, "parent: "+holder.parent+" hold: "+holder+" selindex: "+selindex);
 				
-				holder.parent.getChildren().remove(selindex-1);
-				holder.parent.getChildren().remove(selindex-1);
+				holder.getParent().getChildren().remove(selindex-1);
+				holder.getParent().getChildren().remove(selindex-1);
 
 				if(moveto.isNegative()){
 					moveto.toggleNegative();
 					Minus mn = new Minus();
-					mn.parent = holder.parent;
-					holder.parent.getChildren().add(0,mn);
+					mn.setParent(holder.getParent());
+					holder.getParent().getChildren().add(0,mn);
 				}
 				else{
 					Plus pl = new Plus();
-					pl.parent = holder.parent;
-					holder.parent.getChildren().add(0, pl);
+					pl.setParent(holder.getParent());
+					holder.getParent().getChildren().add(0, pl);
 				}
-				holder.parent.getChildren().add(0, holder);
+				holder.getParent().getChildren().add(0, holder);
 
 
 			}
 			else{
-				Term op = holder.parent.getChildren().get(selindex-1);
-				holder.parent.getChildren().remove(selindex-1);
-				holder.parent.getChildren().remove(selindex-1);
-				holder.parent.getChildren().add(IntermIndex-1, holder);
-				holder.parent.getChildren().add(IntermIndex-1, op);
+				Term op = holder.getParent().getChildren().get(selindex-1);
+				holder.getParent().getChildren().remove(selindex-1);
+				holder.getParent().getChildren().remove(selindex-1);
+				holder.getParent().getChildren().add(IntermIndex-1, holder);
+				holder.getParent().getChildren().add(IntermIndex-1, op);
 	//			op.wordcolor = Color.red;
 			}
 
