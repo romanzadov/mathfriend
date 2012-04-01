@@ -18,12 +18,12 @@ public class SanitizeGhost  implements TreeFunction{
 		}
 //		Log.d(TAG, "ghost tr: "+Ghost.tr);
 		try {
-			int kids = Ghost.tr.getChilds().size();
+			int kids = Ghost.tr.getChildren().size();
 			for(int i = 0; i<kids; i++){
-				if(!Ghost.tr.getChilds().get(i).issimple && Ghost.tr.getChilds().get(i).getChilds().size()==1){
-					Term mid = Ghost.tr.getChilds().get(i).getChilds().get(0);
+				if(!Ghost.tr.getChildren().get(i).issimple && Ghost.tr.getChildren().get(i).getChildren().size()==1){
+					Term mid = Ghost.tr.getChildren().get(i).getChildren().get(0);
 					mid.parent = Ghost.tr;
-					Ghost.tr.getChilds().set(i, mid);
+					Ghost.tr.getChildren().set(i, mid);
 				}
 			}
 			//RelativeContainer dn = new RelativeContainer();

@@ -17,9 +17,15 @@ public class Divide extends Operator{
 		orderofoperation=4;
 		lmult = false;
 		rmult = false;
-		valuestring = "/";
+		valueString = "/";
 	}
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		Times ti = new Times();
 		a = ti.giverect(tr);

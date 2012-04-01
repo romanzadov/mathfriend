@@ -2,7 +2,7 @@ package display;
 
 import java.util.ArrayList;
 
-import representTerms.stringrect;
+import representTerms.StringRectangle;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
@@ -11,7 +11,7 @@ import tree.operators.Divide;
 public class stringofrects implements TreeFunction{
 
 	public ArrayList<rectangle> todraw = new ArrayList<rectangle>();
-	public ArrayList<stringrect> a = new ArrayList<stringrect>();
+	public ArrayList<StringRectangle> a = new ArrayList<StringRectangle>();
 
 	public ArrayList<rectangle> listme(Term main, String argument){
 
@@ -61,8 +61,8 @@ public class stringofrects implements TreeFunction{
 		return todraw;
 	}
 
-	public ArrayList<stringrect> writeme(Term tr){
-		a = new ArrayList<stringrect>();
+	public ArrayList<StringRectangle> writeme(Term tr){
+		a = new ArrayList<StringRectangle>();
 		downwalk wk = new downwalk(tr, this);
 		return a;
 	}
@@ -76,14 +76,14 @@ public class stringofrects implements TreeFunction{
 		sr.height = tr.container.height;
 		sr.width = tr.container.width;
 		
-		stringrect StR = new stringrect();
+		StringRectangle StR = new StringRectangle();
 		StR.container = sr;
 		StR.term = tr.toString();
-		StR.fontscale = tr.scalefactor;
-		if(tr.todraw!=null){StR.todraw = tr.todraw;}
+		StR.fontscale = tr.scaleFactor;
+		if(tr.toDraw !=null){StR.todraw = tr.toDraw;}
 		if(tr instanceof Divide){StR.todraw = "/";}
 	//	StR.container.color = tr.wordcolor;
-		StR.hasParens = tr.hasparen;
+		StR.hasParens = tr.hasParentheses;
 		a.add(StR);
 	}
 

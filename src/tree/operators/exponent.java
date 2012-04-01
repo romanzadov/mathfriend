@@ -19,44 +19,49 @@ public class Exponent extends Operator{
 			rmult = false;
 		
 	}
-	
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		float xsofar = 0;
 		float ysofar = 0;
 		if(tr.issimple){a=justexp(tr);}
 		else{
 			//check that all things are containered
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i).container == null){
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i).container == null){
 					System.out.println("error: exponent was run on non-containered terms");
 				}
 			}
 			//remove parens if any
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(0) instanceof Parens){
-					tr.getChilds().remove(0);
-					tr.getChilds().remove(tr.getChilds().size()-1);
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(0) instanceof Parens){
+					tr.getChildren().remove(0);
+					tr.getChildren().remove(tr.getChildren().size()-1);
 				}
 			}
 			
 			
-			 xsofar = tr.getChilds().get(0).container.width;
-			 ysofar = tr.getChilds().get(0).container.height;
+			 xsofar = tr.getChildren().get(0).container.width;
+			 ysofar = tr.getChildren().get(0).container.height;
 			 
-			for(int i = 2; i<tr.getChilds().size(); i+=2){
-				fontize ft = new fontize(tr.getChilds().get(i), .7);
+			for(int i = 2; i<tr.getChildren().size(); i+=2){
+				fontize ft = new fontize(tr.getChildren().get(i), .7);
 				
 			}
 			 
-			for(int i = 2; i<tr.getChilds().size(); i+=2){
-				rectangle cn = tr.getChilds().get(i).container;
+			for(int i = 2; i<tr.getChildren().size(); i+=2){
+				rectangle cn = tr.getChildren().get(i).container;
 			 	
 				cn.bl.x = xsofar;
 				cn.bl.y = ysofar;
 				xsofar+=cn.width;
 				ysofar+=cn.height/2;
-				if(i == tr.getChilds().size()-1){
+				if(i == tr.getChildren().size()-1){
 					ysofar+=cn.height/2;
 				}
 			}

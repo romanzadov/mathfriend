@@ -24,12 +24,12 @@ public class GroupFractions  implements TreeFunction{
 		//in a term. We'll seperate them into seperate terms.
 		
 
-		if(tr !=null && tr.getChilds().size()>3){
+		if(tr !=null && tr.getChildren().size()>3){
 			dividespots = new ArrayList<Integer>();
 
 			
-			for(int i = 0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i) instanceof Divide){
+			for(int i = 0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i) instanceof Divide){
 					dividespots.add(i);
 				}
 			}
@@ -42,19 +42,19 @@ public class GroupFractions  implements TreeFunction{
 					Term mid = new Term();
 					mid.operator = new Divide();
 					mid.parent = tr;
-					mid.getChilds().add(tr.getChilds().get(i-1));
-					mid.getChilds().add(tr.getChilds().get(i));
-					mid.getChilds().add(tr.getChilds().get(i+1));
+					mid.getChildren().add(tr.getChildren().get(i-1));
+					mid.getChildren().add(tr.getChildren().get(i));
+					mid.getChildren().add(tr.getChildren().get(i+1));
 					
-					tr.getChilds().get(i+1).parent = mid;
-					tr.getChilds().get(i).parent = mid;
-					tr.getChilds().get(i-1).parent = mid;
+					tr.getChildren().get(i+1).parent = mid;
+					tr.getChildren().get(i).parent = mid;
+					tr.getChildren().get(i-1).parent = mid;
 					
-					tr.getChilds().remove(i-1);
-					tr.getChilds().remove(i-1);
+					tr.getChildren().remove(i-1);
+					tr.getChildren().remove(i-1);
 					//tr.childs.remove(i-1);
 					
-					tr.getChilds().set(i-1, mid);
+					tr.getChildren().set(i-1, mid);
 					
 					for(int k = 0; k<dividespots.size(); k++){
 						dividespots.set(k, dividespots.get(k)-2);

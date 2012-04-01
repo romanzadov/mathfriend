@@ -32,10 +32,10 @@ public class PreGroupFractions implements TreeFunction{
 				}
 
 
-				if(mid.getChilds().size()>0){	
-					tr.setChilds(new ArrayList<Term>());
-					for(int i = 0; i<mid.getChilds().size(); i++){
-						tr.getChilds().add(mid.getChilds().get(i));
+				if(mid.getChildren().size()>0){
+					tr.setChildren(new ArrayList<Term>());
+					for(int i = 0; i<mid.getChildren().size(); i++){
+						tr.getChildren().add(mid.getChildren().get(i));
 					}
 				}
 
@@ -52,23 +52,23 @@ public class PreGroupFractions implements TreeFunction{
 
 
 
-		Term[][] stacked = new Term[tr.getChilds().size()][3];
+		Term[][] stacked = new Term[tr.getChildren().size()][3];
 		int[] position = new int[]{0,0};
 
 
 		
 		boolean hasdivide = false;
-		for(int i = 0; i< tr.getChilds().size(); i++){
-			if(tr.getChilds().get(i) instanceof Divide){
+		for(int i = 0; i< tr.getChildren().size(); i++){
+			if(tr.getChildren().get(i) instanceof Divide){
 				hasdivide = true;
 			}
 
 		}
 
 		if(hasdivide){
-			for(int i = 0; i< tr.getChilds().size(); i++){
+			for(int i = 0; i< tr.getChildren().size(); i++){
 				Placeholder one = new Placeholder(1);
-				Term piece = tr.getChilds().get(i);
+				Term piece = tr.getChildren().get(i);
 				
 
 				if(position[1]==0){
@@ -85,14 +85,14 @@ public class PreGroupFractions implements TreeFunction{
 					else{
 						stacked[position[0]][position[1]] = piece;
 						position[1]=1;
-						if(i!=tr.getChilds().size()-1 && (tr.getChilds().get(i+1) instanceof Times)){
+						if(i!=tr.getChildren().size()-1 && (tr.getChildren().get(i+1) instanceof Times)){
 							Divide div = new Divide();
 							stacked[position[0]][1] = div;
 							stacked[position[0]][2] = one;
 							position[0]++;
 							position[1]=0;
 						}
-						else if(i == tr.getChilds().size()-1){
+						else if(i == tr.getChildren().size()-1){
 							
 							Divide div = new Divide();
 							stacked[position[0]][1] = div;
@@ -156,28 +156,28 @@ public class PreGroupFractions implements TreeFunction{
 					Number one = new Number(1);
 					Divide div = new Divide();
 					Times tm = new Times();
-					mid.getChilds().add(one);
-					mid.getChilds().add(div);
-					mid.getChilds().add(stacked[i][2]);
-					mid.getChilds().add(tm);
+					mid.getChildren().add(one);
+					mid.getChildren().add(div);
+					mid.getChildren().add(stacked[i][2]);
+					mid.getChildren().add(tm);
 				}
 				else if(stacked[i][2] instanceof Placeholder){
-					mid.getChilds().add(stacked[i][0]);
+					mid.getChildren().add(stacked[i][0]);
 					Times tm = new Times();
-					mid.getChilds().add(tm);
+					mid.getChildren().add(tm);
 				}
 				else{
-					mid.getChilds().add(stacked[i][0]);
-					mid.getChilds().add(stacked[i][1]);
-					mid.getChilds().add(stacked[i][2]);
+					mid.getChildren().add(stacked[i][0]);
+					mid.getChildren().add(stacked[i][1]);
+					mid.getChildren().add(stacked[i][2]);
 					Times tm = new Times();
-					mid.getChilds().add(tm);
+					mid.getChildren().add(tm);
 				}
 
 			}
 			else{
-				if(mid.getChilds().get(mid.getChilds().size()-1) instanceof Times){
-					mid.getChilds().remove(mid.getChilds().size()-1);
+				if(mid.getChildren().get(mid.getChildren().size()-1) instanceof Times){
+					mid.getChildren().remove(mid.getChildren().size()-1);
 				}
 			}
 		}

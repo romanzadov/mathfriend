@@ -1,16 +1,14 @@
 package representTerms.screens;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import representTerms.Image;
 import representTerms.Settings;
 import representTerms.TouchData;
-import representTerms.stringrect;
+import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
 import representTerms.TouchData.TouchType;
 import tree.operators.Operator;
-import user.UserPrefferences;
 
 
 public class OperatorScreen implements AbstractedScreen{
@@ -43,21 +41,21 @@ public class OperatorScreen implements AbstractedScreen{
 	private Image getImage(){
 		if(operator == null){return null;}
 		else{
-			Image img = new Image(operator.valuestring, (int)Settings.PREFFERED_FONT, 1, 1);
+			Image img = new Image(operator.valueString, (int)Settings.PREFFERED_FONT, 1, 1);
 			return img;
 		}
 	}
 
 	@Override
-	public ArrayList<stringrect> getRelativeRectangles() {
+	public ArrayList<StringRectangle> getRelativeRectangles() {
 		
-		ArrayList<stringrect> relatives = new ArrayList<stringrect>();
+		ArrayList<StringRectangle> relatives = new ArrayList<StringRectangle>();
 		if(getImage() != null){
 			
-			stringrect sr = new stringrect();
+			StringRectangle sr = new StringRectangle();
 			sr.container.width = 1;
 			sr.container.height = 1;
-			sr.todraw = operator.valuestring;
+			sr.todraw = operator.valueString;
 			relatives.add(sr);
 		}
 		
@@ -65,7 +63,7 @@ public class OperatorScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public void updateAbstractRectangles(ArrayList<stringrect> drawn) {
+	public void updateAbstractRectangles(ArrayList<StringRectangle> drawn) {
 		// TODO Auto-generated method stub
 		
 	}

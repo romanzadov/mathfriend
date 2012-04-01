@@ -12,10 +12,10 @@ public class resize  implements TreeFunction{
 	}
 
 	public void performAction(Term tr) {
-		tr.container.height *=tr.scalefactor;
-		tr.container.width *=tr.scalefactor;
-		tr.container.bl.x *=tr.scalefactor;
-		tr.container.bl.y *=tr.scalefactor;
+		tr.container.height *=tr.scaleFactor;
+		tr.container.width *=tr.scaleFactor;
+		tr.container.bl.x *=tr.scaleFactor;
+		tr.container.bl.y *=tr.scaleFactor;
 	}
 	
 	

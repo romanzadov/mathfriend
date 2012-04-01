@@ -14,9 +14,9 @@ public class Equation extends NotSimple{
 		boolean okay = true;
 
 		try {
-			if(tr.getChilds().size()!=3){okay = false;}
+			if(tr.getChildren().size()!=3){okay = false;}
 			if(!(tr.operator instanceof Equals)){okay = false;}
-			if(tr.getChilds().get(1) instanceof Equals){okay = false;}
+			if(tr.getChildren().get(1) instanceof Equals){okay = false;}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 
@@ -25,8 +25,8 @@ public class Equation extends NotSimple{
 		}
 
 		if(okay){
-			left = tr.getChilds().get(0);
-			right = tr.getChilds().get(2);
+			left = tr.getChildren().get(0);
+			right = tr.getChildren().get(2);
 		}
 
 	}
@@ -41,15 +41,14 @@ public class Equation extends NotSimple{
 		return eq;
 	}
 
-	@Override
 	public boolean isNegative(Term tr) {
 
 		boolean okay = true;
 
 		try {
-			if(tr.getChilds().size()!=3){okay = false;}
+			if(tr.getChildren().size()!=3){okay = false;}
 			if(!(tr.operator instanceof Equals)){okay = false;}
-			if(tr.getChilds().get(1) instanceof Equals){okay = false;}
+			if(tr.getChildren().get(1) instanceof Equals){okay = false;}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 
@@ -61,4 +60,8 @@ public class Equation extends NotSimple{
 		return okay;
 	}
 
+    @Override
+    public boolean canConstruct(Term tr) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

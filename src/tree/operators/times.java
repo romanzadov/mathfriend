@@ -25,23 +25,29 @@ public class Times extends Operator{
 		orderofoperation=4;
 		lmult = false;
 		rmult = false;
-		valuestring = "*";
+		valueString = "*";
 		
 	}
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		
 
 		rectangle rect = new rectangle();
 		
 		//rectangle any simpleterm
-		if(	tr.getChilds().size()==1	){
+		if(	tr.getChildren().size()==1	){
 			if( tr instanceof Times){
 
 				rectangle a = new rectangle();
 				a.width = 1;
 				a.height = 1;
 				tr.container = a;
-				tr.todraw = "*";
+				tr.toDraw = "*";
 				rect = a;
 			}
 			if( tr instanceof Divide){
@@ -57,22 +63,22 @@ public class Times extends Operator{
 		
 		//this should only be called when all terms are rectangled
 		
-		else if(tr.getChilds().size()>1){
+		else if(tr.getChildren().size()>1){
 			//strip parens from previous time. They'll be added later.
-			for(int i =0; i<tr.getChilds().size(); i++){
+			for(int i =0; i<tr.getChildren().size(); i++){
 				if(tr instanceof Parens){
-					tr.getChilds().remove(0);
-					tr.getChilds().remove(tr.getChilds().size()-1);
+					tr.getChildren().remove(0);
+					tr.getChildren().remove(tr.getChildren().size()-1);
 				}
 			}
 			//make times visible as needed
-			for(int i = 0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i) instanceof Times && ((Times)tr.getChilds().get(i)).visible){
+			for(int i = 0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i) instanceof Times && ((Times)tr.getChildren().get(i)).visible){
 				
-					Term kid = tr.getChilds().get(i);
+					Term kid = tr.getChildren().get(i);
 					kid.container.height = (float) .3;
 					kid.container.width = (float) .3;
-					kid.todraw = ".";
+					kid.toDraw = ".";
 				}
 			}
 			
@@ -87,18 +93,18 @@ public class Times extends Operator{
 	public rectangle makefractions(Term tr){
 	
 		//set which terms are bottoms
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			if(tr.getChilds().size()>0){
-			if(tr.getChilds().get(i) instanceof Divide)
-			{tr.getChilds().get(i+1).isbottom = true;}
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			if(tr.getChildren().size()>0){
+			if(tr.getChildren().get(i) instanceof Divide)
+			{tr.getChildren().get(i+1).isbottom = true;}
 			}
 		}
 		//find tallest bottom term
 		float tallestbottom = 0;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			if(tr.getChilds().get(i).isbottom){
-				if(tr.getChilds().get(i).container.height>tallestbottom)
-				{tallestbottom = tr.getChilds().get(i).container.height;}
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			if(tr.getChildren().get(i).isbottom){
+				if(tr.getChildren().get(i).container.height>tallestbottom)
+				{tallestbottom = tr.getChildren().get(i).container.height;}
 			}
 		}
 		//now that we have the tallest bottom, set bar height
@@ -110,7 +116,7 @@ public class Times extends Operator{
 		rectangle thiscont = cf.tofracs(tr, places, barheight);
 		tr.container = thiscont;
 		boolean thisfrac = false;
-		if(tr.getChilds().size() == 3 && tr.operator instanceof Divide){
+		if(tr.getChildren().size() == 3 && tr.operator instanceof Divide){
 			thisfrac = true;
 		}
 		if(!thisfrac){

@@ -35,18 +35,18 @@ public class LikeTermsGhost implements TreeFunction{
 
 			int smallest = Integer.MAX_VALUE;
 
-			int ap = as.parent.getChilds().indexOf(as);
-			int bp = bs.parent.getChilds().indexOf(bs);
+			int ap = as.parent.getChildren().indexOf(as);
+			int bp = bs.parent.getChildren().indexOf(bs);
 			
 			smallest = Math.min(ap, bp);
 			int biggest = Math.max(ap, bp);
 			
-			as.parent.getChilds().remove(biggest-1);
-			as.parent.getChilds().remove(biggest-1);
-			if(smallest == 0){as.parent.getChilds().remove(smallest);}
+			as.parent.getChildren().remove(biggest-1);
+			as.parent.getChildren().remove(biggest-1);
+			if(smallest == 0){as.parent.getChildren().remove(smallest);}
 			else{
-				as.parent.getChilds().remove(smallest-1);
-				as.parent.getChilds().remove(smallest-1);
+				as.parent.getChildren().remove(smallest-1);
+				as.parent.getChildren().remove(smallest-1);
 			}
 			
 			
@@ -54,20 +54,20 @@ public class LikeTermsGhost implements TreeFunction{
 			
 			aPLUSb.parent = as.parent;
 			if(smallest == 0){
-				as.parent.getChilds().add(0,aPLUSb);
+				as.parent.getChildren().add(0,aPLUSb);
 			}
 			else{
 				if(!aPLUSb.isNegative()){
 					Plus pl = new Plus();
 					pl.parent = aPLUSb.parent;
-					aPLUSb.parent.getChilds().add(smallest,aPLUSb);
-					aPLUSb.parent.getChilds().add(smallest,pl);
+					aPLUSb.parent.getChildren().add(smallest,aPLUSb);
+					aPLUSb.parent.getChildren().add(smallest,pl);
 				}
 				else{
 					Minus mn = new Minus();
 					mn.parent = aPLUSb.parent;
-					aPLUSb.parent.getChilds().add(smallest,aPLUSb);
-					aPLUSb.parent.getChilds().add(smallest,mn);
+					aPLUSb.parent.getChildren().add(smallest,aPLUSb);
+					aPLUSb.parent.getChildren().add(smallest,mn);
 					aPLUSb.toggleNegative();
 				}
 			}
@@ -89,17 +89,17 @@ public class LikeTermsGhost implements TreeFunction{
 
 				Term ans = null;
 				boolean stop = false;
-				for(int i = 0; i<tr.getChilds().size()-1; i++){
-					for(int j = i+1; j<tr.getChilds().size(); j++){
+				for(int i = 0; i<tr.getChildren().size()-1; i++){
+					for(int j = i+1; j<tr.getChildren().size(); j++){
 						
 						if(!stop){
-						ans = (tr.getChilds().get(i)).AddLikeTerms(tr.getChilds().get(j));
+						ans = (tr.getChildren().get(i)).AddLikeTerms(tr.getChildren().get(j));
 						}
 						if(ans != null && !stop){
 							
 							aPLUSb = ans;
-							a = tr.getChilds().get(i);
-							b = tr.getChilds().get(j);
+							a = tr.getChildren().get(i);
+							b = tr.getChildren().get(j);
 							stop  = true;
 						
 						}

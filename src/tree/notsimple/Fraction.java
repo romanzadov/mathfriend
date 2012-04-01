@@ -17,11 +17,11 @@ public class Fraction extends NotSimple{
 	Term bottom;
 
 	public Term getTop(){
-		return getChilds().get(0);
+		return getChildren().get(0);
 	}
 
 	public Term getBottom(){
-		return getChilds().get(2);
+		return getChildren().get(2);
 	}
 
 	@Override
@@ -75,18 +75,18 @@ public class Fraction extends NotSimple{
 
 		if(tr.isInteger()){
 
-			int place = tr.parent.getChilds().indexOf(tr);
+			int place = tr.parent.getChildren().indexOf(tr);
 			Fraction fr = fractionOverOne(tr);
-			tr.parent.getChilds().set(place, fr);
+			tr.parent.getChildren().set(place, fr);
 			tr = fr;
 
 		}
 		// the fractions will be a/b and c/d
 
 		double a = topnum(this);
-		double b = getNumericValue(this.getChilds().get(2));
+		double b = getNumericValue(this.getChildren().get(2));
 		double c = topnum(tr);
-		double d = getNumericValue(tr.getChilds().get(2));
+		double d = getNumericValue(tr.getChildren().get(2));
 
 		double lcd = LCD(b, d);
 
@@ -100,8 +100,8 @@ public class Fraction extends NotSimple{
 		rectangle a = new rectangle();
 		float xmax= 0;
 		float ymax = 0;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			rectangle b = tr.getChilds().get(i).container;
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			rectangle b = tr.getChildren().get(i).container;
 			if(b.width>xmax){xmax = b.width;}
 			ymax += b.height;
 		}
@@ -118,22 +118,22 @@ public class Fraction extends NotSimple{
 		int negcount = 0;
 
 		if(tr.isNegative()){negcount++;}
-		if(tr.getChilds().get(0).isNegative()){negcount++;}
+		if(tr.getChildren().get(0).isNegative()){negcount++;}
 		if(tr.parent != null){
-			int place = tr.parent.getChilds().indexOf(tr);
+			int place = tr.parent.getChildren().indexOf(tr);
 			if(place>0){
-				if(tr.parent.getChilds().get(place-1) instanceof Minus){negcount++;}
+				if(tr.parent.getChildren().get(place-1) instanceof Minus){negcount++;}
 			}
 		}
 
 		double ans;
 		double val = 0;
-		if(tr.getChilds().get(0) instanceof Number){
-			val = ((Number)tr.getChilds().get(0)).value;
+		if(tr.getChildren().get(0) instanceof Number){
+			val = ((Number)tr.getChildren().get(0)).value;
 
 		}
-		else if(tr.getChilds().get(0).getChilds().get(2) instanceof Number){
-			val = ((Number)tr.getChilds().get(0).getChilds().get(2)).value;
+		else if(tr.getChildren().get(0).getChildren().get(2) instanceof Number){
+			val = ((Number)tr.getChildren().get(0).getChildren().get(2)).value;
 		}
 		ans = Math.pow(-1, negcount)*val;
 
@@ -193,13 +193,13 @@ public class Fraction extends NotSimple{
 		String newTop = "";
 		
 		if(fraction == a ){
-			newTop = fraction.getChilds().get(0).toString()+"*("+number.toString()+")";
+			newTop = fraction.getChildren().get(0).toString()+"*("+number.toString()+")";
 		}
 		else{
-			newTop = number.toString()+"*("+fraction.getChilds().get(0).toString()+")";
+			newTop = number.toString()+"*("+fraction.getChildren().get(0).toString()+")";
 		}
 		
-		String newBottom = fraction.getChilds().get(2).toString();
+		String newBottom = fraction.getChildren().get(2).toString();
 
 		String multipliedFraction = "("+newTop+")/("+newBottom+")";
 		Image img = new Image(multipliedFraction, 2,2,2);	
@@ -216,8 +216,8 @@ public class Fraction extends NotSimple{
 	//	if(!bothfractions){return null;}
 
 		//
-		String newTop = a.getChilds().get(0).toString()+"*("+b.getChilds().get(0).toString()+")";
-		String newBottom = a.getChilds().get(2).toString()+"*("+b.getChilds().get(2).toString()+")";
+		String newTop = a.getChildren().get(0).toString()+"*("+b.getChildren().get(0).toString()+")";
+		String newBottom = a.getChildren().get(2).toString()+"*("+b.getChildren().get(2).toString()+")";
 
 		path pa = new path();
 		Term top = pa.getTermFromString(newTop);
@@ -237,8 +237,8 @@ public class Fraction extends NotSimple{
 
 		boolean fraction = false;
 
-		if(tr.getChilds().size() == 3){
-			if(tr.getChilds().get(1) instanceof Divide){
+		if(tr.getChildren().size() == 3){
+			if(tr.getChildren().get(1) instanceof Divide){
 				fraction = true;
 			}
 		}

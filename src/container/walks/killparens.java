@@ -15,11 +15,11 @@ public class killparens  implements TreeFunction{
 
 	public void performAction(Term tr) {
 		if(tr instanceof Parens){
-			tr.parent.hasparen = true;
-			int n = tr.parent.getChilds().size();
+			tr.parent.hasParentheses = true;
+			int n = tr.parent.getChildren().size();
 			for(int i = 0; i<n ;i++){
-				if(tr.parent.getChilds().get(i) == tr){
-					tr.parent.getChilds().remove(i);
+				if(tr.parent.getChildren().get(i) == tr){
+					tr.parent.getChildren().remove(i);
 					break;
 				}
 			}

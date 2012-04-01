@@ -18,8 +18,8 @@ public class Image implements Cloneable{
 	public String st;
 	public Term tr;
 
-	public ArrayList<stringrect>relativeContainers  = new ArrayList<stringrect>();
-	public ArrayList<stringrect>historyContainers =  new ArrayList<stringrect>();
+	public ArrayList<StringRectangle>relativeContainers  = new ArrayList<StringRectangle>();
+	public ArrayList<StringRectangle>historyContainers =  new ArrayList<StringRectangle>();
 	//	public int background = Color.WHITE;
 	//	public int wordcolor = Color.BLACK;
 
@@ -94,7 +94,7 @@ public class Image implements Cloneable{
 
 	}
 
-	public ArrayList<stringrect> getRelativeContainers(){
+	public ArrayList<StringRectangle> getRelativeContainers(){
 		reset();
 		return relativeContainers;
 	}
@@ -106,14 +106,14 @@ public class Image implements Cloneable{
 		relativeContainers = sp.writeme(tr);
 	}
 
-	public ArrayList<stringrect> getAbsoluteContainers(int myFont, point bel){
+	public ArrayList<StringRectangle> getAbsoluteContainers(int myFont, point bel){
 		
 		reset();
-		ArrayList<stringrect> relativeContainers = getRelativeContainers();
-		ArrayList<stringrect> absoluteContainers = new ArrayList<stringrect>();
+		ArrayList<StringRectangle> relativeContainers = getRelativeContainers();
+		ArrayList<StringRectangle> absoluteContainers = new ArrayList<StringRectangle>();
 		for(int i =0; i<relativeContainers.size(); i++){
 			rectangle rc = relativeContainers.get(i).container;
-			stringrect ac = new stringrect();
+			StringRectangle ac = new StringRectangle();
 			ac.container.bl.x    = rc.bl.x*myFont;
 			ac.container.bl.y    = rc.bl.y*myFont;
 			ac.container.width   = rc.width*myFont;
@@ -136,7 +136,7 @@ public class Image implements Cloneable{
 	private void reset(){
 		path pa = new path();
 		tr = pa.getTermFromString(st);
-		relativeContainers  = new ArrayList<stringrect>();
+		relativeContainers  = new ArrayList<StringRectangle>();
 		//		background = Color.WHITE;
 		//		wordcolor = Color.BLACK;
 

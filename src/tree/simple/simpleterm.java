@@ -4,14 +4,9 @@ import tree.Term;
 import tree.notsimple.NotSimple;
 import display.rectangle;
 
-public class simpleterm extends NotSimple{
+public class SimpleTerm extends NotSimple{
 	//has numbers, variables, and operators
-	
 
-	public simpleterm(){
-		issimple = true;
-		
-	}
 	
 	public boolean lmult;
 	public boolean rmult;
@@ -27,7 +22,7 @@ public class simpleterm extends NotSimple{
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		simpleterm clone = (simpleterm)super.clone();
+		SimpleTerm clone = (SimpleTerm)super.clone();
 		return clone;
 	}
 

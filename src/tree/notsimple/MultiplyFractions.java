@@ -32,7 +32,7 @@ public class MultiplyFractions {
 		Term sel = A;
 		Term tr = B;
 		
-			double a = sel.getNumericValue(sel.getChilds().get(0));
+			double a = sel.getNumericValue(sel.getChildren().get(0));
 			double b = sel.getNumericValue(tr);
 			double c = a*b;
 			Term n = new Term();
@@ -49,7 +49,7 @@ public class MultiplyFractions {
 			} catch (CloneNotSupportedException e) {}
 			
 			n.parent = second;
-			second.getChilds().set(0, n);
+			second.getChildren().set(0, n);
 			
 			return second;
 		
@@ -60,8 +60,8 @@ public class MultiplyFractions {
 		Term sel = A;
 		Term tr = B;
 		
-		double a = sel.getNumericValue(sel.getChilds().get(0));
-		double b = tr.getNumericValue(tr.getChilds().get(0));
+		double a = sel.getNumericValue(sel.getChildren().get(0));
+		double b = tr.getNumericValue(tr.getChildren().get(0));
 		double toptimes = a*b;
 		Term top = new Term();
 		if(toptimes>=0){
@@ -72,8 +72,8 @@ public class MultiplyFractions {
 			top = top.toggleNegative();
 		}
 		
-		double c = sel.getNumericValue(sel.getChilds().get(2));
-		double d = tr.getNumericValue(tr.getChilds().get(2));
+		double c = sel.getNumericValue(sel.getChildren().get(2));
+		double d = tr.getNumericValue(tr.getChildren().get(2));
 		double bottomtimes = c*d;
 		
 		Term bottom = new Term();

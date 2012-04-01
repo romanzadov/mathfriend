@@ -4,11 +4,11 @@ package tree.operators;
 import representTerms.Image;
 import tree.Term;
 import tree.notsimple.Equation;
-import tree.simple.simpleterm;
+import tree.simple.SimpleTerm;
 import display.rectangle;
 
 
-public abstract class Operator extends simpleterm{
+public abstract class Operator extends SimpleTerm {
 
 
 
@@ -35,7 +35,7 @@ public abstract class Operator extends simpleterm{
 			return "*";
 		}
 		else{
-			return valuestring;
+			return valueString;
 		}
 	}
 
@@ -61,24 +61,24 @@ public abstract class Operator extends simpleterm{
 
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
-		if(tr.getChilds().size() == 0){
+		if(tr.getChildren().size() == 0){
 			a.bl.x = 0;
 			a.bl.y = 0;
 			a.height = 0;
 			a.width = 0;
 		}
-		if(tr.getChilds().size()>0){
+		if(tr.getChildren().size()>0){
 			
 			//check that all are rectangled
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i).container == null){
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i).container == null){
 					System.out.println("error: equal called when not all terms are rectangled");
 				}
 			}
-			a.bl.x = tr.getChilds().get(0).container.bl.x;
-			a.bl.y = tr.getChilds().get(0).container.bl.y;
-			a.width = tr.getChilds().get(0).container.width;
-			a.height = tr.getChilds().get(0).container.height;
+			a.bl.x = tr.getChildren().get(0).container.bl.x;
+			a.bl.y = tr.getChildren().get(0).container.bl.y;
+			a.width = tr.getChildren().get(0).container.width;
+			a.height = tr.getChildren().get(0).container.height;
 			
 			
 

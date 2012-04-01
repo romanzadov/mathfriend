@@ -19,19 +19,19 @@ public class newparens implements TreeFunction {
 		if(tr.parent.operator instanceof Times||tr.parent.operator instanceof Negative){
 			
 			if(tr.operator instanceof Plus||tr.operator instanceof Minus){
-					tr.hasparen = true;
+					tr.hasParentheses = true;
 			}
 		}
 		//parentheses around exponents
 		else if(tr.parent.operator instanceof Exponent){
-			if(!tr.parent.getChilds().get(0).issimple){
-				tr.parent.getChilds().get(0).hasparen = true;
+			if(!tr.parent.getChildren().get(0).issimple){
+				tr.parent.getChildren().get(0).hasParentheses = true;
 			}
 		}
 		//parentheses around subtraction
 		else if(tr.parent.operator instanceof Plus || tr.parent.operator instanceof Minus){
 			if(tr.operator instanceof Plus || tr.operator instanceof Minus){
-				if(!tr.issimple){tr.hasparen = true;}
+				if(!tr.issimple){tr.hasParentheses = true;}
 			}
 		}
 		

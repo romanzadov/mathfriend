@@ -1,13 +1,13 @@
 package parse;
 import java.util.ArrayList;
-import tree.*;
-import tree.simple.simpleterm;
+
+import tree.simple.SimpleTerm;
 
 public class parenthesize {
 
 //	
 	public int n=0;
-	public ArrayList<int[]> organize(ArrayList<simpleterm> formula){
+	public ArrayList<int[]> organize(ArrayList<SimpleTerm> formula){
 		
 	
 		

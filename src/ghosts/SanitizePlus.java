@@ -14,9 +14,9 @@ public class SanitizePlus {
 
 		boolean haszero = false;
 		int pos = -1;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			if(tr.getChilds().get(i) instanceof Number){
-				if(((Number)tr.getChilds().get(i)).value == 0){
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			if(tr.getChildren().get(i) instanceof Number){
+				if(((Number)tr.getChildren().get(i)).value == 0){
 					haszero = true;
 					pos = i;
 					break;
@@ -26,21 +26,21 @@ public class SanitizePlus {
 		}
 		if(haszero){
 			if((tr.operator instanceof Plus)||(tr.operator instanceof Minus)){
-				if(tr.getChilds().size()>1){
+				if(tr.getChildren().size()>1){
 					if(pos > 0){
-						tr.getChilds().remove(pos-1);
-						tr.getChilds().remove(pos-1);
+						tr.getChildren().remove(pos-1);
+						tr.getChildren().remove(pos-1);
 					}
 					if(pos == 0){
-						tr.getChilds().remove(0);
-						if(tr.getChilds().get(0) instanceof Plus){
-							tr.getChilds().remove(0);
+						tr.getChildren().remove(0);
+						if(tr.getChildren().get(0) instanceof Plus){
+							tr.getChildren().remove(0);
 						}
-						else if(tr.getChilds().get(0) instanceof Minus){
-							tr.getChilds().remove(0);
-							Term next = tr.getChilds().get(0);
+						else if(tr.getChildren().get(0) instanceof Minus){
+							tr.getChildren().remove(0);
+							Term next = tr.getChildren().get(0);
 //							Log.d(TAG, "next: "+next);
-							tr.getChilds().set(0,  next.toggleNegative());
+							tr.getChildren().set(0,  next.toggleNegative());
 //							Log.d(TAG, "new next: "+next);
 						}
 					}

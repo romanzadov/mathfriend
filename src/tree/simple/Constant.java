@@ -18,7 +18,7 @@ public class Constant extends Number{
 
 	@Override
 	public String toString(){
-		return todraw;
+		return toDraw;
 	}
 
 	public Constant clone(){
@@ -27,7 +27,7 @@ public class Constant extends Number{
 		c.value = this.value;
 		c.charpos = this.charpos;
 		c.font = this.font;
-		c.todraw = this.todraw;
+		c.toDraw = this.toDraw;
 		c.container.bl.x = this.container.bl.x;
 		c.container.bl.y = this.container.bl.y;
 		return c;
@@ -40,13 +40,13 @@ public class Constant extends Number{
 		{
 			a.height = 1; 
 			a.width = 1;
-			tr.todraw = "e";
+			tr.toDraw = "e";
 			tr.container = a;}
 		if(value == Math.PI)
 		{
 			a.height = 1; 
 			a.width = 2;
-			tr.todraw = "pi";
+			tr.toDraw = "pi";
 			tr.container = a;}
 		return a;
 	}

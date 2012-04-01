@@ -2,25 +2,24 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import representTerms.screens.AbstractedScreen;
 import display.point;
 import display.rectangle;
 
 public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 
 	
-	ArrayList<stringrect> rectanglesScaledToIdentity = new ArrayList<stringrect>();
+	ArrayList<StringRectangle> rectanglesScaledToIdentity = new ArrayList<StringRectangle>();
 	ArrayList<TouchData> touches  = new ArrayList<TouchData>();
 	
 	@Override
-	public ArrayList<stringrect> getDrawnRectanglesScaledToIdentity(){
+	public ArrayList<StringRectangle> getDrawnRectanglesScaledToIdentity(){
 		return rectanglesScaledToIdentity;
 	}
 
 
-	public ArrayList<stringrect> center(ArrayList<stringrect> toDraw){
+	public ArrayList<StringRectangle> center(ArrayList<StringRectangle> toDraw){
 		
-		rectanglesScaledToIdentity = new ArrayList<stringrect>();
+		rectanglesScaledToIdentity = new ArrayList<StringRectangle>();
 		rectangle first = toDraw.get(0).container;
 		PlaceAndFont paf = GUIMath.getCenteredPlaceAndFont(first.width, first.height, Settings.PREFFERED_FONT, getWidth(), getHeight());
 	//	System.out.println( " "+paf);
@@ -31,9 +30,9 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 			a.flipY(getHeight());
 			
 			
-			stringrect b;
+			StringRectangle b;
 			try {
-				b = (stringrect) toDraw.get(i).clone();
+				b = (StringRectangle) toDraw.get(i).clone();
 				b.container = scaleToIdealScreen(a);
 				rectanglesScaledToIdentity.add(b);
 			} catch (CloneNotSupportedException e) {
@@ -120,7 +119,7 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 	public abstract boolean setBackgroundColor(int color);
 
 	@Override
-	public abstract void updateDrawnRectangles(ArrayList<stringrect> toDraw);
+	public abstract void updateDrawnRectangles(ArrayList<StringRectangle> toDraw);
 
 
 	@Override

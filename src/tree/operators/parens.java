@@ -1,10 +1,10 @@
 package tree.operators;
 
 import tree.Term;
-import tree.simple.simpleterm;
+import tree.simple.SimpleTerm;
 import display.rectangle;
 
-public class Parens extends simpleterm{
+public class Parens extends SimpleTerm {
 
 	public Character value;
 	
@@ -46,9 +46,9 @@ public class Parens extends simpleterm{
 			System.out.println("error in parens: not containered");
 		}
 		
-		else if(tr.getChilds().size()>0){
-			if((tr.getChilds().get(0) instanceof Parens)&&
-					(tr.getChilds().get(tr.getChilds().size()-1) instanceof Parens)){
+		else if(tr.getChildren().size()>0){
+			if((tr.getChildren().get(0) instanceof Parens)&&
+					(tr.getChildren().get(tr.getChildren().size()-1) instanceof Parens)){
 
 			}
 
@@ -58,15 +58,15 @@ public class Parens extends simpleterm{
 				left.container = rect;
 				left.container.height = tr.container.height;
 				left.container.width = tr.container.height/2;
-				left.todraw = "(";
+				left.toDraw = "(";
 				left.issimple = true;
 				left.simples.add(left);
 				left.parent = tr;
 				left.value = '(';
-				tr.getChilds().add(0,left);
+				tr.getChildren().add(0,left);
 
-				for(int i = 1; i< tr.getChilds().size(); i++){
-					tr.getChilds().get(i).container.bl.x += left.container.width;	
+				for(int i = 1; i< tr.getChildren().size(); i++){
+					tr.getChildren().get(i).container.bl.x += left.container.width;
 				}
 
 				Parens right = new Parens();
@@ -74,13 +74,13 @@ public class Parens extends simpleterm{
 				right.container = rect2;
 				right.container.height = tr.container.height;
 				right.container.width = tr.container.height/2;
-				right.todraw = ")";
+				right.toDraw = ")";
 				right.value = ')';
 				right.issimple = true;
 				right.container.bl.x = left.container.width + tr.container.width;
 				right.simples.add(right);
 				right.parent = tr;
-				tr.getChilds().add(right);
+				tr.getChildren().add(right);
 
 				tr.container.width +=2*left.container.width;
 			}

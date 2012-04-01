@@ -14,15 +14,15 @@ public class TimesTerm {
 		}
 
 		else if(tr.operator instanceof Plus || tr.operator instanceof Minus){
-			for(int i = 0; i< tr.getChilds().size(); i++){
-				if(!(tr.getChilds().get(i) instanceof Operator)){
+			for(int i = 0; i< tr.getChildren().size(); i++){
+				if(!(tr.getChildren().get(i) instanceof Operator)){
 
 					Term resel = null;
 					try {
 						resel = (Term)sel.clone();
 					} catch (CloneNotSupportedException e) {}
 					resel.parent = sel.parent;
-					regularTimes(tr.getChilds().get(i), resel);
+					regularTimes(tr.getChildren().get(i), resel);
 				}
 			}
 		}
@@ -38,25 +38,25 @@ public class TimesTerm {
 		if(tr.operator instanceof Times || tr.operator instanceof Divide){
 			sel.parent = tr;
 			tm.parent = tr;
-			tr.getChilds().add(0,tm);
-			tr.getChilds().add(0,sel);
+			tr.getChildren().add(0,tm);
+			tr.getChildren().add(0,sel);
 		}
 		else{
 			Term mid = new Term();
 			mid.operator = new Times();
 			mid.parent = tr.parent;
 
-			int trplace = tr.parent.getChilds().indexOf(tr);
+			int trplace = tr.parent.getChildren().indexOf(tr);
 
-			mid.getChilds().add(sel);
-			mid.getChilds().add(tm);
-			mid.getChilds().add(tr);
+			mid.getChildren().add(sel);
+			mid.getChildren().add(tm);
+			mid.getChildren().add(tr);
 
 			tr.parent = mid;
 			tm.parent = mid;
 			sel.parent = mid;
 
-			mid.parent.getChilds().set(trplace, mid);
+			mid.parent.getChildren().set(trplace, mid);
 		}
 
 	}
@@ -77,10 +77,10 @@ public class TimesTerm {
 
 
 			//first, try to do simple integer multiplication
-			for(int i = 0; i<tr.getChilds().size(); i++){
+			for(int i = 0; i<tr.getChildren().size(); i++){
 				if(!done){
 
-					Term kid = tr.getChilds().get(i);
+					Term kid = tr.getChildren().get(i);
 
 					if(kid.isDecimal()){
 
@@ -126,10 +126,10 @@ public class TimesTerm {
 
 				 done = false;
 
-				for(int i = 0; i<tr.getChilds().size(); i++){
+				for(int i = 0; i<tr.getChildren().size(); i++){
 					if(!done){
 
-						Term kid = tr.getChilds().get(i);
+						Term kid = tr.getChildren().get(i);
 
 						if(kid.isDecimal() || kid.isFraction()){
 							if(firstMultiple == null){

@@ -4,15 +4,14 @@ import ghosts.GhostImage;
 
 import java.util.ArrayList;
 
-import move.identify.TermMath;
 import move.identify.selectterm;
 import representTerms.Image;
 import representTerms.Settings;
 import representTerms.TouchData;
-import representTerms.stringrect;
+import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
 import representTerms.TouchData.TouchType;
-import representTerms.stringrect.type;
+import representTerms.StringRectangle.type;
 import tree.Term;
 import display.point;
 import display.rectangle;
@@ -28,7 +27,7 @@ public class MainScreen implements AbstractedScreen{
 	boolean moved = false;
 	public boolean moving = false;
 	point selsBottomLeft = new point();
-	ArrayList<stringrect> drawn = new ArrayList<stringrect>();
+	ArrayList<StringRectangle> drawn = new ArrayList<StringRectangle>();
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
 	public String resultTerm = null;
 	
@@ -79,12 +78,12 @@ public class MainScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public ArrayList<stringrect> getRelativeRectangles() {
+	public ArrayList<StringRectangle> getRelativeRectangles() {
 		//this will give a list of rectangles to draw on our display screen. It is sent to the display interface.
 		
 		
 		//first, we draw the main equation 
-		ArrayList <stringrect> relatives = main.getRelativeContainers();
+		ArrayList <StringRectangle> relatives = main.getRelativeContainers();
 		for(int i = 0; i< relatives.size(); i++){
 			relatives.get(i).myType =  type.MAIN;
 		}
@@ -104,16 +103,16 @@ public class MainScreen implements AbstractedScreen{
 				
 				
 				try {
-					stringrect selectedRect = (stringrect) relatives.get(position).clone();
+					StringRectangle selectedRect = (StringRectangle) relatives.get(position).clone();
 					
-					stringrect cover = (stringrect) relatives.get(position).clone();
+					StringRectangle cover = (StringRectangle) relatives.get(position).clone();
 					cover.myType = type.SELECT_COVER;
 					relatives.add(cover);
 				
 					
 				} catch (CloneNotSupportedException e) {}
 				
-				ArrayList<stringrect> sels = sel.getRelativeContainers();
+				ArrayList<StringRectangle> sels = sel.getRelativeContainers();
 				
 				for(int i = 0; i<sels.size(); i++){
 					sels.get(i).container.bl.x += scaled.x-relatives.get(position).container.width/2;
@@ -132,7 +131,7 @@ public class MainScreen implements AbstractedScreen{
 		
 		for(int i = 0; i<relatives.size(); i++){
 			
-			stringrect a = relatives.get(i);
+			StringRectangle a = relatives.get(i);
 			if(a.todraw.equals("/")){
 				a.todraw = "";
 				a.myType = type.FRACTION;
@@ -247,7 +246,7 @@ public class MainScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public void updateAbstractRectangles(ArrayList<stringrect> drawn) {
+	public void updateAbstractRectangles(ArrayList<StringRectangle> drawn) {
 		if(main.getRelativeContainers().size() == drawn.size()){
 		this.drawn = drawn;
 		main.tr.setScreenPositions(drawn);

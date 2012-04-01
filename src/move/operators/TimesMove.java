@@ -24,47 +24,47 @@ public class TimesMove {
 		Term tomove = TermMath.findTermUsingKey(second, key);
 //		ColorText ct = new ColorText(tomove, Color.red);
 		Term parent = tomove.parent;
-		Term switched = tomove.parent.getChilds().get(IntermIndex);
-		int spottomove = tomove.parent.getChilds().indexOf(tomove);
+		Term switched = tomove.parent.getChildren().get(IntermIndex);
+		int spottomove = tomove.parent.getChildren().indexOf(tomove);
 		
-		if(spottomove == 0 && (IntermIndex != parent.getChilds().size()-1)){
+		if(spottomove == 0 && (IntermIndex != parent.getChildren().size()-1)){
 			
-			Term times = parent.getChilds().get(1);
-			parent.getChilds().remove(0);
-			parent.getChilds().remove(0);
-			parent.getChilds().add(IntermIndex,times);
-			parent.getChilds().add(IntermIndex,tomove);
+			Term times = parent.getChildren().get(1);
+			parent.getChildren().remove(0);
+			parent.getChildren().remove(0);
+			parent.getChildren().add(IntermIndex,times);
+			parent.getChildren().add(IntermIndex,tomove);
 			
 		}
 		else if(IntermIndex == 0){
 			
-			Term times = parent.getChilds().get(spottomove-1);
-			parent.getChilds().remove(spottomove-1);
-			parent.getChilds().remove(spottomove-1);
-			parent.getChilds().add(0, times);
-			parent.getChilds().add(0, tomove);
+			Term times = parent.getChildren().get(spottomove-1);
+			parent.getChildren().remove(spottomove-1);
+			parent.getChildren().remove(spottomove-1);
+			parent.getChildren().add(0, times);
+			parent.getChildren().add(0, tomove);
 			
 		}
-		else if(spottomove == 0 && IntermIndex == parent.getChilds().size()-1){
-			Term times = parent.getChilds().get(spottomove+1);
-			parent.getChilds().remove(spottomove);
-			parent.getChilds().remove(spottomove);
-			parent.getChilds().add(times);
-			parent.getChilds().add( tomove);
+		else if(spottomove == 0 && IntermIndex == parent.getChildren().size()-1){
+			Term times = parent.getChildren().get(spottomove+1);
+			parent.getChildren().remove(spottomove);
+			parent.getChildren().remove(spottomove);
+			parent.getChildren().add(times);
+			parent.getChildren().add( tomove);
 		}
-		else if(IntermIndex == parent.getChilds().size()-1){
-			Term times = parent.getChilds().get(spottomove-1);
-			parent.getChilds().remove(spottomove-1);
-			parent.getChilds().remove(spottomove-1);
-			parent.getChilds().add(times);
-			parent.getChilds().add( tomove);
+		else if(IntermIndex == parent.getChildren().size()-1){
+			Term times = parent.getChildren().get(spottomove-1);
+			parent.getChildren().remove(spottomove-1);
+			parent.getChildren().remove(spottomove-1);
+			parent.getChildren().add(times);
+			parent.getChildren().add( tomove);
 		}
 		else{
-			Term times = parent.getChilds().get(spottomove-1);
-			parent.getChilds().remove(spottomove-1);
-			parent.getChilds().remove(spottomove-1);
-			parent.getChilds().add(IntermIndex, times);
-			parent.getChilds().add(IntermIndex, tomove);
+			Term times = parent.getChildren().get(spottomove-1);
+			parent.getChildren().remove(spottomove-1);
+			parent.getChildren().remove(spottomove-1);
+			parent.getChildren().add(IntermIndex, times);
+			parent.getChildren().add(IntermIndex, tomove);
 		}
 		
 		
@@ -88,8 +88,8 @@ public class TimesMove {
 		
 		boolean selfraction =  false;
 		if(sel.operator instanceof Times || sel.operator instanceof Divide){
-			if(sel.getChilds().size() == 3){
-				if(sel.getChilds().get(1) instanceof Divide){
+			if(sel.getChildren().size() == 3){
+				if(sel.getChildren().get(1) instanceof Divide){
 					selfraction = true;
 				}
 			}
@@ -119,9 +119,9 @@ public class TimesMove {
 		
 		if(selfraction){
 
-			Term top = recip.getChilds().get(0);
-			recip.getChilds().set(0, recip.getChilds().get(2));
-			recip.getChilds().set(2, top);
+			Term top = recip.getChildren().get(0);
+			recip.getChildren().set(0, recip.getChildren().get(2));
+			recip.getChildren().set(2, top);
 			
 			regular.parent = ghostsel.parent;
 			recip.parent = ghostsel.parent;
@@ -133,9 +133,9 @@ public class TimesMove {
 			mid.parent = ghostsel.parent;
 			Number one = new Number(1);
 			Divide div = new Divide();
-			mid.getChilds().add(one);
-			mid.getChilds().add(div);
-			mid.getChilds().add(recip);
+			mid.getChildren().add(one);
+			mid.getChildren().add(div);
+			mid.getChildren().add(recip);
 			mid.operator = div;
 			
 			one.parent = div.parent = recip.parent = mid;
@@ -167,29 +167,29 @@ public class TimesMove {
 		//start with out own side
 		
 			//remove the term being moved
-		int posregular = regular.parent.getChilds().indexOf(regular);
+		int posregular = regular.parent.getChildren().indexOf(regular);
 		
 		int eqindex =0;
 		try {
-			eqindex = recip.parent.parent.parent.getChilds().indexOf(recip.parent.parent);
+			eqindex = recip.parent.parent.parent.getChildren().indexOf(recip.parent.parent);
 		} catch (Exception e1) {}
 		
-		int eqindex2 = regular.parent.parent.getChilds().indexOf(regular.parent);
+		int eqindex2 = regular.parent.parent.getChildren().indexOf(regular.parent);
 		
 		if(posregular== 0){
-			regular.parent.getChilds().remove(0);
-			regular.parent.getChilds().remove(0);
+			regular.parent.getChildren().remove(0);
+			regular.parent.getChildren().remove(0);
 		}
 		else{
-			regular.parent.getChilds().remove(posregular-1);
-			regular.parent.getChilds().remove(posregular-1);
+			regular.parent.getChildren().remove(posregular-1);
+			regular.parent.getChildren().remove(posregular-1);
 		}
 		
 	
 		
 		if(recip.parent.parent.operator instanceof Plus || recip.parent.parent.operator instanceof Minus){
-			for(int i = 0; i<recip.parent.parent.getChilds().size(); i++){
-				Term kid = recip.parent.parent.getChilds().get(i);
+			for(int i = 0; i<recip.parent.parent.getChildren().size(); i++){
+				Term kid = recip.parent.parent.getChildren().get(i);
 				if(!(kid instanceof Operator) && (kid != recip.parent)){
 					
 					Term clrecip = new Term();
@@ -203,25 +203,25 @@ public class TimesMove {
 			}
 		}
 		
-		if(regular.parent.getChilds().size()==1){
+		if(regular.parent.getChildren().size()==1){
 			Term top = regular.parent.parent;
-			Term bottom = regular.parent.getChilds().get(0);
-			int place = top.getChilds().indexOf(bottom.parent);
+			Term bottom = regular.parent.getChildren().get(0);
+			int place = top.getChildren().indexOf(bottom.parent);
 			bottom.parent = top;
-			top.getChilds().set(place, bottom);
+			top.getChildren().set(place, bottom);
 		}
 		
 		// next, do the other side of the equals
 		if(recip.parent.parent.parent!=null && recip.parent.parent.parent.operator instanceof Equals){
 			Term eq = recip.parent.parent.parent;
-			for(int i = 0; i<eq.getChilds().size(); i++){
-				if(!(eq.getChilds().get(i) instanceof Operator)&&i!=eqindex){
+			for(int i = 0; i<eq.getChildren().size(); i++){
+				if(!(eq.getChildren().get(i) instanceof Operator)&&i!=eqindex){
 					Term recipcl =null;
 					try {
 						recipcl = (Term)recip.clone();
 					} catch (CloneNotSupportedException e) {}
 	//				ColorText ct = new ColorText(recipcl, Color.red);
-					TM.Times(eq.getChilds().get(i), recipcl);
+					TM.Times(eq.getChildren().get(i), recipcl);
 				}
 			}
 		}
@@ -229,14 +229,14 @@ public class TimesMove {
 		else if(regular.parent.parent!=null && regular.parent.parent.operator instanceof Equals){
 			
 			Term eq = regular.parent.parent;
-			for(int i = 0; i<eq.getChilds().size(); i++){
-				if(!(eq.getChilds().get(i) instanceof Operator)&&i!=eqindex2){
+			for(int i = 0; i<eq.getChildren().size(); i++){
+				if(!(eq.getChildren().get(i) instanceof Operator)&&i!=eqindex2){
 					Term recipcl =null;
 					try {
 						recipcl = (Term)recip.clone();
 					} catch (CloneNotSupportedException e) {}
 	//				ColorText ct = new ColorText(recipcl, Color.red);
-					TM.Times(eq.getChilds().get(i), recipcl);
+					TM.Times(eq.getChildren().get(i), recipcl);
 				}
 			}
 		}

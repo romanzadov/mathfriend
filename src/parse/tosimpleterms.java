@@ -1,19 +1,18 @@
 package parse;
 import java.util.ArrayList;
 
-import tree.*;
 import tree.operators.Operator;
-import tree.simple.simpleterm;
+import tree.simple.SimpleTerm;
 import tree.simple.variable;
 
 public class tosimpleterms {
 
-	public ArrayList<simpleterm> simples;
+	public ArrayList<SimpleTerm> simples;
 	public int placeholder = 0;
 	public Operator op = null;
 	 boolean donenum=false;
 
-	public ArrayList<simpleterm> simplify(ArrayList<Character> formula){
+	public ArrayList<SimpleTerm> simplify(ArrayList<Character> formula){
 
 		for(int i =0; i<formula.size(); i++){
 			char ch = formula.get(i);

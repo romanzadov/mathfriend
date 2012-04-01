@@ -16,10 +16,16 @@ public class Minus extends Operator {
 		orderofoperation=5;
 		lmult = false;
 		rmult = false;
-		todraw = "-";
-		valuestring = "-";
+		toDraw = "-";
+		valueString = "-";
 	}
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 		Plus p = new Plus();
 		a = p.giverect(tr);

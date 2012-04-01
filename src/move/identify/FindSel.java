@@ -13,8 +13,8 @@ public class FindSel {
 
 		Term middle = sel;
 		while(middle != tr){
-			for(int i = 0; i<middle.parent.getChilds().size(); i++){
-				if(middle.parent.getChilds().get(i)==middle){
+			for(int i = 0; i<middle.parent.getChildren().size(); i++){
+				if(middle.parent.getChildren().get(i)==middle){
 					key.add(i);
 
 				}

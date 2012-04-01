@@ -1,9 +1,8 @@
 package representTerms;
 
-import display.point;
 import display.rectangle;
 
-public class stringrect implements Cloneable{
+public class StringRectangle implements Cloneable{
 
 	@Override
 	public String toString() {
@@ -22,7 +21,7 @@ public class stringrect implements Cloneable{
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		stringrect clone = (stringrect)super.clone();
+		StringRectangle clone = (StringRectangle)super.clone();
 		clone.container = (rectangle)this.container.clone();
 		clone.term = (String)this.term;
 		return clone;

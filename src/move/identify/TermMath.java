@@ -13,8 +13,8 @@ public class TermMath {
 
 		Term middle = sel;
 		while(middle != tr){
-			for(int i = 0; i<middle.parent.getChilds().size(); i++){
-				if(middle.parent.getChilds().get(i)==middle){
+			for(int i = 0; i<middle.parent.getChildren().size(); i++){
+				if(middle.parent.getChildren().get(i)==middle){
 					key.add(i);
 
 				}
@@ -34,14 +34,14 @@ public class TermMath {
 		
 			int j = key.size()-i-1;
 		
-			middle = middle.getChilds().get(key.get(j));
+			middle = middle.getChildren().get(key.get(j));
 			
 		}
 	
 		
-		if(middle.parent.hasparen){
-			int midint = middle.parent.getChilds().indexOf(middle);
-			middle = middle.parent.getChilds().get(midint+1);
+		if(middle.parent.hasParentheses){
+			int midint = middle.parent.getChildren().indexOf(middle);
+			middle = middle.parent.getChildren().get(midint+1);
 		}
 		
 		return middle;

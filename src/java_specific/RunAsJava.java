@@ -29,8 +29,8 @@ public class RunAsJava {
 		
 		for(int i = 0; i<tests.size(); i++){
 			Image equation = new Image(tests.get(i),2,2,2);
-			Term first = equation.tr.getChilds().get(0);
-			Term second = equation.tr.getChilds().get(2);
+			Term first = equation.tr.getChildren().get(0);
+			Term second = equation.tr.getChildren().get(2);
 
 			Term result = first;
 			
@@ -53,8 +53,8 @@ public class RunAsJava {
 		boolean equal = false;
 		if(result == null){return false;}
 		
-		for(int i = 0; i<result.getChilds().size(); i++){
-			if(result.getChilds().get(i) == null){return false;}
+		for(int i = 0; i<result.getChildren().size(); i++){
+			if(result.getChildren().get(i) == null){return false;}
 		}
 			
 			Image img2 = new Image(result.toString(), 2,2,2);

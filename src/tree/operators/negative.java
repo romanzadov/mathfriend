@@ -17,14 +17,19 @@ public class Negative extends Operator{
 		orderofoperation=3.5;
 		lmult = false;
 		rmult = false;
-		valuestring = "-";
+		valueString = "-";
 	}
-	
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		float xsofar = 0;
 		float heightmax = 0;
 		rectangle a = new rectangle();
-		if(tr.getChilds().size()==0){
+		if(tr.getChildren().size()==0){
 			a = justnegative(tr);
 		}
 	
@@ -38,7 +43,7 @@ public class Negative extends Operator{
 
 	public rectangle justnegative(Term tr){
 		rectangle a = new rectangle();
-		tr.todraw = "-";
+		tr.toDraw = "-";
 		a.height = 1;
 		a.width = 0.5f;
 		tr.container = a;

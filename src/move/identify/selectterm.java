@@ -22,10 +22,10 @@ public class selectterm {
 
 		try {
 			if(!tr.issimple ){
-				for (int i = 0; i< tr.getChilds().size(); i++){
-					if(!(tr.getChilds().get(i) instanceof Operator)){
+				for (int i = 0; i< tr.getChildren().size(); i++){
+					if(!(tr.getChildren().get(i) instanceof Operator)){
 						boolean in = true;
-						rectangle ours = tr.getChilds().get(i).ScreenPosition.container;
+						rectangle ours = tr.getChildren().get(i).ScreenPosition.container;
 //						Log.d(TAG, ours.toString()+" click: ("+x+","+y+")");
 						point tl = ours.topleft();
 						//go through the four corners of a rectangle
@@ -34,7 +34,7 @@ public class selectterm {
 						if(tl.x+ours.width+error<x){in = false;}
 						if(tl.y-error<y){in = false;}
 						//if still true, stop
-						if(in){found = true; back = tr.getChilds().get(i); break;}
+						if(in){found = true; back = tr.getChildren().get(i); break;}
 						if(!in){back = null;}
 					}
 
@@ -77,16 +77,16 @@ public class selectterm {
 
 		try {
 			if(!tr.issimple){
-				for (int i = 0; i< tr.getChilds().size(); i++){
-					if(!(tr.getChilds().get(i)==exclude)){
+				for (int i = 0; i< tr.getChildren().size(); i++){
+					if(!(tr.getChildren().get(i)==exclude)){
 						boolean in = true;
-						rectangle ours = tr.getChilds().get(i).container;
+						rectangle ours = tr.getChildren().get(i).container;
 						point tl = ours.topleft();
 						//go through the four corners of a rectangle
 						if(tl.x>x){in = false;}
 						if(tl.x+ours.width<x){in = false;}
 						//if still true, stop
-						if(in){found = true; back = tr.getChilds().get(i); break;}
+						if(in){found = true; back = tr.getChildren().get(i); break;}
 						if(!in){back = null;}
 					}
 

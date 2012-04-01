@@ -19,34 +19,40 @@ public class Equals extends Operator{
 		orderofoperation=1000;
 		lmult = false;
 		rmult = false;
-		todraw = "=";
+		toDraw = "=";
 	}
-	public rectangle giverect(Term tr){
+
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
-		if(tr.getChilds().size() == 0){
+		if(tr.getChildren().size() == 0){
 			rectangle cont = tr.container;
-			tr.todraw = "=";
+			tr.toDraw = "=";
 			a = justequal(cont);
 		}
 		else{
 			//check to see that everything is rectangled
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i).container == null){
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i).container == null){
 					System.out.println("error: equal called when not all terms are rectangled");
 				}
 			}
 			//find top height
 			float ysofar = 0;
 			float xsofar = 0;
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i).container.height>ysofar){
-					ysofar = tr.getChilds().get(i).container.height;
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i).container.height>ysofar){
+					ysofar = tr.getChildren().get(i).container.height;
 				}
 			}
 
 			//allign
-			for(int i =0; i<tr.getChilds().size(); i++){
-				rectangle cont = tr.getChilds().get(i).container;
+			for(int i =0; i<tr.getChildren().size(); i++){
+				rectangle cont = tr.getChildren().get(i).container;
 				cont.bl.x = xsofar;
 				xsofar +=cont.width;
 				cont.bl.y = ysofar/2-cont.height/2;
@@ -75,7 +81,7 @@ public class Equals extends Operator{
 
 	public Image inTermMoves(Image im, Term sel, int IntermIndex){
 
-		int selindex = sel.parent.getChilds().indexOf(sel);
+		int selindex = sel.parent.getChildren().indexOf(sel);
 		Image Ghost = im;
 		Ghost = MoveFocus(im, sel, selindex, IntermIndex);
 		
@@ -93,8 +99,8 @@ public class Equals extends Operator{
 			e.printStackTrace();
 		}
 
-		Term secondsel = second.getChilds().get(selindex);
-		Term moveto = second.getChilds().get(IntermIndex);
+		Term secondsel = second.getChildren().get(selindex);
+		Term moveto = second.getChildren().get(IntermIndex);
 
 		if((moveto.operator instanceof Plus)||(moveto.operator instanceof Minus)){
 			if(!(secondsel.operator instanceof Plus)&&!(secondsel.operator instanceof Minus)){
@@ -106,19 +112,19 @@ public class Equals extends Operator{
 				if (secondsel.isNegative()){
 					secondsel = secondsel.toggleNegative();
 					Plus pl = new Plus();
-					moveto.getChilds().add(pl);
-					moveto.getChilds().add(secondsel);
+					moveto.getChildren().add(pl);
+					moveto.getChildren().add(secondsel);
 					pl.parent = moveto;
 					secondsel.parent = moveto;
 				}
 				else{
 					Minus mn = new Minus();
-					moveto.getChilds().add(mn);
-					moveto.getChilds().add(secondsel);
+					moveto.getChildren().add(mn);
+					moveto.getChildren().add(secondsel);
 					mn.parent = moveto;
 					secondsel.parent = moveto;
 				}
-				zero.parent.getChilds().set(selindex, zero);
+				zero.parent.getChildren().set(selindex, zero);
 				
 			}
 		}
@@ -139,12 +145,12 @@ public class Equals extends Operator{
 				mid.operator = pl;
 				zero.parent = secondsel.parent;
 				secondsel.parent = moveto.parent = mid;
-				mid.parent.getChilds().set(selindex, zero);
-				mid.getChilds().add(secondsel);
-				mid.getChilds().add(pl);
-				mid.getChilds().add(moveto);
+				mid.parent.getChildren().set(selindex, zero);
+				mid.getChildren().add(secondsel);
+				mid.getChildren().add(pl);
+				mid.getChildren().add(moveto);
 				
-				mid.parent.getChilds().set(IntermIndex, mid);
+				mid.parent.getChildren().set(IntermIndex, mid);
 				
 			}
 			else{
@@ -158,21 +164,21 @@ public class Equals extends Operator{
 				mid.operator = pl;
 				zero.parent = secondsel.parent;
 				secondsel.parent = moveto.parent = mid;
-				mid.parent.getChilds().set(selindex, zero);
+				mid.parent.getChildren().set(selindex, zero);
 				
-				mid.getChilds().add(moveto);
-				mid.getChilds().add(mn);
-				mid.getChilds().add(secondsel);
+				mid.getChildren().add(moveto);
+				mid.getChildren().add(mn);
+				mid.getChildren().add(secondsel);
 				
-				mid.parent.getChilds().set(IntermIndex, mid);
+				mid.parent.getChildren().set(IntermIndex, mid);
 				
 			}
 		}
 
 		else{
 
-			second.getChilds().set(IntermIndex, secondsel);
-			second.getChilds().set(selindex, moveto);			
+			second.getChildren().set(IntermIndex, secondsel);
+			second.getChildren().set(selindex, moveto);
 		}
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second);

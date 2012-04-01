@@ -7,7 +7,7 @@ import container.walks.TestPaternity;
 
 import tree.*;
 import tree.operators.*;
-import tree.simple.simpleterm;
+import tree.simple.SimpleTerm;
 
 public class path {
 
@@ -24,7 +24,7 @@ public class path {
 		ArrayList<Character> formula =tochars(st);
 		boolean good = grammarcheck(formula);
 		if(good){
-			ArrayList<simpleterm> simp = tosimpleterms(formula);
+			ArrayList<SimpleTerm> simp = tosimpleterms(formula);
 			
 			if(simp.size() == 1){firstterm = simp.get(0);}
 			else if(simp.size() == 3 && simp.get(0) instanceof Parens && simp.get(2) instanceof Parens){
@@ -58,14 +58,14 @@ public class path {
 		return formula;
 	}
 
-	public ArrayList<simpleterm> tosimpleterms(ArrayList<Character> formula)
+	public ArrayList<SimpleTerm> tosimpleterms(ArrayList<Character> formula)
 	{
-		ArrayList<simpleterm> asimp = presimp.simplify(formula);
-		ArrayList<simpleterm> simp = preorg.simplify(asimp);
+		ArrayList<SimpleTerm> asimp = presimp.simplify(formula);
+		ArrayList<SimpleTerm> simp = preorg.simplify(asimp);
 		return simp;
 	}
 
-	public Term toTerms(ArrayList<simpleterm> simp)
+	public Term toTerms(ArrayList<SimpleTerm> simp)
 	{
 		Term firstterm = tr.generatetree(simp);
 //		Log.d(TAG, ""+firstterm.getChilds().get(0).toString()+firstterm.getChilds().get(0).hasparen);
@@ -75,16 +75,16 @@ public class path {
 	}
 
 	public void testdraw(Term tr){
-		for(int i = 0; i<tr.getChilds().size();i++){
-			if(tr.getChilds().get(i).issimple){
-				for(int j = 0; j<tr.getChilds().get(i).simples.size();j++){
+		for(int i = 0; i<tr.getChildren().size();i++){
+			if(tr.getChildren().get(i).issimple){
+				for(int j = 0; j<tr.getChildren().get(i).simples.size();j++){
 					//	System.out.println(tr.childs.get(i).simples.get(j).valuestring);
-					if(i == tr.getChilds().size()-1){
+					if(i == tr.getChildren().size()-1){
 						System.out.println("----------");
 					}
 				}
 			}
-			else{testdraw(tr.getChilds().get(i));}
+			else{testdraw(tr.getChildren().get(i));}
 
 		}
 	}

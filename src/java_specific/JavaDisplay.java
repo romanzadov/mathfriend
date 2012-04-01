@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 import representTerms.DisplayInterfaceTemplate;
 import representTerms.TouchData;
-import representTerms.stringrect;
+import representTerms.StringRectangle;
 import representTerms.screens.AbstractedScreen;
 import display.rectangle;
 
@@ -72,7 +72,7 @@ public class JavaDisplay extends DisplayInterfaceTemplate {
 
 
 	@Override
-	public void updateDrawnRectangles(ArrayList<stringrect> toDraw) {
+	public void updateDrawnRectangles(ArrayList<StringRectangle> toDraw) {
 	
 		if(toDraw.size()>0){
 		rectangle a = toDraw.get(0).container;

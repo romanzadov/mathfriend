@@ -13,7 +13,7 @@ public interface DisplayInterface {
 	public abstract int getHeight();
 	
 	abstract boolean setBackgroundColor(int color);		//pass in int RGB
-	public void updateDrawnRectangles(ArrayList<stringrect> toDraw);
+	public void updateDrawnRectangles(ArrayList<StringRectangle> toDraw);
 	
 	public point scaleToIdealScreen(point a);
 	public point scaleToRealScreen(point a);
@@ -21,7 +21,7 @@ public interface DisplayInterface {
 	public rectangle scaleToIdealScreen(rectangle a);
 	public rectangle scaleToRealScreen(rectangle a);
 	
-	public ArrayList<stringrect> getDrawnRectanglesScaledToIdentity();
+	public ArrayList<StringRectangle> getDrawnRectanglesScaledToIdentity();
 	public AbstractedScreen getAbstractScreen();
 	
 	public ArrayList <TouchData> getTouchData();  //shoud also make sure to scale it

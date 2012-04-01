@@ -17,12 +17,12 @@ public class NegativeTerm extends NotSimple{
 	//		Number minusone = new Number(-1);
 
 			this.setNegative(true);
-			this.hasparen = tr.hasparen;
+			this.hasParentheses = tr.hasParentheses;
 	//		this.childs.add(minusone);
-			this.childs.add(n);
-			this.childs.add(tr.getChilds().get(2));
-			for(int i = 0; i<this.getChilds().size(); i++){
-				this.getChilds().get(i).parent = this;
+			this.children.add(n);
+			this.children.add(tr.getChildren().get(2));
+			for(int i = 0; i<this.getChildren().size(); i++){
+				this.getChildren().get(i).parent = this;
 			}
 		}
 		
@@ -38,20 +38,20 @@ public class NegativeTerm extends NotSimple{
 		n = new Negative();
 		
 		this.setNegative(true);
-		this.getChilds().add(n);
-		this.getChilds().add(tr);
+		this.getChildren().add(n);
+		this.getChildren().add(tr);
 	}
 
 
 	@Override
 	public String toString(){
 		String st = "(-";
-		if(this.getChilds().size()==3){
-			Term tr = this.getChilds().get(2);
+		if(this.getChildren().size()==3){
+			Term tr = this.getChildren().get(2);
 			st +=tr.toString();
 		}
-		else if(this.getChilds().size()==2){
-			Term tr = this.getChilds().get(1);
+		else if(this.getChildren().size()==2){
+			Term tr = this.getChildren().get(1);
 			st +=tr.toString();
 		}
 		st+=")";
@@ -64,8 +64,8 @@ public class NegativeTerm extends NotSimple{
 		rectangle a = new rectangle();
 		float xmax= 0;
 		float ymax = 0;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			rectangle b = tr.getChilds().get(i).container;
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			rectangle b = tr.getChildren().get(i).container;
 			if(b.width>xmax){xmax = b.width;}
 			ymax += b.height;
 		}
@@ -78,7 +78,7 @@ public class NegativeTerm extends NotSimple{
 	@Override
 	public boolean canConstruct(Term tr) {
 		boolean ans = false;
-		if(tr.isNegative() && tr.getChilds().size() == 3){
+		if(tr.isNegative() && tr.getChildren().size() == 3){
 			ans = true;
 		}
 

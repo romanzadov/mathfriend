@@ -11,19 +11,19 @@ public class AllignFracBar {
 		//check to see that all the kids are containered
 		boolean allgood = true;
 		
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			if(tr.getChilds().get(i).container == null){
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			if(tr.getChildren().get(i).container == null){
 				allgood = false;
 			}
 		}
 		
 		// if all are containered, find highest barheight
 		float barheight =0;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			Term kid = tr.getChilds().get(i);
-			if(kid.operator instanceof Divide && kid.getChilds().size() == 3){
-				if(kid.getChilds().get(2).container.height>barheight){
-					barheight = kid.getChilds().get(2).container.height;
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			Term kid = tr.getChildren().get(i);
+			if(kid.operator instanceof Divide && kid.getChildren().size() == 3){
+				if(kid.getChildren().get(2).container.height>barheight){
+					barheight = kid.getChildren().get(2).container.height;
 				}
 			}
 			else{
@@ -34,10 +34,10 @@ public class AllignFracBar {
 		}
 
 		//allign y's
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			Term kid = tr.getChilds().get(i);
-			if(kid.operator instanceof Divide && kid.getChilds().size() == 3){
-				kid.container.bl.y = barheight - kid.getChilds().get(2).container.height;
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			Term kid = tr.getChildren().get(i);
+			if(kid.operator instanceof Divide && kid.getChildren().size() == 3){
+				kid.container.bl.y = barheight - kid.getChildren().get(2).container.height;
 			}
 			else{
 				kid.container.bl.y = barheight - kid.container.height/2;
@@ -46,8 +46,8 @@ public class AllignFracBar {
 		
 		//allign x's
 		float xsofar = 0;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			Term kid = tr.getChilds().get(i);
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			Term kid = tr.getChildren().get(i);
 			kid.container.bl.x = xsofar;
 			xsofar+=kid.container.width;
 		}
@@ -55,8 +55,8 @@ public class AllignFracBar {
 
 		//find biggest height overall
 		float ysofar = 0;
-		for(int i = 0; i<tr.getChilds().size(); i++){
-			Term kid = tr.getChilds().get(i);
+		for(int i = 0; i<tr.getChildren().size(); i++){
+			Term kid = tr.getChildren().get(i);
 			if((kid.container.height + kid.container.bl.y)> ysofar){
 				ysofar = kid.container.height+kid.container.bl.y;
 			}

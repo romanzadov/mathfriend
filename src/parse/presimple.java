@@ -6,15 +6,15 @@ import tree.operators.Operator;
 import tree.operators.Parens;
 import tree.simple.Constant;
 import tree.simple.Number;
-import tree.simple.simpleterm;
+import tree.simple.SimpleTerm;
 import tree.simple.variable;
 
 public class presimple {
 
-	ArrayList<simpleterm> simp = new ArrayList<simpleterm>();
+	ArrayList<SimpleTerm> simp = new ArrayList<SimpleTerm>();
 	public boolean done = false;
 	
-	public ArrayList<simpleterm> simplify(ArrayList<Character> formula)
+	public ArrayList<SimpleTerm> simplify(ArrayList<Character> formula)
 	{
 
 

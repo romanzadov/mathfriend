@@ -4,7 +4,12 @@ import tree.Term;
 
 public class AdvancedOperator extends Operator{
 
-	@Override
+    @Override
+    public Term simpleOperation(Term term) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
 	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub

@@ -3,7 +3,7 @@ package tree.simple;
 import tree.Term;
 import display.rectangle;
 
-public class Number extends simpleterm{
+public class Number extends SimpleTerm {
 	
 	public double value ;
 	public int charpos;
@@ -28,9 +28,9 @@ public class Number extends simpleterm{
 		rmult = true;
 		lmult = true;
 		value = a;
-		todraw = "0";
+		toDraw = "0";
 		if(a<0){
-			isnegative = true;
+			isNegative = true;
 		}
 	}
 	
@@ -39,29 +39,29 @@ public class Number extends simpleterm{
 			
 			if(isNegative())
 			{//if the term is a "negative"
-				tr.todraw = "-";
+				tr.toDraw = "-";
 				a.height = 1;
 				a.width = (float) .5;
 				tr.container = a;
 			}
 			else if(value%1==0)
 			{int b = (int)value;
-			 tr.todraw = ""+b;
+			 tr.toDraw = ""+b;
 			 a.height = 1;
-			 a.width = tr.todraw.length();
+			 a.width = tr.toDraw.length();
 			 tr.container = a;}
 			else if((value*1000)%1==0)
-			{tr.todraw = ""+value;
+			{tr.toDraw = ""+value;
 			 a.height = 1;
-			 a.width = tr.todraw.length();
+			 a.width = tr.toDraw.length();
 			 tr.container = a;}
 			
 			else
 			{   double trunkated = (int)(value*1000);
 				trunkated = 0.0+ trunkated/1000;
-				tr.todraw = ""+trunkated+"...";
+				tr.toDraw = ""+trunkated+"...";
 				a.height = 1;
-				a.width = tr.todraw.length();
+				a.width = tr.toDraw.length();
 				tr.container = a;
 			}
 		return a;

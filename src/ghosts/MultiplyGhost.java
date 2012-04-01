@@ -35,21 +35,21 @@ public class MultiplyGhost implements TreeFunction{
 
 			int smallest = Integer.MAX_VALUE;
 
-			int ap = as.parent.getChilds().indexOf(as);
-			int bp = bs.parent.getChilds().indexOf(bs);
+			int ap = as.parent.getChildren().indexOf(as);
+			int bp = bs.parent.getChildren().indexOf(bs);
 			
 			smallest = Math.min(ap, bp);
 			int biggest = Math.max(ap, bp);
 			
-			if(as.parent.getChilds().size()==3){
-				int place = as.parent.parent.getChilds().indexOf(as.parent);
-				as.parent.parent.getChilds().set(place, aTIMESb);
+			if(as.parent.getChildren().size()==3){
+				int place = as.parent.parent.getChildren().indexOf(as.parent);
+				as.parent.parent.getChildren().set(place, aTIMESb);
 				aTIMESb.parent = as.parent.parent;
 			}
 			else{
-				as.parent.getChilds().remove(biggest-1);
-				as.parent.getChilds().remove(biggest-1);
-				as.parent.getChilds().set(smallest, aTIMESb);
+				as.parent.getChildren().remove(biggest-1);
+				as.parent.getChildren().remove(biggest-1);
+				as.parent.getChildren().set(smallest, aTIMESb);
 				aTIMESb.parent = as.parent;
 			}
 			
@@ -74,18 +74,18 @@ public class MultiplyGhost implements TreeFunction{
 
 				Term ans = null;
 				boolean stop = false;
-				for(int i = 0; i<tr.getChilds().size()-1; i++){
-					for(int j = i+1; j<tr.getChilds().size(); j++){
+				for(int i = 0; i<tr.getChildren().size()-1; i++){
+					for(int j = i+1; j<tr.getChildren().size(); j++){
 						
 
 						if(!stop){
-						ans = (tr.getChilds().get(i)).MultiplyLikeTerms(tr.getChilds().get(j));
+						ans = (tr.getChildren().get(i)).MultiplyLikeTerms(tr.getChildren().get(j));
 						}
 						if(ans != null && !stop){
 							
 							aTIMESb = ans;
-							a = tr.getChilds().get(i);
-							b = tr.getChilds().get(j);
+							a = tr.getChildren().get(i);
+							b = tr.getChildren().get(j);
 							stop  = true;
 						
 						}

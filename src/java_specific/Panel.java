@@ -10,18 +10,16 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import representTerms.DisplayInterface;
-import representTerms.LogicEngine;
-import representTerms.Settings;
 import representTerms.TouchData;
-import representTerms.stringrect;
+import representTerms.StringRectangle;
 import representTerms.TouchData.TouchType;
-import representTerms.stringrect.type;
+import representTerms.StringRectangle.type;
 import tree.notsimple.Fraction;
 import display.rectangle;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 
-	ArrayList <stringrect> toDraw = new ArrayList<stringrect>(); 
+	ArrayList <StringRectangle> toDraw = new ArrayList<StringRectangle>();
 
 	TouchData lastTouch;
 	boolean mousePressed = false;
@@ -35,7 +33,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 
 	}
 
-	public void setToDraw(ArrayList<stringrect> todraw){
+	public void setToDraw(ArrayList<StringRectangle> todraw){
 		toDraw = todraw;
 	}
 
@@ -48,7 +46,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 		
 		if(toDraw != null){
 			for(int i = 0;  i<toDraw.size(); i++){
-				stringrect a = toDraw.get(i);
+				StringRectangle a = toDraw.get(i);
 				rectangle c = a.container;
 				
 				g.setColor(Color.white);
@@ -90,7 +88,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 		}
 	}
 
-	public void updateToDraw(ArrayList<stringrect> td){
+	public void updateToDraw(ArrayList<StringRectangle> td){
 		toDraw = td;
 	}
 

@@ -16,8 +16,8 @@ public class upwalk {
 			f.performAction(tr);
 		}
 		else{
-			for(int i = 0; i<tr.getChilds().size(); i++){
-				upwalk tree = new upwalk(tr.getChilds().get(i),f);
+			for(int i = 0; i<tr.getChildren().size(); i++){
+				upwalk tree = new upwalk(tr.getChildren().get(i),f);
 			}
 		}
 	

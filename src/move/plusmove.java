@@ -2,7 +2,6 @@ package move;
 
 import move.identify.selectterm;
 import tree.Term;
-import tree.notsimple.NegativeTerm;
 import tree.operators.Equality;
 import tree.operators.Operator;
 import tree.operators.Plus;
@@ -36,8 +35,8 @@ public class plusmove {
 	
 	public Term move(Term main, Term selected, Term endterm){
 		
-		int splace = selected.parent.getChilds().indexOf(selected);
-		int eplace = endterm.parent.getChilds().indexOf(endterm);
+		int splace = selected.parent.getChildren().indexOf(selected);
+		int eplace = endterm.parent.getChildren().indexOf(endterm);
 		
 		//if they're on the same side of the equals
 		if(selected.parent==endterm.parent){
@@ -49,29 +48,29 @@ public class plusmove {
 					System.out.println("start or end = 0");
 					if(splace==0){
 						System.out.println("start = 0");
-						if(selected.parent.getChilds().get(1) instanceof Plus){
+						if(selected.parent.getChildren().get(1) instanceof Plus){
 							Plus pl = new Plus();
-							Term hold = selected.parent.getChilds().get(splace);
-							selected.parent.getChilds().set(splace,
-									selected.parent.getChilds().get(eplace));
-							selected.parent.getChilds().set(splace-1,
-									selected.parent.getChilds().get(eplace-1));
-							selected.parent.getChilds().set(eplace,pl);
-							selected.parent.getChilds().set(eplace-1,hold);
+							Term hold = selected.parent.getChildren().get(splace);
+							selected.parent.getChildren().set(splace,
+									selected.parent.getChildren().get(eplace));
+							selected.parent.getChildren().set(splace-1,
+									selected.parent.getChildren().get(eplace-1));
+							selected.parent.getChildren().set(eplace,pl);
+							selected.parent.getChildren().set(eplace-1,hold);
 						}
 						
 					}
 					
 				}
 				else{
-					Term hold1 = selected.parent.getChilds().get(splace-1);
-					Term hold2 = selected.parent.getChilds().get(splace);
-					selected.parent.getChilds().set(splace,
-							selected.parent.getChilds().get(eplace));
-					selected.parent.getChilds().set(splace-1,
-							selected.parent.getChilds().get(eplace-1));
-					selected.parent.getChilds().set(eplace,hold2);
-					selected.parent.getChilds().set(eplace-1,hold1);
+					Term hold1 = selected.parent.getChildren().get(splace-1);
+					Term hold2 = selected.parent.getChildren().get(splace);
+					selected.parent.getChildren().set(splace,
+							selected.parent.getChildren().get(eplace));
+					selected.parent.getChildren().set(splace-1,
+							selected.parent.getChildren().get(eplace-1));
+					selected.parent.getChildren().set(eplace,hold2);
+					selected.parent.getChildren().set(eplace-1,hold1);
 					
 				}
 			}

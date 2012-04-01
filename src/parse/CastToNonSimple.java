@@ -5,7 +5,6 @@ import tree.Term;
 import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
 import tree.notsimple.NegativeTerm;
-import tree.operators.Times;
 //import android.util.Log;
 
 public class CastToNonSimple implements TreeFunction{
@@ -25,20 +24,20 @@ public class CastToNonSimple implements TreeFunction{
 		if(n == 0){
 			Fraction f = new Fraction();
 			if(f.canConstruct(tr)){
-				int place = tr.parent.getChilds().indexOf(tr);
-				f = new Fraction(tr.getChilds().get(0), tr.getChilds().get(2));
+				int place = tr.parent.getChildren().indexOf(tr);
+				f = new Fraction(tr.getChildren().get(0), tr.getChildren().get(2));
 
 				f.parent = tr.parent;
-				tr.parent.getChilds().set(place, f);
+				tr.parent.getChildren().set(place, f);
 			}}
 		else if(n == 1){
 			NegativeTerm n = new NegativeTerm();
 			if(n.canConstruct(tr)){
-				int place = tr.parent.getChilds().indexOf(tr);
+				int place = tr.parent.getChildren().indexOf(tr);
 				n = new NegativeTerm(tr);
 				
 				n.parent = tr.parent;
-				tr.parent.getChilds().set(place, n);
+				tr.parent.getChildren().set(place, n);
 		
 			}
 		}

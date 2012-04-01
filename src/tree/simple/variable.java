@@ -3,7 +3,7 @@ package tree.simple;
 import tree.Term;
 import display.rectangle;
 
-public class variable extends simpleterm{
+public class variable extends SimpleTerm {
 	
 	public String value;
 	
@@ -35,7 +35,7 @@ public class variable extends simpleterm{
 
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
-		tr.todraw = value;
+		tr.toDraw = value;
 		a.height = 1;
 		a.width = value.length();
 		tr.container = a;

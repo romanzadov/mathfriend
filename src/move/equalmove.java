@@ -18,14 +18,14 @@ public class equalmove {
 		}
 		else{
 			int selectedplace = 0;
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i)==selected){selectedplace = i;}
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i)==selected){selectedplace = i;}
 			}
 			selectterm st = new selectterm();
 			Term over = st.whichterm(im.tr, x, y, im.bel, 0);
 			int overplace = 0;
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i)==over){overplace = i; move = true;}
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i)==over){overplace = i; move = true;}
 			}
 			
 			if(move){
@@ -39,9 +39,9 @@ public class equalmove {
 	}
 	
 	public Term switchedterm(Term tr, int selectedplace, int overplace){
-		Term placeholder = tr.getChilds().get(overplace);
-		tr.getChilds().set(overplace, tr.getChilds().get(selectedplace));
-		tr.getChilds().set(selectedplace, placeholder);
+		Term placeholder = tr.getChildren().get(overplace);
+		tr.getChildren().set(overplace, tr.getChildren().get(selectedplace));
+		tr.getChildren().set(selectedplace, placeholder);
 		
 		return tr;
 	}

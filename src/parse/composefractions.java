@@ -23,9 +23,9 @@ public class composefractions implements TreeFunction{
 		//sets terms to be down or up terms in a division situtation
 		if(tr.operator instanceof Times || tr.operator instanceof Divide){
 		
-			for(int i =0; i<tr.getChilds().size(); i++){
-				if(tr.getChilds().get(i) instanceof Divide){
-					tr.getChilds().get(i+1).isbottom = true;
+			for(int i =0; i<tr.getChildren().size(); i++){
+				if(tr.getChildren().get(i) instanceof Divide){
+					tr.getChildren().get(i+1).isbottom = true;
 				}
 			}
 			
@@ -57,8 +57,8 @@ public class composefractions implements TreeFunction{
 				tm.parent = tr;
 				tm.container = cont;
 				tm.simples.add(tm);
-				tr.getChilds().add(places[i][1]+sofar-1, tm);
-				tr.getChilds().add(places[i][1]+sofar, top);
+				tr.getChildren().add(places[i][1]+sofar-1, tm);
+				tr.getChildren().add(places[i][1]+sofar, top);
 				sofar+=2;
 			}
 		}
@@ -78,7 +78,7 @@ public class composefractions implements TreeFunction{
 		for(int i = 0; i<stop ; i++){
 		
 			 if(places[i][1]==0){
-				rectangle mid = tr.getChilds().get(places[i][0]).container;
+				rectangle mid = tr.getChildren().get(places[i][0]).container;
 				mid.bl.x = xsofar;
 				if(barheight!=0){
 				mid.bl.y = barheight - mid.height/2;
@@ -88,9 +88,9 @@ public class composefractions implements TreeFunction{
 				if(mid.height>ysofar){ysofar = mid.height;}
 			}
 			else{
-				Term top = tr.getChilds().get(places[i][0]);
-				Term bar = tr.getChilds().get(places[i][0]+1);
-				Term bottom = 	tr.getChilds().get(places[i][0]+2);
+				Term top = tr.getChildren().get(places[i][0]);
+				Term bar = tr.getChildren().get(places[i][0]+1);
+				Term bottom = 	tr.getChildren().get(places[i][0]+2);
 				total = properfraction(top, bar, bottom, barheight);
 			}
 		}
@@ -128,7 +128,7 @@ public class composefractions implements TreeFunction{
 		num.parent = term;
 		num.issimple = true;
 		num.value = 1;
-		num.todraw = "1";
+		num.toDraw = "1";
 		rectangle cont = new rectangle();
 		cont.height = 1;
 		cont.width = 1;
@@ -141,27 +141,27 @@ public class composefractions implements TreeFunction{
 	
 	public int[][] fracmatrix(Term tr){
 
-		int[][] places = new int[tr.getChilds().size()][2];
+		int[][] places = new int[tr.getChildren().size()][2];
 		int place = 0;
 		//first, break up into fractions
 		int[] thisfrac = new int[2];
 
-		for(int i=0; i<tr.getChilds().size();i++){
+		for(int i=0; i<tr.getChildren().size();i++){
 
-			if(!tr.getChilds().get(i).issimple||
-					!(tr.getChilds().get(i) instanceof Times)
-					&&!(tr.getChilds().get(i) instanceof Divide)){
+			if(!tr.getChildren().get(i).issimple||
+					!(tr.getChildren().get(i) instanceof Times)
+					&&!(tr.getChildren().get(i) instanceof Divide)){
 				int side = place/2;
 				int top = place%2;
 				places[side][top] = i;
 				//stick normal terms where they fall
 			}
 
-			else if(tr.getChilds().get(i) instanceof Times){
+			else if(tr.getChildren().get(i) instanceof Times){
 				if(place%2==0){place = place+2;}
 				if(place%2==1){place++; }
 			}
-			else if(tr.getChilds().get(i) instanceof Divide){
+			else if(tr.getChildren().get(i) instanceof Divide){
 				if(place%2==0){place++;}
 				else if(place%2==1){
 					//1000 is code for 1/x

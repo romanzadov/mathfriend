@@ -2,7 +2,7 @@ package container;
 
 import tree.Term;
 import tree.operators.Operator;
-import tree.simple.simpleterm;
+import tree.simple.SimpleTerm;
 //import android.util.Log;
 import display.rectangle;
 
@@ -15,16 +15,16 @@ public class specificimg {
 		
 		rectangle rect = new rectangle();
 		//for each term's children
-		for(int i =0; i<ter.getChilds().size();i++){
+		for(int i =0; i<ter.getChildren().size();i++){
 			//if simple, make rectangle
-			if(ter.getChilds().get(i) instanceof simpleterm){
-				simpleterm st = (simpleterm)ter.getChilds().get(i);
-				ter.getChilds().get(i).container = st.giverect(ter.getChilds().get(i));
+			if(ter.getChildren().get(i) instanceof SimpleTerm){
+				SimpleTerm st = (SimpleTerm)ter.getChildren().get(i);
+				ter.getChildren().get(i).container = st.giverect(ter.getChildren().get(i));
 			}
 			//if not simple, and not rectangled, dig in
-			else if(!ter.getChilds().get(i).issimple){
-				Term t2 = ter.getChilds().get(i);
-				ter.getChilds().get(i).container = specificimage(t2);
+			else if(!ter.getChildren().get(i).issimple){
+				Term t2 = ter.getChildren().get(i);
+				ter.getChildren().get(i).container = specificimage(t2);
 			}
 			else{}
 		}
@@ -39,13 +39,13 @@ public class specificimg {
 		rect = op.giverect(ter);}
 		else {
 			
-			simpleterm pop = (simpleterm)ter;
+			SimpleTerm pop = (SimpleTerm)ter;
 			rect = pop.giverect(ter);
 		}
 		
 		ter.container = rect;
 		//add parentheses as needed
-		if(ter.hasparen){
+		if(ter.hasParentheses){
 			addParentheses(ter);
 //			Log.d(TAG, "tr: "+ter.toString()+ "  true");
 		}
@@ -61,9 +61,9 @@ public class specificimg {
 		
 		tr.container.width += width+width;
 		
-		for(int i = 0; i<tr.getChilds().size(); i++){
+		for(int i = 0; i<tr.getChildren().size(); i++){
 			//move all the contents over by the width of the parens
-			tr.getChilds().get(i).container.bl.x+=width;
+			tr.getChildren().get(i).container.bl.x+=width;
 		}
 	}
 

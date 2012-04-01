@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import representTerms.Image;
 import representTerms.TouchData;
-import representTerms.stringrect;
+import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
 
 public class HistoryScreen implements AbstractedScreen{
@@ -18,9 +18,9 @@ public class HistoryScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public ArrayList<stringrect> getRelativeRectangles() {
+	public ArrayList<StringRectangle> getRelativeRectangles() {
 		
-		ArrayList<stringrect> rects = new ArrayList<stringrect>();
+		ArrayList<StringRectangle> rects = new ArrayList<StringRectangle>();
 		
 		for(int i = 0; i<equations.size(); i++){
 			Image img = new Image(equations.get(i), 2,2,2);
@@ -37,7 +37,7 @@ public class HistoryScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public void updateAbstractRectangles(ArrayList<stringrect> drawn) {
+	public void updateAbstractRectangles(ArrayList<StringRectangle> drawn) {
 		// TODO Auto-generated method stub
 		
 	}
