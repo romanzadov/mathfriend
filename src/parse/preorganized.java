@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import tree.operators.Parens;
 import tree.simple.SimpleTerm;
+import tree.simple.Variable;
 
 public class PreOrganized {
 
@@ -20,8 +21,8 @@ public class PreOrganized {
 		if(st instanceof Parens){
 			st.setValueString(""+(((Parens) st).value));
 			}
-		if(st instanceof tree.simple.variable){
-			st.setValueString(""+(((tree.simple.variable) st).value));
+		if(st instanceof Variable){
+			st.setValueString(""+(((Variable) st).value));
 			}
 		if(st instanceof tree.operators.Operator){
 			st.setValueString(""+(((tree.operators.Operator) st).thisvalue));

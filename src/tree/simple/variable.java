@@ -3,18 +3,18 @@ package tree.simple;
 import tree.Term;
 import display.rectangle;
 
-public class variable extends SimpleTerm {
+public class Variable extends SimpleTerm {
 	
 	public String value;
 	
-	public variable(String a){
+	public Variable(String a){
 		value = a;
 	}
 	
 	public void setvalue(String a){
 		value = a;
 	}
-	public variable(){
+	public Variable(){
 	lmult = true;
 	rmult = true;
 	}
@@ -25,9 +25,8 @@ public class variable extends SimpleTerm {
 	}
 	
 	@Override
-	public variable clone(){
-		variable v = new variable(this.value);
-		v.font = this.font;
+	public Variable clone(){
+		Variable v = new Variable(this.value);
 		v.getContainer().bl.x = this.getContainer().bl.x;
 		v.getContainer().bl.y = this.getContainer().bl.y;
 		return v;

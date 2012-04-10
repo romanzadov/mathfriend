@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import tree.operators.Operator;
 import tree.simple.SimpleTerm;
-import tree.simple.variable;
+import tree.simple.Variable;
 
 public class tosimpleterms {
 
@@ -28,7 +28,7 @@ public class tosimpleterms {
 					}
 				}
 				else{	
-					variable var = new variable();
+					Variable var = new Variable();
 					String st = new String();
 					st = st+ch;
 					var.setvalue(st);

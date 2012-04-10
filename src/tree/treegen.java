@@ -6,7 +6,7 @@ import tree.operators.*;
 import tree.simple.Number;
 import tree.simple.Constant;
 import tree.simple.SimpleTerm;
-import tree.simple.variable;
+import tree.simple.Variable;
 //import android.util.Log;
 import container.walks.newparens;
 import display.rectangle;
@@ -467,7 +467,7 @@ public class TreeGen {
 			simp.add(st-2,left);
 			simp.add(end+2, right);
 		}
-		else if(simp.get(st) instanceof Number || simp.get(st) instanceof variable
+		else if(simp.get(st) instanceof Number || simp.get(st) instanceof Variable
 				|| simp.get(st) instanceof Constant){
 			Parens left = new Parens();
 			left.value = '(';

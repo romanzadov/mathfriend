@@ -11,7 +11,7 @@ import tree.simple.SimpleTerm;
 public class ParseUtil {
 
 
-    public PreSimple preSimple = new PreSimple();    //to simple terms
+    public PreSimpleUtil preSimple = new PreSimpleUtil();    //to simple terms
     public PreOrganized preorg = new PreOrganized();
     public TreeGen tr = new TreeGen();
 
@@ -41,7 +41,8 @@ public class ParseUtil {
     }
 
     public ArrayList<SimpleTerm> tosimpleterms(ArrayList<Character> formula) {
-        ArrayList<SimpleTerm> asimp = preSimple.simplify(formula);
+        PreSimpleUtil preSimpleUtil = new PreSimpleUtil();
+        ArrayList<PreSimpleTerm> asimp = preSimpleUtil.simplify(formula);
         ArrayList<SimpleTerm> simp = preorg.simplify(asimp);
         return simp;
     }
