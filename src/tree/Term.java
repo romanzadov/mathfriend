@@ -1,10 +1,12 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import container.walks.AssignScreenPositions;
 
-import parse.ParseUtil;
+import container.walks.TestPaternity;
+import parse.*;
 import representTerms.StringRectangle;
 import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
@@ -28,9 +30,21 @@ public class Term implements Cloneable, TreeFunction{
 	private String valueString;
 	private float scaleFactor =1;
 	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
-    
-
 	public StringRectangle ScreenPosition = new StringRectangle();
+
+
+    public Term(){}
+
+    public Term(String st) {
+        ArrayList<Character> characters = ParseCharacterUtil.getCharacterArrayFromString(st);
+        PreSimpleUtil preSimpleUtil = new PreSimpleUtil();
+        List<PreSimpleTerm> simp = preSimpleUtil.simplify(characters);
+        TreeGen tr = new TreeGen();
+        this = tr.generateTree(simp);
+        GroupFractions GF = new GroupFractions(this);
+        CastToNonSimple CT = new CastToNonSimple(this);
+        TestPaternity tp = new TestPaternity(this);
+    }
 
     public boolean isSimple() {
         if (this instanceof SimpleTerm) {
@@ -71,8 +85,7 @@ public class Term implements Cloneable, TreeFunction{
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		String st = this.toString();
-		ParseUtil pa = new ParseUtil();
-		Term clone = pa.getTermFromString(st);
+		Term clone = new Term(st);
 		clone.getContainer().bl.x = this.getContainer().bl.x;
 		clone.getContainer().bl.y = this.getContainer().bl.y;
 
@@ -452,6 +465,16 @@ public class Term implements Cloneable, TreeFunction{
 		return mid;
 	}
 
+    public void insertChild(int index, Term child) {
+        children.add(index, child);
+        child.setParent(this);
+    }
+
+    public void setChild(int index, Term child) {
+        children.set(index, child);
+        child.setParent(this);
+    }
+
 	public void setChildren(ArrayList<Term> children) {
 		this.children = children;
 	}
@@ -540,6 +563,7 @@ public class Term implements Cloneable, TreeFunction{
 
     public void setParent(Term parent) {
         this.parent = parent;
+
     }
 
     public Operator getOperator() {

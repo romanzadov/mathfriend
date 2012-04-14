@@ -1,7 +1,6 @@
 package droid.tests;
 
 import display.point;
-import parse.ParseUtil;
 import representTerms.Image;
 import tree.Term;
 
@@ -13,10 +12,8 @@ public class JavaTest {
 	String sel = "x-3";
 	
 	public void printTerms(){
-		ParseUtil pa = new ParseUtil();
-		Term mainTerm = pa.getTermFromString(main);
-		pa = new ParseUtil();
-		Term selTerm = pa.getTermFromString(sel);
+		Term mainTerm = new Term(main);
+		Term selTerm = new Term(sel);
 		
 		Image mainImage = new Image(mainTerm, new point(0,0), null);
 			

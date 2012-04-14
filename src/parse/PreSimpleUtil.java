@@ -35,10 +35,12 @@ public class PreSimpleUtil {
                 i = isParentheses(i, characters);
             }
             if (!done) {
-                throw new RuntimeException("Unable to parse: "+characters + " at index: "+i);
+                throw new RuntimeException("Unable to parse: " + characters + " at index: " + i);
             }
 
         }
+
+        setExplicitFunctions(preSimpleTerms);
 
         return preSimpleTerms;
     }
@@ -47,7 +49,7 @@ public class PreSimpleUtil {
 
         int out = i;
 
-        for(Constant constant:  EnumSet.allOf(Constant.class)) {
+        for (Constant constant : EnumSet.allOf(Value.class)) {
             char[] name = constant.getName().toCharArray();
             int falses = 0;
 
@@ -154,7 +156,7 @@ public class PreSimpleUtil {
         int out = i;
         if (Character.valueOf(formula.get(i)) == '(' || Character.valueOf(formula.get(i)) == ')') {
             out = i + 1;
-            PreSimpleTerm preSimpleParentheses = new PreSimpleTerm(formula.subList(i, i+1), PreSimpleTerm.Type.PARENTHESES);
+            PreSimpleTerm preSimpleParentheses = new PreSimpleTerm(formula.subList(i, i + 1), PreSimpleTerm.Type.PARENTHESES);
             preSimpleTerms.add(preSimpleParentheses);
             done = true;
         }
@@ -162,5 +164,110 @@ public class PreSimpleUtil {
 
     }
 
+    private void setExplicitFunctions(ArrayList<PreSimpleTerm> formula) {
+        for (PreSimpleTerm preSimpleTerm : formula) {
+            if (preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)) {
+
+                if (preSimpleTerm.toString().equals("+")) {
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.PLUS);
+                }
+                if (preSimpleTerm.toString().equals("-")) {
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.MINUS);
+                }
+                if (preSimpleTerm.toString().equals("*")) {
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.TIMES);
+                }
+                if (preSimpleTerm.toString().equals("/")) {
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.DIVIDE);
+                }
+                if (preSimpleTerm.toString().equals("^")) {
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.EXPONENT);
+                }
+
+                if (preSimpleTerm.toString().equals("=")) {
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.EQUALITY);
+                }
+            }
+
+
+        }
+
+        //reset minuses to negatives
+        for (PreSimpleTerm preSimpleTerm : formula) {
+            if (preSimpleTerm.getFunctionType().equals(PreSimpleTerm.FunctionType.MINUS)) {
+
+                int i = preSimpleTerms.indexOf(preSimpleTerm);
+
+                if (i == 0 || preSimpleTerms.get(i - 1).getFunctionType().equals(PreSimpleTerm.FunctionType.EQUALITY)
+                        || preSimpleTerms.get(i - 1).toString().equals("(")
+                        || preSimpleTerms.get(i - 1).getType().equals(PreSimpleTerm.Type.FUNCTION)) {
+
+                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.NEGATIVE);
+
+                    //add parens around negative
+                    //unless there's an exponent afterwards
+                    /*boolean add = true;
+
+
+                    if (preSimpleTerms.size() > i + 2) {
+                        if (preSimpleTerms.get(i + 2).getFunctionType().equals(PreSimpleTerm.FunctionType.EXPONENT)) {
+                            add = false;
+                        }
+
+                    }
+                    if (i > 0) {
+                        if (preSimpleTerms.get(i - 1).getFunctionType().equals(PreSimpleTerm.FunctionType.EXPONENT)) {
+                            add = true;
+                        }
+                    }
+
+                    if (simp.size() > i + 2) {
+                        if (simp.get(i + 2) instanceof Parens) {
+                            //if parens, find end
+                            int end = 0;
+                            ArrayList<int[]> pans = ParenthesisUtil.getParenthesisGroups(simp);
+                            for (int j = 0; j < pans.size(); j++) {
+                                if (pans.get(j)[0] == i + 2) {
+                                    end = pans.get(j)[1];
+                                }
+                            }
+                            if (end != 0) {
+                                if (simp.size() > end + 1) {
+                                    //the the one after parens is an exponent
+                                    //check that the one before isn't
+                                    if (simp.get(end + 1) instanceof Exponent) {
+                                        add = false;
+                                    }
+                                }
+                            }
+                            if (i - 1 > 0) {
+                                if (simp.get(i - 1) instanceof Exponent) {
+                                    add = true;
+                                }
+                            }
+                        }
+                    }
+
+                    if (add) {
+                        simp = addParensAroundNegatives(simp, pns, i);
+                    }*/
+
+                }
+            }
+
+
+        }
+
+        //add invisible multiplication
+        for (int i = 0; i < preSimpleTerms.size() - 1; i++) {
+            if (preSimpleTerms.get(i).getRightMultiply() == true && preSimpleTerms.get(i + 1).getLeftMultiply() == true) {
+                Times a = new Times();
+                a.setValueString("*");
+                simp.add(i + 1, a);
+            }
+
+        }
+
+    }
 
 }
