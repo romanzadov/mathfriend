@@ -1,6 +1,7 @@
 package parse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 
 import tree.operators.Operator;
@@ -49,7 +50,7 @@ public class PreSimpleUtil {
 
         int out = i;
 
-        for (Constant constant : EnumSet.allOf(Value.class)) {
+        for (Constant constant : EnumSet.allOf(Constant.class)) {
             char[] name = constant.getName().toCharArray();
             int falses = 0;
 
@@ -168,28 +169,15 @@ public class PreSimpleUtil {
         for (PreSimpleTerm preSimpleTerm : formula) {
             if (preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)) {
 
-                if (preSimpleTerm.toString().equals("+")) {
-                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.PLUS);
-                }
-                if (preSimpleTerm.toString().equals("-")) {
-                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.MINUS);
-                }
-                if (preSimpleTerm.toString().equals("*")) {
-                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.TIMES);
-                }
-                if (preSimpleTerm.toString().equals("/")) {
-                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.DIVIDE);
-                }
-                if (preSimpleTerm.toString().equals("^")) {
-                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.EXPONENT);
-                }
+                for(PreSimpleTerm.FunctionType functionType: EnumSet.allOf(PreSimpleTerm.FunctionType.class)) {
 
-                if (preSimpleTerm.toString().equals("=")) {
-                    preSimpleTerm.setFunctionType(PreSimpleTerm.FunctionType.EQUALITY);
+                    if(!functionType.equals(PreSimpleTerm.FunctionType.NEGATIVE)) {
+                        if (preSimpleTerm.toString().equals(functionType.getRepresentation())) {
+                            preSimpleTerm.setFunctionType(functionType);
+                        }
+                    }
                 }
             }
-
-
         }
 
         //reset minuses to negatives
@@ -207,7 +195,6 @@ public class PreSimpleUtil {
                     //add parens around negative
                     //unless there's an exponent afterwards
                     /*boolean add = true;
-
 
                     if (preSimpleTerms.size() > i + 2) {
                         if (preSimpleTerms.get(i + 2).getFunctionType().equals(PreSimpleTerm.FunctionType.EXPONENT)) {
@@ -259,14 +246,14 @@ public class PreSimpleUtil {
         }
 
         //add invisible multiplication
-        for (int i = 0; i < preSimpleTerms.size() - 1; i++) {
+/*        for (int i = 0; i < preSimpleTerms.size() - 1; i++) {
             if (preSimpleTerms.get(i).getRightMultiply() == true && preSimpleTerms.get(i + 1).getLeftMultiply() == true) {
-                Times a = new Times();
-                a.setValueString("*");
-                simp.add(i + 1, a);
+                PreSimpleTerm multiply = new PreSimpleTerm(Arrays.asList('*'), PreSimpleTerm.Type.FUNCTION);
+                multiply.setFunctionType(PreSimpleTerm.FunctionType.TIMES);
+                preSimpleTerms.add(i + 1, multiply);
             }
 
-        }
+        }*/
 
     }
 

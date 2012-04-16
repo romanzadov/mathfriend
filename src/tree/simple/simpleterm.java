@@ -6,10 +6,6 @@ import display.rectangle;
 
 public class SimpleTerm extends NotSimple{
 	//has numbers, variables, and operators
-
-	
-	public boolean lmult;
-	public boolean rmult;
 	
 	public String image;
 	

@@ -12,13 +12,30 @@ public class PreSimpleTerm {
     private boolean rightMultiply = false;
 
     public static enum FunctionType {
-        PLUS,
-        MINUS,
-        TIMES,
-        DIVIDE,
-        NEGATIVE,
-        EXPONENT,
-        EQUALITY;
+        PLUS("+"),
+        MINUS("-"),
+        TIMES("*"),
+        DIVIDE("/"),
+        NEGATIVE("-"),
+        EXPONENT("^"),
+        EQUALITY("="),
+        SINE("sin"),
+        COSINE("cos"),
+        LOG("log");
+
+        private String representation;
+
+        FunctionType(String representation) {
+            this.representation = representation;
+        }
+
+        public String getRepresentation() {
+            return representation;
+        }
+
+        public void setRepresentation(String representation) {
+            this.representation = representation;
+        }
     }
 
     public static enum Type {

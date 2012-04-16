@@ -1,98 +1,67 @@
 package tree;
 import java.util.ArrayList;
 
-import parse.parenthesize;
+import parse.ParenthesisUtil;
+import parse.PreSimpleTerm;
 import tree.operators.*;
 import tree.simple.Number;
 import tree.simple.Constant;
 import tree.simple.SimpleTerm;
 import tree.simple.Variable;
 //import android.util.Log;
-import container.walks.newparens;
-import display.rectangle;
+
 
 public class TreeGen {
-	
-	static final String TAG = "treegen";
 
 	public ArrayList<Term> orgconts = new ArrayList<Term>();		//where we store simple terms to organize them before putting them in terms.
 	public ArrayList<Operator> ops = new ArrayList<Operator>();			//highest level operators
 	public ArrayList<Term> contents = new ArrayList<Term>();
 
 
-	public Term generatetree(ArrayList<SimpleTerm> simp) {
+	public Term generateTree(ArrayList<PreSimpleTerm> preSimpleTerms) {
 
-		Term firstterm = generatenode(simp);
-		Term parent = new Term();
-		rectangle cont = new rectangle();
-		parent.setContainer(cont);
-		parent.getChildren().add(firstterm);
-		firstterm.setParent(parent);
-		newparens np =new newparens(firstterm);
-//		killparens kp = new killparens(firstterm);
-		firstterm = simplecheck(firstterm);
+		Term firstterm = generatenode(preSimpleTerms);
+//		newparens np =new newparens(firstterm);
 		return firstterm;
 	}
 
-	public Term simplecheck(Term tr){
-		
-	/*	if(tr.getChildren().size()==1&&tr.getChildren().get(0).getChildren().size()==0){
-			tr.getChildren().get(0).issimple = true;
-		}*/
-		
-		return tr;
-	}
+
 	
-	public Term generatenode(ArrayList<SimpleTerm> simp){
+	public Term generatenode(ArrayList<PreSimpleTerm> simp){
 
 
-		Term thisterm = new Term();
+		Term term = new Term();
 
-		thisterm = fullyreduced(simp, thisterm);
+		ArrayList<int[]> pns = ParenthesisUtil.getParenthesisGroups(simp);
+	//	simp = removeExcessParens(simp, pns);
 
-		ArrayList<int[]> pns = checkparens(simp);
-		simp = removeexcessparens(simp, pns);
-
-		setoperator(simp,pns);
 
 
 		//check if simple term
-		checksimples(thisterm);
-		pns = checkparens(simp);		
+		checksimples(term);
+		pns = ParenthesisUtil.getParenthesisGroups(simp);
 		//after multiplication is added, parens have to be recalculated
-		simp = removeexcessparens(simp, pns);
-		pns = checkparens(simp);		
+		simp = removeExcessParens(simp, pns);
+		pns = ParenthesisUtil.getParenthesisGroups(simp);
 
 		Operator primary = pickhighestpriority(simp,pns);
 
-		thisterm.setOperator(primary);
+		term.setOperator(primary);
 
 		rephrase(simp,primary);
-		thisterm = setnode(thisterm);
-		checksimples(thisterm);
+		term = setnode(term);
+		checksimples(term);
 
-		digdown(thisterm);
+		digdown(term);
 
-		return thisterm;
+		return term;
 	}
 
-
-	public Term fullyreduced(ArrayList<SimpleTerm> simp, Term tr2){
-
-		if(simp.size() == 1){
-			simp.get(0).setParent(tr2);
-			tr2.getChildren().add(simp.get(0));
-			simp.get(0).simples.add(simp.get(0));
-		}
-
-		return tr2;
-	}
-
-	public ArrayList<SimpleTerm> removeexcessparens(ArrayList<SimpleTerm> simp, ArrayList<int[]> paren){
+	public ArrayList<SimpleTerm> removeExcessParens(ArrayList<SimpleTerm> simp, ArrayList<int[]> paren){
 		boolean done = false;
 		boolean didsomething = false;
 		while(done == false){
-			paren = checkparens(simp);
+			paren = ParenthesisUtil.getParenthesisGroups(simp);
 			for(int i = 0; i<paren.size();i++){
 				if(paren.get(i)[0]==0 && paren.get(i)[1]==simp.size()-1){
 
@@ -159,15 +128,9 @@ public class TreeGen {
 		}
 	}
 
-	public ArrayList<int[]> checkparens(ArrayList<SimpleTerm> simp){
-		parenthesize par = new parenthesize();	
-		ArrayList<int[]> paren = par.organize(simp);
-		return paren;
-	}
-
 	public Operator pickhighestpriority(ArrayList<SimpleTerm> simp,ArrayList<int[]> parens){
 		int primaryspot = 0;
-		double orderofoperation = -10;
+		double orderofoperation = Double.MIN_VALUE;
 		for(int i=0; i<simp.size();i++){
 			if(simp.get(i) instanceof Operator){
 				Operator a = (Operator)simp.get(i);
@@ -229,9 +192,9 @@ public class TreeGen {
 
 	}
 
-	public void checksimples(Term thisterm){
-		if(thisterm.getOperator() instanceof Negative){
-			thisterm.setNegative(true);
+	public void checksimples(Term term){
+		if(term.getOperator() instanceof Negative){
+			term.setNegative(true);
 		}
 		
 		for(int i =0; i<orgconts.size();i++){
@@ -266,140 +229,6 @@ public class TreeGen {
 		}
 	}
 
-	public void setoperator(ArrayList<SimpleTerm> simp,ArrayList<int[]> pns){
-
-		//first set basics
-		//then override minuses with negatives as needed
-
-		for(int i = 0; i<simp.size(); i++){
-			if(simp.get(i) instanceof Operator){
-
-				if(simp.get(i).equals("+")){
-					Plus a = new Plus();
-					a.charpos = ((Operator)simp.get(i)).charpos;
-					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.setValueString(((Operator)simp.get(i)).getValueString());
-					simp.set(i,a);
-				}
-				if(simp.get(i).equals("-")){
-					Minus a = new Minus();
-					a.charpos = ((Operator)simp.get(i)).charpos;
-					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.setValueString(((Operator)simp.get(i)).getValueString());
-					simp.set(i,a);
-				}
-				if(simp.get(i).equals("*")){
-					Times a = new Times();
-					a.charpos = ((Operator)simp.get(i)).charpos;
-					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.setValueString(((Operator)simp.get(i)).getValueString());
-					simp.set(i,a);
-				}
-				if(simp.get(i).equals("/")){
-					Divide a = new Divide();
-					a.charpos = ((Operator)simp.get(i)).charpos;
-					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.setValueString(((Operator)simp.get(i)).getValueString());
-					simp.set(i,a);
-				}
-				if(simp.get(i).equals("^")){
-					Exponent a = new Exponent();
-					a.charpos = ((Operator)simp.get(i)).charpos;
-					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.setValueString(((Operator)simp.get(i)).getValueString());
-					simp.set(i,a);
-				}
-
-				if(simp.get(i).equals("=")){
-					Equality a = new Equality();
-					a.charpos = ((Operator)simp.get(i)).charpos;
-					a.thisvalue = ((Operator)simp.get(i)).thisvalue;
-					a.setValueString(((Operator)simp.get(i)).getValueString());
-					simp.set(i,a);
-				}
-			}
-
-
-		}
-		//reset minuses to negatives
-		for(int i = 0; i<simp.size(); i++){
-			if(simp.get(i) instanceof Minus){
-
-				if(i==0||simp.get(i-1) instanceof Equality
-						||simp.get(i-1).equals("(")
-						||simp.get(i-1) instanceof Operator){
-
-					Negative neg = new Negative();
-					neg.charpos = ((Operator)simp.get(i)).charpos;
-					neg.setValueString("-");
-					simp.set(i, neg);
-					
-					//add parens around negative
-					//unless there's an exponent afterwards
-					boolean add = true;
-					
-					
-					if(simp.size()>i+2){
-						if(simp.get(i+2) instanceof Exponent){
-							add = false;
-						}
-						
-					}
-					if(i>0){
-						if(simp.get(i-1) instanceof Exponent){
-							add = true;
-						}
-					}
-					
-					if(simp.size()>i+2){
-						if(simp.get(i+2) instanceof Parens){
-							//if parens, find end
-							int end = 0;
-							ArrayList<int[]> pans = checkparens(simp);
-							for(int j =0; j<pans.size(); j++){
-								if(pans.get(j)[0]==i+2){
-									end = pans.get(j)[1];
-								}
-							}
-							if(end!=0){
-								if(simp.size()>end+1){
-									//the the one after parens is an exponent
-									//check that the one before isn't
-									if(simp.get(end+1) instanceof Exponent){
-										add = false;
-									}
-								}
-							}
-							if(i-1>0){
-								if(simp.get(i-1) instanceof Exponent){
-									add = true;
-								}
-							}
-						}
-					}
-
-					if(add){simp = addParensAroundNegatives(simp, pns, i);}
-
-				}
-			}
-
-
-		}
-
-		//add invisible multiplication
-		for(int i = 0; i<simp.size()-1; i++){
-			if(simp.get(i).rmult==true&&simp.get(i+1).lmult==true){
-				Times a = new Times();
-				a.setValueString("*");
-				simp.add(i+1,a);
-			}
-
-		}
-
-
-	}
-
-
 	public Term setnode(Term thisterm){
 
 		contents = orgconts;
@@ -407,17 +236,15 @@ public class TreeGen {
 	}
 
 	public ArrayList<SimpleTerm> addParensAroundNegatives(ArrayList<SimpleTerm> simp, ArrayList<int[]> pns, int positionOfNegative){
-		pns = checkparens(simp);
+		pns = ParenthesisUtil.getParenthesisGroups(simp);
 		
 		Parens left = new Parens();
 		left.value = '(';
 		left.setValueString("(");
-		left.lmult = true;
 		Parens right = new Parens();
 		right.value = ')';
 		right.setValueString(")");
-		right.rmult = true;
-		
+
 		//add left parens before the negative
 		simp.add( positionOfNegative, left);
 		
@@ -445,7 +272,7 @@ public class TreeGen {
 	
 	public ArrayList<SimpleTerm>  addpns(ArrayList<SimpleTerm> simp, ArrayList<int[]> pns, int st){
 		//first, reset pns
-		pns = checkparens(simp);
+		pns = ParenthesisUtil.getParenthesisGroups(simp);
 
 		//if we start with a parens, find its end
 
@@ -459,11 +286,9 @@ public class TreeGen {
 			Parens left = new Parens();
 			left.value = '(';
 			left.setValueString("(");
-			left.lmult = true;
 			Parens right = new Parens();
 			right.value = ')';
 			right.setValueString(")");
-			right.rmult = true;
 			simp.add(st-2,left);
 			simp.add(end+2, right);
 		}
@@ -472,11 +297,9 @@ public class TreeGen {
 			Parens left = new Parens();
 			left.value = '(';
 			left.setValueString("(");
-			left.lmult = true;
 			Parens right = new Parens();
 			right.value = ')';
 			right.setValueString(")");
-			right.rmult = true;
 			simp.add(st-2,left);
 			simp.add(st+2, right);
 		}
