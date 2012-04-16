@@ -3,26 +3,29 @@ package tree.simple;
 import tree.Term;
 import display.rectangle;
 
-public class Constant extends Number{
+import java.util.EnumSet;
+import java.util.Set;
 
-    private Value constant;
+public class Constants extends Number{
 
-    public Value getConstant() {
-        return constant;
+    public static Set<Constant> getAllConstants() {
+        return EnumSet.allOf(Constant.class);
     }
 
-    public Constant(double a) {
+    private Constants(double a) {
         super(a);
     }
 
-    enum Value {
+    
+
+    public enum Constant {
         PI("pi", Math.PI),
         E("e", Math.E);
 
         private String name;
         private double value;
 
-        Value(String name, double value) {
+        Constant(String name, double value) {
             this.name = name;
             this.value = value;
         }
@@ -53,8 +56,7 @@ public class Constant extends Number{
         }
 
         public boolean isoperator() {
-            boolean a = false;
-            return a;
+            return false;
         }
     }
 

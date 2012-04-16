@@ -5,9 +5,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 
 import tree.operators.Operator;
-import tree.operators.Parens;
-import tree.simple.Constant;
-import tree.simple.Number;
+import tree.simple.Constants;
 
 public class PreSimpleUtil {
 
@@ -50,7 +48,11 @@ public class PreSimpleUtil {
 
         int out = i;
 
+<<<<<<< HEAD
         for (Constant constant : EnumSet.allOf(Constant.class)) {
+=======
+        for (Constants.Constant constant : Constants.getAllConstants()) {
+>>>>>>> 3600f6ea83023b5530b96a4092cc0f26c0e76ae3
             char[] name = constant.getName().toCharArray();
             int falses = 0;
 

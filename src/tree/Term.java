@@ -14,7 +14,7 @@ import tree.notsimple.MultiplyFractions;
 import tree.notsimple.NegativeTerm;
 import tree.operators.*;
 import tree.simple.Number;
-import tree.simple.Constant;
+import tree.simple.Constants;
 import tree.simple.SimpleTerm;
 //import android.util.Log;
 import display.rectangle;
@@ -338,7 +338,7 @@ public class Term implements Cloneable, TreeFunction{
 					&& tr.getChildren().get(2) instanceof Number && tr.isNegative()){
 				isint = true;
 			}
-			if(tr instanceof Constant){
+			if(tr instanceof Constants){
 				Number n = (Number) tr;
 
 				if(Math.floor(n.value) == n.value  && n.value>0){
@@ -367,7 +367,7 @@ public class Term implements Cloneable, TreeFunction{
 				(tr instanceof NegativeTerm && tr.getAbsoluteValue() instanceof Number)){
 			decimal = true;
 		}
-		if(tr instanceof Constant){
+		if(tr instanceof Constants){
 			decimal = false;
 		}
 		return decimal;
@@ -379,7 +379,7 @@ public class Term implements Cloneable, TreeFunction{
 		if(tr.isRationalNumber()){
 			real = true;
 		}
-		else if(tr instanceof Constant){
+		else if(tr instanceof Constants){
 			real = true;
 		}
 		else if(tr instanceof Number){
