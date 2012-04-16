@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import parse.parenthesize;
 import tree.operators.*;
 import tree.simple.Number;
-import tree.simple.Constant;
+import tree.simple.Constants;
 import tree.simple.SimpleTerm;
 import tree.simple.Variable;
 //import android.util.Log;
@@ -468,7 +468,7 @@ public class TreeGen {
 			simp.add(end+2, right);
 		}
 		else if(simp.get(st) instanceof Number || simp.get(st) instanceof Variable
-				|| simp.get(st) instanceof Constant){
+				|| simp.get(st) instanceof Constants){
 			Parens left = new Parens();
 			left.value = '(';
 			left.setValueString("(");

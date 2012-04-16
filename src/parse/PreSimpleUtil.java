@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 
 import tree.operators.Operator;
-import tree.operators.Parens;
-import tree.simple.Constant;
-import tree.simple.Number;
+import tree.simple.Constants;
 
 public class PreSimpleUtil {
 
@@ -49,7 +47,7 @@ public class PreSimpleUtil {
 
         int out = i;
 
-        for (Constant constant : EnumSet.allOf(Value.class)) {
+        for (Constants.Constant constant : Constants.getAllConstants()) {
             char[] name = constant.getName().toCharArray();
             int falses = 0;
 
@@ -259,14 +257,14 @@ public class PreSimpleUtil {
         }
 
         //add invisible multiplication
-        for (int i = 0; i < preSimpleTerms.size() - 1; i++) {
+/*        for (int i = 0; i < preSimpleTerms.size() - 1; i++) {
             if (preSimpleTerms.get(i).getRightMultiply() == true && preSimpleTerms.get(i + 1).getLeftMultiply() == true) {
                 Times a = new Times();
                 a.setValueString("*");
                 simp.add(i + 1, a);
             }
 
-        }
+        }*/
 
     }
 
