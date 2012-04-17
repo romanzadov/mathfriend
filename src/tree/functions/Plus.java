@@ -1,4 +1,4 @@
-package tree.operators;
+package tree.functions;
 import java.util.ArrayList;
 
 import move.identify.FindSel;
@@ -10,7 +10,7 @@ import display.point;
 import display.rectangle;
 //import android.util.Log;
 
-public class Plus extends Operator {
+public class Plus extends Function {
 
 	public boolean invisible;
 
@@ -104,7 +104,7 @@ public class Plus extends Operator {
 		
 		PlusMove pm = new PlusMove();
 		Image Ghost = new Image();
-		if(!(sel.getParent().getParent().getChildren().get(IntermIndex) instanceof Operator)){
+		if(!(sel.getParent().getParent().getChildren().get(IntermIndex) instanceof Function)){
 		//	Ghost = pm.overEquals(im, sel, IntermIndex, xsel);
 		}
 		return Ghost;

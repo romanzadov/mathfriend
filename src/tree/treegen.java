@@ -3,18 +3,17 @@ import java.util.ArrayList;
 
 import parse.ParenthesisUtil;
 import parse.PreSimpleTerm;
-import tree.operators.*;
+import tree.functions.*;
 import tree.simple.Number;
 import tree.simple.Constants;
 import tree.simple.SimpleTerm;
 import tree.simple.Variable;
-//import android.util.Log;
 
 
 public class TreeGen {
 
 	public ArrayList<Term> orgconts = new ArrayList<Term>();		//where we store simple terms to organize them before putting them in terms.
-	public ArrayList<Operator> ops = new ArrayList<Operator>();			//highest level operators
+	public ArrayList<Function> ops = new ArrayList<Function>();			//highest level operators
 	public ArrayList<Term> contents = new ArrayList<Term>();
 
 
@@ -44,7 +43,7 @@ public class TreeGen {
 		simp = removeExcessParens(simp, pns);
 		pns = ParenthesisUtil.getParenthesisGroups(simp);
 
-		Operator primary = pickhighestpriority(simp,pns);
+		Function primary = pickhighestpriority(simp,pns);
 
 		term.setOperator(primary);
 
@@ -88,7 +87,7 @@ public class TreeGen {
 		return simp;
 	}
 
-	public void rephrase(ArrayList<SimpleTerm> simp, Operator primary){
+	public void rephrase(ArrayList<SimpleTerm> simp, Function primary){
 		
 		
 		int start = 0;
@@ -128,12 +127,12 @@ public class TreeGen {
 		}
 	}
 
-	public Operator pickhighestpriority(ArrayList<SimpleTerm> simp,ArrayList<int[]> parens){
+	public Function pickhighestpriority(ArrayList<PreSimpleTerm> preSimpleTerms,ArrayList<int[]> parens){
 		int primaryspot = 0;
 		double orderofoperation = Double.MIN_VALUE;
-		for(int i=0; i<simp.size();i++){
-			if(simp.get(i) instanceof Operator){
-				Operator a = (Operator)simp.get(i);
+		for(PreSimpleTerm preSimpleTerm: preSimpleTerms){
+			if(preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)){
+
 				if(a.orderofoperation> orderofoperation){
 					primaryspot = i;
 					orderofoperation = a.orderofoperation;
@@ -148,9 +147,9 @@ public class TreeGen {
 
 
 		}
-		Operator primary;
+		Function primary;
 		try {
-			primary = (Operator)simp.get(primaryspot);
+			primary = (Function)simp.get(primaryspot);
 		} catch (Exception e) {
 			primary = new Plus();
 		}
@@ -161,8 +160,8 @@ public class TreeGen {
 					if(parens.get(j)[0]==i){ i=parens.get(j)[1]; }
 				}		
 			}
-			else if(simp.get(i) instanceof Operator){
-				Operator a = (Operator)simp.get(i);
+			else if(simp.get(i) instanceof Function){
+				Function a = (Function)simp.get(i);
 				if(a.orderofoperation==primary.orderofoperation){
 					a.charpos=i;
 					ops.add(a);

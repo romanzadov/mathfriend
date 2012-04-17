@@ -1,8 +1,8 @@
 package ghosts;
 
 import tree.Term;
-import tree.operators.Minus;
-import tree.operators.Plus;
+import tree.functions.Minus;
+import tree.functions.Plus;
 import tree.simple.Number;
 //import android.util.Log;
 

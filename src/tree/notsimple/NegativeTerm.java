@@ -1,7 +1,7 @@
 package tree.notsimple;
 
 import tree.Term;
-import tree.operators.Negative;
+import tree.functions.Negative;
 import display.rectangle;
 
 public class NegativeTerm extends NotSimple{

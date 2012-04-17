@@ -1,12 +1,12 @@
-package tree.operators.calculate;
+package tree.functions.calculate;
 
 import java.util.ArrayList;
 
 import move.identify.TermMath;
 
 import tree.Term;
-import tree.operators.Minus;
-import tree.operators.Plus;
+import tree.functions.Minus;
+import tree.functions.Plus;
 import tree.simple.Number;
 
 public class PlusMinus {

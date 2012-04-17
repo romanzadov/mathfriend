@@ -1,10 +1,10 @@
-package tree.operators;
+package tree.functions;
 
 import display.rectangle;
 import tree.*;
 
 
-public class Negative extends Operator{
+public class Negative extends Function {
 	
 	
 	public Negative(){

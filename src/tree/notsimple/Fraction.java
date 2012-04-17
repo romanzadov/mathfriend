@@ -5,8 +5,8 @@ import parse.ParseUtil;
 
 import representTerms.Image;
 import tree.Term;
-import tree.operators.Divide;
-import tree.operators.Minus;
+import tree.functions.Divide;
+import tree.functions.Minus;
 import tree.simple.Number;
 import display.rectangle;
 

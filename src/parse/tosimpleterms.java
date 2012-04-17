@@ -1,7 +1,7 @@
 package parse;
 import java.util.ArrayList;
 
-import tree.operators.Operator;
+import tree.functions.Function;
 import tree.simple.SimpleTerm;
 import tree.simple.Variable;
 
@@ -9,7 +9,7 @@ public class tosimpleterms {
 
 	public ArrayList<SimpleTerm> simples;
 	public int placeholder = 0;
-	public Operator op = null;
+	public Function op = null;
 	 boolean donenum=false;
 
 	public ArrayList<SimpleTerm> simplify(ArrayList<Character> formula){
@@ -20,8 +20,8 @@ public class tosimpleterms {
 				if(formula.size()-i>4){
 					char[] three = {ch,formula.get(i+1),formula.get(i+2)};
 					String tr = new String(three);
-					for(int j = 0; j<Operator.KNOWNFUNCTIONS.length;j++){
-						if(Operator.KNOWNFUNCTIONS[i]==tr){
+					for(int j = 0; j< Function.KNOWNFUNCTIONS.length;j++){
+						if(Function.KNOWNFUNCTIONS[i]==tr){
 							//fill in what to do with things like sin, cos
 							System.out.println("you put in an unhandled function");
 						}

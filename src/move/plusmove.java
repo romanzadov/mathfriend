@@ -2,9 +2,9 @@ package move;
 
 import move.identify.selectterm;
 import tree.Term;
-import tree.operators.Equality;
-import tree.operators.Operator;
-import tree.operators.Plus;
+import tree.functions.Equality;
+import tree.functions.Function;
+import tree.functions.Plus;
 import display.point;
 
 public class plusmove {
@@ -22,8 +22,8 @@ public class plusmove {
 			
 			}
 		}
-		if(!(selected instanceof Operator) && 
-				!(endterm instanceof Operator))
+		if(!(selected instanceof Function) &&
+				!(endterm instanceof Function))
 		   	{
 			System.out.println("try to move");
 			main = move(main, selected, endterm);}

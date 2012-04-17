@@ -3,7 +3,7 @@ package container.walks;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.Parens;
+import tree.functions.Parens;
 
 public class killparens  implements TreeFunction{
 

@@ -1,9 +1,9 @@
-package tree.operators;
+package tree.functions;
 
 import display.rectangle;
 import tree.*;
 
-public class Divide extends Operator{
+public class Divide extends Function {
 
 	public String todraw = "/";
 	

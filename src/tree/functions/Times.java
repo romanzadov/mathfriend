@@ -1,4 +1,4 @@
-package tree.operators;
+package tree.functions;
 
 import container.AllignFracBar;
 
@@ -10,7 +10,7 @@ import representTerms.Image;
 import display.rectangle;
 import tree.*;
 
-public class Times extends Operator{
+public class Times extends Function {
 
 	public boolean visible = false;
 	

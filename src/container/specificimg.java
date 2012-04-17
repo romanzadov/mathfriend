@@ -1,7 +1,7 @@
 package container;
 
 import tree.Term;
-import tree.operators.Operator;
+import tree.functions.Function;
 import tree.simple.SimpleTerm;
 //import android.util.Log;
 import display.rectangle;
@@ -34,7 +34,7 @@ public class specificimg {
 		//once all terms are rectangled, call
 		//the operation to make superrectangle
 		
-		Operator op = ter.getOperator();
+		Function op = ter.getOperator();
 		if(op!=null){
 		rect = op.giverect(ter);}
 		else {

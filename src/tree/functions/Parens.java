@@ -1,4 +1,4 @@
-package tree.operators;
+package tree.functions;
 
 import tree.Term;
 import tree.simple.SimpleTerm;
@@ -13,23 +13,8 @@ public class Parens extends SimpleTerm {
 		return ""+value;
 	}
 
-	public void setvalue(Character v){
-		value = v;
-		if(value.equals('(')){
-			rmult = false;
-			lmult = true;
-		}
-
-		if(value.equals(')')){
-			rmult = true;
-			lmult = false;
-		}
-	}
-
-
 	public boolean isoperator(){
-		boolean a = false;
-		return a;
+		return false;
 	}
 
 

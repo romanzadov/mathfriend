@@ -1,8 +1,8 @@
 package ghosts;
 
 import tree.Term;
-import tree.operators.Divide;
-import tree.operators.Times;
+import tree.functions.Divide;
+import tree.functions.Times;
 
 public class SanitizeNegative {
 

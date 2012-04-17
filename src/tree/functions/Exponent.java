@@ -1,9 +1,9 @@
-package tree.operators;
+package tree.functions;
 import container.walks.fontize;
 import display.rectangle;
 import tree.*;
 
-public class Exponent extends Operator{
+public class Exponent extends Function {
 	
 	public Exponent()
 	{

@@ -3,7 +3,7 @@ package ghosts;
 import container.walks.FindSel;
 import representTerms.Image;
 import tree.Term;
-import tree.operators.*;
+import tree.functions.*;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
@@ -46,9 +46,9 @@ public class GhostImage {
 			if(IntermIndex!=Integer.MAX_VALUE  && selIndex != IntermIndex){
 
 				SwitchMe = sel.getParent().getChildren().get(IntermIndex);
-				if(!(SwitchMe instanceof Operator)
+				if(!(SwitchMe instanceof Function)
 						&& !(SwitchMe instanceof Parens)){
-					Operator op = sel.getParent().getOperator();
+					Function op = sel.getParent().getOperator();
 					Ghost = op.inTermMoves(im, sel, IntermIndex);
 					//					Log.d(TAG, "index: "+IntermIndex+" sel: "+sel.toString()+" Ghost: "+Ghost);
 				}
@@ -91,7 +91,7 @@ public class GhostImage {
 //			Log.d(TAG, "sel: "+selindex+" interm: "+IntermIndex);
 			if(IntermIndex != Integer.MAX_VALUE && selindex!=IntermIndex){
 				SwitchMe = sel.getParent().getParent().getChildren().get(IntermIndex);
-				Operator op = sel.getParent().getOperator();
+				Function op = sel.getParent().getOperator();
 				Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 			}
@@ -115,7 +115,7 @@ public class GhostImage {
 					}
 					if(IntermIndex != Integer.MAX_VALUE){
 						SwitchMe = sel.getParent().getParent().getParent().getChildren().get(IntermIndex);
-						Operator op = sel.getParent().getOperator();
+						Function op = sel.getParent().getOperator();
 						Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 					}

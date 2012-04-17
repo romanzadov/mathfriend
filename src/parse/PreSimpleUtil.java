@@ -1,10 +1,9 @@
 package parse;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
 
-import tree.operators.Operator;
+import tree.functions.Function;
 import tree.simple.Constants;
 
 public class PreSimpleUtil {
@@ -48,11 +47,7 @@ public class PreSimpleUtil {
 
         int out = i;
 
-<<<<<<< HEAD
-        for (Constant constant : EnumSet.allOf(Constant.class)) {
-=======
         for (Constants.Constant constant : Constants.getAllConstants()) {
->>>>>>> 3600f6ea83023b5530b96a4092cc0f26c0e76ae3
             char[] name = constant.getName().toCharArray();
             int falses = 0;
 
@@ -86,8 +81,8 @@ public class PreSimpleUtil {
 
         int out = i;
 
-        for (int j = 0; j < Operator.KNOWNFUNCTIONS.length; j++) {
-            String con = Operator.KNOWNFUNCTIONS[j];
+        for (int j = 0; j < Function.KNOWNFUNCTIONS.length; j++) {
+            String con = Function.KNOWNFUNCTIONS[j];
             char[] cons = con.toCharArray();
             int falses = 0;
 

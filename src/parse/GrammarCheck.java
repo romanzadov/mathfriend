@@ -3,7 +3,7 @@ package parse;
 import java.util.ArrayList;
 
 
-import tree.operators.Operator;
+import tree.functions.Function;
 
 
 public class GrammarCheck {
@@ -24,9 +24,9 @@ public class GrammarCheck {
 			else if (formula.get(i).equals(')')){
 				rights++;
 			}
-			for(int j = 0; j<Operator.NOTFUNCTIONS.length; j++){
-				if(formula.get(i).equals(Operator.NOTFUNCTIONS[j])){
-					bad.add(Operator.NOTFUNCTIONS[j]);
+			for(int j = 0; j< Function.NOTFUNCTIONS.length; j++){
+				if(formula.get(i).equals(Function.NOTFUNCTIONS[j])){
+					bad.add(Function.NOTFUNCTIONS[j]);
 				}
 			}
 			

@@ -3,8 +3,8 @@ package move;
 import move.identify.selectterm;
 import representTerms.Image;
 import tree.Term;
-import tree.operators.Equality;
-import tree.operators.Operator;
+import tree.functions.Equality;
+import tree.functions.Function;
 
 public class equalmove {
 	
@@ -29,8 +29,8 @@ public class equalmove {
 			}
 			
 			if(move){
-				if(!(over instanceof Operator)
-						&&!(selected instanceof Operator)){
+				if(!(over instanceof Function)
+						&&!(selected instanceof Function)){
 				tr = switchedterm(tr, selectedplace, overplace);
 				}
 			}

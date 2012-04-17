@@ -1,8 +1,8 @@
-package tree.operators;
+package tree.functions;
 
 import tree.Term;
 
-public class AdvancedOperator extends Operator{
+public class AdvancedFunction extends Function {
 
     @Override
     public Term simpleOperation(Term term) {

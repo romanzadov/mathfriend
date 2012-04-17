@@ -8,7 +8,7 @@ import move.identify.TermMath;
 import move.identify.ReturnSel;
 import representTerms.Image;
 import tree.Term;
-import tree.operators.*;
+import tree.functions.*;
 import tree.simple.Number;
 
 public class TimesMove {
@@ -190,7 +190,7 @@ public class TimesMove {
 		if(recip.getParent().getParent().getOperator() instanceof Plus || recip.getParent().getParent().getOperator() instanceof Minus){
 			for(int i = 0; i< recip.getParent().getParent().getChildren().size(); i++){
 				Term kid = recip.getParent().getParent().getChildren().get(i);
-				if(!(kid instanceof Operator) && (kid != recip.getParent())){
+				if(!(kid instanceof Function) && (kid != recip.getParent())){
 					
 					Term clrecip = new Term();
 					try {
@@ -215,7 +215,7 @@ public class TimesMove {
 		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getOperator() instanceof Equals){
 			Term eq = recip.getParent().getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
-				if(!(eq.getChildren().get(i) instanceof Operator)&&i!=eqindex){
+				if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex){
 					Term recipcl =null;
 					try {
 						recipcl = (Term)recip.clone();
@@ -230,7 +230,7 @@ public class TimesMove {
 			
 			Term eq = regular.getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
-				if(!(eq.getChildren().get(i) instanceof Operator)&&i!=eqindex2){
+				if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex2){
 					Term recipcl =null;
 					try {
 						recipcl = (Term)recip.clone();

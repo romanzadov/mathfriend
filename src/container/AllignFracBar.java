@@ -3,7 +3,7 @@ package container;
 import display.rectangle;
 
 import tree.Term;
-import tree.operators.Divide;
+import tree.functions.Divide;
 
 public class AllignFracBar {
 

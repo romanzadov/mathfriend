@@ -3,8 +3,8 @@ package parse;
 import display.rectangle;
 import tree.downwalk;
 import tree.Term;
-import tree.operators.Divide;
-import tree.operators.Times;
+import tree.functions.Divide;
+import tree.functions.Times;
 import tree.simple.Number;
 import tree.downwalk.TreeFunction;
 

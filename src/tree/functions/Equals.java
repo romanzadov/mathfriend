@@ -1,4 +1,4 @@
-package tree.operators;
+package tree.functions;
 
 import display.point;
 import display.rectangle;
@@ -6,7 +6,7 @@ import representTerms.Image;
 import tree.*;
 import tree.simple.Number;
 
-public class Equals extends Operator{
+public class Equals extends Function {
 
 	String name = "=";
 

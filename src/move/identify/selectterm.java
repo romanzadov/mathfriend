@@ -1,7 +1,7 @@
 package move.identify;
 
 import tree.Term;
-import tree.operators.Operator;
+import tree.functions.Function;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
@@ -23,7 +23,7 @@ public class selectterm {
 		try {
 			if(!tr.isSimple() ){
 				for (int i = 0; i< tr.getChildren().size(); i++){
-					if(!(tr.getChildren().get(i) instanceof Operator)){
+					if(!(tr.getChildren().get(i) instanceof Function)){
 						boolean in = true;
 						rectangle ours = tr.getChildren().get(i).ScreenPosition.container;
 //						Log.d(TAG, ours.toString()+" click: ("+x+","+y+")");

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.Divide;
-import tree.operators.Times;
+import tree.functions.Divide;
+import tree.functions.Times;
 import tree.simple.Placeholder;
 import tree.simple.Number;
 

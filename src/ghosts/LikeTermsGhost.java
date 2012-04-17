@@ -7,8 +7,8 @@ import representTerms.Image;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.Minus;
-import tree.operators.Plus;
+import tree.functions.Minus;
+import tree.functions.Plus;
 import display.point;
 
 public class LikeTermsGhost implements TreeFunction{

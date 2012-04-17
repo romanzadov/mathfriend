@@ -1,9 +1,9 @@
-package tree.operators;
+package tree.functions;
 import display.rectangle;
 import representTerms.Image;
 import tree.Term;
 
-public class Minus extends Operator {
+public class Minus extends Function {
 	
 	
 	public Minus(){

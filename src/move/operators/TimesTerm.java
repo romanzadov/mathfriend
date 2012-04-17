@@ -3,7 +3,7 @@ package move.operators;
 import representTerms.Image;
 import tree.Term;
 import tree.notsimple.Fraction;
-import tree.operators.*;
+import tree.functions.*;
 
 public class TimesTerm {
 
@@ -15,7 +15,7 @@ public class TimesTerm {
 
 		else if(tr.getOperator() instanceof Plus || tr.getOperator() instanceof Minus){
 			for(int i = 0; i< tr.getChildren().size(); i++){
-				if(!(tr.getChildren().get(i) instanceof Operator)){
+				if(!(tr.getChildren().get(i) instanceof Function)){
 
 					Term resel = null;
 					try {

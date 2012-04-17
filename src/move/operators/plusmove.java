@@ -1,17 +1,7 @@
 package move.operators;
 
-import java.util.ArrayList;
-
-import move.identify.FindSel;
-import move.identify.ReturnSel;
-import representTerms.Image;
-import tree.Term;
-import tree.operators.Minus;
-import tree.operators.Operator;
-import tree.operators.Plus;
 //import android.util.Log;
-import display.point;
-import display.rectangle;
+
 
 public class PlusMove {/*
 

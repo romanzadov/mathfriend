@@ -1,10 +1,10 @@
 package tree;
 
-import tree.operators.Exponent;
-import tree.operators.Minus;
-import tree.operators.Negative;
-import tree.operators.Plus;
-import tree.operators.Times;
+import tree.functions.Exponent;
+import tree.functions.Minus;
+import tree.functions.Negative;
+import tree.functions.Plus;
+import tree.functions.Times;
 import tree.downwalk.TreeFunction;
 
 public class newparens implements TreeFunction {

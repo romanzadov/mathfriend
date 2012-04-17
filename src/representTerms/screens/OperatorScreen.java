@@ -8,13 +8,13 @@ import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
 import representTerms.TouchData.TouchType;
-import tree.operators.Operator;
+import tree.functions.Function;
 
 
 public class OperatorScreen implements AbstractedScreen{
 
 	
-	public Operator operator;
+	public Function operator;
 	Image sel;
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
 	int timesTapped = 0;

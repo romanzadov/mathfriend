@@ -10,7 +10,7 @@ import representTerms.Image;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.Times;
+import tree.functions.Times;
 
 public class MultiplyGhost implements TreeFunction{
 

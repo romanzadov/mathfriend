@@ -1,13 +1,13 @@
 package move.operators;
 
 import tree.Term;
-import tree.operators.Minus;
-import tree.operators.Operator;
-import tree.operators.Plus;
+import tree.functions.Minus;
+import tree.functions.Function;
+import tree.functions.Plus;
 
 public class AddBothSides {
 
-	public Term AddX(Term tr, Term sel, Operator op){
+	public Term AddX(Term tr, Term sel, Function op){
 		Term second = null;
 		
 		try {

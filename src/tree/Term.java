@@ -12,7 +12,7 @@ import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
 import tree.notsimple.MultiplyFractions;
 import tree.notsimple.NegativeTerm;
-import tree.operators.*;
+import tree.functions.*;
 import tree.simple.Number;
 import tree.simple.Constants;
 import tree.simple.SimpleTerm;
@@ -22,7 +22,7 @@ import display.rectangle;
 public class Term implements Cloneable, TreeFunction{
 
 	private Term parent;
-	private Operator operator;
+	private Function operator;
 	private ArrayList<Term> children = new ArrayList<Term>();
 	private rectangle container = new rectangle();
 	private boolean hasParentheses;
@@ -566,11 +566,11 @@ public class Term implements Cloneable, TreeFunction{
 
     }
 
-    public Operator getOperator() {
+    public Function getOperator() {
         return operator;
     }
 
-    public void setOperator(Operator operator) {
+    public void setOperator(Function operator) {
         this.operator = operator;
     }
 

@@ -1,14 +1,18 @@
-package tree.operators;
+package tree.functions;
 
-
+import parse.PreSimpleTerm;
 import representTerms.Image;
 import tree.Term;
 import tree.notsimple.Equation;
 import tree.simple.SimpleTerm;
 import display.rectangle;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class Operator extends SimpleTerm {
+
+public abstract class Function extends SimpleTerm {
 
 
 
@@ -18,7 +22,7 @@ public abstract class Operator extends SimpleTerm {
 	public boolean distributive;
 	public boolean associative;
 	public float identity;
-	public double orderofoperation;
+	private static double orderofoperation;
 	public boolean lmult;
 	public boolean rmult;
 
@@ -26,6 +30,10 @@ public abstract class Operator extends SimpleTerm {
 			"+","-","*","/","^","=","<",">",	
 			"tan","csc","cot","log","ln"}; 
 	final static public Character[] NOTFUNCTIONS = {'!', '@', '#', '$', '%', ',','~', '|'};
+    final static public Map<PreSimpleTerm.FunctionType, Class<Function>> PRE_SIMPLE_TERM_TO_FUNCTION = new HashMap<PreSimpleTerm.FunctionType, Class<Function>>();
+    {
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.PLUS, Plus.class);
+    }
 	public String thisvalue;
 	public int charpos;
 	
@@ -41,11 +49,15 @@ public abstract class Operator extends SimpleTerm {
 
     public abstract Term simpleOperation(Term term);
 
-	public Operator setconstants(Operator a){
+	public Function setconstants(Function a){
 		a.thisvalue = thisvalue;
 		a.charpos = charpos;
 		return a;
 	}
+
+    public double getOrderOfOperation() {
+        return orderofoperation;
+    }
 
 	public boolean equals(Object a)
 	{
@@ -90,9 +102,13 @@ public abstract class Operator extends SimpleTerm {
 	
 	public abstract Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel);
 
-	public Equation ToBothSides(Equation eq, Operator op, Term sel) {
+	public Equation ToBothSides(Equation eq, Function op, Term sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}
+
+    public int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
+
+    }
 	
 }

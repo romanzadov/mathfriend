@@ -6,7 +6,7 @@ import representTerms.StringRectangle;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.operators.Divide;
+import tree.functions.Divide;
 
 public class stringofrects implements TreeFunction{
 
