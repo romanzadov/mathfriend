@@ -30,9 +30,15 @@ public abstract class Function extends SimpleTerm {
 			"+","-","*","/","^","=","<",">",	
 			"tan","csc","cot","log","ln"}; 
 	final static public Character[] NOTFUNCTIONS = {'!', '@', '#', '$', '%', ',','~', '|'};
-    final static public Map<PreSimpleTerm.FunctionType, Class<Function>> PRE_SIMPLE_TERM_TO_FUNCTION = new HashMap<PreSimpleTerm.FunctionType, Class<Function>>();
+    final static public Map<PreSimpleTerm.FunctionType, Class<? extends Function>> PRE_SIMPLE_TERM_TO_FUNCTION = new HashMap<PreSimpleTerm.FunctionType, Class<? extends Function>>();
     {
         PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.PLUS, Plus.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.MINUS, Plus.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.TIMES, Times.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.DIVIDE, Times.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.EXPONENT, Exponent.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.EQUALITY, Equality.class);
+        //TODO add the rest of the mappings
     }
 	public String thisvalue;
 	public int charpos;
@@ -108,7 +114,7 @@ public abstract class Function extends SimpleTerm {
 	}
 
     public int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
-
+        return 0; //TODO finish
     }
 	
 }
