@@ -37,10 +37,10 @@ public class GroupFractions  implements TreeFunction{
 			for(int j = 0; j<dividespots.size(); j++){
 				
 				int i = dividespots.get(j);
-					tr.setOperator(new Times());
+					tr.setFunction(new Times());
 				
 					Term mid = new Term();
-					mid.setOperator(new Divide());
+					mid.setFunction(new Divide());
 					mid.setParent(tr);
 					mid.getChildren().add(tr.getChildren().get(i-1));
 					mid.getChildren().add(tr.getChildren().get(i));

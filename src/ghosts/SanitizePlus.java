@@ -25,7 +25,7 @@ public class SanitizePlus {
 			
 		}
 		if(haszero){
-			if((tr.getOperator() instanceof Plus)||(tr.getOperator() instanceof Minus)){
+			if((tr.getFunction() instanceof Plus)||(tr.getFunction() instanceof Minus)){
 				if(tr.getChildren().size()>1){
 					if(pos > 0){
 						tr.getChildren().remove(pos-1);

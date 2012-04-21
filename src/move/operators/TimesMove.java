@@ -87,7 +87,7 @@ public class TimesMove {
 		Image Ghost = null;
 		
 		boolean selfraction =  false;
-		if(sel.getOperator() instanceof Times || sel.getOperator() instanceof Divide){
+		if(sel.getFunction() instanceof Times || sel.getFunction() instanceof Divide){
 			if(sel.getChildren().size() == 3){
 				if(sel.getChildren().get(1) instanceof Divide){
 					selfraction = true;
@@ -136,7 +136,7 @@ public class TimesMove {
 			mid.getChildren().add(one);
 			mid.getChildren().add(div);
 			mid.getChildren().add(recip);
-			mid.setOperator(div);
+			mid.setFunction(div);
 			
 			one.setParent(div.setParent(recip.setParent(mid)));
 			
@@ -187,7 +187,7 @@ public class TimesMove {
 		
 	
 		
-		if(recip.getParent().getParent().getOperator() instanceof Plus || recip.getParent().getParent().getOperator() instanceof Minus){
+		if(recip.getParent().getParent().getFunction() instanceof Plus || recip.getParent().getParent().getFunction() instanceof Minus){
 			for(int i = 0; i< recip.getParent().getParent().getChildren().size(); i++){
 				Term kid = recip.getParent().getParent().getChildren().get(i);
 				if(!(kid instanceof Function) && (kid != recip.getParent())){
@@ -212,7 +212,7 @@ public class TimesMove {
 		}
 		
 		// next, do the other side of the equals
-		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getOperator() instanceof Equals){
+		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getFunction() instanceof Equals){
 			Term eq = recip.getParent().getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
 				if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex){
@@ -226,7 +226,7 @@ public class TimesMove {
 			}
 		}
 		
-		else if(regular.getParent().getParent() !=null && regular.getParent().getParent().getOperator() instanceof Equals){
+		else if(regular.getParent().getParent() !=null && regular.getParent().getParent().getFunction() instanceof Equals){
 			
 			Term eq = regular.getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){

@@ -11,7 +11,7 @@ public class NegativeTerm extends NotSimple{
 	public NegativeTerm(Term tr){
 		if(canConstruct(tr)){
 			Negative n = new Negative();
-			this.setOperator(n);
+			this.setFunction(n);
 			n = new Negative();
 
 	//		Number minusone = new Number(-1);
@@ -34,7 +34,7 @@ public class NegativeTerm extends NotSimple{
 
 	public void makeNegative(Term tr){
 		Negative n = new Negative();
-		this.setOperator(n);
+		this.setFunction(n);
 		n = new Negative();
 		
 		this.setNegative(true);

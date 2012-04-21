@@ -21,21 +21,21 @@ public class newparens implements TreeFunction {
 	public void performAction(Term tr) {
 		
 		//parentheses around multiplied terms
-		if(tr.getParent().getOperator() instanceof Times|| tr.getParent().getOperator() instanceof Negative){
+		if(tr.getParent().getFunction() instanceof Times|| tr.getParent().getFunction() instanceof Negative){
 			
-			if(tr.getOperator() instanceof Plus|| tr.getOperator() instanceof Minus){
+			if(tr.getFunction() instanceof Plus|| tr.getFunction() instanceof Minus){
 					tr.setHasParentheses(true);
 			}
 		}
 		//parentheses around exponents
-		else if(tr.getParent().getOperator() instanceof Exponent){
+		else if(tr.getParent().getFunction() instanceof Exponent){
 			if(!tr.getParent().getChildren().get(0).issimple){
 			 	tr.getParent().getChildren().get(0).setHasParentheses(true);
 			}
 		}
 		//parentheses around subtraction
-		else if(tr.getParent().getOperator() instanceof Plus || tr.getParent().getOperator() instanceof Minus){
-			if(tr.getOperator() instanceof Plus || tr.getOperator() instanceof Minus){
+		else if(tr.getParent().getFunction() instanceof Plus || tr.getParent().getFunction() instanceof Minus){
+			if(tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus){
 				if(!tr.issimple){
                     tr.setHasParentheses(true);}
 			}

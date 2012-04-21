@@ -102,8 +102,8 @@ public class Equals extends Function {
 		Term secondsel = second.getChildren().get(selindex);
 		Term moveto = second.getChildren().get(IntermIndex);
 
-		if((moveto.getOperator() instanceof Plus)||(moveto.getOperator() instanceof Minus)){
-			if(!(secondsel.getOperator() instanceof Plus)&&!(secondsel.getOperator() instanceof Minus)){
+		if((moveto.getFunction() instanceof Plus)||(moveto.getFunction() instanceof Minus)){
+			if(!(secondsel.getFunction() instanceof Plus)&&!(secondsel.getFunction() instanceof Minus)){
 				
 				Number zero = new Number(0);
 				zero.setParent(secondsel.getParent());
@@ -129,8 +129,8 @@ public class Equals extends Function {
 			}
 		}
 
-		else if(!(secondsel.getOperator() instanceof Plus)&&!(secondsel.getOperator() instanceof Minus)
-				&&!(moveto.getOperator() instanceof Plus)&&!(moveto.getOperator() instanceof Minus)
+		else if(!(secondsel.getFunction() instanceof Plus)&&!(secondsel.getFunction() instanceof Minus)
+				&&!(moveto.getFunction() instanceof Plus)&&!(moveto.getFunction() instanceof Minus)
 				&&!(selindex == IntermIndex)){
 		
 			if(secondsel.isNegative()){
@@ -142,7 +142,7 @@ public class Equals extends Function {
 				pl.setParent(mid);
 				mn.setParent(mid);
 				mid.setParent(secondsel.getParent());
-				mid.setOperator(pl);
+				mid.setFunction(pl);
 				zero.setParent(secondsel.getParent());
 				secondsel.setParent(moveto.setParent(mid));
 				mid.getParent().getChildren().set(selindex, zero);
@@ -161,7 +161,7 @@ public class Equals extends Function {
 				pl.setParent(mid);
 				mn.setParent(mid);
 				mid.setParent(secondsel.getParent());
-				mid.setOperator(pl);
+				mid.setFunction(pl);
 				zero.setParent(secondsel.getParent());
 				secondsel.setParent(moveto.setParent(mid));
 				mid.getParent().getChildren().set(selindex, zero);

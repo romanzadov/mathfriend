@@ -21,7 +21,9 @@ public class PreSimpleTerm {
         EQUALITY("="),
         SINE("sin"),
         COSINE("cos"),
-        LOG("log");
+        TANGENT("tan"),
+        LOG("log"),
+        LN("ln");
 
         private String representation;
 

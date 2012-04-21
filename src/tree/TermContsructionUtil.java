@@ -1,5 +1,7 @@
 package tree;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import parse.ParenthesisUtil;
 import parse.PreSimpleTerm;
@@ -10,42 +12,31 @@ import tree.simple.SimpleTerm;
 import tree.simple.Variable;
 
 
-public class TreeGen {
+public class TermContsructionUtil {
 
 	public ArrayList<Term> orgconts = new ArrayList<Term>();		//where we store simple terms to organize them before putting them in terms.
 	public ArrayList<Function> ops = new ArrayList<Function>();			//highest level operators
 	public ArrayList<Term> contents = new ArrayList<Term>();
 
 
-	public Term generateTree(ArrayList<PreSimpleTerm> preSimpleTerms) {
-
-		Term firstterm = generatenode(preSimpleTerms);
-//		newparens np =new newparens(firstterm);
-		return firstterm;
-	}
-
-
 	
-	public Term generatenode(ArrayList<PreSimpleTerm> simp){
+	/*public Term generatenode(List<PreSimpleTerm> simp){
 
 
 		Term term = new Term();
 
-		ArrayList<int[]> pns = ParenthesisUtil.getParenthesisGroups(simp);
 	//	simp = removeExcessParens(simp, pns);
 
 
 
 		//check if simple term
 		checksimples(term);
-		pns = ParenthesisUtil.getParenthesisGroups(simp);
 		//after multiplication is added, parens have to be recalculated
-		simp = removeExcessParens(simp, pns);
-		pns = ParenthesisUtil.getParenthesisGroups(simp);
+	//	simp = removeExcessParens(simp, pns);
 
-		Function primary = pickhighestpriority(simp,pns);
+		Function primary = getHighestPriorityFunction(simp);
 
-		term.setOperator(primary);
+		term.setFunction(primary);
 
 		rephrase(simp,primary);
 		term = setnode(term);
@@ -54,14 +45,14 @@ public class TreeGen {
 		digdown(term);
 
 		return term;
-	}
+	}*/
 
-	public ArrayList<SimpleTerm> removeExcessParens(ArrayList<SimpleTerm> simp, ArrayList<int[]> paren){
+	/*public ArrayList<SimpleTerm> removeExcessParens(List<SimpleTerm> simp){
 		boolean done = false;
 		boolean didsomething = false;
 		while(done == false){
-			paren = ParenthesisUtil.getParenthesisGroups(simp);
-			for(int i = 0; i<paren.size();i++){
+			Map<Integer, Integer> paren = ParenthesisUtil.getParenthesisGroups(simp);
+			*//*for(int i = 0; i<paren.size();i++){
 				if(paren.get(i)[0]==0 && paren.get(i)[1]==simp.size()-1){
 
 					simp.remove(0);
@@ -76,7 +67,7 @@ public class TreeGen {
 					paren.remove(i);
 					didsomething = true;
 				}
-			}
+			}*//*
 
 			if(didsomething==true)
 			{didsomething=false;}
@@ -85,9 +76,9 @@ public class TreeGen {
 
 
 		return simp;
-	}
+	}*/
 
-	public void rephrase(ArrayList<SimpleTerm> simp, Function primary){
+/*	public void rephrase(ArrayList<SimpleTerm> simp, Function primary){
 		
 		
 		int start = 0;
@@ -125,60 +116,45 @@ public class TreeGen {
 				}
 			}
 		}
-	}
+	}*/
 
-	public Function pickhighestpriority(ArrayList<PreSimpleTerm> preSimpleTerms,ArrayList<int[]> parens){
-		int primaryspot = 0;
-		double orderofoperation = Double.MIN_VALUE;
-		for(PreSimpleTerm preSimpleTerm: preSimpleTerms){
+	public static Class<? extends Function> getHighestPriorityFunction(List<PreSimpleTerm> preSimpleTerms){
+        PreSimpleTerm primaryPreFunction = null;
+		int order = Integer.MIN_VALUE;
+        Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
+
+		for(int i = 0; i < preSimpleTerms.size() ; i++){
+            PreSimpleTerm preSimpleTerm = preSimpleTerms.get(i);
 			if(preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)){
 
-				if(a.orderofoperation> orderofoperation){
-					primaryspot = i;
-					orderofoperation = a.orderofoperation;
+				if(Function.getOrderOfOperation(preSimpleTerm)> order){
+					primaryPreFunction = preSimpleTerm;
+					order = Function.getOrderOfOperation(preSimpleTerm);
 				}
 			}
-			//don't look for operators inside parens
-			else if(simp.get(i) instanceof Parens){
-				for(int j=0;j<parens.size();j++){
-					if(parens.get(j)[0]==i){ i=parens.get(j)[1]; }
-				}
-			}
-
-
-		}
-		Function primary;
-		try {
-			primary = (Function)simp.get(primaryspot);
-		} catch (Exception e) {
-			primary = new Plus();
-		}
-		
-		for(int i=0; i<simp.size();i++){
-			if(simp.get(i) instanceof Parens){
-				for(int j=0;j<parens.size();j++){
-					if(parens.get(j)[0]==i){ i=parens.get(j)[1]; }
-				}		
-			}
-			else if(simp.get(i) instanceof Function){
-				Function a = (Function)simp.get(i);
-				if(a.orderofoperation==primary.orderofoperation){
-					a.charpos=i;
-					ops.add(a);
-				}
+			//don't look for operators inside parentheses
+			else if(preSimpleTerm.getType().equals(PreSimpleTerm.Type.PARENTHESES)){
+                i = parentheses.get(i);
 			}
 		}
 
-
+		Class<? extends Function> primary = Function.PRE_SIMPLE_TERM_TO_FUNCTION.get(primaryPreFunction);
 		return primary;
 	}
 
+    public static List<PreSimpleTermGrouping> getGroupings(List<PreSimpleTerm> preSimpleTerms, Class<? extends Function> function) {
+        List<PreSimpleTermGrouping> groupings = new ArrayList<PreSimpleTermGrouping>();
+        for(PreSimpleTerm preSimpleTerm: preSimpleTerms) {
 
-	public void digdown(Term thisterm){
+        }
+        return groupings;
+    }
+
+	/*public void digdown(Term thisterm){
 		for(int i = 0;i< contents.size();i++){		//for any non simple term
 
 			Term child = new Term();
-			TreeGen tr = new TreeGen();
+			TermContsructionUtil tr = new TermContsructionUtil();
 
 			if(contents.get(i).isSimple()==false){
 				child = tr.generatenode(contents.get(i).simples);}
@@ -192,7 +168,7 @@ public class TreeGen {
 	}
 
 	public void checksimples(Term term){
-		if(term.getOperator() instanceof Negative){
+		if(term.getFunction() instanceof Negative){
 			term.setNegative(true);
 		}
 		
@@ -221,9 +197,9 @@ public class TreeGen {
 						parennumber++;
 					}
 				}
-/*				if(orgconts.get(i).simples.size()-parennumber<2){
+*//*				if(orgconts.get(i).simples.size()-parennumber<2){
 					orgconts.get(i).issimple = true;
-				}*/
+				}*//*
 			}
 		}
 	}
@@ -307,5 +283,5 @@ public class TreeGen {
 		return simp;
 	}
 
-
+*/
 }

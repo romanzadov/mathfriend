@@ -1,5 +1,6 @@
 package tree.functions;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import parse.PreSimpleTerm;
 import representTerms.Image;
 import tree.Term;
@@ -7,9 +8,7 @@ import tree.notsimple.Equation;
 import tree.simple.SimpleTerm;
 import display.rectangle;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public abstract class Function extends SimpleTerm {
@@ -22,13 +21,10 @@ public abstract class Function extends SimpleTerm {
 	public boolean distributive;
 	public boolean associative;
 	public float identity;
-	private static double orderofoperation;
 	public boolean lmult;
 	public boolean rmult;
 
-	final static public String[] KNOWNFUNCTIONS = {"sin","cos",
-			"+","-","*","/","^","=","<",">",	
-			"tan","csc","cot","log","ln"}; 
+	final static public String[] KNOWN_FUNCTIONS = {"+","-","*","/","^","=", "sin", "cos", "tan", "log", "ln"};
 	final static public Character[] NOTFUNCTIONS = {'!', '@', '#', '$', '%', ',','~', '|'};
     final static public Map<PreSimpleTerm.FunctionType, Class<? extends Function>> PRE_SIMPLE_TERM_TO_FUNCTION = new HashMap<PreSimpleTerm.FunctionType, Class<? extends Function>>();
     {
@@ -36,9 +32,22 @@ public abstract class Function extends SimpleTerm {
         PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.MINUS, Plus.class);
         PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.TIMES, Times.class);
         PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.DIVIDE, Times.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.NEGATIVE, Times.class);
         PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.EXPONENT, Exponent.class);
         PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.EQUALITY, Equality.class);
-        //TODO add the rest of the mappings
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.SINE, AdvancedFunction.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.COSINE, AdvancedFunction.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.TANGENT, AdvancedFunction.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.LOG, AdvancedFunction.class);
+        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.LN, AdvancedFunction.class);
+    }
+    final static public List<Class<? extends Function>> ORDER_OF_OPERATIONS = new ArrayList<Class<? extends Function>>();
+    {
+        ORDER_OF_OPERATIONS.add(Equality.class);
+        ORDER_OF_OPERATIONS.add(Plus.class);
+        ORDER_OF_OPERATIONS.add(Times.class);
+        ORDER_OF_OPERATIONS.add(Exponent.class);
+        ORDER_OF_OPERATIONS.add(AdvancedFunction.class);
     }
 	public String thisvalue;
 	public int charpos;
@@ -60,10 +69,6 @@ public abstract class Function extends SimpleTerm {
 		a.charpos = charpos;
 		return a;
 	}
-
-    public double getOrderOfOperation() {
-        return orderofoperation;
-    }
 
 	public boolean equals(Object a)
 	{
@@ -113,8 +118,12 @@ public abstract class Function extends SimpleTerm {
 		return eq;
 	}
 
-    public int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
-        return 0; //TODO finish
+    public static int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
+        return ORDER_OF_OPERATIONS.indexOf(PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm));
+    }
+
+    public static Class<? extends Function> getFunction(PreSimpleTerm preSimpleTerm) {
+        return PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm);
     }
 	
 }

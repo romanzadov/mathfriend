@@ -15,7 +15,7 @@ public class Equation extends NotSimple{
 
 		try {
 			if(tr.getChildren().size()!=3){okay = false;}
-			if(!(tr.getOperator() instanceof Equals)){okay = false;}
+			if(!(tr.getFunction() instanceof Equals)){okay = false;}
 			if(tr.getChildren().get(1) instanceof Equals){okay = false;}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -47,7 +47,7 @@ public class Equation extends NotSimple{
 
 		try {
 			if(tr.getChildren().size()!=3){okay = false;}
-			if(!(tr.getOperator() instanceof Equals)){okay = false;}
+			if(!(tr.getFunction() instanceof Equals)){okay = false;}
 			if(tr.getChildren().get(1) instanceof Equals){okay = false;}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

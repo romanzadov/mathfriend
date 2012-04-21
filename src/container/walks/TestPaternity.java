@@ -25,7 +25,7 @@ public class TestPaternity implements TreeFunction{
 					if(place == -1){
 					}
 				}
-				if(tr.getOperator() == null){
+				if(tr.getFunction() == null){
 				}
 			}
 

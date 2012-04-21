@@ -27,7 +27,7 @@ public class OperatorScreen implements AbstractedScreen{
 	
 	@Override
 	public void updateMainImage(Image main) {
-		operator = main.tr.getOperator();
+		operator = main.tr.getFunction();
 		sel = main;
 		touches.clear();
 	//	resetTimesTapped();

@@ -5,10 +5,8 @@ import java.util.List;
 
 import container.walks.AssignScreenPositions;
 
-import container.walks.TestPaternity;
 import parse.*;
 import representTerms.StringRectangle;
-import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
 import tree.notsimple.MultiplyFractions;
 import tree.notsimple.NegativeTerm;
@@ -16,17 +14,17 @@ import tree.functions.*;
 import tree.simple.Number;
 import tree.simple.Constants;
 import tree.simple.SimpleTerm;
-//import android.util.Log;
 import display.rectangle;
 
-public class Term implements Cloneable, TreeFunction{
+public class Term implements Cloneable, upwalk.TreeFunction{
 
 	private Term parent;
-	private Function operator;
+	private Class<? extends Function> function;
 	private ArrayList<Term> children = new ArrayList<Term>();
 	private rectangle container = new rectangle();
 	private boolean hasParentheses;
 	private boolean isNegative = false;
+
 	private String valueString;
 	private float scaleFactor =1;
 	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
@@ -38,13 +36,29 @@ public class Term implements Cloneable, TreeFunction{
     public Term(String st) {
         ArrayList<Character> characters = ParseCharacterUtil.getCharacterArrayFromString(st);
         PreSimpleUtil preSimpleUtil = new PreSimpleUtil();
-        List<PreSimpleTerm> simp = preSimpleUtil.simplify(characters);
-        TreeGen tr = new TreeGen();
-        this = tr.generateTree(simp);
-        GroupFractions GF = new GroupFractions(this);
-        CastToNonSimple CT = new CastToNonSimple(this);
-        TestPaternity tp = new TestPaternity(this);
+        List<PreSimpleTerm> preSimpleTerms = preSimpleUtil.simplify(characters);
+        this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
+        List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+
     }
+
+    private Term(List<PreSimpleTerm> preSimpleTerms) {
+        this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
+        List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+    }
+
+    public Term(boolean hasParentheses, boolean isNegative, Class<? extends Function> function, List<List<PreSimpleTerm>> preSimpleTermLists) {
+        this.hasParentheses = hasParentheses;
+        this.setNegative(isNegative);
+        this.function = function;
+        for(List<PreSimpleTerm> preSimpleTerms: preSimpleTermLists) {
+            children.add(new Term(preSimpleTerms));
+        }
+    }
+
+
+
+
 
     public boolean isSimple() {
         if (this instanceof SimpleTerm) {
@@ -276,7 +290,7 @@ public class Term implements Cloneable, TreeFunction{
 	public boolean SimpleCompound(){
 		Term tr = this;
 		boolean simp = false;
-		if((tr.getOperator() !=null)&&(tr.getOperator() instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
+		if((tr.getFunction() !=null)&&(tr.getFunction() instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
 			boolean insidessimp = true;
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(!tr.getChildren().get(i).isSimple()){
@@ -395,7 +409,7 @@ public class Term implements Cloneable, TreeFunction{
 		if(tr.isInteger()){
 			rational = true;
 		}
-		else if (tr.getOperator() instanceof Divide && tr.getChildren().size() == 3 &&
+		else if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			rational = true;
 		}
@@ -405,7 +419,7 @@ public class Term implements Cloneable, TreeFunction{
 	public boolean isSimpleFraction(){
 		Term tr = this;
 		boolean fraction = false;
-		if (tr.getOperator() instanceof Divide && tr.getChildren().size() == 3 &&
+		if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			fraction = true;
 		}
@@ -421,7 +435,7 @@ public class Term implements Cloneable, TreeFunction{
 		else if(tr instanceof Fraction){
 			fraction = true;
 		}
-		else if(tr.getOperator() instanceof Divide && tr.getChildren().size() == 3 ){
+		else if(tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 ){
 			fraction = true;
 		}
 		
@@ -489,8 +503,8 @@ public class Term implements Cloneable, TreeFunction{
 
 	public boolean isNegative() {
 		boolean ans = false;
-		if(this.getOperator() != null){
-			if(this.getOperator() instanceof Negative){
+		if(this.getFunction() != null){
+			if(this.getFunction() instanceof Negative){
 				ans= true;
 			}
 
@@ -548,7 +562,7 @@ public class Term implements Cloneable, TreeFunction{
 	private Term getResultOfBasicOperation(){
 
 		if(!this.isSimple()){
-			Term result = this.getOperator().simpleOperation(this);
+			Term result = this.getFunction().simpleOperation(this);
 
 			return result;}
 		else{
@@ -566,12 +580,8 @@ public class Term implements Cloneable, TreeFunction{
 
     }
 
-    public Function getOperator() {
-        return operator;
-    }
-
-    public void setOperator(Function operator) {
-        this.operator = operator;
+    public Class<? extends Function> getFunction() {
+        return function;
     }
 
     public rectangle getContainer() {

@@ -116,7 +116,7 @@ public class Times extends Function {
 		rectangle thiscont = cf.tofracs(tr, places, barheight);
 		tr.setContainer(thiscont);
 		boolean thisfrac = false;
-		if(tr.getChildren().size() == 3 && tr.getOperator() instanceof Divide){
+		if(tr.getChildren().size() == 3 && tr.getFunction() instanceof Divide){
 			thisfrac = true;
 		}
 		if(!thisfrac){

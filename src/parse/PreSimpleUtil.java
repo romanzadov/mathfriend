@@ -81,8 +81,8 @@ public class PreSimpleUtil {
 
         int out = i;
 
-        for (int j = 0; j < Function.KNOWNFUNCTIONS.length; j++) {
-            String con = Function.KNOWNFUNCTIONS[j];
+        for (int j = 0; j < Function.KNOWN_FUNCTIONS.length; j++) {
+            String con = Function.KNOWN_FUNCTIONS[j];
             char[] cons = con.toCharArray();
             int falses = 0;
 

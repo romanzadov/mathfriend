@@ -21,7 +21,7 @@ public class composefractions implements TreeFunction{
 
 	public void performAction(Term tr) {
 		//sets terms to be down or up terms in a division situtation
-		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
+		if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 		
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i) instanceof Divide){

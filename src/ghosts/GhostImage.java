@@ -48,7 +48,7 @@ public class GhostImage {
 				SwitchMe = sel.getParent().getChildren().get(IntermIndex);
 				if(!(SwitchMe instanceof Function)
 						&& !(SwitchMe instanceof Parens)){
-					Function op = sel.getParent().getOperator();
+					Function op = sel.getParent().getFunction();
 					Ghost = op.inTermMoves(im, sel, IntermIndex);
 					//					Log.d(TAG, "index: "+IntermIndex+" sel: "+sel.toString()+" Ghost: "+Ghost);
 				}
@@ -75,8 +75,8 @@ public class GhostImage {
 		int selindex = 0;
 		if((sel.getParent() !=null)&&
 				(sel.getParent().getParent() !=null)&&
-				(sel.getParent().getParent().getOperator() !=null)&&
-				(sel.getParent().getParent().getOperator() instanceof Equality)){
+				(sel.getParent().getParent().getFunction() !=null)&&
+				(sel.getParent().getParent().getFunction() instanceof Equality)){
 
 			selindex = sel.getParent().getParent().getChildren().indexOf(sel.getParent());
 			
@@ -91,7 +91,7 @@ public class GhostImage {
 //			Log.d(TAG, "sel: "+selindex+" interm: "+IntermIndex);
 			if(IntermIndex != Integer.MAX_VALUE && selindex!=IntermIndex){
 				SwitchMe = sel.getParent().getParent().getChildren().get(IntermIndex);
-				Function op = sel.getParent().getOperator();
+				Function op = sel.getParent().getFunction();
 				Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 			}
@@ -100,10 +100,10 @@ public class GhostImage {
 
 
 		if(sel.getParent() !=null &&
-				(sel.getParent().getOperator() instanceof Times || sel.getParent().getOperator() instanceof Divide)){
-			if(sel.getParent().getParent() != null && (sel.getParent().getParent().getOperator() instanceof Plus
-					|| sel.getParent().getParent().getOperator() instanceof Minus)){
-				if(sel.getParent().getParent().getParent() != null && sel.getParent().getParent().getParent().getOperator() instanceof Equality){
+				(sel.getParent().getFunction() instanceof Times || sel.getParent().getFunction() instanceof Divide)){
+			if(sel.getParent().getParent() != null && (sel.getParent().getParent().getFunction() instanceof Plus
+					|| sel.getParent().getParent().getFunction() instanceof Minus)){
+				if(sel.getParent().getParent().getParent() != null && sel.getParent().getParent().getParent().getFunction() instanceof Equality){
 
 					for (int i = 0; i< sel.getParent().getParent().getParent().getChildren().size(); i++){
 						rectangle a = sel.getParent().getParent().getParent().getChildren().get(i).getContainer();
@@ -115,7 +115,7 @@ public class GhostImage {
 					}
 					if(IntermIndex != Integer.MAX_VALUE){
 						SwitchMe = sel.getParent().getParent().getParent().getChildren().get(IntermIndex);
-						Function op = sel.getParent().getOperator();
+						Function op = sel.getParent().getFunction();
 						Ghost = op.overEqualsMoves(im, sel, IntermIndex, xsel);
 
 					}

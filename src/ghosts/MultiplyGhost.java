@@ -70,7 +70,7 @@ public class MultiplyGhost implements TreeFunction{
 
 	public void performAction(Term tr) {
 		if(aTIMESb == null){
-			if(tr.getOperator() !=null && (tr.getOperator() instanceof Times)){
+			if(tr.getFunction() !=null && (tr.getFunction() instanceof Times)){
 
 				Term ans = null;
 				boolean stop = false;

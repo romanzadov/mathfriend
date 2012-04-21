@@ -86,7 +86,7 @@ public class LikeTermsGhost implements TreeFunction{
 
 	public void performAction(Term tr) {
 		if(aPLUSb == null){
-			if(tr.getOperator() !=null && (tr.getOperator() instanceof Plus || tr.getOperator() instanceof Minus)){
+			if(tr.getFunction() !=null && (tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus)){
 
 				Term ans = null;
 				boolean stop = false;

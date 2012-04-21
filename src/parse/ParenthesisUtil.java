@@ -1,11 +1,14 @@
 package parse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ParenthesisUtil {
 
 
-    public static ArrayList<int[]> getParenthesisGroups(ArrayList<PreSimpleTerm> formula) {
+    public static Map<Integer, Integer> getParenthesisGroups(List<PreSimpleTerm> formula) {
 
         int[] placesOfParenthesisInFormula = new int[formula.size()];
 
@@ -22,7 +25,7 @@ public class ParenthesisUtil {
 
         int n = 0;
         int formulaLength = formula.size();
-        ArrayList<int[]> parenthesesPairs = new ArrayList<int[]>();
+        Map<Integer, Integer> parenthesesPairs = new HashMap<Integer, Integer>();
         boolean done = false;
 
         while (done == false) {
@@ -41,8 +44,7 @@ public class ParenthesisUtil {
                         }
                         if (placesOfParenthesisInFormula[j] == 2) {
                             rightParenthesisPosition = j;
-                            int[] ends = {leftParenthesisPosition, rightParenthesisPosition};
-                            parenthesesPairs.add(n, ends);
+                            parenthesesPairs.put(leftParenthesisPosition, rightParenthesisPosition);
                             placesOfParenthesisInFormula[rightParenthesisPosition] = 0;
                             placesOfParenthesisInFormula[leftParenthesisPosition] = 0;
                             n++;
@@ -68,7 +70,7 @@ public class ParenthesisUtil {
 
     }
 
-    private static void checkFormula(ArrayList<PreSimpleTerm> formula) {
+    private static void checkFormula(List<PreSimpleTerm> formula) {
 
         ArrayList<Integer> leftParenthesisPositions = new ArrayList<Integer>();
         ArrayList<Integer> rightParenthesisPositions = new ArrayList<Integer>();

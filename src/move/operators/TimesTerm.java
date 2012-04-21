@@ -9,11 +9,11 @@ public class TimesTerm {
 
 	public void Times(Term tr, Term sel){
 
-		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
+		if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			regularTimes(tr, sel);
 		}
 
-		else if(tr.getOperator() instanceof Plus || tr.getOperator() instanceof Minus){
+		else if(tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus){
 			for(int i = 0; i< tr.getChildren().size(); i++){
 				if(!(tr.getChildren().get(i) instanceof Function)){
 
@@ -35,7 +35,7 @@ public class TimesTerm {
 
 	public void regularTimes(Term tr, Term sel){
 		Times tm = new Times();
-		if(tr.getOperator() instanceof Times || tr.getOperator() instanceof Divide){
+		if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			sel.setParent(tr);
 			tm.setParent(tr);
 			tr.getChildren().add(0,tm);
@@ -43,7 +43,7 @@ public class TimesTerm {
 		}
 		else{
 			Term mid = new Term();
-			mid.setOperator(new Times());
+			mid.setFunction(new Times());
 			mid.setParent(tr.getParent());
 
 			int trplace = tr.getParent().getChildren().indexOf(tr);

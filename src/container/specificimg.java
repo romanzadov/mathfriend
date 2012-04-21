@@ -34,7 +34,7 @@ public class specificimg {
 		//once all terms are rectangled, call
 		//the operation to make superrectangle
 		
-		Function op = ter.getOperator();
+		Function op = ter.getFunction();
 		if(op!=null){
 		rect = op.giverect(ter);}
 		else {

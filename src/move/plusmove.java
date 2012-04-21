@@ -16,7 +16,7 @@ public class plusmove {
 		
 		if(endterm == null){
 			
-			if(selected.getParent().getParent().getOperator() instanceof Equality){
+			if(selected.getParent().getParent().getFunction() instanceof Equality){
 				Term higherterm = st.whichterm(selected.getParent().getParent(), x, y, new point(0,0), 0);
 				endterm = st.whichterm(higherterm, x, y, new point(0,0), 0);
 			

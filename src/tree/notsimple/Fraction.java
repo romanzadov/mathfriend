@@ -41,7 +41,7 @@ public class Fraction extends NotSimple{
 	public Fraction(Term t, Term b){
 
 		Divide dv = new Divide();
-		this.setOperator(dv);
+		this.setFunction(dv);
 
 			top = t;
 			bottom = b;

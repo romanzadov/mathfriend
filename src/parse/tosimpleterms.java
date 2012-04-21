@@ -20,8 +20,8 @@ public class tosimpleterms {
 				if(formula.size()-i>4){
 					char[] three = {ch,formula.get(i+1),formula.get(i+2)};
 					String tr = new String(three);
-					for(int j = 0; j< Function.KNOWNFUNCTIONS.length;j++){
-						if(Function.KNOWNFUNCTIONS[i]==tr){
+					for(int j = 0; j< Function.KNOWN_FUNCTIONS.length;j++){
+						if(Function.KNOWN_FUNCTIONS[i]==tr){
 							//fill in what to do with things like sin, cos
 							System.out.println("you put in an unhandled function");
 						}
