@@ -244,7 +244,7 @@ public class PreSimpleUtil {
 
         //add invisible multiplication
 /*        for (int i = 0; i < preSimpleTerms.size() - 1; i++) {
-            if (preSimpleTerms.get(i).getRightMultiply() == true && preSimpleTerms.get(i + 1).getLeftMultiply() == true) {
+            if (preSimpleTerms.get(i).isRightMultiplied() == true && preSimpleTerms.get(i + 1).nisLeftMultiplied() == true) {
                 PreSimpleTerm multiply = new PreSimpleTerm(Arrays.asList('*'), PreSimpleTerm.Type.FUNCTION);
                 multiply.setFunctionType(PreSimpleTerm.FunctionType.TIMES);
                 preSimpleTerms.add(i + 1, multiply);

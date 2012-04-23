@@ -1,15 +1,12 @@
 package tree;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import parse.ParenthesisUtil;
 import parse.PreSimpleTerm;
 import tree.functions.*;
-import tree.simple.Number;
-import tree.simple.Constants;
-import tree.simple.SimpleTerm;
-import tree.simple.Variable;
 
 
 public class TermContsructionUtil {
@@ -119,7 +116,7 @@ public class TermContsructionUtil {
 	}*/
 
 	public static Class<? extends Function> getHighestPriorityFunction(List<PreSimpleTerm> preSimpleTerms){
-        PreSimpleTerm primaryPreFunction = null;
+        Class<? extends Function> primaryPreFunction = null;
 		int order = Integer.MIN_VALUE;
         Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
 
@@ -128,10 +125,19 @@ public class TermContsructionUtil {
 			if(preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)){
 
 				if(Function.getOrderOfOperation(preSimpleTerm)> order){
-					primaryPreFunction = preSimpleTerm;
+					primaryPreFunction = Function.PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm);
 					order = Function.getOrderOfOperation(preSimpleTerm);
 				}
 			}
+
+            //check for invisible multiplication
+            if(hasInvisibleMultiplication(preSimpleTerm, preSimpleTerms)) {
+                if(Function.getOrderOfOperation(Times.class)> order) {
+                    primaryPreFunction = Times.class;
+                    order = Function.getOrderOfOperation(Times.class);
+                }
+            }
+
 			//don't look for operators inside parentheses
 			else if(preSimpleTerm.getType().equals(PreSimpleTerm.Type.PARENTHESES)){
                 i = parentheses.get(i);
@@ -144,10 +150,87 @@ public class TermContsructionUtil {
 
     public static List<PreSimpleTermGrouping> getGroupings(List<PreSimpleTerm> preSimpleTerms, Class<? extends Function> function) {
         List<PreSimpleTermGrouping> groupings = new ArrayList<PreSimpleTermGrouping>();
-        for(PreSimpleTerm preSimpleTerm: preSimpleTerms) {
 
+        List<Integer> groupEndpoints = new ArrayList<Integer>();
+
+        for(PreSimpleTerm preSimpleTerm: preSimpleTerms) {
+            boolean breakPoint = (function.equals(Function.getFunction(preSimpleTerm)));
+            //if our function is multiplication, check for implicit multiplications like 2x
+            if(function == Times.class && !breakPoint) {
+                breakPoint = hasInvisibleMultiplication(preSimpleTerm, preSimpleTerms);
+            }
+
+            if(breakPoint || preSimpleTerms.size() == preSimpleTerms.indexOf(preSimpleTerm)) {
+                groupEndpoints.add(preSimpleTerms.indexOf(preSimpleTerm));
+            }
         }
+
+        for(Integer groupEnd: groupEndpoints) {
+            List<PreSimpleTerm> group;
+            boolean isNegative = false;
+            boolean isInverse = false;
+            boolean hasParentheses = false;
+
+            if(groupEndpoints.indexOf(groupEnd) == 0) {
+                group = preSimpleTerms.subList(0, groupEnd);
+            } else {
+                group = preSimpleTerms.subList(groupEndpoints.get(groupEndpoints.indexOf(groupEnd) - 1), groupEnd);
+            }
+            PreSimpleTerm firstTerm = group.get(0);
+            PreSimpleTerm secondTerm = group.get(1);
+            PreSimpleTerm lastTerm = group.get(group.size() - 1);
+            if(PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType()) || PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
+                isNegative = true;
+                group.remove(firstTerm);
+                if(PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                    hasParentheses = true;
+                    group.remove(secondTerm);
+                    group.remove(lastTerm);
+                }
+            } else if (PreSimpleTerm.FunctionType.DIVIDE.equals(firstTerm.getFunctionType())) {
+                isInverse = true;
+                group.remove(firstTerm);
+                if(PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                    hasParentheses = false;//example: 2/(3x-4).  These are probably parentheses for parsing, not for the equation. I will remove them
+                    group.remove(secondTerm);
+                    group.remove(lastTerm);
+                }
+            } else if (PreSimpleTerm.Type.PARENTHESES.equals(firstTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                hasParentheses = true;
+                group.remove(firstTerm);
+                group.remove(lastTerm);
+            } else if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType()) || Function.getFunction(firstTerm) == AdvancedFunction.class) {
+                group.remove(firstTerm);
+                if(PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                    group.remove(secondTerm);
+                    group.remove(lastTerm);
+                } else {
+                    throw new RuntimeException("advanced function without a parentheses afterwards");
+                }
+            }
+
+            else {
+                //trim operators
+                if(PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType())) {
+                    group.remove(firstTerm);
+                }
+            }
+
+            groupings.add(new PreSimpleTermGrouping(group, isNegative, isInverse, hasParentheses));
+        }
+        
         return groupings;
+    }
+
+    private static boolean hasInvisibleMultiplication(PreSimpleTerm preSimpleTerm, List<PreSimpleTerm> preSimpleTerms) {
+        int index = preSimpleTerms.indexOf(preSimpleTerm);
+
+        if(index == preSimpleTerms.size() - 1) {
+            return false;
+        } else {
+            PreSimpleTerm nextTerm = preSimpleTerms.get(index + 1);
+            return preSimpleTerm.isRightMultiplied() && nextTerm.isLeftMultiplied();
+        }
     }
 
 	/*public void digdown(Term thisterm){

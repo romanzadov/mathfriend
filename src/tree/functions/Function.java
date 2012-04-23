@@ -122,6 +122,10 @@ public abstract class Function extends SimpleTerm {
         return ORDER_OF_OPERATIONS.indexOf(PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm));
     }
 
+    public static int getOrderOfOperation(Class<? extends Function> function) {
+        return ORDER_OF_OPERATIONS.indexOf(function);
+    }
+
     public static Class<? extends Function> getFunction(PreSimpleTerm preSimpleTerm) {
         return PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm);
     }

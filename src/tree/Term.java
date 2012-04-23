@@ -37,26 +37,26 @@ public class Term implements Cloneable, upwalk.TreeFunction{
         ArrayList<Character> characters = ParseCharacterUtil.getCharacterArrayFromString(st);
         PreSimpleUtil preSimpleUtil = new PreSimpleUtil();
         List<PreSimpleTerm> preSimpleTerms = preSimpleUtil.simplify(characters);
-        this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
-        List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+        if(preSimpleTerms.size() == 1) {
+            //TODO make this a simple term
+        } else {
+            this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
+            List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+            for(PreSimpleTermGrouping grouping: groupings) {
+                Term child = new Term();
+                child.setNegative(grouping.isNegative());
+                child.setInverse(grouping.isInverse());
+                child.setHasParentheses(grouping.isHasParentheses());
+                //TODO set the contents to be the group ocntents
+            }
+        }
 
     }
-
+/*
     private Term(List<PreSimpleTerm> preSimpleTerms) {
         this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
         List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
-    }
-
-    public Term(boolean hasParentheses, boolean isNegative, Class<? extends Function> function, List<List<PreSimpleTerm>> preSimpleTermLists) {
-        this.hasParentheses = hasParentheses;
-        this.setNegative(isNegative);
-        this.function = function;
-        for(List<PreSimpleTerm> preSimpleTerms: preSimpleTermLists) {
-            children.add(new Term(preSimpleTerms));
-        }
-    }
-
-
+    }*/
 
 
 

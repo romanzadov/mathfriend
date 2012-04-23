@@ -14,7 +14,6 @@ public class Exponent extends Function {
 			distributive=false;
 			associative=false;
 			identity=1;
-			orderofoperation=3;
 			lmult = false;
 			rmult = false;
 		
