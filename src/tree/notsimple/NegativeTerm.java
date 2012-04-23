@@ -17,7 +17,7 @@ public class NegativeTerm extends NotSimple{
 	//		Number minusone = new Number(-1);
 
 			this.setNegative(true);
-			this.setHasParentheses(tr.isHasParentheses());
+			this.setHasParentheses(tr.hasParentheses());
 	//		this.childs.add(minusone);
 			this.getChildren().add(n);
 			this.getChildren().add(tr.getChildren().get(2));

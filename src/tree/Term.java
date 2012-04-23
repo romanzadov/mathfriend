@@ -22,8 +22,9 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 	private Class<? extends Function> function;
 	private ArrayList<Term> children = new ArrayList<Term>();
 	private rectangle container = new rectangle();
-	private boolean hasParentheses;
-	private boolean isNegative = false;
+	private boolean hasParentheses = false;
+	private boolean negative = false;
+    private boolean inverse = false;
 
 	private String valueString;
 	private float scaleFactor =1;
@@ -46,7 +47,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
                 Term child = new Term();
                 child.setNegative(grouping.isNegative());
                 child.setInverse(grouping.isInverse());
-                child.setHasParentheses(grouping.isHasParentheses());
+                child.setHasParentheses(grouping.hasParentheses());
                 //TODO set the contents to be the group ocntents
             }
         }
@@ -59,6 +60,13 @@ public class Term implements Cloneable, upwalk.TreeFunction{
     }*/
 
 
+    public boolean isInverse() {
+        return inverse;
+    }
+
+    public void setInverse(boolean inverse) {
+        this.inverse = inverse;
+    }
 
     public boolean isSimple() {
         if (this instanceof SimpleTerm) {
@@ -497,8 +505,8 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 		return children;
 	}
 
-	public void setNegative(boolean isnegative) {
-		this.isNegative = isnegative;
+	public void setNegative(boolean negative) {
+		this.negative = negative;
 	}
 
 	public boolean isNegative() {
@@ -592,7 +600,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
         this.container = container;
     }
 
-    public boolean isHasParentheses() {
+    public boolean hasParentheses() {
         return hasParentheses;
     }
 

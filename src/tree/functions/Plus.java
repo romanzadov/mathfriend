@@ -86,7 +86,7 @@ public class Plus extends Function {
 		ArrayList<Integer> key = fs.FindSelected(im.tr, sel);
 		ReturnSel rs = new ReturnSel();
 		Term secondsel = rs.Return(second, key);
-		if(!secondsel.getParent().isHasParentheses()){
+		if(!secondsel.getParent().hasParentheses()){
 			changeterm(secondsel, IntermIndex);
 		}
 		else{
@@ -124,7 +124,7 @@ public class Plus extends Function {
 
 
 		if(selindex != IntermIndex){
-			if(sel.getParent().isHasParentheses()){IntermIndex++; selindex++;}  // in parens still doesn't work
+			if(sel.getParent().hasParentheses()){IntermIndex++; selindex++;}  // in parens still doesn't work
 
 			if(selindex == 0 ){
 				if(holder.isNegative()){
