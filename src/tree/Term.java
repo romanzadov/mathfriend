@@ -24,6 +24,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 	private rectangle container = new rectangle();
 	private boolean hasParentheses;
 	private boolean isNegative = false;
+    private boolean isInverse = false;
 
 	private String valueString;
 	private float scaleFactor =1;
@@ -39,6 +40,13 @@ public class Term implements Cloneable, upwalk.TreeFunction{
         List<PreSimpleTerm> preSimpleTerms = preSimpleUtil.simplify(characters);
         this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
         List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+        for(PreSimpleTermGrouping grouping: groupings) {
+            Term child = new Term(grouping.getPreSimpleTerms());
+            child.setNegative(grouping.isNegative());
+            child.setHasParentheses(grouping.isHasParentheses());
+            child.setInverse(grouping.isInverse());
+            children.add(child);
+        }
 
     }
 
@@ -57,8 +65,13 @@ public class Term implements Cloneable, upwalk.TreeFunction{
     }
 
 
+    public boolean isInverse() {
+        return isInverse;
+    }
 
-
+    public void setInverse(boolean inverse) {
+        isInverse = inverse;
+    }
 
     public boolean isSimple() {
         if (this instanceof SimpleTerm) {
