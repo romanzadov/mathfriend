@@ -45,7 +45,7 @@ public class specificimg {
 		
 		ter.setContainer(rect);
 		//add parentheses as needed
-		if(ter.isHasParentheses()){
+		if(ter.hasParentheses()){
 			addParentheses(ter);
 //			Log.d(TAG, "tr: "+ter.toString()+ "  true");
 		}

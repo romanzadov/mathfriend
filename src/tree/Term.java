@@ -40,30 +40,26 @@ public class Term implements Cloneable, upwalk.TreeFunction{
         List<PreSimpleTerm> preSimpleTerms = preSimpleUtil.simplify(characters);
         this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
         List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
-        for(PreSimpleTermGrouping grouping: groupings) {
-            Term child = new Term(grouping.getPreSimpleTerms());
-            child.setNegative(grouping.isNegative());
-            child.setHasParentheses(grouping.isHasParentheses());
-            child.setInverse(grouping.isInverse());
-            children.add(child);
+
+        if(preSimpleTerms.size() == 1) {
+            //TODO make this a simple term
+        } else {
+            this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
+            List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+            for(PreSimpleTermGrouping grouping: groupings) {
+                Term child = new Term();
+                child.setNegative(grouping.isNegative());
+                child.setInverse(grouping.isInverse());
+                children.add(child);
+            }
         }
 
     }
-
+/*
     private Term(List<PreSimpleTerm> preSimpleTerms) {
         this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
         List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
-    }
-
-    public Term(boolean hasParentheses, boolean isNegative, Class<? extends Function> function, List<List<PreSimpleTerm>> preSimpleTermLists) {
-        this.hasParentheses = hasParentheses;
-        this.setNegative(isNegative);
-        this.function = function;
-        for(List<PreSimpleTerm> preSimpleTerms: preSimpleTermLists) {
-            children.add(new Term(preSimpleTerms));
-        }
-    }
-
+    }*/
 
     public boolean isInverse() {
         return isInverse;
@@ -510,8 +506,8 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 		return children;
 	}
 
-	public void setNegative(boolean isnegative) {
-		this.isNegative = isnegative;
+	public void setNegative(boolean negative) {
+		this.negative = negative;
 	}
 
 	public boolean isNegative() {
@@ -605,7 +601,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
         this.container = container;
     }
 
-    public boolean isHasParentheses() {
+    public boolean hasParentheses() {
         return hasParentheses;
     }
 

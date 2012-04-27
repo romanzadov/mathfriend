@@ -31,7 +31,7 @@ public class PreSimpleTermGrouping {
         return isInverse;
     }
 
-    public boolean isHasParentheses() {
+    public boolean hasParentheses() {
         return hasParentheses;
     }
 }

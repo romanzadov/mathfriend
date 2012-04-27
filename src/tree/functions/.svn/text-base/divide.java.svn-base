@@ -1,13 +1,13 @@
-package tree.functions;
+package tree.operators;
 
 import display.rectangle;
 import tree.*;
 
-public class Divide extends Function {
+public class divide extends operator{
 
 	public String todraw = "/";
 	
-	public Divide(){
+	public divide(){
 		inputs=2;
 	    invertable=true;
 		commutative=true;
@@ -17,17 +17,11 @@ public class Divide extends Function {
 		orderofoperation=4;
 		lmult = false;
 		rmult = false;
-		setValueString("/");
+		valuestring = "/";
 	}
-
-    @Override
-    public Term simpleOperation(Term term) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public rectangle giverect(Term tr){
+	public rectangle giverect(term tr){
 		rectangle a = new rectangle();
-		Times ti = new Times();
+		times ti = new times();
 		a = ti.giverect(tr);
 		return a;
 	}
@@ -39,14 +33,14 @@ public class Divide extends Function {
 		return c;
 	}
 	@Override
-	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
+	public representTerms.image inTermMoves(representTerms.image im, term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public representTerms.Image overEqualsMoves(representTerms.Image im,
-			Term sel, int IntermIndex, double xsel) {
+	public representTerms.image overEqualsMoves(representTerms.image im,
+			term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

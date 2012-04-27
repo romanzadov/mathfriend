@@ -39,7 +39,7 @@ public class TermMath {
 		}
 	
 		
-		if(middle.getParent().isHasParentheses()){
+		if(middle.getParent().hasParentheses()){
 			int midint = middle.getParent().getChildren().indexOf(middle);
 			middle = middle.getParent().getChildren().get(midint+1);
 		}

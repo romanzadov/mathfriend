@@ -81,11 +81,11 @@ public class PreSimpleTerm {
         this.type = type;
     }
 
-    public boolean getLeftMultiply() {
+    public boolean isLeftMultiplied() {
         return leftMultiply;
     }
 
-    public boolean getRightMultiply() {
+    public boolean isRightMultiplied() {
         return rightMultiply;
     }
 

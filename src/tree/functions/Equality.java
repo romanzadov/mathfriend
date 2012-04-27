@@ -16,10 +16,8 @@ public class Equality extends Function {
 		commutative=true;
 		distributive=false;
 		associative=true;
-		orderofoperation=1000;
 		lmult = false;
 		rmult = false;
-		toDraw = "=";
 	}
 
     @Override

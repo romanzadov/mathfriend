@@ -83,7 +83,7 @@ public class stringofrects implements TreeFunction{
 		if(tr.toDraw !=null){StR.todraw = tr.toDraw;}
 		if(tr instanceof Divide){StR.todraw = "/";}
 	//	StR.container.color = tr.wordcolor;
-		StR.hasParens = tr.isHasParentheses();
+		StR.hasParens = tr.hasParentheses();
 		a.add(StR);
 	}
 
