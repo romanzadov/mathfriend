@@ -18,7 +18,7 @@ import tree.simple.SimpleTerm;
 import display.rectangle;
 import tree.simple.Variable;
 
-public class Term implements Cloneable, upwalk.TreeFunction{
+public class Term implements Cloneable{
 
 	private Term parent;
 
@@ -268,6 +268,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 			
 			if(tr instanceof Number){
 
+/*
 				x = ((Number)tr).value;
 				int positionOfX = tr.getParent().getChildren().indexOf(tr);
 				
@@ -284,13 +285,14 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 						x*= -1;
 					}
 				}
+*/
 
 			}
 		}
 
 
 
-		if(!tr.isNegative()){
+	/*	if(!tr.isNegative()){
 			if( tr.getParent().getChildren().indexOf(tr) == 0){
 				if(tr instanceof Number){
 					x = ((Number)tr).value;
@@ -312,7 +314,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 			else if(tr.getChildren().size()>2 && tr.getChildren().get(2) instanceof Number){
 				x = -((Number)tr.getChildren().get(2)).value;
 			}
-		}
+		}*/
 
 
 		return x;
@@ -321,7 +323,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 	public boolean SimpleCompound(){
 		Term tr = this;
 		boolean simp = false;
-		if((tr.getFunction() !=null)&&(tr.getFunction() instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
+	/*	if((tr.getFunction() !=null)&&(tr.getFunction() instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
 			boolean insidessimp = true;
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(!tr.getChildren().get(i).isSimple()){
@@ -329,7 +331,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 				}
 			}
 			if(insidessimp){simp = true;}
-		}
+		}*/
 
 		return simp;
 	}
@@ -372,7 +374,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 		boolean isint = false;
 		Term tr = this;
 
-		try {
+	/*	try {
 			if(tr.isWhole()){isint = true;}
 
 			else if(tr.getChildren().size() == 2 && tr.getChildren().get(0) instanceof Negative
@@ -394,7 +396,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 				}
 
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {}*/
 
 		return isint;
 
@@ -437,30 +439,30 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 	public boolean isRationalNumber(){
 		Term tr = this;
 		boolean rational = false;
-		if(tr.isInteger()){
+/*		if(tr.isInteger()){
 			rational = true;
 		}
 		else if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			rational = true;
-		}
+		}*/
 		return rational;
 	}
 
 	public boolean isSimpleFraction(){
 		Term tr = this;
 		boolean fraction = false;
-		if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
+		/*if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			fraction = true;
-		}
+		}*/
 		return fraction;
 	}
 	
 	public boolean isFraction(){
 		Term tr = this;
 		boolean fraction = false;
-		if(tr.isSimpleFraction()){
+		/*if(tr.isSimpleFraction()){
 			fraction = true;
 		}
 		else if(tr instanceof Fraction){
@@ -468,7 +470,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 		}
 		else if(tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 ){
 			fraction = true;
-		}
+		}*/
 		
 		return fraction;
 	}
@@ -534,7 +536,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 
 	public boolean isNegative() {
 		boolean ans = false;
-		if(this.getFunction() != null){
+/*		if(this.getFunction() != null){
 			if(this.getFunction() instanceof Negative){
 				ans= true;
 			}
@@ -542,7 +544,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 		}
 		if(this instanceof NegativeTerm){
 			ans = true;
-		}
+		}*/
 		return ans;
 	}
 
@@ -554,12 +556,13 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 	}
 
 
-
+/*
 
 	private int steps = 0;
 	private Term innerTerm;
 	private boolean found = false;
-	@Override
+
+    @Override
 	public void performAction(Term tr ) {
 
 		if(innerTerm.getContainer().bl.x == tr.getContainer().bl.x &&
@@ -584,7 +587,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 		else { return steps;}
 	}
 
-	public Term getResultOfOperation(){
+*/	public Term getResultOfOperation(){
 
 		return getResultOfBasicOperation();
 
