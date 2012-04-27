@@ -66,6 +66,7 @@ public class PreSimpleUtil {
                 if (falses == 0) {
                     out = i + name.length;
                     PreSimpleTerm preSimpleConstant = new PreSimpleTerm(formula.subList(i, out), PreSimpleTerm.Type.CONSTANT);
+                    preSimpleConstant.setConstant(constant);
                     preSimpleTerms.add(preSimpleConstant);
                     done = true;
                 }

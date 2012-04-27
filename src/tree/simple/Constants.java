@@ -12,11 +12,16 @@ public class Constants extends Number{
         return EnumSet.allOf(Constant.class);
     }
 
+    private Constant constant;
+
     private Constants(double a) {
         super(a);
     }
 
-    
+    public Constants(Constant constant) {
+        this.constant = constant;
+    }
+
 
     public enum Constant {
         PI("pi", Math.PI),

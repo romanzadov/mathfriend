@@ -59,8 +59,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
                 SimpleTerm child = null;
 
                 if(PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
-                    //TODO fix constants
-                    child = new Constants();
+                    child = new Constants(preSimpleTerm.getConstant());
                 } else if (PreSimpleTerm.Type.NUMBER.equals(preSimpleTerm.getType())) {
                     Double value = Double.parseDouble(preSimpleTerm.getCharacters().toString());
                     child = new Number(value);

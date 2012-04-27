@@ -24,14 +24,11 @@ public class Number extends SimpleTerm {
 	}
 	
 	public Number(double a){
-		rmult = true;
-		lmult = true;
 		value = a;
-		if(a<0){
-			setNegative(true);
-		}
 	}
-	
+
+    public Number(){};
+
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
 

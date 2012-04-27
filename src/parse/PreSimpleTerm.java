@@ -1,6 +1,8 @@
 package parse;
 
 
+import tree.simple.Constants;
+
 import java.util.List;
 
 public class PreSimpleTerm {
@@ -10,6 +12,7 @@ public class PreSimpleTerm {
     private FunctionType functionType;
     private boolean leftMultiply = false;
     private boolean rightMultiply = false;
+    private Constants.Constant constant;
 
     public static enum FunctionType {
         PLUS("+"),
@@ -38,6 +41,14 @@ public class PreSimpleTerm {
         public void setRepresentation(String representation) {
             this.representation = representation;
         }
+    }
+
+    public Constants.Constant getConstant() {
+        return constant;
+    }
+
+    public void setConstant(Constants.Constant constant) {
+        this.constant = constant;
     }
 
     public static enum Type {
