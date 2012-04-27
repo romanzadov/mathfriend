@@ -4,11 +4,14 @@ import tree.Term;
 import tree.notsimple.NotSimple;
 import display.rectangle;
 
-public class SimpleTerm extends NotSimple{
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class SimpleTerm extends Term{
 	//has numbers, variables, and operators
-	
 	public String image;
-	
+
+
 	public rectangle giverect(Term tr){
 		System.out.println("error: giverect was run on simpleterm");
 		rectangle a = new rectangle();
@@ -23,10 +26,8 @@ public class SimpleTerm extends NotSimple{
 	}
 
 	@Override
-	public boolean canConstruct(Term tr) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+    public ArrayList<Term> getChildren() {
+        return new ArrayList<Term>();
+    }
 	
 }

@@ -5,23 +5,15 @@ import display.rectangle;
 
 public class Variable extends SimpleTerm {
 	
-	public String value;
+	public Character value;
 	
-	public Variable(String a){
+	public Variable(Character a){
 		value = a;
-	}
-	
-	public void setvalue(String a){
-		value = a;
-	}
-	public Variable(){
-	lmult = true;
-	rmult = true;
 	}
 	
 	@Override
 	public String toString(){
-		return value;
+		return value.toString();
 	}
 	
 	@Override
@@ -34,9 +26,8 @@ public class Variable extends SimpleTerm {
 
 	public rectangle giverect(Term tr){
 		rectangle a = new rectangle();
-		tr.toDraw = value;
 		a.height = 1;
-		a.width = value.length();
+		a.width = 1;
 		tr.setContainer(a);
 		return a;
 	}

@@ -3,6 +3,7 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.xml.internal.fastinfoset.util.ValueArray;
 import container.walks.AssignScreenPositions;
 
 import parse.*;
@@ -15,10 +16,12 @@ import tree.simple.Number;
 import tree.simple.Constants;
 import tree.simple.SimpleTerm;
 import display.rectangle;
+import tree.simple.Variable;
 
 public class Term implements Cloneable, upwalk.TreeFunction{
 
 	private Term parent;
+
 	private Class<? extends Function> function;
 	private ArrayList<Term> children = new ArrayList<Term>();
 	private rectangle container = new rectangle();
@@ -38,28 +41,48 @@ public class Term implements Cloneable, upwalk.TreeFunction{
         ArrayList<Character> characters = ParseCharacterUtil.getCharacterArrayFromString(st);
         PreSimpleUtil preSimpleUtil = new PreSimpleUtil();
         List<PreSimpleTerm> preSimpleTerms = preSimpleUtil.simplify(characters);
+        fillOutChildren(preSimpleTerms);
+    }
+
+    private Term(List<PreSimpleTerm> preSimpleTerms) {
+        fillOutChildren(preSimpleTerms);
+    }
+
+    private void fillOutChildren(List<PreSimpleTerm> preSimpleTerms) {
+
         this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
         List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
+        for(PreSimpleTermGrouping grouping: groupings) {
+            if(grouping.getPreSimpleTerms().size() == 1) {
 
-        if(preSimpleTerms.size() == 1) {
-            //TODO make this a simple term
-        } else {
-            this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
-            List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
-            for(PreSimpleTermGrouping grouping: groupings) {
-                Term child = new Term();
+                PreSimpleTerm preSimpleTerm = grouping.getPreSimpleTerms().get(0);
+                SimpleTerm child = null;
+
+                if(PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
+                    //TODO fix constants
+                    child = new Constants();
+                } else if (PreSimpleTerm.Type.NUMBER.equals(preSimpleTerm.getType())) {
+                    Double value = Double.parseDouble(preSimpleTerm.getCharacters().toString());
+                    child = new Number(value);
+                } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
+                    child = new Variable(preSimpleTerm.getCharacters().get(0));
+                }
+                if (child != null) {
+                    child.setNegative(grouping.isNegative());
+                    child.setInverse(grouping.isInverse());
+                    children.add(child);
+                }
+
+            } else {
+                Term child = new Term(grouping.getPreSimpleTerms());
                 child.setNegative(grouping.isNegative());
                 child.setInverse(grouping.isInverse());
                 children.add(child);
             }
+
         }
 
     }
-/*
-    private Term(List<PreSimpleTerm> preSimpleTerms) {
-        this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
-        List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
-    }*/
 
     public boolean isInverse() {
         return isInverse;
@@ -507,7 +530,7 @@ public class Term implements Cloneable, upwalk.TreeFunction{
 	}
 
 	public void setNegative(boolean negative) {
-		this.negative = negative;
+		this.isNegative = negative;
 	}
 
 	public boolean isNegative() {
