@@ -3,7 +3,7 @@ package move.operators;
 //import android.util.Log;
 
 
-public class PlusMove {/*
+public class plusmove {/*
 
 	static final String TAG = "plusmove";
 

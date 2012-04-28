@@ -6,7 +6,6 @@ import representTerms.StringRectangle;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.functions.Divide;
 
 public class stringofrects implements TreeFunction{
 
@@ -79,9 +78,9 @@ public class stringofrects implements TreeFunction{
 		StringRectangle StR = new StringRectangle();
 		StR.container = sr;
 		StR.term = tr.toString();
-		StR.fontscale = tr.getScaleFactor();
+		StR.fontscale = tr.getScaleFactor();/*
 		if(tr.toDraw !=null){StR.todraw = tr.toDraw;}
-		if(tr instanceof Divide){StR.todraw = "/";}
+		if(tr instanceof Divide){StR.todraw = "/";}*/
 	//	StR.container.color = tr.wordcolor;
 		StR.hasParens = tr.hasParentheses();
 		a.add(StR);

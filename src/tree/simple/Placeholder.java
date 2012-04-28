@@ -1,6 +1,6 @@
 package tree.simple;
 
-public class Placeholder extends SimpleTerm {
+public class Placeholder extends SimpleTerms {
 
 	int value;
 	String st;

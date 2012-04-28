@@ -1,6 +1,7 @@
 package tree.functions;
 import container.walks.fontize;
 import display.rectangle;
+import representTerms.Images;
 import tree.*;
 
 public class Exponent extends Function {
@@ -36,14 +37,7 @@ public class Exponent extends Function {
 					System.out.println("error: exponent was run on non-containered terms");
 				}
 			}
-			//remove parens if any
-			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(0) instanceof Parens){
-					tr.getChildren().remove(0);
-					tr.getChildren().remove(tr.getChildren().size()-1);
-				}
-			}
-			
+
 			
 			 xsofar = tr.getChildren().get(0).getContainer().width;
 			 ysofar = tr.getChildren().get(0).getContainer().height;
@@ -83,14 +77,14 @@ public class Exponent extends Function {
 	}
 
 	@Override
-	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
+	public Images inTermMoves(Images im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public representTerms.Image overEqualsMoves(representTerms.Image im,
+	public Images overEqualsMoves(Images im,
 			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;

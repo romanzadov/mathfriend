@@ -1,19 +1,15 @@
 package tree.notsimple;
 import java.util.ArrayList;
 
-import parse.ParseUtil;
-
-import representTerms.Image;
+import representTerms.Images;
 import tree.Term;
-import tree.functions.Divide;
-import tree.functions.Minus;
 import tree.simple.Number;
 import display.rectangle;
 
 public class Fraction extends NotSimple{
 
 	Term top;
-	Divide divide = new Divide();
+//	Divide divide = new Divide();
 	Term bottom;
 
 	public Term getTop(){
@@ -39,7 +35,7 @@ public class Fraction extends NotSimple{
 	}
 
 	public Fraction(Term t, Term b){
-
+/*
 		Divide dv = new Divide();
 		this.setFunction(dv);
 
@@ -48,7 +44,7 @@ public class Fraction extends NotSimple{
 
 		this.top.setParent(this);
 		this.divide.setParent(this);
-		this.bottom.setParent(this);
+		this.bottom.setParent(this);*/
 	}
 
 
@@ -121,7 +117,7 @@ public class Fraction extends NotSimple{
 		if(tr.getParent() != null){
 			int place = tr.getParent().getChildren().indexOf(tr);
 			if(place>0){
-				if(tr.getParent().getChildren().get(place-1) instanceof Minus){negcount++;}
+		//		if(tr.getParent().getChildren().get(place-1) instanceof Minus){negcount++;}
 			}
 		}
 
@@ -201,7 +197,7 @@ public class Fraction extends NotSimple{
 		String newBottom = fraction.getChildren().get(2).toString();
 
 		String multipliedFraction = "("+newTop+")/("+newBottom+")";
-		Image img = new Image(multipliedFraction, 2,2,2);	
+		Images img = new Images(multipliedFraction, 2,2,2);
 		
 
 		return img.tr;
@@ -218,17 +214,19 @@ public class Fraction extends NotSimple{
 		String newTop = a.getChildren().get(0).toString()+"*("+b.getChildren().get(0).toString()+")";
 		String newBottom = a.getChildren().get(2).toString()+"*("+b.getChildren().get(2).toString()+")";
 
+/*
 		ParseUtil pa = new ParseUtil();
 		Term top = pa.getTermFromString(newTop);
 
 		pa = new ParseUtil();
 		Term bottom = pa.getTermFromString(newBottom);
+*/
 
 		
-		Fraction result = new Fraction(top, bottom);
+//		Fraction result = new Fraction(top, bottom);
 
 
-		return result;
+		return null;
 	}
 
 	@Override
@@ -237,9 +235,9 @@ public class Fraction extends NotSimple{
 		boolean fraction = false;
 
 		if(tr.getChildren().size() == 3){
-			if(tr.getChildren().get(1) instanceof Divide){
+		/*	if(tr.getChildren().get(1) instanceof Divide){
 				fraction = true;
-			}
+			}*/
 		}
 
 		return fraction;

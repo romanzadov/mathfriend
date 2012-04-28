@@ -1,7 +1,6 @@
 package tree.notsimple;
 
 import tree.Term;
-import tree.functions.Negative;
 import display.rectangle;
 
 public class NegativeTerm extends NotSimple{
@@ -10,16 +9,16 @@ public class NegativeTerm extends NotSimple{
 	
 	public NegativeTerm(Term tr){
 		if(canConstruct(tr)){
-			Negative n = new Negative();
+		/*	Negative n = new Negative();
 			this.setFunction(n);
 			n = new Negative();
-
+*/
 	//		Number minusone = new Number(-1);
 
 			this.setNegative(true);
 			this.setHasParentheses(tr.hasParentheses());
 	//		this.childs.add(minusone);
-			this.getChildren().add(n);
+	//		this.getChildren().add(n);
 			this.getChildren().add(tr.getChildren().get(2));
 			for(int i = 0; i<this.getChildren().size(); i++){
 				this.getChildren().get(i).setParent(this);
@@ -33,13 +32,13 @@ public class NegativeTerm extends NotSimple{
 	}
 
 	public void makeNegative(Term tr){
-		Negative n = new Negative();
+/*		Negative n = new Negative();
 		this.setFunction(n);
 		n = new Negative();
 		
 		this.setNegative(true);
 		this.getChildren().add(n);
-		this.getChildren().add(tr);
+		this.getChildren().add(tr);*/
 	}
 
 

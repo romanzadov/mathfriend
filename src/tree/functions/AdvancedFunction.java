@@ -1,5 +1,6 @@
 package tree.functions;
 
+import representTerms.Images;
 import tree.Term;
 
 public class AdvancedFunction extends Function {
@@ -10,14 +11,14 @@ public class AdvancedFunction extends Function {
     }
 
     @Override
-	public representTerms.Image inTermMoves(representTerms.Image im, Term sel,
+	public Images inTermMoves(Images im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public representTerms.Image overEqualsMoves(representTerms.Image im,
+	public Images overEqualsMoves(Images im,
 			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;

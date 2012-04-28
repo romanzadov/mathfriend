@@ -1,13 +1,9 @@
 package tree.functions;
 
-import container.AllignFracBar;
-
 import move.operators.TimesMove;
 
-import parse.composefractions;
-import representTerms.Image;
-
 import display.rectangle;
+import representTerms.Images;
 import tree.*;
 
 public class Times extends Function {
@@ -22,7 +18,6 @@ public class Times extends Function {
 		distributive=true;
 		associative=true;
 		identity=1;
-		orderofoperation=4;
 		lmult = false;
 		rmult = false;
 		setValueString("*");
@@ -47,16 +42,8 @@ public class Times extends Function {
 				a.width = 1;
 				a.height = 1;
 				tr.setContainer(a);
-				tr.toDraw = "*";
-				rect = a;
-			}
-			if( tr instanceof Divide){
-				rectangle a = new rectangle();
-				a.width = 1;
-				a.height = 1;
-				tr.setContainer(a);
-				rect = a;
 
+				rect = a;
 			}
 		}
 		//find the bottoms of the fractions
@@ -64,13 +51,7 @@ public class Times extends Function {
 		//this should only be called when all terms are rectangled
 		
 		else if(tr.getChildren().size()>1){
-			//strip parens from previous time. They'll be added later.
-			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr instanceof Parens){
-					tr.getChildren().remove(0);
-					tr.getChildren().remove(tr.getChildren().size()-1);
-				}
-			}
+
 			//make times visible as needed
 			for(int i = 0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i) instanceof Times && ((Times)tr.getChildren().get(i)).visible){
@@ -78,7 +59,6 @@ public class Times extends Function {
 					Term kid = tr.getChildren().get(i);
 					kid.getContainer().height = (float) .3;
 					kid.getContainer().width = (float) .3;
-					kid.toDraw = ".";
 				}
 			}
 			
@@ -92,7 +72,7 @@ public class Times extends Function {
 		
 	public rectangle makefractions(Term tr){
 	
-		//set which terms are bottoms
+/*		//set which terms are bottoms
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			if(tr.getChildren().size()>0){
 			if(tr.getChildren().get(i) instanceof Divide)
@@ -125,22 +105,22 @@ public class Times extends Function {
 		thiscont = tr.getContainer();
 		return thiscont;
 		
-		
-		
+		*/
+		return null;
 	}
 	TimesMove tm = new TimesMove();
 	@Override
-	public Image inTermMoves(Image im, Term sel,
+	public Images inTermMoves(Images im, Term sel,
 			int IntermIndex) {
 		
-		Image Ghost = tm.inTermMoves(im, sel, IntermIndex);
+		Images Ghost = tm.inTermMoves(im, sel, IntermIndex);
 		return Ghost;
 	}
 	@Override
-	public representTerms.Image overEqualsMoves(representTerms.Image im,
+	public Images overEqualsMoves(Images im,
 			Term sel, int IntermIndex, double xsel) {
 		
-		Image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);	
+		Images Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);
 		return Ghost;
 	}
 	

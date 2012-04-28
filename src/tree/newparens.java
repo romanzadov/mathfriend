@@ -1,8 +1,6 @@
 package tree;
 
 import tree.functions.Exponent;
-import tree.functions.Minus;
-import tree.functions.Negative;
 import tree.functions.Plus;
 import tree.functions.Times;
 import tree.downwalk.TreeFunction;
@@ -15,7 +13,7 @@ public class newparens implements TreeFunction {
 	
 	public void performAction(Term tr) {
 	
-		//parentheses around multiplied terms
+	/*	//parentheses around multiplied terms
 		if(tr.getParent().getFunction() instanceof Times|| tr.getParent().getFunction() instanceof Negative){
 			
 			if(tr.getFunction() instanceof Plus|| tr.getFunction() instanceof Minus){
@@ -34,7 +32,7 @@ public class newparens implements TreeFunction {
 				if(!tr.issimple){
                     tr.setHasParentheses(true);}
 			}
-		}
+		}*/
 		
 	}
 

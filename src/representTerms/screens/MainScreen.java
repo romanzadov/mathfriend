@@ -1,22 +1,6 @@
 package representTerms.screens;
 
-import ghosts.GhostImage;
-
-import java.util.ArrayList;
-
-import move.identify.selectterm;
-import representTerms.Image;
-import representTerms.Settings;
-import representTerms.TouchData;
-import representTerms.StringRectangle;
-import representTerms.Settings.ScreenType;
-import representTerms.TouchData.TouchType;
-import representTerms.StringRectangle.type;
-import tree.Term;
-import display.point;
-import display.rectangle;
-
-public class MainScreen implements AbstractedScreen{
+public class MainScreen {}/*implements AbstractedScreen{
 
 
 	Image main;
@@ -43,7 +27,7 @@ public class MainScreen implements AbstractedScreen{
 	
 	public void performOperationOnSel(){
 		
-/*		Image mainClone = null;
+*//*		Image mainClone = null;
 		
 		Term compound = sel.tr.getResultOfOperation();
 		if(compound != null) {
@@ -68,7 +52,7 @@ public class MainScreen implements AbstractedScreen{
 		
 		if(mainClone != null){
 			ghost = new Image(mainClone.tr.toString(), (int)Settings.PREFFERED_FONT, 1,1);
-		}*/
+		}*//*
 		
 	}
 	
@@ -126,7 +110,7 @@ public class MainScreen implements AbstractedScreen{
 		else{
 
 		}
-		
+
 		//go through the rectangles and if there's any fractions, redraw the fraction bar.
 		
 		for(int i = 0; i<relatives.size(); i++){
@@ -280,3 +264,4 @@ public class MainScreen implements AbstractedScreen{
 	}
 	
 }
+*/

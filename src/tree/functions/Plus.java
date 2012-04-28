@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 import move.identify.FindSel;
 import move.identify.ReturnSel;
-import move.operators.PlusMove;
-import representTerms.Image;
+import move.operators.plusmove;
+import representTerms.Images;
 import tree.Term;
 import display.point;
 import display.rectangle;
@@ -23,7 +23,6 @@ public class Plus extends Function {
 		distributive=true;
 		associative=true;
 		identity=0;
-		orderofoperation=5;
 		invisible = false;
 		lmult = false;
 		rmult = false;
@@ -71,7 +70,7 @@ public class Plus extends Function {
 		return c;
 	}
 
-	public Image inTermMoves(Image im, Term sel, int IntermIndex){
+	public Images inTermMoves(Images im, Term sel, int IntermIndex){
 
 		Term second = new Term();
 		try {
@@ -95,15 +94,15 @@ public class Plus extends Function {
 
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second, (int)im.tr.font);
-		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
+		Images Ghost = new Images(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
 		return Ghost;
 	}
 
-	public Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel){
+	public Images overEqualsMoves(Images im, Term sel, int IntermIndex, double xsel){
 		
-		PlusMove pm = new PlusMove();
-		Image Ghost = new Image();
+		plusmove pm = new plusmove();
+		Images Ghost = new Images();
 		if(!(sel.getParent().getParent().getChildren().get(IntermIndex) instanceof Function)){
 		//	Ghost = pm.overEquals(im, sel, IntermIndex, xsel);
 		}
@@ -111,7 +110,7 @@ public class Plus extends Function {
 	}
 
 
-	public void changeterm( Term sel, int IntermIndex){
+	public void changeterm( Term sel, int IntermIndex){/*
 	
 		int selindex = sel.getParent().getChildren().indexOf(sel);
 
@@ -190,7 +189,7 @@ public class Plus extends Function {
 	//			op.wordcolor = Color.red;
 			}
 
-		}
+		}*/
 
 	}
 }

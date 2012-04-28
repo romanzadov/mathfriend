@@ -1,17 +1,16 @@
 package tree.functions;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import parse.PreSimpleTerm;
-import representTerms.Image;
+import representTerms.Images;
 import tree.Term;
-import tree.notsimple.Equation;
-import tree.simple.SimpleTerm;
+import tree.notsimple.Equations;
+import tree.simple.SimpleTerms;
 import display.rectangle;
 
 import java.util.*;
 
 
-public abstract class Function extends SimpleTerm {
+public abstract class Function extends SimpleTerms {
 
 
 
@@ -54,12 +53,12 @@ public abstract class Function extends SimpleTerm {
 	
 	@Override
 	public String toString(){
-		if(this instanceof Negative){
+		/*if(this instanceof Negative){
 			return "*";
 		}
-		else{
+		else{*/
 			return getValueString();
-		}
+		//}
 	}
 
     public abstract Term simpleOperation(Term term);
@@ -109,11 +108,11 @@ public abstract class Function extends SimpleTerm {
 		return a;
 	}
 
-	public abstract Image inTermMoves(Image im, Term sel, int IntermIndex);
+	public abstract Images inTermMoves(Images im, Term sel, int IntermIndex);
 	
-	public abstract Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel);
+	public abstract Images overEqualsMoves(Images im, Term sel, int IntermIndex, double xsel);
 
-	public Equation ToBothSides(Equation eq, Function op, Term sel) {
+	public Equations ToBothSides(Equations eq, Function op, Term sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}

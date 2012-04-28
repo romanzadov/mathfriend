@@ -2,9 +2,8 @@ package tree.functions;
 
 import display.point;
 import display.rectangle;
-import representTerms.Image;
+import representTerms.Images;
 import tree.*;
-import tree.simple.Number;
 
 public class Equals extends Function {
 
@@ -29,7 +28,7 @@ public class Equals extends Function {
 		rectangle a = new rectangle();
 		if(tr.getChildren().size() == 0){
 			rectangle cont = tr.getContainer();
-			tr.toDraw = "=";
+		//	tr.toDraw = "=";
 			a = justequal(cont);
 		}
 		else{
@@ -77,18 +76,18 @@ public class Equals extends Function {
 		return c;
 	}
 
-	public Image inTermMoves(Image im, Term sel, int IntermIndex){
+	public Images inTermMoves(Images im, Term sel, int IntermIndex){
 
 		int selindex = sel.getParent().getChildren().indexOf(sel);
-		Image Ghost = im;
+		Images Ghost = im;
 		Ghost = MoveFocus(im, sel, selindex, IntermIndex);
 		
 		return Ghost;
 
 	}
 
-	public Image MoveFocus(Image im, Term sel, int selindex, int IntermIndex){
-		Image Ghost = new Image();
+	public Images MoveFocus(Images im, Term sel, int selindex, int IntermIndex){
+		Images Ghost = new Images();
 		Term second = new Term();
 		try {
 			second = (Term) im.tr.clone();
@@ -99,7 +98,7 @@ public class Equals extends Function {
 
 		Term secondsel = second.getChildren().get(selindex);
 		Term moveto = second.getChildren().get(IntermIndex);
-
+/*
 		if((moveto.getFunction() instanceof Plus)||(moveto.getFunction() instanceof Minus)){
 			if(!(secondsel.getFunction() instanceof Plus)&&!(secondsel.getFunction() instanceof Minus)){
 				
@@ -116,11 +115,11 @@ public class Equals extends Function {
 					secondsel.setParent(moveto);
 				}
 				else{
-					Minus mn = new Minus();
+		*//*			Minus mn = new Minus();
 					moveto.getChildren().add(mn);
 					moveto.getChildren().add(secondsel);
 					mn.setParent(moveto);
-					secondsel.setParent(moveto);
+					secondsel.setParent(moveto);*//*
 				}
 				zero.getParent().getChildren().set(selindex, zero);
 				
@@ -131,7 +130,7 @@ public class Equals extends Function {
 				&&!(moveto.getFunction() instanceof Plus)&&!(moveto.getFunction() instanceof Minus)
 				&&!(selindex == IntermIndex)){
 		
-			if(secondsel.isNegative()){
+			*//*if(secondsel.isNegative()){
 				secondsel = secondsel.toggleNegative();
 				Plus pl = new Plus();
 				Minus mn = new Minus();
@@ -170,18 +169,18 @@ public class Equals extends Function {
 				
 				mid.getParent().getChildren().set(IntermIndex, mid);
 				
-			}
+			}*//*
 		}
 
 		else{
 
 			second.getChildren().set(IntermIndex, secondsel);
 			second.getChildren().set(selindex, moveto);
-		}
+		}*/
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second);
 	//	ColorText CT = new ColorText(secondsel, /.red);
-		Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
+		Ghost = new Images(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
 
 
@@ -189,7 +188,7 @@ public class Equals extends Function {
 
 	}
 	@Override
-	public Image overEqualsMoves(Image im, Term sel, int IntermIndex,
+	public Images overEqualsMoves(Images im, Term sel, int IntermIndex,
 			double xsel) {
 		// TODO Auto-generated method stub
 		return null;

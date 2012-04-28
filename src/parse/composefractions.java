@@ -3,7 +3,6 @@ package parse;
 import display.rectangle;
 import tree.downwalk;
 import tree.Term;
-import tree.functions.Divide;
 import tree.functions.Times;
 import tree.simple.Number;
 import tree.downwalk.TreeFunction;
@@ -21,7 +20,7 @@ public class composefractions implements TreeFunction{
 
 	public void performAction(Term tr) {
 		//sets terms to be down or up terms in a division situtation
-		if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
+	/*	if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 		
 			for(int i =0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i) instanceof Divide){
@@ -29,7 +28,7 @@ public class composefractions implements TreeFunction{
 				}
 			}
 			
-		}
+		}*/
 	}
 	
 	
@@ -148,7 +147,7 @@ public class composefractions implements TreeFunction{
 
 		for(int i=0; i<tr.getChildren().size();i++){
 
-			if(!tr.getChildren().get(i).isSimple()||
+			/*if(!tr.getChildren().get(i).isSimple()||
 					!(tr.getChildren().get(i) instanceof Times)
 					&&!(tr.getChildren().get(i) instanceof Divide)){
 				int side = place/2;
@@ -174,7 +173,7 @@ public class composefractions implements TreeFunction{
 					top = place%2;
 					places[side][top]=i;
 				}
-			}
+			}*/
 
 		}
 	return places;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import droid.tests.TestStrings;
 
-import representTerms.Image;
+import representTerms.Images;
 import representTerms.LogicEngine;
 import tree.Term;
 
@@ -28,7 +28,7 @@ public class RunAsJava {
 		int wrongSoFar = 0;
 		
 		for(int i = 0; i<tests.size(); i++){
-			Image equation = new Image(tests.get(i),2,2,2);
+			Images equation = new Images(tests.get(i),2,2,2);
 			Term first = equation.tr.getChildren().get(0);
 			Term second = equation.tr.getChildren().get(2);
 
@@ -57,7 +57,7 @@ public class RunAsJava {
 			if(result.getChildren().get(i) == null){return false;}
 		}
 			
-			Image img2 = new Image(result.toString(), 2,2,2);
+			Images img2 = new Images(result.toString(), 2,2,2);
 			
 			if(result.toString().equals(second.toString()) ||
 					("("+result.toString()+")").equals(second.toString()) ||
@@ -73,7 +73,7 @@ public class RunAsJava {
 	public void testMultiplication(){
 
 		String st = "(2/3)(4/5)(3/9)";
-		Image img = new Image(st, 2,2,2);
+		Images img = new Images(st, 2,2,2);
 		System.out.println(img.tr);
 		for(int i = 0; i<4; i++){
 			img.tr = img.tr.getResultOfOperation();
@@ -85,7 +85,7 @@ public class RunAsJava {
 	public void testAddtion(){
 
 		String st = "-4+6+5";
-		Image img = new Image(st, 2,2,2);
+		Images img = new Images(st, 2,2,2);
 		System.out.println(img.tr);
 		for(int i = 0; i<4; i++){
 			img.tr = img.tr.getResultOfOperation();
@@ -98,7 +98,7 @@ public class RunAsJava {
 
 		for(int i = 0; i<tests.length; i++){
 
-			Image img = new Image(tests[i],2,2,2);
+			Images img = new Images(tests[i],2,2,2);
 			Term tr = img.tr;
 			String type = tr.toString()+"|";
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import move.identify.TermMath;
 
 import tree.Term;
-import tree.functions.Minus;
 import tree.functions.Plus;
 import tree.simple.Number;
 
@@ -57,12 +56,12 @@ public class PlusMinus {
 			if(one.isNegative()){onepositive = false;}
 			
 			int twopos = two.getParent().getChildren().indexOf(two);
-			if(two.getParent().getChildren().get(twopos-1) instanceof Minus||two.isNegative()){
+		/*	if(two.getParent().getChildren().get(twopos-1) instanceof Minus||two.isNegative()){
 				twopositive = false;
 			}
 			if(two.getParent().getChildren().get(twopos-1) instanceof Minus&&two.isNegative()){
 				twopositive = true;
-			}
+			}*/
 			
 			double onenum;
 			double twonum; 
@@ -101,11 +100,11 @@ public class PlusMinus {
 					one.getParent().getChildren().set(onepos, mid);
 				}
 				if(mid.isNegative()){
-					Minus mn = new Minus();
+			/*		Minus mn = new Minus();
 					mn.setParent(one.getParent());
 					mid.toggleNegative();
 					one.getParent().getChildren().set(onepos-1, mn);
-					one.getParent().getChildren().set(onepos, mid);
+					one.getParent().getChildren().set(onepos, mid);*/
 				}
 			}
 			

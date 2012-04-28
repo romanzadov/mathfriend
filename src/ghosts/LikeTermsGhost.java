@@ -3,11 +3,10 @@ package ghosts;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
-import representTerms.Image;
+import representTerms.Images;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.functions.Minus;
 import tree.functions.Plus;
 import display.point;
 
@@ -16,10 +15,10 @@ public class LikeTermsGhost implements TreeFunction{
 	Term a = null;
 	Term b = null;
 	Term aPLUSb = null;
-	Image im;
+	Images im;
 
-	public Image Like(){
-		Image Ghost =null;
+	public Images Like(){
+		Images Ghost =null;
 		Term second = null;
 		if(aPLUSb != null){
 			try {
@@ -65,28 +64,28 @@ public class LikeTermsGhost implements TreeFunction{
 					aPLUSb.getParent().getChildren().add(smallest,pl);
 				}
 				else{
-					Minus mn = new Minus();
+/*					Minus mn = new Minus();
 					mn.setParent(aPLUSb.getParent());
 					aPLUSb.getParent().getChildren().add(smallest,aPLUSb);
 					aPLUSb.getParent().getChildren().add(smallest,mn);
-					aPLUSb.toggleNegative();
+					aPLUSb.toggleNegative();*/
 				}
 			}
 		//	RelativeContainer dc = new RelativeContainer();
 		//	dc.drawelement(second, (int)im.tr.font);
-			Ghost = new Image(second, new point(im.bel.x, 80), null);
+			Ghost = new Images(second, new point(im.bel.x, 80), null);
 		}
 
 		return Ghost;
 	}
-	public LikeTermsGhost(Image img){
+	public LikeTermsGhost(Images img){
 		im = img;
 		downwalk walk = new downwalk(img.tr, this);
 	}
 
 	public void performAction(Term tr) {
 		if(aPLUSb == null){
-			if(tr.getFunction() !=null && (tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus)){
+/*			if(tr.getFunction() !=null && (tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus)){
 
 				Term ans = null;
 				boolean stop = false;
@@ -106,7 +105,7 @@ public class LikeTermsGhost implements TreeFunction{
 						}
 					}
 				}
-			}
+			}*/
 		}
 	}
 

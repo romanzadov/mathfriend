@@ -77,7 +77,7 @@ public class LogicEngine {
 		OperatorScreen operatorScreen = (OperatorScreen) operatorInterface.getAbstractScreen();
 
 
-		if(mainScreen.resultTerm != null){ updateEquation(mainScreen.resultTerm); }
+		/*if(mainScreen.resultTerm != null){ updateEquation(mainScreen.resultTerm); }
 		if(mainScreen.moving){ operatorScreen.resetTimesTapped(); }
 
 		if(operatorScreen.getTimesTapped() == 1){
@@ -96,7 +96,7 @@ public class LogicEngine {
 
 		ghostInterface.getAbstractScreen().updateMainImage(mainScreen.ghost);
 		operatorInterface.getAbstractScreen().updateMainImage(mainScreen.sel);
-
+*/
 
 	}
 
@@ -106,11 +106,11 @@ public class LogicEngine {
 
 
 
-		Image next = new Image(nextEquation, (int)Settings.PREFFERED_FONT, 1,1);
+		Images next = new Images(nextEquation, (int)Settings.PREFFERED_FONT, 1,1);
 
 		//change main
 		MainScreen mainScreen = (MainScreen)mainInterface.getAbstractScreen();
-		mainScreen.updateMainImage(next);
+	//	mainScreen.updateMainImage(next);
 
 		//clear ghost
 		GhostScreen ghostScreen = (GhostScreen)ghostInterface.getAbstractScreen();
@@ -126,9 +126,9 @@ public class LogicEngine {
 
 	private void initMain(){
 		String st = equations.get(0);
-		Image img = new Image(st, new point(0,0));
+		Images img = new Images(st, new point(0,0));/*
 		MainScreen ms = new MainScreen(st);
-		mainInterface = new JavaDisplay(ms);
+		mainInterface = new JavaDisplay(ms);*/
 		mainInterface.updateDrawnRectangles(img.getRelativeContainers());
 	}
 

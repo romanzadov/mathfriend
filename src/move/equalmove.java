@@ -1,14 +1,14 @@
 package move;
 
 import move.identify.selectterm;
-import representTerms.Image;
+import representTerms.Images;
 import tree.Term;
 import tree.functions.Equality;
 import tree.functions.Function;
 
 public class equalmove {
 	
-	public Term eqmove(Image im, Term selected, int x, int y){
+	public Term eqmove(Images im, Term selected, int x, int y){
 		boolean move = false;
 		
 		Term tr = im.tr;

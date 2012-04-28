@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import display.point;
 
 import move.identify.TermMath;
-import move.identify.ReturnSel;
-import representTerms.Image;
+import representTerms.Images;
 import tree.Term;
 import tree.functions.*;
-import tree.simple.Number;
 
 public class TimesMove {
 
-	public Image inTermMoves(Image im, Term sel,
+	public Images inTermMoves(Images im, Term sel,
 			int IntermIndex) {
 		Term second = null;
 		try {
@@ -74,18 +72,18 @@ public class TimesMove {
 		 
 	
 
-		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
-		Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
+		Images Ghost = new Images(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
+		Ghost = new Images(Ghost.tr.toString(), Ghost.bel);
 		return Ghost;
 	}
 
-	public Image overEqualsMoves(Image im,
+	public Images overEqualsMoves(Images im,
 			Term sel, int IntermIndex, double xsel) {
 		
 		
 		
-		Image Ghost = null;
-		
+		Images Ghost = null;
+/*
 		boolean selfraction =  false;
 		if(sel.getFunction() instanceof Times || sel.getFunction() instanceof Divide){
 			if(sel.getChildren().size() == 3){
@@ -156,7 +154,7 @@ public class TimesMove {
 			Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		
 		
-	
+	*/
 		
 		return Ghost;
 	}
@@ -187,7 +185,7 @@ public class TimesMove {
 		
 	
 		
-		if(recip.getParent().getParent().getFunction() instanceof Plus || recip.getParent().getParent().getFunction() instanceof Minus){
+	/*	if(recip.getParent().getParent().getFunction() instanceof Plus || recip.getParent().getParent().getFunction() instanceof Minus){
 			for(int i = 0; i< recip.getParent().getParent().getChildren().size(); i++){
 				Term kid = recip.getParent().getParent().getChildren().get(i);
 				if(!(kid instanceof Function) && (kid != recip.getParent())){
@@ -201,7 +199,7 @@ public class TimesMove {
 					
 				}
 			}
-		}
+		}*/
 		
 		if(regular.getParent().getChildren().size()==1){
 			Term top = regular.getParent().getParent();

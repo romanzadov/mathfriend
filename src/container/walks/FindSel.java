@@ -1,6 +1,6 @@
 package container.walks;
 
-import representTerms.Image;
+import representTerms.Images;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
@@ -12,11 +12,11 @@ public class FindSel implements TreeFunction{
 	static final String TAG = "FindSel";
 
 	public Term found = null;
-	Image myMain;
+	Images myMain;
 	Term mySel;
 	point myTapped;
 
-	public FindSel(Image main, Term sel, point tapped){
+	public FindSel(Images main, Term sel, point tapped){
 		myMain = main;
 		mySel = sel;
 		myTapped = tapped;

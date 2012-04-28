@@ -2,7 +2,7 @@ package container;
 
 import tree.Term;
 import tree.functions.Function;
-import tree.simple.SimpleTerm;
+import tree.simple.SimpleTerms;
 //import android.util.Log;
 import display.rectangle;
 
@@ -17,15 +17,15 @@ public class specificimg {
 		//for each term's children
 		for(int i =0; i<ter.getChildren().size();i++){
 			//if simple, make rectangle
-			if(ter.getChildren().get(i) instanceof SimpleTerm){
-				SimpleTerm st = (SimpleTerm)ter.getChildren().get(i);
+			if(ter.getChildren().get(i) instanceof SimpleTerms){
+				SimpleTerms st = (SimpleTerms)ter.getChildren().get(i);
 				ter.getChildren().get(i).setContainer(st.giverect(ter.getChildren().get(i)));
 			}
 			//if not simple, and not rectangled, dig in
-			else if(!ter.getChildren().get(i).issimple){
+			/*else if(!ter.getChildren().get(i).issimple){
 				Term t2 = ter.getChildren().get(i);
 				ter.getChildren().get(i).setContainer(specificimage(t2));
-			}
+			}*/
 			else{}
 		}
 
@@ -39,7 +39,7 @@ public class specificimg {
 		rect = op.giverect(ter);}
 		else {
 			
-			SimpleTerm pop = (SimpleTerm)ter;
+			SimpleTerms pop = (SimpleTerms)ter;
 			rect = pop.giverect(ter);
 		}
 		

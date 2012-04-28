@@ -1,13 +1,11 @@
 package tree.simple;
 
 import tree.Term;
-import tree.notsimple.NotSimple;
 import display.rectangle;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public abstract class SimpleTerm extends Term{
+public abstract class SimpleTerms extends Term{
 	//has numbers, variables, and operators
 	public String image;
 
@@ -21,7 +19,7 @@ public abstract class SimpleTerm extends Term{
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		SimpleTerm clone = (SimpleTerm)super.clone();
+		SimpleTerms clone = (SimpleTerms)super.clone();
 		return clone;
 	}
 

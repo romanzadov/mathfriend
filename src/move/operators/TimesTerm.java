@@ -1,6 +1,6 @@
 package move.operators;
 
-import representTerms.Image;
+import representTerms.Images;
 import tree.Term;
 import tree.notsimple.Fraction;
 import tree.functions.*;
@@ -9,7 +9,7 @@ public class TimesTerm {
 
 	public void Times(Term tr, Term sel){
 
-		if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
+		/*if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			regularTimes(tr, sel);
 		}
 
@@ -28,14 +28,14 @@ public class TimesTerm {
 		}
 		else{
 			regularTimes(tr, sel);
-		}
+		}*/
 
 
 	}
 
 	public void regularTimes(Term tr, Term sel){
 		Times tm = new Times();
-		if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
+		/*if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			sel.setParent(tr);
 			tm.setParent(tr);
 			tr.getChildren().add(0,tm);
@@ -57,7 +57,7 @@ public class TimesTerm {
 			sel.setParent(mid);
 
 			mid.getParent().getChildren().set(trplace, mid);
-		}
+		}*/
 
 	}
 
@@ -93,7 +93,7 @@ public class TimesTerm {
 							secondValue = Term.getNumericValue(kid);
 
 							String val = String.valueOf(firstValue*secondValue);
-							Image img = new Image(val,2,2,2);
+							Images img = new Images(val,2,2,2);
 							Term result = img.tr;
 
 							try {

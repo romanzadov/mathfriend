@@ -1,7 +1,6 @@
 package ghosts;
 
 import tree.Term;
-import tree.functions.Minus;
 import tree.functions.Plus;
 import tree.simple.Number;
 //import android.util.Log;
@@ -25,7 +24,7 @@ public class SanitizePlus {
 			
 		}
 		if(haszero){
-			if((tr.getFunction() instanceof Plus)||(tr.getFunction() instanceof Minus)){
+			/*if((tr.getFunction() instanceof Plus)||(tr.getFunction() instanceof Minus)){
 				if(tr.getChildren().size()>1){
 					if(pos > 0){
 						tr.getChildren().remove(pos-1);
@@ -47,7 +46,7 @@ public class SanitizePlus {
 					
 					
 				}
-			}
+			}*/
 		}
 		
 		

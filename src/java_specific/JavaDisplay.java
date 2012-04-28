@@ -40,7 +40,7 @@ public class JavaDisplay extends DisplayInterfaceTemplate {
 		setSize(myScreen.getScreenType().width, myScreen.getScreenType().height);
 	}
 
-	@Override
+	//@Override
 	public AbstractedScreen getAbstractScreen() {
 		return myScreen;
 	}
@@ -56,7 +56,7 @@ public class JavaDisplay extends DisplayInterfaceTemplate {
 		return myPanel.getHeight();
 	}
 
-	@Override
+	//@Override
 	public void setSize(int x, int y){
 		myPanel.setSize(x, y);
 	//	f.setSize(x, y);

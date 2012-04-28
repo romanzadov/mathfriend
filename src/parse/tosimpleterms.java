@@ -2,17 +2,16 @@ package parse;
 import java.util.ArrayList;
 
 import tree.functions.Function;
-import tree.simple.SimpleTerm;
-import tree.simple.Variable;
+import tree.simple.SimpleTerms;
 
 public class tosimpleterms {
 
-	public ArrayList<SimpleTerm> simples;
+	public ArrayList<SimpleTerms> simples;
 	public int placeholder = 0;
 	public Function op = null;
 	 boolean donenum=false;
 
-	public ArrayList<SimpleTerm> simplify(ArrayList<Character> formula){
+	public ArrayList<SimpleTerms> simplify(ArrayList<Character> formula){
 
 		for(int i =0; i<formula.size(); i++){
 			char ch = formula.get(i);
@@ -28,11 +27,11 @@ public class tosimpleterms {
 					}
 				}
 				else{	
-					Variable var = new Variable();
+/*					Variables var = new Variables();
 					String st = new String();
 					st = st+ch;
 					var.setvalue(st);
-					simples.add(var);
+					simples.add(var);*/
 				}
 
 			}

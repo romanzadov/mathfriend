@@ -44,10 +44,10 @@ public class CastToNonSimple implements TreeFunction{
 		
 /*
 		else if(n == 2){
-			Equation equation = new Equation();
+			Equations equation = new Equations();
 			if(equation.canConstruct(tr)){
 				int place = tr.parent.getChilds().indexOf(tr);
-				equation = new Equation(tr);
+				equation = new Equations(tr);
 
 				equation.parent = tr.parent;
 				tr.parent.getChilds().set(place, equation);

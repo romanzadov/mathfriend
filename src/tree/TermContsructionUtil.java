@@ -350,7 +350,7 @@ public class TermContsructionUtil {
 			simp.add(st-2,left);
 			simp.add(end+2, right);
 		}
-		else if(simp.get(st) instanceof Number || simp.get(st) instanceof Variable
+		else if(simp.get(st) instanceof Number || simp.get(st) instanceof Variables
 				|| simp.get(st) instanceof Constants){
 			Parens left = new Parens();
 			left.value = '(';

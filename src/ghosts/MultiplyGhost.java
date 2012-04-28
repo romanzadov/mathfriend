@@ -6,7 +6,7 @@ import container.RelativeContainer;
 import display.point;
 
 import move.identify.TermMath;
-import representTerms.Image;
+import representTerms.Images;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
@@ -17,11 +17,11 @@ public class MultiplyGhost implements TreeFunction{
 	Term a = null;
 	Term b = null;
 	Term aTIMESb = null;
-	Image im;
+	Images im;
 
-	public Image Like(){
+	public Images Like(){
 		
-		Image Ghost =null;
+		Images Ghost =null;
 		Term second = null;
 		if(aTIMESb != null){
 			try {
@@ -55,14 +55,14 @@ public class MultiplyGhost implements TreeFunction{
 			
 			RelativeContainer dc = new RelativeContainer();
 			dc.drawelement(second);
-			Ghost = new Image(second, new point(im.bel.x, 80), null);
+			Ghost = new Images(second, new point(im.bel.x, 80), null);
 		}
 		
 		
 		return Ghost;
 	}
 	
-	public MultiplyGhost(Image img){
+	public MultiplyGhost(Images img){
 		im = img;
 		downwalk walk = new downwalk(img.tr, this);
 	}

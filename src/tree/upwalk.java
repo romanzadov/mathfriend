@@ -12,14 +12,14 @@ public class upwalk {
 		//for each child, if simple child then execute, if not, dig in
 	
 		
-		if(tr.issimple){
+		/*if(tr.issimple){
 			f.performAction(tr);
 		}
 		else{
 			for(int i = 0; i<tr.getChildren().size(); i++){
 				upwalk tree = new upwalk(tr.getChildren().get(i),f);
 			}
-		}
+		}*/
 	
 	}
 	

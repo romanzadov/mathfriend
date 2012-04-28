@@ -1,7 +1,7 @@
 package ghosts;
 
 import container.walks.FindSel;
-import representTerms.Image;
+import representTerms.Images;
 import tree.Term;
 import tree.functions.*;
 //import android.util.Log;
@@ -14,10 +14,10 @@ public class GhostImage {
 	Term SwitchMe;
 	static final String TAG = "GhostImage";
 
-	public Image newImage(Image im, Term sel, point current, point tapped){
+	public Images newImage(Images im, Term sel, point current, point tapped){
 
 
-		Image Ghost = im;
+		Images Ghost = im;
 		int selIndex = 0;
 
 		sel = findSel(im, sel, tapped);
@@ -46,14 +46,14 @@ public class GhostImage {
 			if(IntermIndex!=Integer.MAX_VALUE  && selIndex != IntermIndex){
 
 				SwitchMe = sel.getParent().getChildren().get(IntermIndex);
-				if(!(SwitchMe instanceof Function)
+				/*if(!(SwitchMe instanceof Function)
 						&& !(SwitchMe instanceof Parens)){
 					Function op = sel.getParent().getFunction();
 					Ghost = op.inTermMoves(im, sel, IntermIndex);
 					//					Log.d(TAG, "index: "+IntermIndex+" sel: "+sel.toString()+" Ghost: "+Ghost);
 				}
 
-				else{Ghost = null;}
+				else{Ghost = null;}*/
 			}
 
 
@@ -70,8 +70,8 @@ public class GhostImage {
 
 
 
-	public Image CheckEquals(Image im, Term sel, double xsel, int IntermIndex ){
-		Image Ghost = new Image();
+	public Images CheckEquals(Images im, Term sel, double xsel, int IntermIndex ){
+		Images Ghost = new Images();
 		int selindex = 0;
 		if((sel.getParent() !=null)&&
 				(sel.getParent().getParent() !=null)&&
@@ -99,7 +99,7 @@ public class GhostImage {
 		}
 
 
-		if(sel.getParent() !=null &&
+		/*if(sel.getParent() !=null &&
 				(sel.getParent().getFunction() instanceof Times || sel.getParent().getFunction() instanceof Divide)){
 			if(sel.getParent().getParent() != null && (sel.getParent().getParent().getFunction() instanceof Plus
 					|| sel.getParent().getParent().getFunction() instanceof Minus)){
@@ -128,14 +128,14 @@ public class GhostImage {
 				SanitizeGhost sg = new SanitizeGhost(Ghost);
 			}
 
-		}
+		}*/
 	
 //		Log.d(TAG, "index: "+IntermIndex+" sel: "+sel+" Ghost: "+Ghost);
 
 		return Ghost;
 	}
 
-	public Term findSel(Image main, Term sel, point tapped){
+	public Term findSel(Images main, Term sel, point tapped){
 
 		FindSel fs = new FindSel(main, sel, tapped);
 		if(fs.found==null){

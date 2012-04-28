@@ -2,7 +2,6 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import parse.ParseUtil;
 import tree.Term;
 //import android.graphics.Color;
 //import android.util.Log;
@@ -12,7 +11,7 @@ import display.rectangle;
 import display.stringofrects;
 
 
-public class Image implements Cloneable{
+public class Images implements Cloneable{
 
 	public static final String TAG = "image";
 	public String st;
@@ -30,10 +29,10 @@ public class Image implements Cloneable{
 	public double scalefactor =1;
 	String arg = null;
 
-	public Image(){}
+	public Images(){}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		Image clone = (Image)super.clone();
+		Images clone = (Images)super.clone();
 
 		if(this.tr != null){
 			clone.tr = (Term) this.tr.clone();
@@ -58,16 +57,15 @@ public class Image implements Cloneable{
 
 
 
-	public Image(Term term, point bl, String argument){
+	public Images(Term term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
 		st = tr.toString();
 	}
 
-	public Image(String myst, int myFont, int screenWidth, int screenHeight){
-		ParseUtil pa = new ParseUtil();
-		tr = pa.getTermFromString(myst);
+	public Images(String myst, int myFont, int screenWidth, int screenHeight){
+		tr = new Term(st);
 		st = myst;
 		setRelativeContainers();
 
@@ -80,9 +78,8 @@ public class Image implements Cloneable{
 	}
 
 
-	public Image(String myst, point bl){
-		ParseUtil pa = new ParseUtil();
-		tr = pa.getTermFromString(myst);
+	public Images(String myst, point bl){
+		tr = new Term(st);
 		bel = bl;
 		st = myst;
 	}
@@ -134,8 +131,7 @@ public class Image implements Cloneable{
 	}
 
 	private void reset(){
-		ParseUtil pa = new ParseUtil();
-		tr = pa.getTermFromString(st);
+		tr = new Term(st);
 		relativeContainers  = new ArrayList<StringRectangle>();
 		//		background = Color.WHITE;
 		//		wordcolor = Color.BLACK;

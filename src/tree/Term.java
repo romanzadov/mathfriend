@@ -3,7 +3,6 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.xml.internal.fastinfoset.util.ValueArray;
 import container.walks.AssignScreenPositions;
 
 import parse.*;
@@ -14,9 +13,9 @@ import tree.notsimple.NegativeTerm;
 import tree.functions.*;
 import tree.simple.Number;
 import tree.simple.Constants;
-import tree.simple.SimpleTerm;
+import tree.simple.SimpleTerms;
 import display.rectangle;
-import tree.simple.Variable;
+import tree.simple.Variables;
 
 public class Term implements Cloneable{
 
@@ -31,7 +30,7 @@ public class Term implements Cloneable{
 
 	private String valueString;
 	private float scaleFactor =1;
-	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
+	public ArrayList<SimpleTerms> simples = new ArrayList<SimpleTerms>();
 	public StringRectangle ScreenPosition = new StringRectangle();
 
 
@@ -56,7 +55,7 @@ public class Term implements Cloneable{
             if(grouping.getPreSimpleTerms().size() == 1) {
 
                 PreSimpleTerm preSimpleTerm = grouping.getPreSimpleTerms().get(0);
-                SimpleTerm child = null;
+                SimpleTerms child = null;
 
                 if(PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
                     child = new Constants(preSimpleTerm.getConstant());
@@ -64,7 +63,7 @@ public class Term implements Cloneable{
                     Double value = Double.parseDouble(preSimpleTerm.getCharacters().toString());
                     child = new Number(value);
                 } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
-                    child = new Variable(preSimpleTerm.getCharacters().get(0));
+                    child = new Variables(preSimpleTerm.getCharacters().get(0));
                 }
                 if (child != null) {
                     child.setNegative(grouping.isNegative());
@@ -92,7 +91,7 @@ public class Term implements Cloneable{
     }
 
     public boolean isSimple() {
-        if (this instanceof SimpleTerm) {
+        if (this instanceof SimpleTerms) {
             return true;
         }
         return false;
@@ -105,7 +104,7 @@ public class Term implements Cloneable{
 	@Override
 	public String toString(){
 		String st = "";
-		if(this instanceof SimpleTerm){
+		if(this instanceof SimpleTerms){
 			st+= this.getValueString();
 		} 
 
@@ -596,6 +595,7 @@ public class Term implements Cloneable{
 	private Term getResultOfBasicOperation(){
 
 		if(!this.isSimple()){
+
 			Term result = this.getFunction().simpleOperation(this);
 
 			return result;}
@@ -614,8 +614,14 @@ public class Term implements Cloneable{
 
     }
 
-    public Class<? extends Function> getFunction() {
-        return function;
+    public Function getFunction() {
+        Function instance = null;
+        try {
+            instance = function.newInstance();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public rectangle getContainer() {

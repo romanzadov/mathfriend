@@ -2,10 +2,9 @@ package display;
 
 import java.util.ArrayList;
 
-import parse.ParseUtil;
 
+import representTerms.Images;
 import representTerms.PlaceAndFont;
-import representTerms.Image;
 import tree.Term;
 
 public class ImagePositionManager {
@@ -33,7 +32,7 @@ public class ImagePositionManager {
 		//the width and height of my display remain constant. 
 	}
 	
-	public point blGhost(Image myGhost, int prefferedFont){
+	public point blGhost(Images myGhost, int prefferedFont){
 		point bl = new point();
 		//position the ghost term. and return the bottom left corner
 		//The top 1/3 of the screen is for the ghost. It'll have to be resized if it is too big.
@@ -56,7 +55,7 @@ public class ImagePositionManager {
 			ghostHeight = (int)(newFont*myGhost.getRelativeContainers().get(0).container.height);
 			ghostWidth = (int)(newFont*myGhost.getRelativeContainers().get(0).container.width);
 			
-			myGhost.tr.font = newFont;
+	//		myGhost.tr.font = newFont;
 
 		}
 		
@@ -69,7 +68,7 @@ public class ImagePositionManager {
 		return bl;
 	}
 	
-	public PlaceAndFont blMain(Image myMain, int prefferedFont){
+	public PlaceAndFont blMain(Images myMain, int prefferedFont){
 		//check that image fits into the display at the preffered font
 		
 		point bl = new point();
@@ -100,17 +99,16 @@ public class ImagePositionManager {
 		return new PlaceAndFont(bl, scale);
 	}
 	
-	public ArrayList<Image> getHistory(	ArrayList<String> history ,int prefferedFont, int mainBottom){
+	public ArrayList<Images> getHistory(	ArrayList<String> history ,int prefferedFont, int mainBottom){
 		//all the previous steps are stored in "history"
 		// this method returns those images and their locations
 		int historyStep = 1;
-		ArrayList<Image> imageHistory = new ArrayList<Image>();
+		ArrayList<Images> imageHistory = new ArrayList<Images>();
 		
 		for(int i = 0; i<history.size(); i++){
 			//create image
-			ParseUtil pa = new ParseUtil();
-			Term tr = pa.getTermFromString(history.get(i));
-			Image step = new Image(tr, new point(0,0), null);
+			Term tr = new Term(history.get(i));
+			Images step = new Images(tr, new point(0,0), null);
 			
 			//figure out new font if we have to scale it
 			float scale = 1;

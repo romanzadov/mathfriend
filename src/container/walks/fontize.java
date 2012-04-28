@@ -26,7 +26,7 @@ public class fontize  implements TreeFunction{
 		tr.getContainer().width *=font;
 		tr.getContainer().bl.x *=font;
 		tr.getContainer().bl.y *=font;
-		tr.font = font;
+	//	tr.font = font;
 	}
 	
 	

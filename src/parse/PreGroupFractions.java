@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
-import tree.functions.Divide;
 import tree.functions.Times;
 import tree.simple.Placeholder;
 import tree.simple.Number;
@@ -22,7 +21,7 @@ public class PreGroupFractions implements TreeFunction{
 
 
 		if(tr != null && tr.getFunction() != null){
-			if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
+		/*	if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 
 				Term[][] stacked = PutIntoMatrix(tr);
 
@@ -39,7 +38,7 @@ public class PreGroupFractions implements TreeFunction{
 					}
 				}
 
-			}
+			}*/
 
 
 
@@ -58,13 +57,13 @@ public class PreGroupFractions implements TreeFunction{
 
 		
 		boolean hasdivide = false;
-		for(int i = 0; i< tr.getChildren().size(); i++){
+	/*	for(int i = 0; i< tr.getChildren().size(); i++){
 			if(tr.getChildren().get(i) instanceof Divide){
 				hasdivide = true;
 			}
 
 		}
-
+*/
 		if(hasdivide){
 			for(int i = 0; i< tr.getChildren().size(); i++){
 				Placeholder one = new Placeholder(1);
@@ -76,7 +75,7 @@ public class PreGroupFractions implements TreeFunction{
 					if(piece instanceof Times){ 
 					}
 
-					else if(piece instanceof Divide){
+	/*				else if(piece instanceof Divide){
 						stacked[position[0]][position[1]] = one;
 						stacked[position[0]][1] = piece;
 						position[1]=2;
@@ -132,7 +131,7 @@ public class PreGroupFractions implements TreeFunction{
 						stacked[position[0]][position[1]] = piece;
 						position[0]++;
 						position[1]=0;
-					}
+					}*/
 
 				}
 
@@ -150,7 +149,7 @@ public class PreGroupFractions implements TreeFunction{
 
 		for(int i = 0; i< stacked.length; i++){
 			if(stacked[i][0] != null){
-
+/*
 				if(stacked[i][0] instanceof Placeholder){
 
 					Number one = new Number(1);
@@ -172,7 +171,7 @@ public class PreGroupFractions implements TreeFunction{
 					mid.getChildren().add(stacked[i][2]);
 					Times tm = new Times();
 					mid.getChildren().add(tm);
-				}
+				}*/
 
 			}
 			else{
