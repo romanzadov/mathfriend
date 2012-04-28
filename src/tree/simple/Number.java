@@ -3,7 +3,7 @@ package tree.simple;
 import tree.Term;
 import display.rectangle;
 
-public class Number extends SimpleTerms {
+public class Number extends SimpleTerm {
 	
 	public double value ;
 	public int charpos;

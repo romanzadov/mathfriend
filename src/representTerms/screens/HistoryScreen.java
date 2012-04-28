@@ -2,7 +2,7 @@ package representTerms.screens;
 
 import java.util.ArrayList;
 
-import representTerms.Images;
+import representTerms.Image;
 import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
@@ -23,7 +23,7 @@ public class HistoryScreen implements AbstractedScreen{
 		ArrayList<StringRectangle> rects = new ArrayList<StringRectangle>();
 		
 		for(int i = 0; i<equations.size(); i++){
-			Images img = new Images(equations.get(i), 2,2,2);
+			Image img = new Image(equations.get(i), 2,2,2);
 			rects.addAll(img.getRelativeContainers());
 		}
 		
@@ -50,7 +50,7 @@ public class HistoryScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public void updateMainImage(Images main) {
+	public void updateMainImage(Image main) {
 		// TODO Auto-generated method stub
 		
 	}

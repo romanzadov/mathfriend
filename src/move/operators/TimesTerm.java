@@ -1,6 +1,6 @@
 package move.operators;
 
-import representTerms.Images;
+import representTerms.Image;
 import tree.Term;
 import tree.notsimple.Fraction;
 import tree.functions.*;
@@ -93,7 +93,7 @@ public class TimesTerm {
 							secondValue = Term.getNumericValue(kid);
 
 							String val = String.valueOf(firstValue*secondValue);
-							Images img = new Images(val,2,2,2);
+							Image img = new Image(val,2,2,2);
 							Term result = img.tr;
 
 							try {

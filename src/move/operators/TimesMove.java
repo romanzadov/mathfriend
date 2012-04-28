@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import display.point;
 
 import move.identify.TermMath;
-import representTerms.Images;
+import representTerms.Image;
 import tree.Term;
 import tree.functions.*;
 
 public class TimesMove {
 
-	public Images inTermMoves(Images im, Term sel,
+	public Image inTermMoves(Image im, Term sel,
 			int IntermIndex) {
 		Term second = null;
 		try {
@@ -72,17 +72,17 @@ public class TimesMove {
 		 
 	
 
-		Images Ghost = new Images(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
-		Ghost = new Images(Ghost.tr.toString(), Ghost.bel);
+		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
+		Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
 		return Ghost;
 	}
 
-	public Images overEqualsMoves(Images im,
+	public Image overEqualsMoves(Image im,
 			Term sel, int IntermIndex, double xsel) {
 		
 		
 		
-		Images Ghost = null;
+		Image Ghost = null;
 /*
 		boolean selfraction =  false;
 		if(sel.getFunction() instanceof Times || sel.getFunction() instanceof Divide){

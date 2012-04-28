@@ -3,7 +3,7 @@ package tree.functions;
 import move.operators.TimesMove;
 
 import display.rectangle;
-import representTerms.Images;
+import representTerms.Image;
 import tree.*;
 
 public class Times extends Function {
@@ -110,17 +110,17 @@ public class Times extends Function {
 	}
 	TimesMove tm = new TimesMove();
 	@Override
-	public Images inTermMoves(Images im, Term sel,
+	public Image inTermMoves(Image im, Term sel,
 			int IntermIndex) {
 		
-		Images Ghost = tm.inTermMoves(im, sel, IntermIndex);
+		Image Ghost = tm.inTermMoves(im, sel, IntermIndex);
 		return Ghost;
 	}
 	@Override
-	public Images overEqualsMoves(Images im,
+	public Image overEqualsMoves(Image im,
 			Term sel, int IntermIndex, double xsel) {
 		
-		Images Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);
+		Image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);
 		return Ghost;
 	}
 	

@@ -13,9 +13,9 @@ import tree.notsimple.NegativeTerm;
 import tree.functions.*;
 import tree.simple.Number;
 import tree.simple.Constants;
-import tree.simple.SimpleTerms;
+import tree.simple.SimpleTerm;
 import display.rectangle;
-import tree.simple.Variables;
+import tree.simple.Variable;
 
 public class Term implements Cloneable{
 
@@ -30,7 +30,7 @@ public class Term implements Cloneable{
 
 	private String valueString;
 	private float scaleFactor =1;
-	public ArrayList<SimpleTerms> simples = new ArrayList<SimpleTerms>();
+	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
 	public StringRectangle ScreenPosition = new StringRectangle();
 
 
@@ -55,7 +55,7 @@ public class Term implements Cloneable{
             if(grouping.getPreSimpleTerms().size() == 1) {
 
                 PreSimpleTerm preSimpleTerm = grouping.getPreSimpleTerms().get(0);
-                SimpleTerms child = null;
+                SimpleTerm child = null;
 
                 if(PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
                     child = new Constants(preSimpleTerm.getConstant());
@@ -63,7 +63,7 @@ public class Term implements Cloneable{
                     Double value = Double.parseDouble(preSimpleTerm.getCharacters().toString());
                     child = new Number(value);
                 } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
-                    child = new Variables(preSimpleTerm.getCharacters().get(0));
+                    child = new Variable(preSimpleTerm.getCharacters().get(0));
                 }
                 if (child != null) {
                     child.setNegative(grouping.isNegative());
@@ -91,7 +91,7 @@ public class Term implements Cloneable{
     }
 
     public boolean isSimple() {
-        if (this instanceof SimpleTerms) {
+        if (this instanceof SimpleTerm) {
             return true;
         }
         return false;
@@ -104,7 +104,7 @@ public class Term implements Cloneable{
 	@Override
 	public String toString(){
 		String st = "";
-		if(this instanceof SimpleTerms){
+		if(this instanceof SimpleTerm){
 			st+= this.getValueString();
 		} 
 

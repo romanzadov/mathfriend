@@ -2,7 +2,7 @@ package representTerms.screens;
 
 import java.util.ArrayList;
 
-import representTerms.Images;
+import representTerms.Image;
 import representTerms.Settings;
 import representTerms.TouchData;
 import representTerms.StringRectangle;
@@ -15,7 +15,7 @@ public class OperatorScreen implements AbstractedScreen{
 
 	
 	public Function operator;
-	Images sel;
+	Image sel;
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
 	int timesTapped = 0;
 	
@@ -26,7 +26,7 @@ public class OperatorScreen implements AbstractedScreen{
 	
 	
 	@Override
-	public void updateMainImage(Images main) {
+	public void updateMainImage(Image main) {
 		operator = main.tr.getFunction();
 		sel = main;
 		touches.clear();
@@ -38,10 +38,10 @@ public class OperatorScreen implements AbstractedScreen{
 		return 0;
 	}
 	
-	private Images getImage(){
+	private Image getImage(){
 		if(operator == null){return null;}
 		else{
-			Images img = new Images(operator.getValueString(), (int)Settings.PREFFERED_FONT, 1, 1);
+			Image img = new Image(operator.getValueString(), (int)Settings.PREFFERED_FONT, 1, 1);
 			return img;
 		}
 	}

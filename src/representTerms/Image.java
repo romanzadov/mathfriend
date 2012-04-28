@@ -11,7 +11,7 @@ import display.rectangle;
 import display.stringofrects;
 
 
-public class Images implements Cloneable{
+public class Image implements Cloneable{
 
 	public static final String TAG = "image";
 	public String st;
@@ -29,10 +29,10 @@ public class Images implements Cloneable{
 	public double scalefactor =1;
 	String arg = null;
 
-	public Images(){}
+	public Image(){}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		Images clone = (Images)super.clone();
+		Image clone = (Image)super.clone();
 
 		if(this.tr != null){
 			clone.tr = (Term) this.tr.clone();
@@ -57,14 +57,14 @@ public class Images implements Cloneable{
 
 
 
-	public Images(Term term, point bl, String argument){
+	public Image(Term term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
 		st = tr.toString();
 	}
 
-	public Images(String myst, int myFont, int screenWidth, int screenHeight){
+	public Image(String myst, int myFont, int screenWidth, int screenHeight){
 		tr = new Term(st);
 		st = myst;
 		setRelativeContainers();
@@ -78,7 +78,7 @@ public class Images implements Cloneable{
 	}
 
 
-	public Images(String myst, point bl){
+	public Image(String myst, point bl){
 		tr = new Term(st);
 		bel = bl;
 		st = myst;

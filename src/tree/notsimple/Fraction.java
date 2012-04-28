@@ -1,7 +1,7 @@
 package tree.notsimple;
 import java.util.ArrayList;
 
-import representTerms.Images;
+import representTerms.Image;
 import tree.Term;
 import tree.simple.Number;
 import display.rectangle;
@@ -197,7 +197,7 @@ public class Fraction extends NotSimple{
 		String newBottom = fraction.getChildren().get(2).toString();
 
 		String multipliedFraction = "("+newTop+")/("+newBottom+")";
-		Images img = new Images(multipliedFraction, 2,2,2);
+		Image img = new Image(multipliedFraction, 2,2,2);
 		
 
 		return img.tr;

@@ -5,7 +5,7 @@ import display.rectangle;
 
 import java.util.ArrayList;
 
-public abstract class SimpleTerms extends Term{
+public abstract class SimpleTerm extends Term{
 	//has numbers, variables, and operators
 	public String image;
 
@@ -19,7 +19,7 @@ public abstract class SimpleTerms extends Term{
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		SimpleTerms clone = (SimpleTerms)super.clone();
+		SimpleTerm clone = (SimpleTerm)super.clone();
 		return clone;
 	}
 

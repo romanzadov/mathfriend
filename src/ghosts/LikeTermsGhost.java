@@ -3,7 +3,7 @@ package ghosts;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
-import representTerms.Images;
+import representTerms.Image;
 import tree.downwalk;
 import tree.Term;
 import tree.downwalk.TreeFunction;
@@ -15,10 +15,10 @@ public class LikeTermsGhost implements TreeFunction{
 	Term a = null;
 	Term b = null;
 	Term aPLUSb = null;
-	Images im;
+	Image im;
 
-	public Images Like(){
-		Images Ghost =null;
+	public Image Like(){
+		Image Ghost =null;
 		Term second = null;
 		if(aPLUSb != null){
 			try {
@@ -73,12 +73,12 @@ public class LikeTermsGhost implements TreeFunction{
 			}
 		//	RelativeContainer dc = new RelativeContainer();
 		//	dc.drawelement(second, (int)im.tr.font);
-			Ghost = new Images(second, new point(im.bel.x, 80), null);
+			Ghost = new Image(second, new point(im.bel.x, 80), null);
 		}
 
 		return Ghost;
 	}
-	public LikeTermsGhost(Images img){
+	public LikeTermsGhost(Image img){
 		im = img;
 		downwalk walk = new downwalk(img.tr, this);
 	}

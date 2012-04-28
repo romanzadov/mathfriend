@@ -4,12 +4,12 @@ import tree.Term;
 import tree.functions.Equals;
 import tree.functions.Function;
 
-public class Equations extends NotSimple{
+public class Equation extends NotSimple{
 
 	Term left;
 	Term right;
 
-	public Equations(Term tr){
+	public Equation(Term tr){
 
 		boolean okay = true;
 
@@ -34,7 +34,7 @@ public class Equations extends NotSimple{
 	//One of the properties of an equation is that if we apply an arbitrary
 	//function to both sides of the equation, equality is preserved.
 
-	public Equations Operation(Equations eq, Function op, Term sel){
+	public Equation Operation(Equation eq, Function op, Term sel){
 
 		eq = op.ToBothSides(eq, op, sel);
 

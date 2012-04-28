@@ -2,16 +2,16 @@ package parse;
 import java.util.ArrayList;
 
 import tree.functions.Function;
-import tree.simple.SimpleTerms;
+import tree.simple.SimpleTerm;
 
 public class tosimpleterms {
 
-	public ArrayList<SimpleTerms> simples;
+	public ArrayList<SimpleTerm> simples;
 	public int placeholder = 0;
 	public Function op = null;
 	 boolean donenum=false;
 
-	public ArrayList<SimpleTerms> simplify(ArrayList<Character> formula){
+	public ArrayList<SimpleTerm> simplify(ArrayList<Character> formula){
 
 		for(int i =0; i<formula.size(); i++){
 			char ch = formula.get(i);

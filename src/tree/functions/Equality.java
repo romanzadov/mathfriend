@@ -2,7 +2,7 @@ package tree.functions;
 
 import display.point;
 import display.rectangle;
-import representTerms.Images;
+import representTerms.Image;
 import tree.*;
 
 public class Equality extends Function {
@@ -76,18 +76,18 @@ public class Equality extends Function {
 		return c;
 	}
 
-	public Images inTermMoves(Images im, Term sel, int IntermIndex){
+	public Image inTermMoves(Image im, Term sel, int IntermIndex){
 
 		int selindex = sel.getParent().getChildren().indexOf(sel);
-		Images Ghost = im;
+		Image Ghost = im;
 		Ghost = MoveFocus(im, sel, selindex, IntermIndex);
 		
 		return Ghost;
 
 	}
 
-	public Images MoveFocus(Images im, Term sel, int selindex, int IntermIndex){
-		Images Ghost = new Images();
+	public Image MoveFocus(Image im, Term sel, int selindex, int IntermIndex){
+		Image Ghost = new Image();
 		Term second = new Term();
 		try {
 			second = (Term) im.tr.clone();
@@ -180,7 +180,7 @@ public class Equality extends Function {
             second.getChildren().set(selindex, moveto);
         }*/
         //	ColorText CT = new ColorText(secondsel, /.red);
-		Ghost = new Images(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
+		Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
 
 
@@ -188,7 +188,7 @@ public class Equality extends Function {
 
 	}
 	@Override
-	public Images overEqualsMoves(Images im, Term sel, int IntermIndex,
+	public Image overEqualsMoves(Image im, Term sel, int IntermIndex,
 			double xsel) {
 		// TODO Auto-generated method stub
 		return null;

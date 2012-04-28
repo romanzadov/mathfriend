@@ -1,7 +1,7 @@
 package tree.functions;
 import container.walks.fontize;
 import display.rectangle;
-import representTerms.Images;
+import representTerms.Image;
 import tree.*;
 
 public class Exponent extends Function {
@@ -77,14 +77,14 @@ public class Exponent extends Function {
 	}
 
 	@Override
-	public Images inTermMoves(Images im, Term sel,
+	public Image inTermMoves(Image im, Term sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Images overEqualsMoves(Images im,
+	public Image overEqualsMoves(Image im,
 			Term sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;

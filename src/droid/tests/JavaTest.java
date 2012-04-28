@@ -1,7 +1,7 @@
 package droid.tests;
 
 import display.point;
-import representTerms.Images;
+import representTerms.Image;
 import tree.Term;
 
 public class JavaTest {
@@ -15,7 +15,7 @@ public class JavaTest {
 		Term mainTerm = new Term(main);
 		Term selTerm = new Term(sel);
 		
-		Images mainImage = new Images(mainTerm, new point(0,0), null);
+		Image mainImage = new Image(mainTerm, new point(0,0), null);
 			
 	}
 }

@@ -1,7 +1,7 @@
 package ghosts;
 
 import container.walks.FindSel;
-import representTerms.Images;
+import representTerms.Image;
 import tree.Term;
 import tree.functions.*;
 //import android.util.Log;
@@ -14,10 +14,10 @@ public class GhostImage {
 	Term SwitchMe;
 	static final String TAG = "GhostImage";
 
-	public Images newImage(Images im, Term sel, point current, point tapped){
+	public Image newImage(Image im, Term sel, point current, point tapped){
 
 
-		Images Ghost = im;
+		Image Ghost = im;
 		int selIndex = 0;
 
 		sel = findSel(im, sel, tapped);
@@ -70,8 +70,8 @@ public class GhostImage {
 
 
 
-	public Images CheckEquals(Images im, Term sel, double xsel, int IntermIndex ){
-		Images Ghost = new Images();
+	public Image CheckEquals(Image im, Term sel, double xsel, int IntermIndex ){
+		Image Ghost = new Image();
 		int selindex = 0;
 		if((sel.getParent() !=null)&&
 				(sel.getParent().getParent() !=null)&&
@@ -135,7 +135,7 @@ public class GhostImage {
 		return Ghost;
 	}
 
-	public Term findSel(Images main, Term sel, point tapped){
+	public Term findSel(Image main, Term sel, point tapped){
 
 		FindSel fs = new FindSel(main, sel, tapped);
 		if(fs.found==null){

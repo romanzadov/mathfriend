@@ -2,7 +2,7 @@ package representTerms.screens;
 
 import java.util.ArrayList;
 
-import representTerms.Images;
+import representTerms.Image;
 import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
@@ -12,7 +12,7 @@ import representTerms.StringRectangle.type;
 public class GhostScreen implements AbstractedScreen{
 
 
-	public Images ghost;
+	public Image ghost;
 
 
 	@Override 
@@ -21,7 +21,7 @@ public class GhostScreen implements AbstractedScreen{
 	}
 
 	@Override
-	public void updateMainImage(Images main) {
+	public void updateMainImage(Image main) {
 		ghost = main;
 	}
 

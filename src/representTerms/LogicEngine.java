@@ -106,7 +106,7 @@ public class LogicEngine {
 
 
 
-		Images next = new Images(nextEquation, (int)Settings.PREFFERED_FONT, 1,1);
+		Image next = new Image(nextEquation, (int)Settings.PREFFERED_FONT, 1,1);
 
 		//change main
 		MainScreen mainScreen = (MainScreen)mainInterface.getAbstractScreen();
@@ -126,7 +126,7 @@ public class LogicEngine {
 
 	private void initMain(){
 		String st = equations.get(0);
-		Images img = new Images(st, new point(0,0));/*
+		Image img = new Image(st, new point(0,0));/*
 		MainScreen ms = new MainScreen(st);
 		mainInterface = new JavaDisplay(ms);*/
 		mainInterface.updateDrawnRectangles(img.getRelativeContainers());

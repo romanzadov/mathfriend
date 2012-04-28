@@ -1,16 +1,16 @@
 package tree.functions;
 
 import parse.PreSimpleTerm;
-import representTerms.Images;
+import representTerms.Image;
 import tree.Term;
-import tree.notsimple.Equations;
-import tree.simple.SimpleTerms;
+import tree.notsimple.Equation;
+import tree.simple.SimpleTerm;
 import display.rectangle;
 
 import java.util.*;
 
 
-public abstract class Function extends SimpleTerms {
+public abstract class Function extends SimpleTerm {
 
 
 
@@ -108,11 +108,11 @@ public abstract class Function extends SimpleTerms {
 		return a;
 	}
 
-	public abstract Images inTermMoves(Images im, Term sel, int IntermIndex);
+	public abstract Image inTermMoves(Image im, Term sel, int IntermIndex);
 	
-	public abstract Images overEqualsMoves(Images im, Term sel, int IntermIndex, double xsel);
+	public abstract Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel);
 
-	public Equations ToBothSides(Equations eq, Function op, Term sel) {
+	public Equation ToBothSides(Equation eq, Function op, Term sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}

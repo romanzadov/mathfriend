@@ -3,11 +3,11 @@ package tree.simple;
 import tree.Term;
 import display.rectangle;
 
-public class Variables extends SimpleTerms {
+public class Variable extends SimpleTerm {
 	
 	public Character value;
 	
-	public Variables(Character a){
+	public Variable(Character a){
 		value = a;
 	}
 	
@@ -17,8 +17,8 @@ public class Variables extends SimpleTerms {
 	}
 	
 	@Override
-	public Variables clone(){
-		Variables v = new Variables(this.value);
+	public Variable clone(){
+		Variable v = new Variable(this.value);
 		v.getContainer().bl.x = this.getContainer().bl.x;
 		v.getContainer().bl.y = this.getContainer().bl.y;
 		return v;
