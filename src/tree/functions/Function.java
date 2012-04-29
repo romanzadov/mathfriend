@@ -25,21 +25,7 @@ public abstract class Function extends SimpleTerm {
 
 	final static public String[] KNOWN_FUNCTIONS = {"+","-","*","/","^","=", "sin", "cos", "tan", "log", "ln"};
 	final static public Character[] NOTFUNCTIONS = {'!', '@', '#', '$', '%', ',','~', '|'};
-    final static public Map<PreSimpleTerm.FunctionType, Class<? extends Function>> PRE_SIMPLE_TERM_TO_FUNCTION = new HashMap<PreSimpleTerm.FunctionType, Class<? extends Function>>();
-    {
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.PLUS, Plus.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.MINUS, Plus.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.TIMES, Times.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.DIVIDE, Times.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.NEGATIVE, Times.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.EXPONENT, Exponent.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.EQUALITY, Equality.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.SINE, AdvancedFunction.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.COSINE, AdvancedFunction.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.TANGENT, AdvancedFunction.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.LOG, AdvancedFunction.class);
-        PRE_SIMPLE_TERM_TO_FUNCTION.put(PreSimpleTerm.FunctionType.LN, AdvancedFunction.class);
-    }
+
     final static public List<Class<? extends Function>> ORDER_OF_OPERATIONS = new ArrayList<Class<? extends Function>>();
     {
         ORDER_OF_OPERATIONS.add(Equality.class);
@@ -118,15 +104,11 @@ public abstract class Function extends SimpleTerm {
 	}
 
     public static int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
-        return ORDER_OF_OPERATIONS.indexOf(PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm));
+        return ORDER_OF_OPERATIONS.indexOf(preSimpleTerm.getFunctionType());
     }
 
     public static int getOrderOfOperation(Class<? extends Function> function) {
         return ORDER_OF_OPERATIONS.indexOf(function);
-    }
-
-    public static Class<? extends Function> getFunction(PreSimpleTerm preSimpleTerm) {
-        return PRE_SIMPLE_TERM_TO_FUNCTION.get(preSimpleTerm);
     }
 	
 }

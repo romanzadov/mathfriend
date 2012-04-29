@@ -18,7 +18,7 @@ public class PreSimpleUtil {
             done = false;
 
             if (!done) {
-                i = isOperator(i, characters);
+                i = isFunction(i, characters);
             }
             if (!done) {
                 i = isConstant(i, characters);
@@ -78,7 +78,7 @@ public class PreSimpleUtil {
         return out;
     }
 
-    private int isOperator(int i, ArrayList<Character> formula) {
+    private int isFunction(int i, ArrayList<Character> formula) {
 
         int out = i;
 
@@ -103,6 +103,7 @@ public class PreSimpleUtil {
                     out = i + con.length();
                     PreSimpleTerm preSimpleOperator = new PreSimpleTerm(formula.subList(i, out), PreSimpleTerm.Type.FUNCTION);
                     preSimpleTerms.add(preSimpleOperator);
+                    out --;
                     done = true;
 
                 }
@@ -118,7 +119,7 @@ public class PreSimpleUtil {
         int out = i;
         if (Character.isLetter(formula.get(i))) {
             out = i + 1;
-            PreSimpleTerm preSimpleVariable = new PreSimpleTerm(formula.subList(i, out), PreSimpleTerm.Type.FUNCTION);
+            PreSimpleTerm preSimpleVariable = new PreSimpleTerm(formula.subList(i, out), PreSimpleTerm.Type.VARIABLE);
             preSimpleTerms.add(preSimpleVariable);
             done = true;
 
@@ -144,6 +145,7 @@ public class PreSimpleUtil {
         if (numlength > 0) {
             PreSimpleTerm preSimpleNumber = new PreSimpleTerm(formula.subList(i, out), PreSimpleTerm.Type.NUMBER);
             preSimpleTerms.add(preSimpleNumber);
+            out--;
             done = true;
         }
 
@@ -180,7 +182,7 @@ public class PreSimpleUtil {
 
         //reset minuses to negatives
         for (PreSimpleTerm preSimpleTerm : formula) {
-            if (preSimpleTerm.getFunctionType().equals(PreSimpleTerm.FunctionType.MINUS)) {
+            if (PreSimpleTerm.FunctionType.MINUS.equals(preSimpleTerm.getFunctionType())) {
 
                 int i = preSimpleTerms.indexOf(preSimpleTerm);
 

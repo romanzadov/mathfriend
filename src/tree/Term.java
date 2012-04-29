@@ -60,7 +60,7 @@ public class Term implements Cloneable{
                 if(PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
                     child = new Constants(preSimpleTerm.getConstant());
                 } else if (PreSimpleTerm.Type.NUMBER.equals(preSimpleTerm.getType())) {
-                    Double value = Double.parseDouble(preSimpleTerm.getCharacters().toString());
+                    Double value = Double.parseDouble(preSimpleTerm.toString());
                     child = new Number(value);
                 } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
                     child = new Variable(preSimpleTerm.getCharacters().get(0));

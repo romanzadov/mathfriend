@@ -1,6 +1,7 @@
 package parse;
 
 
+import tree.functions.*;
 import tree.simple.Constants;
 
 import java.util.List;
@@ -15,31 +16,33 @@ public class PreSimpleTerm {
     private Constants.Constant constant;
 
     public static enum FunctionType {
-        PLUS("+"),
-        MINUS("-"),
-        TIMES("*"),
-        DIVIDE("/"),
-        NEGATIVE("-"),
-        EXPONENT("^"),
-        EQUALITY("="),
-        SINE("sin"),
-        COSINE("cos"),
-        TANGENT("tan"),
-        LOG("log"),
-        LN("ln");
+        PLUS("+", Plus.class),
+        MINUS("-", Plus.class),
+        TIMES("*", Times.class),
+        DIVIDE("/", Times.class),
+        NEGATIVE("-", Times.class),
+        EXPONENT("^", Exponent.class),
+        EQUALITY("=", Equality.class),
+        SINE("sin", AdvancedFunction.class),
+        COSINE("cos", AdvancedFunction.class),
+        TANGENT("tan", AdvancedFunction.class),
+        LOG("log", AdvancedFunction.class),
+        LN("ln", AdvancedFunction.class);
 
         private String representation;
+        private Class<? extends Function> function;
 
-        FunctionType(String representation) {
+        FunctionType(String representation, Class<? extends Function> function) {
             this.representation = representation;
+            this.function = function;
+        }
+
+        public Class<? extends Function> getFunction() {
+            return function;
         }
 
         public String getRepresentation() {
             return representation;
-        }
-
-        public void setRepresentation(String representation) {
-            this.representation = representation;
         }
     }
 
