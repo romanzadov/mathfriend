@@ -25,6 +25,12 @@ public class Times extends Function {
 	}
 
     @Override
+    public String toString() {
+        return "*";
+    }
+
+
+    @Override
     public Term simpleOperation(Term term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }

@@ -15,13 +15,16 @@ public class Equals extends Function {
 		commutative=true;
 		distributive=false;
 		associative=true;
-		lmult = false;
-		rmult = false;
 	}
 
     @Override
     public Term simpleOperation(Term term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String toString(){
+        return "=";
     }
 
     public rectangle giverect(Term tr){

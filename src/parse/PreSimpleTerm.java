@@ -22,7 +22,7 @@ public class PreSimpleTerm {
         DIVIDE("/", Times.class),
         NEGATIVE("-", Times.class),
         EXPONENT("^", Exponent.class),
-        EQUALITY("=", Equality.class),
+        EQUALITY("=", Equals.class),
         SINE("sin", AdvancedFunction.class),
         COSINE("cos", AdvancedFunction.class),
         TANGENT("tan", AdvancedFunction.class),
@@ -70,7 +70,7 @@ public class PreSimpleTerm {
         try {
             Double.parseDouble(getStringFromList(characters));
         } catch (NumberFormatException e) {
-            System.out.println("Unable to parse " + getStringFromList(characters) + " as a double.");
+            //System.out.println("Unable to parse " + getStringFromList(characters) + " as a double.");
         }
 
         if(type.equals(Type.NUMBER)) {

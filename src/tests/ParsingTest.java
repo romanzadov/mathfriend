@@ -7,12 +7,10 @@ import tree.Term;
 
 public class ParsingTest {
 
-    private static final String[] TEST_STRINGS = {"5=x", "2x", "2+5"};
-
     @Test
     public void testParseTerm() {
 
-        for(String formula: TEST_STRINGS) {
+        for(String formula: TestStrings.getStrings()) {
 
             Term term = new Term(formula);
             System.out.println("Term: "+term);

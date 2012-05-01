@@ -1,4 +1,4 @@
-package droid.tests;
+package tests;
 
 import java.util.ArrayList;
 import java.util.Arrays;

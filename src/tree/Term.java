@@ -120,8 +120,14 @@ public class Term implements Cloneable{
 			for(int i = 0; i<this.getChildren().size(); i++){
 				st+= getChildren().get(i).toString();
 			}
-			st+=")";
-		}
+            try {
+                st+=")("+function.newInstance().toString()+")";
+            } catch (InstantiationException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
 		return st;
 	}
 

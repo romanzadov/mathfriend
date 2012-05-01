@@ -2,7 +2,7 @@ package java_specific;
 
 import java.util.ArrayList;
 
-import droid.tests.TestStrings;
+import tests.TestStrings;
 
 import representTerms.Image;
 import representTerms.LogicEngine;
