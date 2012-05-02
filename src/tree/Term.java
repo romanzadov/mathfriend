@@ -104,16 +104,11 @@ public class Term implements Cloneable{
 	@Override
 	public String toString(){
 		String st = "";
-		if(this instanceof SimpleTerm){
+        if(this.isNegative()) {
+                st += "-";
+        }
+		if(this instanceof SimpleTerm) {
 			st+= this.getValueString();
-		} 
-
-		else if(this.isInteger() && getNumericValue(this)<0){
-			st+=getNumericValue(this);
-		}
-		else if(isNegative()){
-			st+="-";
-			st+=getAbsoluteValue().toString();
 		}
 		else{
 			st+="(";
@@ -121,11 +116,11 @@ public class Term implements Cloneable{
 				st+= getChildren().get(i).toString();
 			}
             try {
-                st+=")("+function.newInstance().toString()+")";
+                st+=function.newInstance().toString()+")";
             } catch (InstantiationException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
 

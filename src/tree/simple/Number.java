@@ -7,11 +7,12 @@ public class Number extends SimpleTerm {
 	
 	public double value ;
 	public int charpos;
-	
-	
+
+
 	@Override
 	public String toString(){
-		return ""+value;
+        final String sign = isNegative() ? "-" : "";
+        return sign+value;
 	}
 	
 	@Override
