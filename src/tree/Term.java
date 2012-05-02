@@ -128,6 +128,7 @@ public class Term implements Cloneable{
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
+
 		return st;
 	}
 
@@ -540,17 +541,7 @@ public class Term implements Cloneable{
 	}
 
 	public boolean isNegative() {
-		boolean ans = false;
-/*		if(this.getFunction() != null){
-			if(this.getFunction() instanceof Negative){
-				ans= true;
-			}
-
-		}
-		if(this instanceof NegativeTerm){
-			ans = true;
-		}*/
-		return ans;
+		return isNegative;
 	}
 
 

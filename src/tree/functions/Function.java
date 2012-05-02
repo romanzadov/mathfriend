@@ -27,8 +27,8 @@ public abstract class Function extends SimpleTerm {
 	final static public Character[] NOTFUNCTIONS = {'!', '@', '#', '$', '%', ',','~', '|'};
 
     final static public List<Class<? extends Function>> ORDER_OF_OPERATIONS = new ArrayList<Class<? extends Function>>();
-    {
-        ORDER_OF_OPERATIONS.add(Equality.class);
+    static {
+        ORDER_OF_OPERATIONS.add(Equals.class);
         ORDER_OF_OPERATIONS.add(Plus.class);
         ORDER_OF_OPERATIONS.add(Times.class);
         ORDER_OF_OPERATIONS.add(Exponent.class);
@@ -104,7 +104,7 @@ public abstract class Function extends SimpleTerm {
 	}
 
     public static int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
-        return ORDER_OF_OPERATIONS.indexOf(preSimpleTerm.getFunctionType());
+        return ORDER_OF_OPERATIONS.indexOf(preSimpleTerm.getFunctionType().getFunction());
     }
 
     public static int getOrderOfOperation(Class<? extends Function> function) {

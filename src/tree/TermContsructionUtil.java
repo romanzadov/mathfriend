@@ -117,14 +117,14 @@ public class TermContsructionUtil {
 
     public static Class<? extends Function> getHighestPriorityFunction(List<PreSimpleTerm> preSimpleTerms) {
         Class<? extends Function> primaryPreFunction = null;
-        int order = Integer.MIN_VALUE;
+        int order = Integer.MAX_VALUE;
         Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
 
         for (int i = 0; i < preSimpleTerms.size(); i++) {
             PreSimpleTerm preSimpleTerm = preSimpleTerms.get(i);
             if (preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)) {
 
-                if (Function.getOrderOfOperation(preSimpleTerm) > order) {
+                if (Function.getOrderOfOperation(preSimpleTerm) < order) {
                     primaryPreFunction = preSimpleTerm.getFunctionType().getFunction();
                     order = Function.getOrderOfOperation(preSimpleTerm);
                 }
@@ -132,7 +132,7 @@ public class TermContsructionUtil {
 
             //check for invisible multiplication
             if (hasInvisibleMultiplication(preSimpleTerm, preSimpleTerms)) {
-                if (Function.getOrderOfOperation(Times.class) > order) {
+                if (Function.getOrderOfOperation(Times.class) < order) {
                     primaryPreFunction = Times.class;
                     order = Function.getOrderOfOperation(Times.class);
                 }
