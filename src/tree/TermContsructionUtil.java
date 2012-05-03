@@ -52,7 +52,7 @@ public class TermContsructionUtil {
         for (PreSimpleTerm preSimpleTerm : preSimpleTerms) {
             int breakPoint = -1;
             boolean breakPointFound = false;
-            if (PreSimpleTerm.Type.FUNCTION.equals(preSimpleTerm.getType()) && function.equals(preSimpleTerm.getFunctionType().getFunction())) {
+            if (preSimpleTerms.indexOf(preSimpleTerm) > 0 && PreSimpleTerm.Type.FUNCTION.equals(preSimpleTerm.getType()) && function.equals(preSimpleTerm.getFunctionType().getFunction())) {
                 breakPointFound = true;
                 breakPoint = preSimpleTerms.indexOf(preSimpleTerm);
             }
@@ -77,10 +77,13 @@ public class TermContsructionUtil {
 
             groupings.add(getPreSimpleTermGrouping(group));
         }
-
-        int lastBreakpoint = groupEndpoints.get(groupEndpoints.size() - 1);
-        int endOfList =  preSimpleTerms.size();
-        groupings.add(getPreSimpleTermGrouping(preSimpleTerms.subList(lastBreakpoint, endOfList)));
+        if(groupEndpoints.size() == 0) {
+            groupings.add(getPreSimpleTermGrouping(preSimpleTerms));
+        } else {
+            int lastBreakpoint = groupEndpoints.get(groupEndpoints.size() - 1);
+            int endOfList =  preSimpleTerms.size();
+            groupings.add(getPreSimpleTermGrouping(preSimpleTerms.subList(lastBreakpoint, endOfList)));
+        }
 
         return groupings;
     }
@@ -94,7 +97,15 @@ public class TermContsructionUtil {
             PreSimpleTerm firstTerm = group.get(0);
             PreSimpleTerm secondTerm = group.get(1);
             PreSimpleTerm lastTerm = group.get(group.size() - 1);
-            if (PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType()) || PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
+            if (PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType())) {
+                isNegative = true;
+                group = remove(group, firstTerm);
+                if (PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                    hasParentheses = true;
+                    group = remove(group, secondTerm);
+                    group = remove(group, lastTerm);
+                }
+            } else if (PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
                 if(Function.getOrderOfOperation(getHighestPriorityFunction(group)) > Function.getOrderOfOperation(Plus.class)) {
                     isNegative = true;
                     group = remove(group, firstTerm);
@@ -104,7 +115,6 @@ public class TermContsructionUtil {
                         group = remove(group, lastTerm);
                     }
                 }
-
             } else if (PreSimpleTerm.FunctionType.DIVIDE.equals(firstTerm.getFunctionType())) {
                 isInverse = true;
                 group = remove(group, firstTerm);
