@@ -122,7 +122,7 @@ public class PreSimpleUtil {
             PreSimpleTerm preSimpleVariable = new PreSimpleTerm(formula.subList(i, out), PreSimpleTerm.Type.VARIABLE);
             preSimpleTerms.add(preSimpleVariable);
             done = true;
-
+            out --;
         }
         return out;
     }
