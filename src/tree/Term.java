@@ -104,26 +104,30 @@ public class Term implements Cloneable{
 	@Override
 	public String toString(){
 		String st = "";
-        if(this.isNegative()) {
-                st += "-";
+        String operator = "";
+        try {
+            operator = function.newInstance().toString();
+        } catch (Exception ignore){
+
         }
+
 		if(this instanceof SimpleTerm) {
 			st+= this.getValueString();
 		}
 		else{
-			st+="(";
+			st += "(";
 			for(int i = 0; i<this.getChildren().size(); i++){
-				st+= getChildren().get(i).toString();
+                st += operator;
+                Term child = getChildren().get(i);
+                if(child.isNegative()) {
+                    st += "(" + child + ")";
+                }
+                else {
+                    st += child;
+                }
 			}
-            try {
-                st+=function.newInstance().toString()+")";
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            st += ")";
         }
-
 		return st;
 	}
 
