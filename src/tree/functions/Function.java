@@ -10,7 +10,7 @@ import display.rectangle;
 import java.util.*;
 
 
-public abstract class Function extends SimpleTerm {
+public abstract class Function {
 
 
 
@@ -36,16 +36,7 @@ public abstract class Function extends SimpleTerm {
     }
 	public String thisvalue;
 	public int charpos;
-	
-	@Override
-	public String toString(){
-		/*if(this instanceof Negative){
-			return "*";
-		}
-		else{*/
-			return getValueString();
-		//}
-	}
+
 
     public abstract Term simpleOperation(Term term);
 

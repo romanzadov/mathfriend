@@ -139,7 +139,7 @@ public class GhostImage {
 
 		FindSel fs = new FindSel(main, sel, tapped);
 		if(fs.found==null){
-			fs.found = new Times();
+		//	fs.found = new Times();
 		}
 		return fs.found;
 	}

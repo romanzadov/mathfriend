@@ -22,11 +22,11 @@ public class plusmove {
 			
 			}
 		}
-		if(!(selected instanceof Function) &&
+/*		if(!(selected instanceof Function) &&
 				!(endterm instanceof Function))
 		   	{
 			System.out.println("try to move");
-			main = move(main, selected, endterm);}
+			main = move(main, selected, endterm);}*/
 		
 		
 		
@@ -48,7 +48,7 @@ public class plusmove {
 					System.out.println("start or end = 0");
 					if(splace==0){
 						System.out.println("start = 0");
-						if(selected.getParent().getChildren().get(1) instanceof Plus){
+						/*if(selected.getParent().getChildren().get(1) instanceof Plus){
 							Plus pl = new Plus();
 							Term hold = selected.getParent().getChildren().get(splace);
 							selected.getParent().getChildren().set(splace,
@@ -57,7 +57,7 @@ public class plusmove {
 									selected.getParent().getChildren().get(eplace-1));
 							selected.getParent().getChildren().set(eplace,pl);
 							selected.getParent().getChildren().set(eplace-1,hold);
-						}
+						}*/
 						
 					}
 					

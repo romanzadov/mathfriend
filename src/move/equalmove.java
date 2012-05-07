@@ -29,10 +29,10 @@ public class equalmove {
 			}
 			
 			if(move){
-				if(!(over instanceof Function)
+				/*if(!(over instanceof Function)
 						&&!(selected instanceof Function)){
 				tr = switchedterm(tr, selectedplace, overplace);
-				}
+				}*/
 			}
 		}
 		return tr;

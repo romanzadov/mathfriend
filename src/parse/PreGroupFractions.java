@@ -72,8 +72,8 @@ public class PreGroupFractions implements TreeFunction{
 
 				if(position[1]==0){
 
-					if(piece instanceof Times){ 
-					}
+					/*if(piece instanceof Times){
+					}*/
 
 	/*				else if(piece instanceof Divide){
 						stacked[position[0]][position[1]] = one;
@@ -174,11 +174,11 @@ public class PreGroupFractions implements TreeFunction{
 				}*/
 
 			}
-			else{
+			/*else{
 				if(mid.getChildren().get(mid.getChildren().size()-1) instanceof Times){
 					mid.getChildren().remove(mid.getChildren().size()-1);
 				}
-			}
+			}*/
 		}
 		return mid;
 	}

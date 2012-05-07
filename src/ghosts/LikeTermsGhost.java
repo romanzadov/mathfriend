@@ -59,9 +59,9 @@ public class LikeTermsGhost implements TreeFunction{
 			else{
 				if(!aPLUSb.isNegative()){
 					Plus pl = new Plus();
-					pl.setParent(aPLUSb.getParent());
+				//	pl.setParent(aPLUSb.getParent());
 					aPLUSb.getParent().getChildren().add(smallest,aPLUSb);
-					aPLUSb.getParent().getChildren().add(smallest,pl);
+				//	aPLUSb.getParent().getChildren().add(smallest,pl);
 				}
 				else{
 /*					Minus mn = new Minus();

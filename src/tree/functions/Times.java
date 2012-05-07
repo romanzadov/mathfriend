@@ -20,7 +20,6 @@ public class Times extends Function {
 		identity=1;
 		lmult = false;
 		rmult = false;
-		setValueString("*");
 		
 	}
 
@@ -42,7 +41,7 @@ public class Times extends Function {
 		
 		//rectangle any simpleterm
 		if(	tr.getChildren().size()==1	){
-			if( tr instanceof Times){
+			/*if( tr instanceof Times){
 
 				rectangle a = new rectangle();
 				a.width = 1;
@@ -50,7 +49,7 @@ public class Times extends Function {
 				tr.setContainer(a);
 
 				rect = a;
-			}
+			}*/
 		}
 		//find the bottoms of the fractions
 		
@@ -60,12 +59,12 @@ public class Times extends Function {
 
 			//make times visible as needed
 			for(int i = 0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i) instanceof Times && ((Times)tr.getChildren().get(i)).visible){
+				/*if(tr.getChildren().get(i) instanceof Times && ((Times)tr.getChildren().get(i)).visible){
 				
 					Term kid = tr.getChildren().get(i);
 					kid.getContainer().height = (float) .3;
 					kid.getContainer().width = (float) .3;
-				}
+				}*/
 			}
 			
 			tr.setContainer(makefractions(tr));

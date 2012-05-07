@@ -213,14 +213,14 @@ public class TimesMove {
 		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getFunction() instanceof Equals){
 			Term eq = recip.getParent().getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
-				if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex){
+			/*	if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex){
 					Term recipcl =null;
 					try {
 						recipcl = (Term)recip.clone();
 					} catch (CloneNotSupportedException e) {}
 	//				ColorText ct = new ColorText(recipcl, Color.red);
 					TM.Times(eq.getChildren().get(i), recipcl);
-				}
+				}*/
 			}
 		}
 		
@@ -228,14 +228,14 @@ public class TimesMove {
 			
 			Term eq = regular.getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
-				if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex2){
+				/*if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex2){
 					Term recipcl =null;
 					try {
 						recipcl = (Term)recip.clone();
 					} catch (CloneNotSupportedException e) {}
 	//				ColorText ct = new ColorText(recipcl, Color.red);
 					TM.Times(eq.getChildren().get(i), recipcl);
-				}
+				}*/
 			}
 		}
 	}

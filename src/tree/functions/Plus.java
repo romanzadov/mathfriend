@@ -13,8 +13,6 @@ import display.rectangle;
 public class Plus extends Function {
 
 	public boolean invisible;
-
-	static final String TAG = "plus";
 	
 	public Plus(){
 		inputs =2;
@@ -26,7 +24,6 @@ public class Plus extends Function {
 		invisible = false;
 		lmult = false;
 		rmult = false;
-		setValueString("+");
 	}
 
     @Override
@@ -107,10 +104,10 @@ public class Plus extends Function {
 	public Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel){
 		
 		plusmove pm = new plusmove();
-		Image Ghost = new Image();
+		Image Ghost = new Image();/*
 		if(!(sel.getParent().getParent().getChildren().get(IntermIndex) instanceof Function)){
 		//	Ghost = pm.overEquals(im, sel, IntermIndex, xsel);
-		}
+		}*/
 		return Ghost;
 	}
 

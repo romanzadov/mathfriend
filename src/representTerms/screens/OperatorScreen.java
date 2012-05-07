@@ -41,7 +41,7 @@ public class OperatorScreen implements AbstractedScreen{
 	private Image getImage(){
 		if(operator == null){return null;}
 		else{
-			Image img = new Image(operator.getValueString(), (int)Settings.PREFFERED_FONT, 1, 1);
+			Image img = new Image(operator.toString(), (int)Settings.PREFFERED_FONT, 1, 1);
 			return img;
 		}
 	}
@@ -55,7 +55,7 @@ public class OperatorScreen implements AbstractedScreen{
 			StringRectangle sr = new StringRectangle();
 			sr.container.width = 1;
 			sr.container.height = 1;
-			sr.todraw = operator.getValueString();
+			sr.todraw = operator.toString();
 			relatives.add(sr);
 		}
 		

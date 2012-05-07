@@ -95,8 +95,8 @@ public class PlusMinus {
 			else{
 				if(!mid.isNegative()){
 					Plus pl = new Plus();
-					pl.setParent(one.getParent());
-					one.getParent().getChildren().set(onepos-1, pl);
+			//		pl.setParent(one.getParent());
+			//		one.getParent().getChildren().set(onepos-1, pl);
 					one.getParent().getChildren().set(onepos, mid);
 				}
 				if(mid.isNegative()){

@@ -53,10 +53,10 @@ public class composefractions implements TreeFunction{
 				rectangle cont = new rectangle();
 				cont.height = 0;
 				cont.width = 0;
-				tm.setParent(tr);
+				/*tm.setParent(tr);
 				tm.setContainer(cont);
 				tm.simples.add(tm);
-				tr.getChildren().add(places[i][1]+sofar-1, tm);
+				tr.getChildren().add(places[i][1]+sofar-1, tm);*/
 				tr.getChildren().add(places[i][1]+sofar, top);
 				sofar+=2;
 			}
