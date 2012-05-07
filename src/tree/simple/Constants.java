@@ -22,6 +22,11 @@ public class Constants extends Number{
         this.constant = constant;
     }
 
+    @Override
+    public String toString() {
+        return constant.getName();
+    }
+
 
     public enum Constant {
         PI("pi", Math.PI),

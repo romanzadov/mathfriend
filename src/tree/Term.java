@@ -55,31 +55,46 @@ public class Term implements Cloneable{
             if(grouping.getPreSimpleTerms().size() == 1) {
 
                 PreSimpleTerm preSimpleTerm = grouping.getPreSimpleTerms().get(0);
-                SimpleTerm child = null;
+                children.add(getSimpleTerm(preSimpleTerm, grouping.isNegative(), grouping.isInverse()));
 
-                if(PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
-                    child = new Constants(preSimpleTerm.getConstant());
-                } else if (PreSimpleTerm.Type.NUMBER.equals(preSimpleTerm.getType())) {
-                    Double value = Double.parseDouble(preSimpleTerm.toString());
-                    child = new Number(value);
-                } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
-                    child = new Variable(preSimpleTerm.getCharacters().get(0));
-                }
-                if (child != null) {
-                    child.setNegative(grouping.isNegative());
-                    child.setInverse(grouping.isInverse());
-                    children.add(child);
-                }
 
+            } else if(grouping.getPreSimpleTerms().size() == 2) {
+                PreSimpleTerm first = grouping.getPreSimpleTerms().get(0);
+                PreSimpleTerm second = grouping.getPreSimpleTerms().get(1);
+                if (PreSimpleTerm.Type.FUNCTION.equals(first.getType()) &&
+                        PreSimpleTerm.FunctionType.NEGATIVE.equals(first.getFunctionType())) {
+
+                    children.add(getSimpleTerm(second, true, grouping.isInverse()));
+
+                }
             } else {
                 Term child = new Term(grouping.getPreSimpleTerms());
                 child.setNegative(grouping.isNegative());
                 child.setInverse(grouping.isInverse());
+                child.setHasParentheses(grouping.hasParentheses());
                 children.add(child);
             }
 
         }
 
+    }
+
+    private SimpleTerm getSimpleTerm(PreSimpleTerm preSimpleTerm, boolean negative, boolean inverse) {
+        SimpleTerm child = null;
+
+        if (PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
+            child = new Constants(preSimpleTerm.getConstant());
+        } else if (PreSimpleTerm.Type.NUMBER.equals(preSimpleTerm.getType())) {
+            Double value = Double.parseDouble(preSimpleTerm.toString());
+            child = new Number(value);
+        } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
+            child = new Variable(preSimpleTerm.getCharacters().get(0));
+        }
+        if (child != null) {
+            child.setNegative(negative);
+            child.setInverse(inverse);
+        }
+        return child;
     }
 
     public boolean isInverse() {
@@ -115,18 +130,18 @@ public class Term implements Cloneable{
 			st+= this.getValueString();
 		}
 		else{
-			st += "(";
-			for(int i = 0; i<this.getChildren().size(); i++){
-                st += operator;
+    		for(int i = 0; i<this.getChildren().size(); i++){
                 Term child = getChildren().get(i);
-                if(child.isNegative()) {
+                if(child.hasParentheses()) {
                     st += "(" + child + ")";
                 }
                 else {
                     st += child;
                 }
+                if(this.getChildren().indexOf(child) < this.getChildren().size() - 1) {
+                     st += operator;
+                }
 			}
-            st += ")";
         }
 		return st;
 	}
@@ -587,6 +602,15 @@ public class Term implements Cloneable{
 		return getResultOfBasicOperation();
 
 	}
+
+    public void print() {
+        System.out.println(this);
+        for(Term child: children) {
+            if(!child.isSimple()) {
+                child.print();
+            }
+        }
+    }
 
 	private Term getResultOfBasicOperation(){
 

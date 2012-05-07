@@ -69,6 +69,7 @@ public class PreSimpleUtil {
                     preSimpleConstant.setConstant(constant);
                     preSimpleTerms.add(preSimpleConstant);
                     done = true;
+                    out--;
                 }
 
             }
@@ -156,7 +157,6 @@ public class PreSimpleUtil {
     private int isParentheses(int i, ArrayList<Character> formula) {
         int out = i;
         if (Character.valueOf(formula.get(i)) == '(' || Character.valueOf(formula.get(i)) == ')') {
-            out = i + 1;
             PreSimpleTerm preSimpleParentheses = new PreSimpleTerm(formula.subList(i, i + 1), PreSimpleTerm.Type.PARENTHESES);
             preSimpleTerms.add(preSimpleParentheses);
             done = true;

@@ -15,10 +15,10 @@ public class ParenthesisUtil {
         checkFormula(formula);
 
         for (int i = 0; i < formula.size(); i++) {
-            if (formula.get(i).toString().equals('(')) {
+            if (formula.get(i).toString().equals("(")) {
                 placesOfParenthesisInFormula[i] = 1;  //left parentheses
             }
-            if (formula.get(i).toString().equals(')')) {
+            if (formula.get(i).toString().equals(")")) {
                 placesOfParenthesisInFormula[i] = 2; //right parenthes
             }
         }

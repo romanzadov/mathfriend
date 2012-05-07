@@ -36,7 +36,7 @@ public class TermContsructionUtil {
             }
 
             //don't look for operators inside parentheses
-            else if (preSimpleTerm.getType().equals(PreSimpleTerm.Type.PARENTHESES)) {
+            else if (PreSimpleTerm.Type.PARENTHESES.equals(preSimpleTerm.getType())) {
                 i = parentheses.get(i);
             }
         }

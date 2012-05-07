@@ -13,7 +13,9 @@ public class ParsingTest {
         for(String formula: TestStrings.getStrings()) {
 
             Term term = new Term(formula);
-            System.out.println(formula+ " ==> "+term);
+//            System.out.println(formula+ " ==> "+term);
+            term.print();
+            System.out.println("_________________________");
             Assert.assertNotNull(term);
 
      /*       String fromTerm = term.toString();
