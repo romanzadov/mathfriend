@@ -53,8 +53,23 @@ public class TermContsructionUtil {
             int breakPoint = -1;
             boolean breakPointFound = false;
             if (preSimpleTerms.indexOf(preSimpleTerm) > 0 && PreSimpleTerm.Type.FUNCTION.equals(preSimpleTerm.getType()) && function.equals(preSimpleTerm.getFunctionType().getFunction())) {
-                breakPointFound = true;
-                breakPoint = preSimpleTerms.indexOf(preSimpleTerm);
+
+                //ignore case of negative after multiplication
+                int index = preSimpleTerms.indexOf(preSimpleTerm);
+                PreSimpleTerm previous = null;
+                if(index > 0) {
+                    previous = preSimpleTerms.get(index - 1);
+                }
+                boolean ignore = false;
+                if(previous != null && PreSimpleTerm.Type.FUNCTION.equals(previous.getType()) &&
+                        PreSimpleTerm.FunctionType.TIMES.equals(previous.getFunctionType()) &&
+                        PreSimpleTerm.FunctionType.NEGATIVE.equals(preSimpleTerm.getFunctionType())) {ignore = true;}
+
+                if (!ignore) {
+                    breakPointFound = true;
+                    breakPoint = preSimpleTerms.indexOf(preSimpleTerm);
+                }
+
             }
             //if our function is multiplication, check for implicit multiplications like 2x
             if (function == Times.class && !breakPointFound) {
@@ -111,6 +126,7 @@ public class TermContsructionUtil {
                     group = remove(group, lastTerm);
                 }
             } else if (PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
+                // this should account for the case of 5 = -10
                 if(Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class)) {
                     isNegative = true;
                     group = remove(group, firstTerm);
