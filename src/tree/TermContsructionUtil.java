@@ -114,13 +114,13 @@ public class TermContsructionUtil {
             PreSimpleTerm lastTerm = group.get(group.size() - 1);
 
             //sort by primary function instead
-            if(function.equals(Times.class)) {
+            if(Times.class.equals(function)) {
 
             }
             if (PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType())) {
                 isNegative = true;
                 group = remove(group, firstTerm);
-                if (PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                if (isInParentheses(group)) {
                     hasParentheses = true;
                     group = remove(group, secondTerm);
                     group = remove(group, lastTerm);
@@ -130,7 +130,7 @@ public class TermContsructionUtil {
                 if(Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class)) {
                     isNegative = true;
                     group = remove(group, firstTerm);
-                    if (PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                    if (isInParentheses(group)) {
                         hasParentheses = true;
                         group = remove(group, secondTerm);
                         group = remove(group, lastTerm);
@@ -139,18 +139,18 @@ public class TermContsructionUtil {
             } else if (PreSimpleTerm.FunctionType.DIVIDE.equals(firstTerm.getFunctionType())) {
                 isInverse = true;
                 group = remove(group, firstTerm);
-                if (PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                if (isInParentheses(group)) {
                     hasParentheses = false;//example: 2/(3x-4).  These are probably parentheses for parsing, not for the equation. I will remove them
                     group = remove(group, secondTerm);
                     group = remove(group, lastTerm);
                 }
-            } else if (PreSimpleTerm.Type.PARENTHESES.equals(firstTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+            } else if (isInParentheses(group)) {
                 hasParentheses = true;
                 group = remove(group, firstTerm);
                 group = remove(group, lastTerm);
             } else if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType()) && firstTerm.getFunctionType().getFunction() == AdvancedFunction.class) {
                 group = remove(group, firstTerm);
-                if (PreSimpleTerm.Type.PARENTHESES.equals(secondTerm.getType()) && PreSimpleTerm.Type.PARENTHESES.equals(lastTerm.getType())) {
+                if (isInParentheses(group)) {
                     group = remove(group, secondTerm);
                     group = remove(group, lastTerm);
                 } else {
@@ -183,6 +183,17 @@ public class TermContsructionUtil {
             PreSimpleTerm nextTerm = preSimpleTerms.get(index + 1);
             return preSimpleTerm.isRightMultiplied() && nextTerm.isLeftMultiplied();
         }
+    }
+
+    private static boolean isInParentheses(List<PreSimpleTerm> preSimpleTerms) {
+        Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
+        try {
+             if(parentheses.get(0) == preSimpleTerms.size() - 1) {
+                return true;
+            }
+        } catch (Exception ignore) {
+        }
+        return false;
     }
 
     private static List<PreSimpleTerm> remove(List<PreSimpleTerm> group, PreSimpleTerm preSimpleTerm) {
