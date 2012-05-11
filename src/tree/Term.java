@@ -28,7 +28,6 @@ public class Term implements Cloneable{
 	private boolean isNegative = false;
     private boolean isInverse = false;
 
-	private String valueString;
 	private float scaleFactor =1;
 	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
 	public StringRectangle ScreenPosition = new StringRectangle();
@@ -133,7 +132,7 @@ public class Term implements Cloneable{
         }
 
 		if(this instanceof SimpleTerm) {
-			st+= this.getValueString();
+			st+= ((SimpleTerm)this).getValueString();
 		}
 		else{
     		for(int i = 0; i<this.getChildren().size(); i++){
@@ -667,14 +666,6 @@ public class Term implements Cloneable{
 
     public void setHasParentheses(boolean hasParentheses) {
         this.hasParentheses = hasParentheses;
-    }
-
-    public String getValueString() {
-        return valueString;
-    }
-
-    public void setValueString(String valueString) {
-        this.valueString = valueString;
     }
 
     public float getScaleFactor() {

@@ -8,9 +8,13 @@ import java.util.ArrayList;
 public abstract class SimpleTerm extends Term{
 	//has numbers, variables, and operators
 	public String image;
+    private String valueString;
 
+    public String getValueString() {
+        return valueString;
+    }
 
-	public rectangle giverect(Term tr){
+    public rectangle giverect(Term tr){
 		System.out.println("error: giverect was run on simpleterm");
 		rectangle a = new rectangle();
 		
