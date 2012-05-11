@@ -66,17 +66,23 @@ public class Term implements Cloneable{
 
                     children.add(getSimpleTerm(second, true, grouping.isInverse()));
 
+                } else {
+                    addChild(grouping);
                 }
             } else {
-                Term child = new Term(grouping.getPreSimpleTerms());
-                child.setNegative(grouping.isNegative());
-                child.setInverse(grouping.isInverse());
-                child.setHasParentheses(grouping.hasParentheses());
-                children.add(child);
+                addChild(grouping);
             }
 
         }
 
+    }
+
+    private void addChild(PreSimpleTermGrouping grouping) {
+        Term child = new Term(grouping.getPreSimpleTerms());
+        child.setNegative(grouping.isNegative());
+        child.setInverse(grouping.isInverse());
+        child.setHasParentheses(grouping.hasParentheses());
+        children.add(child);
     }
 
     private SimpleTerm getSimpleTerm(PreSimpleTerm preSimpleTerm, boolean negative, boolean inverse) {
@@ -132,6 +138,9 @@ public class Term implements Cloneable{
 		else{
     		for(int i = 0; i<this.getChildren().size(); i++){
                 Term child = getChildren().get(i);
+                if (child.isInverse()) {
+                    st += "1/";
+                }
                 if(child.hasParentheses()) {
                     st += "(" + child + ")";
                 }
