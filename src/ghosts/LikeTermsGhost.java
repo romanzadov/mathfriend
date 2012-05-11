@@ -5,32 +5,32 @@ import java.util.ArrayList;
 import move.identify.TermMath;
 import representTerms.Image;
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 import tree.functions.Plus;
 import display.point;
 
 public class LikeTermsGhost implements TreeFunction{
 
-	Term a = null;
-	Term b = null;
-	Term aPLUSb = null;
+	CompoundTerm a = null;
+	CompoundTerm b = null;
+	CompoundTerm aPLUSb = null;
 	Image im;
 
 	public Image Like(){
 		Image Ghost =null;
-		Term second = null;
+		CompoundTerm second = null;
 		if(aPLUSb != null){
 			try {
-				second = (Term) im.tr.clone();
+				second = (CompoundTerm) im.tr.clone();
 			} catch (CloneNotSupportedException e) {}
 
 			
 			ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, a);
 			
-			Term as = TermMath.findTermUsingKey(second, key);
+			CompoundTerm as = TermMath.findTermUsingKey(second, key);
 			key = TermMath.findTreePositionOfSelected(im.tr, b);
-			Term bs = TermMath.findTermUsingKey(second, key);
+			CompoundTerm bs = TermMath.findTermUsingKey(second, key);
 
 			int smallest = Integer.MAX_VALUE;
 
@@ -83,7 +83,7 @@ public class LikeTermsGhost implements TreeFunction{
 		downwalk walk = new downwalk(img.tr, this);
 	}
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		if(aPLUSb == null){
 /*			if(tr.getFunction() !=null && (tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus)){
 

@@ -1,7 +1,7 @@
 package parse;
 
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 import tree.notsimple.Fraction;
 import tree.notsimple.NegativeTerm;
@@ -12,20 +12,20 @@ public class CastToNonSimple implements TreeFunction{
 	public static final String TAG = "CastToNonSimple";
 	int n = 0;
 
-	public CastToNonSimple(Term tr){
+	public CastToNonSimple(CompoundTerm tr){
 		for(int i = 0; i<3; i++){
 			n = i;
 			downwalk walk = new downwalk(tr, this);
 		}
 	}
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		//go through subclasses of "notsimple" and see  we can cast our term as one of them.
 		if(n == 0){
 			Fraction f = new Fraction();
 			if(f.canConstruct(tr)){
 				int place = tr.getParent().getChildren().indexOf(tr);
-				f = new Fraction(tr.getChildren().get(0), tr.getChildren().get(2));
+				f = new Fraction(tr.getCompoundChildren().get(0), tr.getCompoundChildren().get(2));
 
 				f.setParent(tr.getParent());
 				tr.getParent().getChildren().set(place, f);

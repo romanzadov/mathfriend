@@ -1,6 +1,6 @@
 package tree.simple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import display.rectangle;
 
 public class Number extends SimpleTerm {
@@ -19,8 +19,8 @@ public class Number extends SimpleTerm {
 	public Number clone(){
 		
 		Number na = new Number(this.value);
-		na.getContainer().bl.x = this.getContainer().bl.x;
-		na.getContainer().bl.y = this.getContainer().bl.y;
+	/*	na.getContainer().bl.x = this.getContainer().bl.x;
+		na.getContainer().bl.y = this.getContainer().bl.y;*/
 		return na;
 	}
 	
@@ -30,7 +30,7 @@ public class Number extends SimpleTerm {
 
     public Number(){};
 
-	public rectangle giverect(Term tr){
+	public rectangle giverect(CompoundTerm tr){
 		rectangle a = new rectangle();
 
     /*    if (isNegative()) {//if the term is a "negative"

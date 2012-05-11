@@ -1,18 +1,18 @@
 package container.walks;
 
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class killparens  implements TreeFunction{
 
 
-	public killparens(Term tr){
+	public killparens(CompoundTerm tr){
 		
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		/*if(tr instanceof Parens){
 			tr.getParent().setHasParentheses(true);
 			int n = tr.getParent().getChildren().size();

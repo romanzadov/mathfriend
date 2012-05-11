@@ -1,11 +1,11 @@
 package ghosts;
 
-import tree.Term;
+import tree.CompoundTerm;
 
 public class SanitizeTimes {
 
 	
-	public SanitizeTimes(Term tr){
+	public SanitizeTimes(CompoundTerm tr){
 		
 	}
 }

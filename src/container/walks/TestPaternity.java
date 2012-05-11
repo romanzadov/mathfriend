@@ -1,17 +1,17 @@
 package container.walks;
 
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class TestPaternity implements TreeFunction{
 
 
-	public TestPaternity(Term tr){
+	public TestPaternity(CompoundTerm tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 
 		if(tr != null){
 			for(int i = 0; i<tr.getChildren().size(); i++){

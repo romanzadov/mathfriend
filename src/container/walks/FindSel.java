@@ -2,7 +2,7 @@ package container.walks;
 
 import representTerms.Image;
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 //import android.util.Log;
 import display.point;
@@ -11,12 +11,12 @@ public class FindSel implements TreeFunction{
 
 	static final String TAG = "FindSel";
 
-	public Term found = null;
+	public CompoundTerm found = null;
 	Image myMain;
-	Term mySel;
+	CompoundTerm mySel;
 	point myTapped;
 
-	public FindSel(Image main, Term sel, point tapped){
+	public FindSel(Image main, CompoundTerm sel, point tapped){
 		myMain = main;
 		mySel = sel;
 		myTapped = tapped;
@@ -25,7 +25,7 @@ public class FindSel implements TreeFunction{
 	}
 
 	@Override
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 
 		boolean sameString = false;
 		boolean samePlace = false;

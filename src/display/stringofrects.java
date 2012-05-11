@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import representTerms.StringRectangle;
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class stringofrects implements TreeFunction{
@@ -12,7 +12,7 @@ public class stringofrects implements TreeFunction{
 	public ArrayList<rectangle> todraw = new ArrayList<rectangle>();
 	public ArrayList<StringRectangle> a = new ArrayList<StringRectangle>();
 
-	public ArrayList<rectangle> listme(Term main, String argument){
+	public ArrayList<rectangle> listme(CompoundTerm main, String argument){
 
 		if(argument == null){
 			rectangle rt = main.getContainer();
@@ -32,7 +32,7 @@ public class stringofrects implements TreeFunction{
 
 		else if(argument == "magnet"){
 
-			Term top = main;
+			CompoundTerm top = main;
 
 			rectangle rt = top.getContainer();
 			int width = (int)(rt.width);
@@ -60,13 +60,13 @@ public class stringofrects implements TreeFunction{
 		return todraw;
 	}
 
-	public ArrayList<StringRectangle> writeme(Term tr){
+	public ArrayList<StringRectangle> writeme(CompoundTerm tr){
 		a = new ArrayList<StringRectangle>();
 		downwalk wk = new downwalk(tr, this);
 		return a;
 	}
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		
 		
 		rectangle sr = new rectangle();

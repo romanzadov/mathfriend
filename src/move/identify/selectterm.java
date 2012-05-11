@@ -1,7 +1,6 @@
 package move.identify;
 
-import tree.Term;
-import tree.functions.Function;
+import tree.CompoundTerm;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
@@ -13,8 +12,8 @@ public class selectterm {
 
 	static final String TAG = "selectterm";
 	
-	public Term whichterm(Term tr, float x, float y, point termbl, int error){
-		Term back = new Term();
+	public CompoundTerm whichterm(CompoundTerm tr, float x, float y, point termbl, int error){
+		CompoundTerm back = new CompoundTerm();
 		
 	//	System.out.println(" "+tr+"|"+x+"|"+y+"|"+termbl+"|");
 		
@@ -50,7 +49,7 @@ public class selectterm {
 				if(tl.x+ours.width<x){in = false;}
 				if(tl.y>y){in = false;}
 				//if still true, stop
-				if(in){found = true; back = (Term) tr.clone();}
+				if(in){found = true; back = (CompoundTerm) tr.clone();}
 				if(!in){back = null;}
 			
 				
@@ -69,8 +68,8 @@ public class selectterm {
 	}
 
 	//simpler version of select term. This one only cares if you're in the same x range and ignores y
-	public Term aboveterm(Term tr, int x, Term exclude, point termbl){
-		Term back = new Term();
+	public CompoundTerm aboveterm(CompoundTerm tr, int x, CompoundTerm exclude, point termbl){
+		CompoundTerm back = new CompoundTerm();
 		boolean found = false;
 
 		x-=termbl.x;

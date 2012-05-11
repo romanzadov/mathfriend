@@ -8,30 +8,30 @@ import display.point;
 import move.identify.TermMath;
 import representTerms.Image;
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 import tree.functions.Times;
 
 public class MultiplyGhost implements TreeFunction{
 
-	Term a = null;
-	Term b = null;
-	Term aTIMESb = null;
+	CompoundTerm a = null;
+	CompoundTerm b = null;
+	CompoundTerm aTIMESb = null;
 	Image im;
 
 	public Image Like(){
 		
 		Image Ghost =null;
-		Term second = null;
+		CompoundTerm second = null;
 		if(aTIMESb != null){
 			try {
-				second = (Term) im.tr.clone();
+				second = (CompoundTerm) im.tr.clone();
 			} catch (CloneNotSupportedException e) {}
 
 			ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, a);
-			Term as = TermMath.findTermUsingKey(second, key);
+			CompoundTerm as = TermMath.findTermUsingKey(second, key);
 			key = TermMath.findTreePositionOfSelected(im.tr, b);
-			Term bs = TermMath.findTermUsingKey(second, key);
+			CompoundTerm bs = TermMath.findTermUsingKey(second, key);
 
 			int smallest = Integer.MAX_VALUE;
 
@@ -68,11 +68,11 @@ public class MultiplyGhost implements TreeFunction{
 	}
 
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		if(aTIMESb == null){
 			if(tr.getFunction() !=null && (tr.getFunction() instanceof Times)){
 
-				Term ans = null;
+				CompoundTerm ans = null;
 				boolean stop = false;
 				for(int i = 0; i<tr.getChildren().size()-1; i++){
 					for(int j = i+1; j<tr.getChildren().size(); j++){

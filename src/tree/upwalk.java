@@ -5,9 +5,9 @@ public class upwalk {
 	//walk through all the nodes in up order and change things
 	//using performAction
 	public interface TreeFunction{
-		public void performAction(Term tr);
+		public void performAction(CompoundTerm tr);
 	}
-	public upwalk(Term tr, TreeFunction f){
+	public upwalk(CompoundTerm tr, TreeFunction f){
 		//input the first term
 		//for each child, if simple child then execute, if not, dig in
 	

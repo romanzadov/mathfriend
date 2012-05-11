@@ -1,17 +1,17 @@
 package tree.functions;
 
 import representTerms.Image;
-import tree.Term;
+import tree.CompoundTerm;
 
 public class AdvancedFunction extends Function {
 
     @Override
-    public Term simpleOperation(Term term) {
+    public CompoundTerm simpleOperation(CompoundTerm term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-	public Image inTermMoves(Image im, Term sel,
+	public Image inTermMoves(Image im, CompoundTerm sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
@@ -19,7 +19,7 @@ public class AdvancedFunction extends Function {
 
 	@Override
 	public Image overEqualsMoves(Image im,
-			Term sel, int IntermIndex, double xsel) {
+			CompoundTerm sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

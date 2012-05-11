@@ -1,23 +1,21 @@
 package move;
 
 import move.identify.selectterm;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.functions.Equality;
-import tree.functions.Function;
-import tree.functions.Plus;
 import display.point;
 
 public class plusmove {
 
-	public Term plmomve(Term main, Term selected, int x, int y){
+	public CompoundTerm plmomve(CompoundTerm main, CompoundTerm selected, int x, int y){
 		System.out.println("plus move");
 		selectterm st = new selectterm();		
-		Term endterm = st.whichterm(selected.getParent(), x, y, new point(0,0), 0);
+		CompoundTerm endterm = st.whichterm(selected.getParent(), x, y, new point(0,0), 0);
 		
 		if(endterm == null){
 			
 			if(selected.getParent().getParent().getFunction() instanceof Equality){
-				Term higherterm = st.whichterm(selected.getParent().getParent(), x, y, new point(0,0), 0);
+				CompoundTerm higherterm = st.whichterm(selected.getParent().getParent(), x, y, new point(0,0), 0);
 				endterm = st.whichterm(higherterm, x, y, new point(0,0), 0);
 			
 			}
@@ -33,7 +31,7 @@ public class plusmove {
 		return main;
 	}
 	
-	public Term move(Term main, Term selected, Term endterm){
+	public CompoundTerm move(CompoundTerm main, CompoundTerm selected, CompoundTerm endterm){
 		
 		int splace = selected.getParent().getChildren().indexOf(selected);
 		int eplace = endterm.getParent().getChildren().indexOf(endterm);
@@ -63,8 +61,8 @@ public class plusmove {
 					
 				}
 				else{
-					Term hold1 = selected.getParent().getChildren().get(splace-1);
-					Term hold2 = selected.getParent().getChildren().get(splace);
+					CompoundTerm hold1 = selected.getParent().getChildren().get(splace-1);
+					CompoundTerm hold2 = selected.getParent().getChildren().get(splace);
 					selected.getParent().getChildren().set(splace,
 							selected.getParent().getChildren().get(eplace));
 					selected.getParent().getChildren().set(splace-1,

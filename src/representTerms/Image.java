@@ -2,7 +2,7 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import tree.Term;
+import tree.CompoundTerm;
 //import android.graphics.Color;
 //import android.util.Log;
 import container.RelativeContainer;
@@ -15,7 +15,7 @@ public class Image implements Cloneable{
 
 	public static final String TAG = "image";
 	public String st;
-	public Term tr;
+	public CompoundTerm tr;
 
 	public ArrayList<StringRectangle>relativeContainers  = new ArrayList<StringRectangle>();
 	public ArrayList<StringRectangle>historyContainers =  new ArrayList<StringRectangle>();
@@ -35,7 +35,7 @@ public class Image implements Cloneable{
 		Image clone = (Image)super.clone();
 
 		if(this.tr != null){
-			clone.tr = (Term) this.tr.clone();
+			clone.tr = (CompoundTerm) this.tr.clone();
 		}
 
 		clone.bel = (point)this.bel.clone();
@@ -57,7 +57,7 @@ public class Image implements Cloneable{
 
 
 
-	public Image(Term term, point bl, String argument){
+	public Image(CompoundTerm term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
@@ -65,7 +65,7 @@ public class Image implements Cloneable{
 	}
 
 	public Image(String myst, int myFont, int screenWidth, int screenHeight){
-		tr = new Term(st);
+		tr = new CompoundTerm(st);
 		st = myst;
 		setRelativeContainers();
 
@@ -79,12 +79,12 @@ public class Image implements Cloneable{
 
 
 	public Image(String myst, point bl){
-		tr = new Term(st);
+		tr = new CompoundTerm(st);
 		bel = bl;
 		st = myst;
 	}
 
-	public void imagemove(Term term, point bl, String argument){
+	public void imagemove(CompoundTerm term, point bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
@@ -131,7 +131,7 @@ public class Image implements Cloneable{
 	}
 
 	private void reset(){
-		tr = new Term(st);
+		tr = new CompoundTerm(st);
 		relativeContainers  = new ArrayList<StringRectangle>();
 		//		background = Color.WHITE;
 		//		wordcolor = Color.BLACK;

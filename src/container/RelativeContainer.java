@@ -1,6 +1,6 @@
 package container;
 
-import tree.Term;
+import tree.CompoundTerm;
 //import android.util.Log;
 import container.walks.allignbls;
 import container.walks.resize;
@@ -15,7 +15,7 @@ public class RelativeContainer {
 	
 	
 	
-	public Term drawelement(Term ter){
+	public CompoundTerm drawelement(CompoundTerm ter){
 
 		specificimg current = new specificimg();
 

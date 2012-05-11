@@ -1,11 +1,12 @@
 package tree.simple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import display.rectangle;
+import tree.Term;
 
 import java.util.ArrayList;
 
-public abstract class SimpleTerm extends Term{
+public abstract class SimpleTerm extends Term {
 	//has numbers, variables, and operators
 	public String image;
     private String valueString;
@@ -14,7 +15,7 @@ public abstract class SimpleTerm extends Term{
         return valueString;
     }
 
-    public rectangle giverect(Term tr){
+    public rectangle giverect(CompoundTerm tr){
 		System.out.println("error: giverect was run on simpleterm");
 		rectangle a = new rectangle();
 		
@@ -27,9 +28,19 @@ public abstract class SimpleTerm extends Term{
 		return clone;
 	}
 
-	@Override
-    public ArrayList<Term> getChildren() {
-        return new ArrayList<Term>();
-    }
-	
+    public boolean isRealNumber(){
+		boolean real = false;
+	/*	if(this.isRationalNumber()){
+			real = true;
+		}
+		else*/ if(this instanceof Constants){
+			real = true;
+		}
+		else if(this instanceof Number){
+			real = true;
+		}
+
+		return real;
+	}
+
 }

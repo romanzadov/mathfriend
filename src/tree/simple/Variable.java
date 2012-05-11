@@ -1,6 +1,6 @@
 package tree.simple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import display.rectangle;
 
 public class Variable extends SimpleTerm {
@@ -24,7 +24,7 @@ public class Variable extends SimpleTerm {
 		return v;
 	}
 
-	public rectangle giverect(Term tr){
+	public rectangle giverect(CompoundTerm tr){
 		rectangle a = new rectangle();
 		a.height = 1;
 		a.width = 1;

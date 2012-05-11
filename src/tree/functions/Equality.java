@@ -20,11 +20,11 @@ public class Equality extends Function {
 	}
 
     @Override
-    public Term simpleOperation(Term term) {
+    public CompoundTerm simpleOperation(CompoundTerm term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public rectangle giverect(Term tr){
+    public rectangle giverect(CompoundTerm tr){
 		rectangle a = new rectangle();
 		if(tr.getChildren().size() == 0){
 			rectangle cont = tr.getContainer();
@@ -76,7 +76,7 @@ public class Equality extends Function {
 		return c;
 	}
 
-	public Image inTermMoves(Image im, Term sel, int IntermIndex){
+	public Image inTermMoves(Image im, CompoundTerm sel, int IntermIndex){
 
 		int selindex = sel.getParent().getChildren().indexOf(sel);
 		Image Ghost = im;
@@ -86,18 +86,18 @@ public class Equality extends Function {
 
 	}
 
-	public Image MoveFocus(Image im, Term sel, int selindex, int IntermIndex){
+	public Image MoveFocus(Image im, CompoundTerm sel, int selindex, int IntermIndex){
 		Image Ghost = new Image();
-		Term second = new Term();
+		CompoundTerm second = new CompoundTerm();
 		try {
-			second = (Term) im.tr.clone();
+			second = (CompoundTerm) im.tr.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		Term secondsel = second.getChildren().get(selindex);
-		Term moveto = second.getChildren().get(IntermIndex);
+		CompoundTerm secondsel = second.getChildren().get(selindex);
+		CompoundTerm moveto = second.getChildren().get(IntermIndex);
 
 	//	RelativeContainer dn = new RelativeContainer();
         //	dn.drawelement(second);
@@ -188,7 +188,7 @@ public class Equality extends Function {
 
 	}
 	@Override
-	public Image overEqualsMoves(Image im, Term sel, int IntermIndex,
+	public Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex,
 			double xsel) {
 		// TODO Auto-generated method stub
 		return null;

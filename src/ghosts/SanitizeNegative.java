@@ -1,11 +1,10 @@
 package ghosts;
 
-import tree.Term;
-import tree.functions.Times;
+import tree.CompoundTerm;
 
 public class SanitizeNegative {
 
-	public SanitizeNegative(Term tr){
+	public SanitizeNegative(CompoundTerm tr){
 
 		/*if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			for(int i = 0; i<tr.getChildren().size(); i++){

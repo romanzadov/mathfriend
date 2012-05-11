@@ -6,28 +6,28 @@ import display.point;
 
 import move.identify.TermMath;
 import representTerms.Image;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.functions.*;
 
 public class TimesMove {
 
-	public Image inTermMoves(Image im, Term sel,
+	public Image inTermMoves(Image im, CompoundTerm sel,
 			int IntermIndex) {
-		Term second = null;
+		CompoundTerm second = null;
 		try {
-			 second = (Term) im.tr.clone();
+			 second = (CompoundTerm) im.tr.clone();
 		} catch (CloneNotSupportedException e) {}
 		
 		ArrayList<Integer> key = TermMath.findTreePositionOfSelected(im.tr, sel);
-		Term tomove = TermMath.findTermUsingKey(second, key);
+		CompoundTerm tomove = TermMath.findTermUsingKey(second, key);
 //		ColorText ct = new ColorText(tomove, Color.red);
-		Term parent = tomove.getParent();
-		Term switched = tomove.getParent().getChildren().get(IntermIndex);
+		CompoundTerm parent = tomove.getParent();
+		CompoundTerm switched = tomove.getParent().getChildren().get(IntermIndex);
 		int spottomove = tomove.getParent().getChildren().indexOf(tomove);
 		
 		if(spottomove == 0 && (IntermIndex != parent.getChildren().size()-1)){
 			
-			Term times = parent.getChildren().get(1);
+			CompoundTerm times = parent.getChildren().get(1);
 			parent.getChildren().remove(0);
 			parent.getChildren().remove(0);
 			parent.getChildren().add(IntermIndex,times);
@@ -36,7 +36,7 @@ public class TimesMove {
 		}
 		else if(IntermIndex == 0){
 			
-			Term times = parent.getChildren().get(spottomove-1);
+			CompoundTerm times = parent.getChildren().get(spottomove-1);
 			parent.getChildren().remove(spottomove-1);
 			parent.getChildren().remove(spottomove-1);
 			parent.getChildren().add(0, times);
@@ -44,21 +44,21 @@ public class TimesMove {
 			
 		}
 		else if(spottomove == 0 && IntermIndex == parent.getChildren().size()-1){
-			Term times = parent.getChildren().get(spottomove+1);
+			CompoundTerm times = parent.getChildren().get(spottomove+1);
 			parent.getChildren().remove(spottomove);
 			parent.getChildren().remove(spottomove);
 			parent.getChildren().add(times);
 			parent.getChildren().add( tomove);
 		}
 		else if(IntermIndex == parent.getChildren().size()-1){
-			Term times = parent.getChildren().get(spottomove-1);
+			CompoundTerm times = parent.getChildren().get(spottomove-1);
 			parent.getChildren().remove(spottomove-1);
 			parent.getChildren().remove(spottomove-1);
 			parent.getChildren().add(times);
 			parent.getChildren().add( tomove);
 		}
 		else{
-			Term times = parent.getChildren().get(spottomove-1);
+			CompoundTerm times = parent.getChildren().get(spottomove-1);
 			parent.getChildren().remove(spottomove-1);
 			parent.getChildren().remove(spottomove-1);
 			parent.getChildren().add(IntermIndex, times);
@@ -78,7 +78,7 @@ public class TimesMove {
 	}
 
 	public Image overEqualsMoves(Image im,
-			Term sel, int IntermIndex, double xsel) {
+			CompoundTerm sel, int IntermIndex, double xsel) {
 		
 		
 		
@@ -159,7 +159,7 @@ public class TimesMove {
 		return Ghost;
 	}
 
-	public void timesRecip(Term second, Term recip, Term regular){
+	public void timesRecip(CompoundTerm second, CompoundTerm recip, CompoundTerm regular){
 		TimesTerm TM = new TimesTerm();
 		
 		//start with out own side
@@ -202,8 +202,8 @@ public class TimesMove {
 		}*/
 		
 		if(regular.getParent().getChildren().size()==1){
-			Term top = regular.getParent().getParent();
-			Term bottom = regular.getParent().getChildren().get(0);
+			CompoundTerm top = regular.getParent().getParent();
+			CompoundTerm bottom = regular.getParent().getChildren().get(0);
 			int place = top.getChildren().indexOf(bottom.getParent());
 			bottom.setParent(top);
 			top.getChildren().set(place, bottom);
@@ -211,7 +211,7 @@ public class TimesMove {
 		
 		// next, do the other side of the equals
 		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getFunction() instanceof Equals){
-			Term eq = recip.getParent().getParent().getParent();
+			CompoundTerm eq = recip.getParent().getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
 			/*	if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex){
 					Term recipcl =null;
@@ -226,7 +226,7 @@ public class TimesMove {
 		
 		else if(regular.getParent().getParent() !=null && regular.getParent().getParent().getFunction() instanceof Equals){
 			
-			Term eq = regular.getParent().getParent();
+			CompoundTerm eq = regular.getParent().getParent();
 			for(int i = 0; i<eq.getChildren().size(); i++){
 				/*if(!(eq.getChildren().get(i) instanceof Function)&&i!=eqindex2){
 					Term recipcl =null;

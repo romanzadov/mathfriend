@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import representTerms.StringRectangle;
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class AssignScreenPositions  implements TreeFunction{
@@ -15,14 +15,14 @@ public class AssignScreenPositions  implements TreeFunction{
 	static final String TAG = "AssignScreenPositions";
 	
 	
-	public AssignScreenPositions(Term tr, ArrayList<StringRectangle> myScreenPositions){
+	public AssignScreenPositions(CompoundTerm tr, ArrayList<StringRectangle> myScreenPositions){
 		screenPositions = myScreenPositions;
 		downwalk walk = new downwalk(tr, this);
 	}
 
 	
 	int placeSaver = 0;
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		try {
 
 			

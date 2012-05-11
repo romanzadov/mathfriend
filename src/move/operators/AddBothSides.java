@@ -1,16 +1,15 @@
 package move.operators;
 
-import tree.Term;
+import tree.CompoundTerm;
 import tree.functions.Function;
-import tree.functions.Plus;
 
 public class AddBothSides {
 
-	public Term AddX(Term tr, Term sel, Function op){
-		Term second = null;
+	public CompoundTerm AddX(CompoundTerm tr, CompoundTerm sel, Function op){
+		CompoundTerm second = null;
 		
 		try {
-			second = (Term) tr.clone();
+			second = (CompoundTerm) tr.clone();
 		} catch (CloneNotSupportedException e) {}
 		
 		/*if(op instanceof Minus){

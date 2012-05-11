@@ -1,14 +1,14 @@
 package tree.notsimple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import tree.simple.Number;
 
 public class MultiplyFractions {
 
 	
-	public Term times(Term a, Term b){
+	public CompoundTerm times(CompoundTerm a, CompoundTerm b){
 		
-		Term ans = null;
+		CompoundTerm ans = null;
 		
 		
 		
@@ -27,15 +27,15 @@ public class MultiplyFractions {
 		return ans;
 	}
 	
-	public Term fractimesnumber(Term A, Term B){
+	public CompoundTerm fractimesnumber(CompoundTerm A, CompoundTerm B){
 
-		Term sel = A;
-		Term tr = B;
+		CompoundTerm sel = A;
+		CompoundTerm tr = B;
 		
 			double a = sel.getNumericValue(sel.getChildren().get(0));
 			double b = sel.getNumericValue(tr);
 			double c = a*b;
-			Term n = new Term();
+			CompoundTerm n = new CompoundTerm();
 			if(c>=0){
 				n = new Number(c);
 			}
@@ -43,9 +43,9 @@ public class MultiplyFractions {
 				n = new Number(-c);
 				n = n.toggleNegative();
 			}
-			Term second = null;
+			CompoundTerm second = null;
 			try {
-				 second = (Term)sel.clone();
+				 second = (CompoundTerm)sel.clone();
 			} catch (CloneNotSupportedException e) {}
 			
 			n.setParent(second);
@@ -55,15 +55,15 @@ public class MultiplyFractions {
 		
 	}
 	
-	public Term fractimesfrac(Term A, Term B){
+	public CompoundTerm fractimesfrac(CompoundTerm A, CompoundTerm B){
 		
-		Term sel = A;
-		Term tr = B;
+		CompoundTerm sel = A;
+		CompoundTerm tr = B;
 		
 		double a = sel.getNumericValue(sel.getChildren().get(0));
 		double b = tr.getNumericValue(tr.getChildren().get(0));
 		double toptimes = a*b;
-		Term top = new Term();
+		CompoundTerm top = new CompoundTerm();
 		if(toptimes>=0){
 			top = new Number(toptimes);
 		}
@@ -76,7 +76,7 @@ public class MultiplyFractions {
 		double d = tr.getNumericValue(tr.getChildren().get(2));
 		double bottomtimes = c*d;
 		
-		Term bottom = new Term();
+		CompoundTerm bottom = new CompoundTerm();
 		if(bottomtimes >=0){
 			bottom = new Number(bottomtimes);
 		}

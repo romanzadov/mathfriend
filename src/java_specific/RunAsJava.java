@@ -6,7 +6,7 @@ import tests.TestStrings;
 
 import representTerms.Image;
 import representTerms.LogicEngine;
-import tree.Term;
+import tree.CompoundTerm;
 
 public class RunAsJava {
 
@@ -29,10 +29,10 @@ public class RunAsJava {
 		
 		for(int i = 0; i<tests.size(); i++){
 			Image equation = new Image(tests.get(i),2,2,2);
-			Term first = equation.tr.getChildren().get(0);
-			Term second = equation.tr.getChildren().get(2);
+			CompoundTerm first = equation.tr.getChildren().get(0);
+			CompoundTerm second = equation.tr.getChildren().get(2);
 
-			Term result = first;
+			CompoundTerm result = first;
 			
 			if(equality(result, second)){}
 			else{
@@ -49,7 +49,7 @@ public class RunAsJava {
 		System.out.println(stats);
 	}
 
-	private boolean equality(Term result, Term second){
+	private boolean equality(CompoundTerm result, CompoundTerm second){
 		boolean equal = false;
 		if(result == null){return false;}
 		
@@ -99,7 +99,7 @@ public class RunAsJava {
 		for(int i = 0; i<tests.length; i++){
 
 			Image img = new Image(tests[i],2,2,2);
-			Term tr = img.tr;
+			CompoundTerm tr = img.tr;
 			String type = tr.toString()+"|";
 
 			if(tr.isNatural()){type+=" isnatural |";}
@@ -110,7 +110,7 @@ public class RunAsJava {
 			if(tr.isNegative()){type+=" isnegative |";}
 			if(tr.isSimple()){type+=" issimple |";}
 
-			type += " val: "+ Term.getNumericValue(tr);
+			type += " val: "+ CompoundTerm.getNumericValue(tr);
 
 			System.out.println(type);
 		}

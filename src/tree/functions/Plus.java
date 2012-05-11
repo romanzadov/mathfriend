@@ -5,7 +5,7 @@ import move.identify.FindSel;
 import move.identify.ReturnSel;
 import move.operators.plusmove;
 import representTerms.Image;
-import tree.Term;
+import tree.CompoundTerm;
 import display.point;
 import display.rectangle;
 //import android.util.Log;
@@ -32,18 +32,18 @@ public class Plus extends Function {
     }
 
     @Override
-    public Term simpleOperation(Term term) {
+    public CompoundTerm simpleOperation(CompoundTerm term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     //draws the rectangle that goes around terms with a plus operator
-	public rectangle giverect(Term tr){
+	public rectangle giverect(CompoundTerm tr){
 		rectangle a = new rectangle();
 
         if(tr.getChildren().size()>=1){
 			//check rectangled and get max height
 			float maxheight = 0;
-			for(int i =0; i<tr.getChildren().size();i++){
+		/*	for(int i =0; i<tr.getChildren().size();i++){
 				if(tr.getChildren().get(i).getContainer() ==null){
 					System.out.println("error: plus called on non-rectangled");
 				}
@@ -57,9 +57,9 @@ public class Plus extends Function {
 				left.bl.y = maxheight/2-left.height/2;
 				left.bl.x = xsofar;
 				xsofar = left.bl.x+left.width;
-			}
+			}*/
 			a.height = maxheight;
-			a.width = xsofar;
+	//		a.width = xsofar;
 		}
 
 
@@ -72,11 +72,11 @@ public class Plus extends Function {
 		return c;
 	}
 
-	public Image inTermMoves(Image im, Term sel, int IntermIndex){
+	public Image inTermMoves(Image im, CompoundTerm sel, int IntermIndex){
 
-		Term second = new Term();
+		CompoundTerm second = new CompoundTerm();
 		try {
-			second = (Term)im.tr.clone();
+			second = (CompoundTerm)im.tr.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,7 +86,7 @@ public class Plus extends Function {
 
 		ArrayList<Integer> key = fs.FindSelected(im.tr, sel);
 		ReturnSel rs = new ReturnSel();
-		Term secondsel = rs.Return(second, key);
+		CompoundTerm secondsel = rs.Return(second, key);
 		if(!secondsel.getParent().hasParentheses()){
 			changeterm(secondsel, IntermIndex);
 		}
@@ -101,7 +101,7 @@ public class Plus extends Function {
 		return Ghost;
 	}
 
-	public Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel){
+	public Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex, double xsel){
 		
 		plusmove pm = new plusmove();
 		Image Ghost = new Image();/*
@@ -112,7 +112,7 @@ public class Plus extends Function {
 	}
 
 
-	public void changeterm( Term sel, int IntermIndex){/*
+	public void changeterm( CompoundTerm sel, int IntermIndex){/*
 	
 		int selindex = sel.getParent().getChildren().indexOf(sel);
 

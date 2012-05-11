@@ -1,22 +1,19 @@
 package container.walks;
 
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
-import tree.functions.Exponent;
-import tree.functions.Plus;
-import tree.functions.Times;
 //import android.util.Log;
 
 public class newparens implements TreeFunction {
 
 	final static String TAG = "newparens";
 	
-	public newparens(Term tr){
+	public newparens(CompoundTerm tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 	
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		
 	/*	//parentheses around multiplied terms
 		if(tr.getParent().getFunction() instanceof Times|| tr.getParent().getFunction() instanceof Negative){

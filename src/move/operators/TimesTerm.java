@@ -1,13 +1,13 @@
 package move.operators;
 
 import representTerms.Image;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.notsimple.Fraction;
 import tree.functions.*;
 
 public class TimesTerm {
 
-	public void Times(Term tr, Term sel){
+	public void Times(CompoundTerm tr, CompoundTerm sel){
 
 		/*if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			regularTimes(tr, sel);
@@ -33,7 +33,7 @@ public class TimesTerm {
 
 	}
 
-	public void regularTimes(Term tr, Term sel){
+	public void regularTimes(CompoundTerm tr, CompoundTerm sel){
 		Times tm = new Times();
 		/*if(tr.getFunction() instanceof Times || tr.getFunction() instanceof Divide){
 			sel.setParent(tr);
@@ -61,16 +61,16 @@ public class TimesTerm {
 
 	}
 
-	public static Term simpleTimes(Term tr){
+	public static CompoundTerm simpleTimes(CompoundTerm tr){
 
 		//multiply real numbers together
 
 		if(tr == null){System.out.println("tred to TimesTerm a null term"); return null;}
 		else{
 
-			Term firstMultiple = null;
-			Term secondMultiple = null;
-			Term resultingTerm = null;
+			CompoundTerm firstMultiple = null;
+			CompoundTerm secondMultiple = null;
+			CompoundTerm resultingTerm = null;
 			double firstValue = Double.MIN_VALUE;
 			double secondValue = Double.MIN_VALUE;
 			boolean done = false;
@@ -80,39 +80,39 @@ public class TimesTerm {
 			for(int i = 0; i<tr.getChildren().size(); i++){
 				if(!done){
 
-					Term kid = tr.getChildren().get(i);
+					CompoundTerm kid = tr.getCompoundChildren().get(i);
 
-					if(kid.isDecimal()){
+					/*if(kid.isDecimal()){
 
 						if(firstMultiple == null){
 							firstMultiple = kid;
-							firstValue = Term.getNumericValue(kid);
+							firstValue = CompoundTerm.getNumericValue(kid);
 						}
 						else{
 							secondMultiple = kid;
-							secondValue = Term.getNumericValue(kid);
+							secondValue = CompoundTerm.getNumericValue(kid);
 
 							String val = String.valueOf(firstValue*secondValue);
 							Image img = new Image(val,2,2,2);
-							Term result = img.tr;
+							CompoundTerm result = img.tr;
 
 							try {
-								resultingTerm = (Term) tr.clone();
+								resultingTerm = (CompoundTerm) tr.clone();
 							} catch (CloneNotSupportedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 
 							//remove the second addent and replace the first addent with our result
-/*
+*//*
 							resultingTerm = TimesMove.removeChild(resultingTerm, tr.getChilds().indexOf(secondMultiple));
 
 							resultingTerm = TimesMove.replaceMultiplicativeTerm(resultingTerm, result, tr.getChilds().indexOf(firstMultiple));
-*/
+*//*
 
 							done = true;
 						}
-					}
+					}*/
 
 
 				}
@@ -129,7 +129,7 @@ public class TimesTerm {
 				for(int i = 0; i<tr.getChildren().size(); i++){
 					if(!done){
 
-						Term kid = tr.getChildren().get(i);
+						CompoundTerm kid = tr.getChildren().get(i);
 
 						if(kid.isDecimal() || kid.isFraction()){
 							if(firstMultiple == null){
@@ -138,12 +138,12 @@ public class TimesTerm {
 							else{
 								secondMultiple = kid;
 
-								Term result = Fraction.productOfNaturalFractions(firstMultiple, secondMultiple);
+								CompoundTerm result = Fraction.productOfNaturalFractions(firstMultiple, secondMultiple);
 
 								if(result == null){break;}
 
 								try {
-									resultingTerm = (Term) tr.clone();
+									resultingTerm = (CompoundTerm) tr.clone();
 								} catch (CloneNotSupportedException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();

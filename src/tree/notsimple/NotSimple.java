@@ -1,9 +1,9 @@
 package tree.notsimple;
 
-import tree.Term;
+import tree.CompoundTerm;
 
-public abstract class NotSimple extends Term {
+public abstract class NotSimple extends CompoundTerm {
 
-	public abstract boolean canConstruct(Term tr);
+	public abstract boolean canConstruct(CompoundTerm tr);
 		
 }

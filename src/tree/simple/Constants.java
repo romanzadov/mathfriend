@@ -1,6 +1,6 @@
 package tree.simple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import display.rectangle;
 
 import java.util.EnumSet;
@@ -48,7 +48,7 @@ public class Constants extends Number{
             return value;
         }
 
-        public rectangle giverect(Term tr) {
+        public rectangle giverect(CompoundTerm tr) {
             rectangle a = new rectangle();
             if (value == Math.E) {
                 a.height = 1;

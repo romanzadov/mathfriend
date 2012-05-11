@@ -2,39 +2,39 @@ package tree.notsimple;
 import java.util.ArrayList;
 
 import representTerms.Image;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.simple.Number;
 import display.rectangle;
 
 public class Fraction extends NotSimple{
 
-	Term top;
+	CompoundTerm top;
 //	Divide divide = new Divide();
-	Term bottom;
+	CompoundTerm bottom;
 
-	public Term getTop(){
+	public CompoundTerm getTop(){
 		return getChildren().get(0);
 	}
 
-	public Term getBottom(){
+	public CompoundTerm getBottom(){
 		return getChildren().get(2);
 	}
 
 	@Override
-	public ArrayList<Term> getChildren(){
-		ArrayList<Term> kids = new ArrayList<Term>();
+	public ArrayList<CompoundTerm> getChildren(){
+		ArrayList<CompoundTerm> kids = new ArrayList<CompoundTerm>();
 		kids.add(top);
 		kids.add(bottom);
 		return kids;
 	}
 	
-	public void setChilds(ArrayList<Term> childs) {
+	public void setChilds(ArrayList<CompoundTerm> childs) {
 		if(childs.size() != 3){System.out.println("wrong number of childs for fraction");}
 		top = childs.get(0);
 		bottom = childs.get(2);
 	}
 
-	public Fraction(Term t, Term b){
+	public Fraction(CompoundTerm t, CompoundTerm b){
 /*
 		Divide dv = new Divide();
 		this.setFunction(dv);
@@ -65,7 +65,7 @@ public class Fraction extends NotSimple{
 	}
 
 
-	public Fraction add(Term tr){
+	public Fraction add(CompoundTerm tr){
 
 
 		if(tr.isInteger()){
@@ -90,7 +90,7 @@ public class Fraction extends NotSimple{
 		return f;
 	}
 
-	public rectangle giverect(Term tr){
+	public rectangle giverect(CompoundTerm tr){
 
 		rectangle a = new rectangle();
 		float xmax= 0;
@@ -106,7 +106,7 @@ public class Fraction extends NotSimple{
 		return a;
 	}
 
-	public double topnum(Term tr){
+	public double topnum(CompoundTerm tr){
 		//will give the true number of the top of the fraction
 		//noticing the +/- in front or negative
 
@@ -152,9 +152,9 @@ public class Fraction extends NotSimple{
 		return LCD;
 	}
 
-	public static Term productOfNaturalFractions(Term a, Term b){
+	public static CompoundTerm productOfNaturalFractions(CompoundTerm a, CompoundTerm b){
 
-		Term result = null;
+		CompoundTerm result = null;
 		
 		
 		if(a instanceof Fraction && b instanceof Fraction){
@@ -171,7 +171,7 @@ public class Fraction extends NotSimple{
 
 	}
 
-	private static Term fractionTimesNumber(Term a, Term b){
+	private static CompoundTerm fractionTimesNumber(CompoundTerm a, CompoundTerm b){
 		boolean onefraction = false;
 		if(a.isFraction() || b.isFraction()){
 			if(a.isDecimal() || b.isDecimal()){
@@ -180,8 +180,8 @@ public class Fraction extends NotSimple{
 		}
 		if(!onefraction){return null;}
 
-		Term fraction = null;
-		Term number = null;
+		CompoundTerm fraction = null;
+		CompoundTerm number = null;
 		if(a.isFraction()){fraction = a; number = b;}
 		else{fraction = b; number = a;}
 
@@ -230,7 +230,7 @@ public class Fraction extends NotSimple{
 	}
 
 	@Override
-	public boolean canConstruct(Term tr) {
+	public boolean canConstruct(CompoundTerm tr) {
 
 		boolean fraction = false;
 

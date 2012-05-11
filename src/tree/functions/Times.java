@@ -30,11 +30,11 @@ public class Times extends Function {
 
 
     @Override
-    public Term simpleOperation(Term term) {
+    public CompoundTerm simpleOperation(CompoundTerm term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public rectangle giverect(Term tr){
+    public rectangle giverect(CompoundTerm tr){
 		
 
 		rectangle rect = new rectangle();
@@ -75,7 +75,7 @@ public class Times extends Function {
 	}
 	
 		
-	public rectangle makefractions(Term tr){
+	public rectangle makefractions(CompoundTerm tr){
 	
 /*		//set which terms are bottoms
 		for(int i = 0; i<tr.getChildren().size(); i++){
@@ -115,7 +115,7 @@ public class Times extends Function {
 	}
 	TimesMove tm = new TimesMove();
 	@Override
-	public Image inTermMoves(Image im, Term sel,
+	public Image inTermMoves(Image im, CompoundTerm sel,
 			int IntermIndex) {
 		
 		Image Ghost = tm.inTermMoves(im, sel, IntermIndex);
@@ -123,7 +123,7 @@ public class Times extends Function {
 	}
 	@Override
 	public Image overEqualsMoves(Image im,
-			Term sel, int IntermIndex, double xsel) {
+			CompoundTerm sel, int IntermIndex, double xsel) {
 		
 		Image Ghost = tm.overEqualsMoves(im, sel, IntermIndex, xsel);
 		return Ghost;

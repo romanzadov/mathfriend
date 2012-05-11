@@ -3,20 +3,20 @@ package move;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
-import tree.Term;
+import tree.CompoundTerm;
 
 public class ChangeBranch {
 
-	public Term Change(Term tree, Term current, Term future){
-		Term second = new Term();
+	public CompoundTerm Change(CompoundTerm tree, CompoundTerm current, CompoundTerm future){
+		CompoundTerm second = new CompoundTerm();
 		try {
-			second = (Term) tree.clone();
+			second = (CompoundTerm) tree.clone();
 		} catch (CloneNotSupportedException e) {
 		}
 		
 	
 		ArrayList<Integer> key = TermMath.findTreePositionOfSelected(tree, current);
-		Term moveto = TermMath.findTermUsingKey(second, key);
+		CompoundTerm moveto = TermMath.findTermUsingKey(second, key);
 		
 		future.setParent(moveto.getParent());
 		int moveint = moveto.getParent().getChildren().indexOf(moveto);

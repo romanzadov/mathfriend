@@ -1,7 +1,6 @@
 package ghosts;
 
-import tree.Term;
-import tree.functions.Plus;
+import tree.CompoundTerm;
 import tree.simple.Number;
 //import android.util.Log;
 
@@ -9,7 +8,7 @@ public class SanitizePlus {
 
 	static final String TAG = "SanitizePlus";
 	
-	public SanitizePlus(Term tr){
+	public SanitizePlus(CompoundTerm tr){
 
 		boolean haszero = false;
 		int pos = -1;

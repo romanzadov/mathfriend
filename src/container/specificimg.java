@@ -1,6 +1,6 @@
 package container;
 
-import tree.Term;
+import tree.CompoundTerm;
 import tree.functions.Function;
 import tree.simple.SimpleTerm;
 //import android.util.Log;
@@ -10,7 +10,7 @@ public class specificimg {
 	
 	static final String TAG = "specificimg";
 	
-	public rectangle specificimage(Term ter){
+	public rectangle specificimage(CompoundTerm ter){
 		
 		
 		rectangle rect = new rectangle();
@@ -54,7 +54,7 @@ public class specificimg {
 		return rect;
 	}
 		
-	public void addParentheses(Term tr){
+	public void addParentheses(CompoundTerm tr){
 		//these will be the width and height of the parentheses
 		float height = tr.getContainer().height;
 		float width = height/2;

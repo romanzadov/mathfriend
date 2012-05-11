@@ -2,11 +2,11 @@ package container;
 
 import display.rectangle;
 
-import tree.Term;
+import tree.CompoundTerm;
 
 public class AllignFracBar {
 
-	public AllignFracBar(Term tr){
+	public AllignFracBar(CompoundTerm tr){
 		//check to see that all the kids are containered
 		boolean allgood = true;
 		
@@ -19,7 +19,7 @@ public class AllignFracBar {
 		// if all are containered, find highest barheight
 		float barheight =0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			Term kid = tr.getChildren().get(i);
+			CompoundTerm kid = tr.getChildren().get(i);
 		/*	if(kid.getFunction() instanceof Divide && kid.getChildren().size() == 3){
 				if(kid.getChildren().get(2).getContainer().height>barheight){
 					barheight = kid.getChildren().get(2).getContainer().height;
@@ -34,7 +34,7 @@ public class AllignFracBar {
 
 		//allign y's
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			Term kid = tr.getChildren().get(i);
+			CompoundTerm kid = tr.getChildren().get(i);
 	/*		if(kid.getFunction() instanceof Divide && kid.getChildren().size() == 3){
 				kid.getContainer().bl.y = barheight - kid.getChildren().get(2).getContainer().height;
 			}
@@ -46,7 +46,7 @@ public class AllignFracBar {
 		//allign x's
 		float xsofar = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			Term kid = tr.getChildren().get(i);
+			CompoundTerm kid = tr.getChildren().get(i);
 			kid.getContainer().bl.x = xsofar;
 			xsofar+= kid.getContainer().width;
 		}
@@ -55,7 +55,7 @@ public class AllignFracBar {
 		//find biggest height overall
 		float ysofar = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
-			Term kid = tr.getChildren().get(i);
+			CompoundTerm kid = tr.getChildren().get(i);
 			if((kid.getContainer().height + kid.getContainer().bl.y)> ysofar){
 				ysofar = kid.getContainer().height+ kid.getContainer().bl.y;
 			}

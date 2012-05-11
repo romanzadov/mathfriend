@@ -2,16 +2,16 @@ package move.identify;
 
 import java.util.ArrayList;
 
-import tree.Term;
+import tree.CompoundTerm;
 
 public class TermMath {
 
 
 
-	public static ArrayList<Integer> findTreePositionOfSelected(Term tr, Term sel){
+	public static ArrayList<Integer> findTreePositionOfSelected(CompoundTerm tr, CompoundTerm sel){
 		ArrayList<Integer> key = new ArrayList<Integer>();
 
-		Term middle = sel;
+		CompoundTerm middle = sel;
 		while(middle != tr){
 			for(int i = 0; i< middle.getParent().getChildren().size(); i++){
 				if(middle.getParent().getChildren().get(i)==middle){
@@ -27,21 +27,21 @@ public class TermMath {
 		return key;
 	}
 	
-	public static Term findTermUsingKey(Term second, ArrayList<Integer> key){
-		Term middle = second;
+	public static CompoundTerm findTermUsingKey(CompoundTerm second, ArrayList<Integer> key){
+		CompoundTerm middle = second;
 		
 		for(int i = 0; i<key.size(); i++){
 		
 			int j = key.size()-i-1;
 		
-			middle = middle.getChildren().get(key.get(j));
+		//	middle = middle.getChildren().get(key.get(j));
 			
 		}
 	
 		
 		if(middle.getParent().hasParentheses()){
 			int midint = middle.getParent().getChildren().indexOf(middle);
-			middle = middle.getParent().getChildren().get(midint+1);
+		//	middle = middle.getParent().getChildren().get(midint+1);
 		}
 		
 		return middle;

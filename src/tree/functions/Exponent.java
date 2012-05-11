@@ -27,11 +27,11 @@ public class Exponent extends Function {
 
 
     @Override
-    public Term simpleOperation(Term term) {
+    public CompoundTerm simpleOperation(CompoundTerm term) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public rectangle giverect(Term tr){
+    public rectangle giverect(CompoundTerm tr){
 		rectangle a = new rectangle();
 		float xsofar = 0;
 		float ysofar = 0;
@@ -70,7 +70,7 @@ public class Exponent extends Function {
 		return a;
 	}
 
-	public rectangle justexp(Term tr){
+	public rectangle justexp(CompoundTerm tr){
 		rectangle a = new rectangle();
 		tr.setContainer(a);
 		return a;
@@ -83,7 +83,7 @@ public class Exponent extends Function {
 	}
 
 	@Override
-	public Image inTermMoves(Image im, Term sel,
+	public Image inTermMoves(Image im, CompoundTerm sel,
 			int IntermIndex) {
 		// TODO Auto-generated method stub
 		return null;
@@ -91,7 +91,7 @@ public class Exponent extends Function {
 
 	@Override
 	public Image overEqualsMoves(Image im,
-			Term sel, int IntermIndex, double xsel) {
+			CompoundTerm sel, int IntermIndex, double xsel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

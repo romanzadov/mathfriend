@@ -1,13 +1,13 @@
 package tree.notsimple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import display.rectangle;
 
 public class NegativeTerm extends NotSimple{
 
 	public NegativeTerm(){}
 	
-	public NegativeTerm(Term tr){
+	public NegativeTerm(CompoundTerm tr){
 		if(canConstruct(tr)){
 		/*	Negative n = new Negative();
 			this.setFunction(n);
@@ -31,7 +31,7 @@ public class NegativeTerm extends NotSimple{
 		}
 	}
 
-	public void makeNegative(Term tr){
+	public void makeNegative(CompoundTerm tr){
 /*		Negative n = new Negative();
 		this.setFunction(n);
 		n = new Negative();
@@ -46,11 +46,11 @@ public class NegativeTerm extends NotSimple{
 	public String toString(){
 		String st = "(-";
 		if(this.getChildren().size()==3){
-			Term tr = this.getChildren().get(2);
+			CompoundTerm tr = this.getChildren().get(2);
 			st +=tr.toString();
 		}
 		else if(this.getChildren().size()==2){
-			Term tr = this.getChildren().get(1);
+			CompoundTerm tr = this.getChildren().get(1);
 			st +=tr.toString();
 		}
 		st+=")";
@@ -58,7 +58,7 @@ public class NegativeTerm extends NotSimple{
 
 	}
 
-	public rectangle giverect(Term tr){
+	public rectangle giverect(CompoundTerm tr){
 
 		rectangle a = new rectangle();
 		float xmax= 0;
@@ -75,7 +75,7 @@ public class NegativeTerm extends NotSimple{
 	}
 
 	@Override
-	public boolean canConstruct(Term tr) {
+	public boolean canConstruct(CompoundTerm tr) {
 		boolean ans = false;
 		if(tr.isNegative() && tr.getChildren().size() == 3){
 			ans = true;

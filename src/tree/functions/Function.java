@@ -2,9 +2,8 @@ package tree.functions;
 
 import parse.PreSimpleTerm;
 import representTerms.Image;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.notsimple.Equation;
-import tree.simple.SimpleTerm;
 import display.rectangle;
 
 import java.util.*;
@@ -38,7 +37,7 @@ public abstract class Function {
 	public int charpos;
 
 
-    public abstract Term simpleOperation(Term term);
+    public abstract CompoundTerm simpleOperation(CompoundTerm term);
 
 	public Function setconstants(Function a){
 		a.thisvalue = thisvalue;
@@ -58,7 +57,7 @@ public abstract class Function {
 		return a;
 	}
 
-	public rectangle giverect(Term tr){
+	public rectangle giverect(CompoundTerm tr){
 		rectangle a = new rectangle();
 		if(tr.getChildren().size() == 0){
 			a.bl.x = 0;
@@ -69,7 +68,7 @@ public abstract class Function {
 		if(tr.getChildren().size()>0){
 			
 			//check that all are rectangled
-			for(int i =0; i<tr.getChildren().size(); i++){
+/*			for(int i =0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i).getContainer() == null){
 					System.out.println("error: equal called when not all terms are rectangled");
 				}
@@ -77,7 +76,7 @@ public abstract class Function {
 			a.bl.x = tr.getChildren().get(0).getContainer().bl.x;
 			a.bl.y = tr.getChildren().get(0).getContainer().bl.y;
 			a.width = tr.getChildren().get(0).getContainer().width;
-			a.height = tr.getChildren().get(0).getContainer().height;
+			a.height = tr.getChildren().get(0).getContainer().height;*/
 			
 			
 
@@ -85,11 +84,11 @@ public abstract class Function {
 		return a;
 	}
 
-	public abstract Image inTermMoves(Image im, Term sel, int IntermIndex);
+	public abstract Image inTermMoves(Image im, CompoundTerm sel, int IntermIndex);
 	
-	public abstract Image overEqualsMoves(Image im, Term sel, int IntermIndex, double xsel);
+	public abstract Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex, double xsel);
 
-	public Equation ToBothSides(Equation eq, Function op, Term sel) {
+	public Equation ToBothSides(Equation eq, Function op, CompoundTerm sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}

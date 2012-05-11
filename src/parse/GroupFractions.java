@@ -3,21 +3,20 @@ package parse;
 import java.util.ArrayList;
 
 import tree.downwalk;
-import tree.Term;
+import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
-import tree.functions.Times;
 
 public class GroupFractions  implements TreeFunction{
 
 	ArrayList<Integer> dividespots;
 	
-	public GroupFractions(Term tr){
+	public GroupFractions(CompoundTerm tr){
 		
 		PreGroupFractions pf = new PreGroupFractions(tr);
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(Term tr) {
+	public void performAction(CompoundTerm tr) {
 		
 		//this should run anytime there's more than one fraction
 		//in a term. We'll seperate them into seperate terms.

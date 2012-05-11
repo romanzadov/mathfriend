@@ -1,17 +1,17 @@
 package move.identify;
 
-import tree.Term;
+import tree.CompoundTerm;
 
 import java.util.List;
 
 @Deprecated
 public class ReturnSel {
 
-    public Term Return(Term second, List<Integer> key){
+    public CompoundTerm Return(CompoundTerm second, List<Integer> key){
         return null;
     }
 
-    public Term findTermUsingKey(Term second, List<Integer> key){
+    public CompoundTerm findTermUsingKey(CompoundTerm second, List<Integer> key){
         return null;
     }
 }

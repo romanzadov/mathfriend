@@ -1,15 +1,15 @@
 package tree.notsimple;
 
-import tree.Term;
+import tree.CompoundTerm;
 import tree.functions.Equals;
 import tree.functions.Function;
 
 public class Equation extends NotSimple{
 
-	Term left;
-	Term right;
+	CompoundTerm left;
+	CompoundTerm right;
 
-	public Equation(Term tr){
+	public Equation(CompoundTerm tr){
 
 		boolean okay = true;
 
@@ -34,14 +34,14 @@ public class Equation extends NotSimple{
 	//One of the properties of an equation is that if we apply an arbitrary
 	//function to both sides of the equation, equality is preserved.
 
-	public Equation Operation(Equation eq, Function op, Term sel){
+	public Equation Operation(Equation eq, Function op, CompoundTerm sel){
 
 		eq = op.ToBothSides(eq, op, sel);
 
 		return eq;
 	}
 
-	public boolean isNegative(Term tr) {
+	public boolean isNegative(CompoundTerm tr) {
 
 		boolean okay = true;
 
@@ -61,7 +61,7 @@ public class Equation extends NotSimple{
 	}
 
     @Override
-    public boolean canConstruct(Term tr) {
+    public boolean canConstruct(CompoundTerm tr) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
