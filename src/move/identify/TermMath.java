@@ -2,7 +2,7 @@ package move.identify;
 
 import java.util.ArrayList;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 
 public class TermMath {
 

@@ -5,8 +5,9 @@ import java.util.ArrayList;
 //import android.util.Log;
 
 import representTerms.StringRectangle;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class AssignScreenPositions  implements TreeFunction{
@@ -22,16 +23,16 @@ public class AssignScreenPositions  implements TreeFunction{
 
 	
 	int placeSaver = 0;
-	public void performAction(CompoundTerm tr) {
-		try {
+	public void performAction(Term tr) {
+		/*try {
 
 			
-			tr.ScreenPosition = (StringRectangle)screenPositions.get(placeSaver).clone();
+		//	tr.ScreenPosition = (StringRectangle)screenPositions.get(placeSaver).clone();
 			placeSaver++;
 			
-		} catch (CloneNotSupportedException e) {}
+		} catch (CloneNotSupportedException e) {}*/
 		
 	}
-	
+
 
 }

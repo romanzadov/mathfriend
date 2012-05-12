@@ -3,7 +3,8 @@ package tests;
 
 import junit.framework.Assert;
 import org.junit.Test;
-import tree.CompoundTerm;
+import tree.Term;
+import tree.compound.CompoundTerm;
 
 public class ParsingTest {
 
@@ -12,7 +13,7 @@ public class ParsingTest {
 
         for(String formula: TestStrings.getStrings()) {
 
-            CompoundTerm term = new CompoundTerm(formula);
+            Term term = Term.getTermFromString(formula);
             System.out.println(formula+ " ==> "+term);
             Assert.assertNotNull(term);
 

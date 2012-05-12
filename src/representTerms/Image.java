@@ -2,7 +2,8 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import tree.CompoundTerm;
+import tree.Term;
+import tree.compound.CompoundTerm;
 //import android.graphics.Color;
 //import android.util.Log;
 import container.RelativeContainer;
@@ -15,7 +16,7 @@ public class Image implements Cloneable{
 
 	public static final String TAG = "image";
 	public String st;
-	public CompoundTerm tr;
+	public Term tr;
 
 	public ArrayList<StringRectangle>relativeContainers  = new ArrayList<StringRectangle>();
 	public ArrayList<StringRectangle>historyContainers =  new ArrayList<StringRectangle>();
@@ -65,7 +66,7 @@ public class Image implements Cloneable{
 	}
 
 	public Image(String myst, int myFont, int screenWidth, int screenHeight){
-		tr = new CompoundTerm(st);
+		tr = Term.getTermFromString(st);
 		st = myst;
 		setRelativeContainers();
 
@@ -79,7 +80,7 @@ public class Image implements Cloneable{
 
 
 	public Image(String myst, point bl){
-		tr = new CompoundTerm(st);
+		tr = Term.getTermFromString(st);
 		bel = bl;
 		st = myst;
 	}
@@ -98,9 +99,9 @@ public class Image implements Cloneable{
 
 	private void setRelativeContainers(){
 		RelativeContainer dc = new RelativeContainer();
-		dc.drawelement(tr);
+		//dc.drawelement(tr);
 		stringofrects sp = new stringofrects();
-		relativeContainers = sp.writeme(tr);
+		//relativeContainers = sp.writeme(tr);
 	}
 
 	public ArrayList<StringRectangle> getAbsoluteContainers(int myFont, point bel){
@@ -131,7 +132,7 @@ public class Image implements Cloneable{
 	}
 
 	private void reset(){
-		tr = new CompoundTerm(st);
+		tr = Term.getTermFromString(st);
 		relativeContainers  = new ArrayList<StringRectangle>();
 		//		background = Color.WHITE;
 		//		wordcolor = Color.BLACK;

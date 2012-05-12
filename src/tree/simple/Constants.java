@@ -1,6 +1,6 @@
 package tree.simple;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 import display.rectangle;
 
 import java.util.EnumSet;

@@ -3,8 +3,9 @@ package display;
 import java.util.ArrayList;
 
 import representTerms.StringRectangle;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class stringofrects implements TreeFunction{
@@ -66,11 +67,11 @@ public class stringofrects implements TreeFunction{
 		return a;
 	}
 
-	public void performAction(CompoundTerm tr) {
+	public void performAction(Term tr) {
 		
 		
 		rectangle sr = new rectangle();
-		sr.bl.x = tr.getContainer().bl.x;
+		/*sr.bl.x = tr.getContainer().bl.x;
 		sr.bl.y = tr.getContainer().bl.y;
 		sr.height = tr.getContainer().height;
 		sr.width = tr.getContainer().width;
@@ -78,12 +79,12 @@ public class stringofrects implements TreeFunction{
 		StringRectangle StR = new StringRectangle();
 		StR.container = sr;
 		StR.term = tr.toString();
-		StR.fontscale = tr.getScaleFactor();/*
+		StR.fontscale = tr.getScaleFactor();*//*
 		if(tr.toDraw !=null){StR.todraw = tr.toDraw;}
-		if(tr instanceof Divide){StR.todraw = "/";}*/
+		if(tr instanceof Divide){StR.todraw = "/";}*//*
 	//	StR.container.color = tr.wordcolor;
-		StR.hasParens = tr.hasParentheses();
-		a.add(StR);
+		StR.hasParens = tr.hasParentheses();*/
+	//	a.add(StR);
 	}
 
 }

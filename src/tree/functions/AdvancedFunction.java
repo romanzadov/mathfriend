@@ -1,7 +1,7 @@
 package tree.functions;
 
 import representTerms.Image;
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 
 public class AdvancedFunction extends Function {
 

@@ -6,7 +6,7 @@ import display.point;
 
 import move.identify.TermMath;
 import representTerms.Image;
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 import tree.functions.*;
 
 public class TimesMove {
@@ -14,7 +14,7 @@ public class TimesMove {
 	public Image inTermMoves(Image im, CompoundTerm sel,
 			int IntermIndex) {
 		CompoundTerm second = null;
-		try {
+	/*	try {
 			 second = (CompoundTerm) im.tr.clone();
 		} catch (CloneNotSupportedException e) {}
 		
@@ -74,7 +74,8 @@ public class TimesMove {
 
 		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 		Ghost = new Image(Ghost.tr.toString(), Ghost.bel);
-		return Ghost;
+		return Ghost;*/
+        return null;
 	}
 
 	public Image overEqualsMoves(Image im,
@@ -201,13 +202,13 @@ public class TimesMove {
 			}
 		}*/
 		
-		if(regular.getParent().getChildren().size()==1){
+	/*	if(regular.getParent().getChildren().size()==1){
 			CompoundTerm top = regular.getParent().getParent();
 			CompoundTerm bottom = regular.getParent().getChildren().get(0);
 			int place = top.getChildren().indexOf(bottom.getParent());
 			bottom.setParent(top);
 			top.getChildren().set(place, bottom);
-		}
+		}*/
 		
 		// next, do the other side of the equals
 		if(recip.getParent().getParent().getParent() !=null && recip.getParent().getParent().getParent().getFunction() instanceof Equals){

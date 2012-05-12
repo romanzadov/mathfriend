@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import representTerms.Image;
 import representTerms.StringRectangle;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 import display.point;
 
@@ -43,7 +44,7 @@ public class AbsoluteContainer implements TreeFunction{
 		return sr;
 	}
 
-	public void performAction(CompoundTerm tr) {
+	public void performAction(Term tr) {
 		tr.setContainer(sr.get(j).container);
 		j++;
 		

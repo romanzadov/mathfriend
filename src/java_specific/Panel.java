@@ -14,7 +14,6 @@ import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.TouchData.TouchType;
 import representTerms.StringRectangle.type;
-import tree.notsimple.Fraction;
 import display.rectangle;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener{
@@ -64,8 +63,8 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 				g.setColor(Color.black);
 
 				if(toDraw.get(i).myType == type.FRACTION){
-					rectangle fractionBar = Fraction.getFractionBarToDraw(c);
-					g.fillRect((int)fractionBar.bl.x,(int)fractionBar.bl.y, (int)fractionBar.width, (int)fractionBar.height);	
+	//				rectangle fractionBar = Fraction.getFractionBarToDraw(c);
+	//				g.fillRect((int)fractionBar.bl.x,(int)fractionBar.bl.y, (int)fractionBar.width, (int)fractionBar.height);
 				}
 
 				if(i == 0){
@@ -92,38 +91,38 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 		toDraw = td;
 	}
 
-	@Override
+//	@Override
 	public void mouseClicked(MouseEvent e){
 
 	}
 
-	@Override
+//	@Override
 	public void mouseEntered(MouseEvent arg0) {
 	}
 
-	@Override
+//	@Override
 	public void mouseExited(MouseEvent arg0) {
 	}
 
-	@Override 
+//	@Override
 	public void mouseDragged(MouseEvent e){
 		lastTouch = new TouchData(e.getX(), e.getY(), mousePressed , System.currentTimeMillis(), TouchType.DRAGGED);
 		myDisplay.addTouchEvent(lastTouch);
 	}
 
-	@Override
+//	@Override
 	public void mousePressed(MouseEvent e) {
 		lastTouch = new TouchData(e.getX(), e.getY(), mousePressed ,  System.currentTimeMillis(), TouchType.PRESSED);
 		myDisplay.addTouchEvent(lastTouch);
 	}
 
-	@Override
+//	@Override
 	public void mouseReleased(MouseEvent e) {
 		lastTouch = new TouchData(e.getX(), e.getY(), mousePressed ,  System.currentTimeMillis(), TouchType.RELEASED);
 		myDisplay.addTouchEvent(lastTouch);
 	}
 
-	@Override
+//	@Override
 	public void mouseMoved(MouseEvent e) {
-	} 
+	}
 }

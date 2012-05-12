@@ -1,6 +1,6 @@
 package ghosts;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 import tree.simple.Number;
 //import android.util.Log;
 

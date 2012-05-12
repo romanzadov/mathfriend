@@ -7,8 +7,9 @@ import display.point;
 
 import move.identify.TermMath;
 import representTerms.Image;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 import tree.functions.Times;
 
@@ -21,7 +22,7 @@ public class MultiplyGhost implements TreeFunction{
 
 	public Image Like(){
 		
-		Image Ghost =null;
+		/*Image Ghost =null;
 		CompoundTerm second = null;
 		if(aTIMESb != null){
 			try {
@@ -59,7 +60,8 @@ public class MultiplyGhost implements TreeFunction{
 		}
 		
 		
-		return Ghost;
+		return Ghost;*/
+        return null;
 	}
 	
 	public MultiplyGhost(Image img){
@@ -68,8 +70,8 @@ public class MultiplyGhost implements TreeFunction{
 	}
 
 
-	public void performAction(CompoundTerm tr) {
-		if(aTIMESb == null){
+	public void performAction(Term tr) {
+		/*if(aTIMESb == null){
 			if(tr.getFunction() !=null && (tr.getFunction() instanceof Times)){
 
 				CompoundTerm ans = null;
@@ -94,7 +96,7 @@ public class MultiplyGhost implements TreeFunction{
 				}
 			}
 		}
-
+*/
 
 
 	}

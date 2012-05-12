@@ -1,7 +1,8 @@
 package container.walks;
 
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 //import android.util.Log;
 
@@ -9,11 +10,11 @@ public class newparens implements TreeFunction {
 
 	final static String TAG = "newparens";
 	
-	public newparens(CompoundTerm tr){
+	public newparens(Term tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 	
-	public void performAction(CompoundTerm tr) {
+	public void performAction(Term tr) {
 		
 	/*	//parentheses around multiplied terms
 		if(tr.getParent().getFunction() instanceof Times|| tr.getParent().getFunction() instanceof Negative){

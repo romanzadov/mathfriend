@@ -1,6 +1,6 @@
 package container;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 //import android.util.Log;
 import container.walks.allignbls;
 import container.walks.resize;

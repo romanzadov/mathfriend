@@ -1,8 +1,9 @@
 package container.walks;
 
 import representTerms.Image;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 //import android.util.Log;
 import display.point;
@@ -24,8 +25,8 @@ public class FindSel implements TreeFunction{
 //		Log.d(TAG, "main: "+myMain.tr.toString()+" sel: "+mySel.toString()+" "+tapped.toString());
 	}
 
-	@Override
-	public void performAction(CompoundTerm tr) {
+//	@Override
+	public void performAction(Term tr) {
 
 		boolean sameString = false;
 		boolean samePlace = false;
@@ -41,13 +42,13 @@ public class FindSel implements TreeFunction{
 				sameString = true;
 			}
 
-			if(tr.ScreenPosition.container.bl.x-2<myTapped.x &&
+		/*	if(tr.ScreenPosition.container.bl.x-2<myTapped.x &&
 					tr.ScreenPosition.container.bl.x+tr.ScreenPosition.container.width+2>myTapped.x){
 				samePlace = true;
-			}
+			}*/
 
 			if(samePlace && sameString){
-				found = tr;
+				//found = tr;
 			}
 		}
 		else{}

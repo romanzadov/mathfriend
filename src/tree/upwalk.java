@@ -1,6 +1,8 @@
 package tree;
 
 
+import tree.compound.CompoundTerm;
+
 public class upwalk {
 	//walk through all the nodes in up order and change things
 	//using performAction

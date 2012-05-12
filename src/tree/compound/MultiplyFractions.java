@@ -1,6 +1,5 @@
-package tree.notsimple;
+package tree.compound;
 
-import tree.CompoundTerm;
 import tree.simple.Number;
 
 public class MultiplyFractions {
@@ -19,7 +18,7 @@ public class MultiplyFractions {
 			ans = fractimesnumber(b, a);
 		}
 		else if( a.isSimpleFraction() && b.isSimpleFraction()){
-			ans = fractimesfrac(a, b);
+			//ans = fractimesfrac(a, b);
 		}
 		
 	
@@ -29,7 +28,7 @@ public class MultiplyFractions {
 	
 	public CompoundTerm fractimesnumber(CompoundTerm A, CompoundTerm B){
 
-		CompoundTerm sel = A;
+		/*CompoundTerm sel = A;
 		CompoundTerm tr = B;
 		
 			double a = sel.getNumericValue(sel.getChildren().get(0));
@@ -87,7 +86,8 @@ public class MultiplyFractions {
 		
 		Fraction ans = new Fraction(top, bottom);
 		
-		return ans;
+		return ans;*/
+        return null;
 	}
 	
 }

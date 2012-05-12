@@ -1,4 +1,4 @@
-package tree;
+package tree.compound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import container.walks.AssignScreenPositions;
 
 import parse.*;
 import representTerms.StringRectangle;
-import tree.notsimple.Fraction;
-import tree.notsimple.MultiplyFractions;
-import tree.notsimple.NegativeTerm;
+import tree.PreSimpleTermGrouping;
+import tree.Term;
+import tree.TermContsructionUtil;
 import tree.functions.*;
 import tree.simple.Number;
 import tree.simple.Constants;
@@ -17,92 +17,32 @@ import tree.simple.SimpleTerm;
 import display.rectangle;
 import tree.simple.Variable;
 
-public class CompoundTerm extends Term implements Cloneable{
-
-	private CompoundTerm parent;
+public abstract class CompoundTerm extends Term {
 
 	private Class<? extends Function> function;
 	private ArrayList<Term> children = new ArrayList<Term>();
-	private rectangle container = new rectangle();
-
-	private float scaleFactor =1;
-	public ArrayList<SimpleTerm> simples = new ArrayList<SimpleTerm>();
-	public StringRectangle ScreenPosition = new StringRectangle();
 
 
-    public CompoundTerm(){}
-
-    public CompoundTerm(String st) {
-        ArrayList<Character> characters = ParseCharacterUtil.getCharacterArrayFromString(st);
-        PreSimpleUtil preSimpleUtil = new PreSimpleUtil();
-        List<PreSimpleTerm> preSimpleTerms = preSimpleUtil.simplify(characters);
-        fillOutChildren(preSimpleTerms);
+    public CompoundTerm(Class<? extends Function> function){
+        this.function = function;
     }
 
-    private CompoundTerm(List<PreSimpleTerm> preSimpleTerms) {
-        fillOutChildren(preSimpleTerms);
-    }
+    public static CompoundTerm getCompoundTerm(Class<? extends Function> function) {
 
-    private void fillOutChildren(List<PreSimpleTerm> preSimpleTerms) {
+        Class<? extends CompoundTerm> termClass = Function.getCompoundTermClass(function);
 
-        this.function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
-        List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
-        for(PreSimpleTermGrouping grouping: groupings) {
-            if(grouping.getPreSimpleTerms().size() == 1) {
-
-                PreSimpleTerm preSimpleTerm = grouping.getPreSimpleTerms().get(0);
-                children.add(getSimpleTerm(preSimpleTerm, grouping.isNegative(), grouping.isInverse()));
-
-
-            } else if(grouping.getPreSimpleTerms().size() == 2) {
-                PreSimpleTerm first = grouping.getPreSimpleTerms().get(0);
-                PreSimpleTerm second = grouping.getPreSimpleTerms().get(1);
-                if (PreSimpleTerm.Type.FUNCTION.equals(first.getType()) &&
-                        PreSimpleTerm.FunctionType.NEGATIVE.equals(first.getFunctionType())) {
-
-                    children.add(getSimpleTerm(second, true, grouping.isInverse()));
-
-                } else {
-                    addChild(grouping);
-                }
-            } else {
-                addChild(grouping);
-            }
-
+        try{
+            CompoundTerm compoundTerm = termClass.newInstance();
+            return compoundTerm;
+        } catch (Exception e) {
+            return null;
         }
 
     }
 
-    private void addChild(PreSimpleTermGrouping grouping) {
-        CompoundTerm child = new CompoundTerm(grouping.getPreSimpleTerms());
-        child.setNegative(grouping.isNegative());
-        child.setInverse(grouping.isInverse());
-        child.setHasParentheses(grouping.hasParentheses());
+
+    public void addChild(Term child) {
         children.add(child);
-    }
-
-    private SimpleTerm getSimpleTerm(PreSimpleTerm preSimpleTerm, boolean negative, boolean inverse) {
-        SimpleTerm child = null;
-
-        if (PreSimpleTerm.Type.CONSTANT.equals(preSimpleTerm.getType())) {
-            child = new Constants(preSimpleTerm.getConstant());
-        } else if (PreSimpleTerm.Type.NUMBER.equals(preSimpleTerm.getType())) {
-            Double value = Double.parseDouble(preSimpleTerm.toString());
-            child = new Number(value);
-        } else if (PreSimpleTerm.Type.VARIABLE.equals(preSimpleTerm.getType())) {
-            child = new Variable(preSimpleTerm.getCharacters().get(0));
-        }
-        if (child != null) {
-            child.setNegative(negative);
-            child.setInverse(inverse);
-        }
-        return child;
-    }
-
-
-
-    public String getToDraw() {
-        return this.toString();
     }
 
 	@Override
@@ -136,15 +76,6 @@ public class CompoundTerm extends Term implements Cloneable{
 	}
 
 
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		String st = this.toString();
-		CompoundTerm clone = new CompoundTerm(st);
-		clone.getContainer().bl.x = this.getContainer().bl.x;
-		clone.getContainer().bl.y = this.getContainer().bl.y;
-
-		return clone;
-	}
 	
 	
 
@@ -162,7 +93,7 @@ public class CompoundTerm extends Term implements Cloneable{
 			ans = mf.times(sel, tr);
 
 		}
-		else if (sel.isInteger() && tr.isInteger()){
+		eltree.functions se if (sel.isInteger() && tr.isInteger()){
 			CompoundTerm n = new CompoundTerm();
 			double a = getNumericValue(sel);
 			double b = getNumericValue(tr);
@@ -508,6 +439,8 @@ public class CompoundTerm extends Term implements Cloneable{
 		return mid;
 	}*/
 
+
+
     public void insertChild(int index, CompoundTerm child) {
         children.add(index, child);
         child.setParent(this);
@@ -594,14 +527,6 @@ public class CompoundTerm extends Term implements Cloneable{
 	}
 
 
-    public CompoundTerm getParent() {
-        return parent;
-    }
-
-    public void setParent(CompoundTerm parent) {
-        this.parent = parent;
-
-    }
 
     public Function getFunction() {
         Function instance = null;
@@ -613,21 +538,5 @@ public class CompoundTerm extends Term implements Cloneable{
         return null;
     }
 
-    public rectangle getContainer() {
-        return container;
-    }
-
-    public void setContainer(rectangle container) {
-        this.container = container;
-    }
-
-
-    public float getScaleFactor() {
-        return scaleFactor;
-    }
-
-    public void setScaleFactor(float scaleFactor) {
-        this.scaleFactor = scaleFactor;
-    }
 }
 

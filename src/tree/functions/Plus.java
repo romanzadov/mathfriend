@@ -5,7 +5,7 @@ import move.identify.FindSel;
 import move.identify.ReturnSel;
 import move.operators.plusmove;
 import representTerms.Image;
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 import display.point;
 import display.rectangle;
 //import android.util.Log;
@@ -16,14 +16,12 @@ public class Plus extends Function {
 	
 	public Plus(){
 		inputs =2;
-		invertable=true;
+		invertible =true;
 		commutative=true;
 		distributive=true;
 		associative=true;
 		identity=0;
 		invisible = false;
-		lmult = false;
-		rmult = false;
 	}
 
     @Override
@@ -74,7 +72,7 @@ public class Plus extends Function {
 
 	public Image inTermMoves(Image im, CompoundTerm sel, int IntermIndex){
 
-		CompoundTerm second = new CompoundTerm();
+		/*CompoundTerm second = new CompoundTerm();
 		try {
 			second = (CompoundTerm)im.tr.clone();
 		} catch (CloneNotSupportedException e) {
@@ -98,7 +96,8 @@ public class Plus extends Function {
 	//	dn.drawelement(second, (int)im.tr.font);
 		Image Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
-		return Ghost;
+		return Ghost;*/
+        return null;
 	}
 
 	public Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex, double xsel){

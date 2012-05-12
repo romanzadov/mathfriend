@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import representTerms.Image;
 import representTerms.PlaceAndFont;
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 
 public class ImagePositionManager {
 
@@ -107,7 +107,7 @@ public class ImagePositionManager {
 		
 		for(int i = 0; i<history.size(); i++){
 			//create image
-			CompoundTerm tr = new CompoundTerm(history.get(i));
+			/*CompoundTerm tr = new CompoundTerm(history.get(i));
 			Image step = new Image(tr, new point(0,0), null);
 			
 			//figure out new font if we have to scale it
@@ -138,7 +138,7 @@ public class ImagePositionManager {
 			step.historyContainers = step.getAbsoluteContainers((int)(prefferedFont*scale), bel);
 			
 			historyStep ++;
-			imageHistory.add(step);
+			imageHistory.add(step);*/
 		}
 		
 		

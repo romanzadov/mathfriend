@@ -3,7 +3,7 @@ package tree.functions;
 import display.point;
 import display.rectangle;
 import representTerms.Image;
-import tree.*;
+import tree.compound.CompoundTerm;
 
 public class Equals extends Function {
 
@@ -11,7 +11,7 @@ public class Equals extends Function {
 
 	public Equals(){
 		inputs=2;
-		invertable=false;
+		invertible =false;
 		commutative=true;
 		distributive=false;
 		associative=true;
@@ -90,17 +90,17 @@ public class Equals extends Function {
 	}
 
 	public Image MoveFocus(Image im, CompoundTerm sel, int selindex, int IntermIndex){
-		Image Ghost = new Image();
+	/*	Image Ghost = new Image();
 		CompoundTerm second = new CompoundTerm();
 		try {
 			second = (CompoundTerm) im.tr.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
-		CompoundTerm secondsel = second.getChildren().get(selindex);
-		CompoundTerm moveto = second.getChildren().get(IntermIndex);
+//		CompoundTerm secondsel = second.getChildren().get(selindex);
+//		CompoundTerm moveto = second.getChildren().get(IntermIndex);
 /*
 		if((moveto.getFunction() instanceof Plus)||(moveto.getFunction() instanceof Minus)){
 			if(!(secondsel.getFunction() instanceof Plus)&&!(secondsel.getFunction() instanceof Minus)){
@@ -183,12 +183,13 @@ public class Equals extends Function {
 	//	RelativeContainer dn = new RelativeContainer();
 	//	dn.drawelement(second);
 	//	ColorText CT = new ColorText(secondsel, /.red);
-		Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
+	/*	Ghost = new Image(second.toString(), new point(im.bel.x,im.bel.y+(int) im.tr.getContainer().height/2+100));
 
 
 
 		return Ghost;
-
+*/
+        return null;
 	}
 	@Override
 	public Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex,

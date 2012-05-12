@@ -1,6 +1,6 @@
 package container;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 import tree.functions.Function;
 import tree.simple.SimpleTerm;
 //import android.util.Log;
@@ -19,7 +19,7 @@ public class specificimg {
 			//if simple, make rectangle
 			if(ter.getChildren().get(i) instanceof SimpleTerm){
 				SimpleTerm st = (SimpleTerm)ter.getChildren().get(i);
-				ter.getChildren().get(i).setContainer(st.giverect(ter.getChildren().get(i)));
+			//	ter.getChildren().get(i).setContainer(st.giverect(ter.getChildren().get(i)));
 			}
 			//if not simple, and not rectangled, dig in
 			/*else if(!ter.getChildren().get(i).issimple){
@@ -36,11 +36,11 @@ public class specificimg {
 		
 		Function op = ter.getFunction();
 		if(op!=null){
-		rect = op.giverect(ter);}
-		else {
+		//rect = op.giverect(ter);
+		} else {
 			
-			SimpleTerm pop = (SimpleTerm)ter;
-			rect = pop.giverect(ter);
+		//	SimpleTerm pop = (SimpleTerm)ter;
+		//	rect = pop.giverect(ter);
 		}
 		
 		ter.setContainer(rect);

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import move.identify.TermMath;
 import representTerms.Image;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 import tree.functions.Plus;
 import display.point;
@@ -18,7 +19,7 @@ public class LikeTermsGhost implements TreeFunction{
 	Image im;
 
 	public Image Like(){
-		Image Ghost =null;
+/*		Image Ghost =null;
 		CompoundTerm second = null;
 		if(aPLUSb != null){
 			try {
@@ -64,11 +65,11 @@ public class LikeTermsGhost implements TreeFunction{
 				//	aPLUSb.getParent().getChildren().add(smallest,pl);
 				}
 				else{
-/*					Minus mn = new Minus();
+*//*					Minus mn = new Minus();
 					mn.setParent(aPLUSb.getParent());
 					aPLUSb.getParent().getChildren().add(smallest,aPLUSb);
 					aPLUSb.getParent().getChildren().add(smallest,mn);
-					aPLUSb.toggleNegative();*/
+					aPLUSb.toggleNegative();*//*
 				}
 			}
 		//	RelativeContainer dc = new RelativeContainer();
@@ -76,14 +77,15 @@ public class LikeTermsGhost implements TreeFunction{
 			Ghost = new Image(second, new point(im.bel.x, 80), null);
 		}
 
-		return Ghost;
+		return Ghost;*/
+        return null;
 	}
 	public LikeTermsGhost(Image img){
 		im = img;
 		downwalk walk = new downwalk(img.tr, this);
 	}
 
-	public void performAction(CompoundTerm tr) {
+	public void performAction(Term tr) {
 		if(aPLUSb == null){
 /*			if(tr.getFunction() !=null && (tr.getFunction() instanceof Plus || tr.getFunction() instanceof Minus)){
 

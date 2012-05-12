@@ -1,6 +1,6 @@
 package move.identify;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 
 import java.util.List;
 

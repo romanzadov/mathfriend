@@ -1,19 +1,20 @@
 package container.walks;
 
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class TestPaternity implements TreeFunction{
 
 
-	public TestPaternity(CompoundTerm tr){
+	public TestPaternity(Term tr){
 		downwalk walk = new downwalk(tr, this);
 	}
 
-	public void performAction(CompoundTerm tr) {
+	public void performAction(Term tr) {
 
-		if(tr != null){
+		/*if(tr != null){
 			for(int i = 0; i<tr.getChildren().size(); i++){
 				if(tr.getChildren().get(i).getParent() != tr){
 					tr.getChildren().get(i).setParent(tr);
@@ -29,6 +30,6 @@ public class TestPaternity implements TreeFunction{
 				}
 			}
 
-		}
+		}*/
 	}
 }

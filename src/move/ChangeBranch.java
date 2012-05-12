@@ -3,12 +3,12 @@ package move;
 import java.util.ArrayList;
 
 import move.identify.TermMath;
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 
 public class ChangeBranch {
 
 	public CompoundTerm Change(CompoundTerm tree, CompoundTerm current, CompoundTerm future){
-		CompoundTerm second = new CompoundTerm();
+/*		CompoundTerm second = new CompoundTerm();
 		try {
 			second = (CompoundTerm) tree.clone();
 		} catch (CloneNotSupportedException e) {
@@ -22,6 +22,7 @@ public class ChangeBranch {
 		int moveint = moveto.getParent().getChildren().indexOf(moveto);
 		moveto.getParent().getChildren().set(moveint, future);
 		
-		return second;
+		return second;*/
+        return null;
 	}
 }

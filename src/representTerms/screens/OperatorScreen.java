@@ -19,21 +19,21 @@ public class OperatorScreen implements AbstractedScreen{
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
 	int timesTapped = 0;
 	
-	@Override 
+//	@Override
 	public ScreenType getScreenType(){
 		return ScreenType.OPERATOR;
 	}
 	
 	
-	@Override
+//	@Override
 	public void updateMainImage(Image main) {
-		operator = main.tr.getFunction();
+	//	operator = main.tr.getFunction();
 		sel = main;
 		touches.clear();
 	//	resetTimesTapped();
 	}
 
-	@Override
+//	@Override
 	public int getBackgroundColor() {
 		return 0;
 	}
@@ -46,7 +46,7 @@ public class OperatorScreen implements AbstractedScreen{
 		}
 	}
 
-	@Override
+//	@Override
 	public ArrayList<StringRectangle> getRelativeRectangles() {
 		
 		ArrayList<StringRectangle> relatives = new ArrayList<StringRectangle>();
@@ -62,19 +62,19 @@ public class OperatorScreen implements AbstractedScreen{
 		return relatives;
 	}
 
-	@Override
+//	@Override
 	public void updateAbstractRectangles(ArrayList<StringRectangle> drawn) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+//	@Override
 	public void updateTouch(ArrayList<TouchData> touch){
 		touches.addAll(touch);
 		updateLogic();
 	}
 
-	@Override
+//	@Override
 	public void updateLogic(){
 		for(int i = 0; i<touches.size(); i++){
 			singleTouch(touches.get(0));

@@ -1,8 +1,6 @@
 package move.operators;
 
-import representTerms.Image;
-import tree.CompoundTerm;
-import tree.notsimple.Fraction;
+import tree.compound.CompoundTerm;
 import tree.functions.*;
 
 public class TimesTerm {
@@ -129,18 +127,20 @@ public class TimesTerm {
 				for(int i = 0; i<tr.getChildren().size(); i++){
 					if(!done){
 
-						CompoundTerm kid = tr.getChildren().get(i);
+						CompoundTerm kid = tr.getCompoundChildren().get(i);
 
-						if(kid.isDecimal() || kid.isFraction()){
+						if(
+                                //kid.isDecimal() ||
+                                        kid.isFraction()){
 							if(firstMultiple == null){
 								firstMultiple = kid;
 							}
 							else{
 								secondMultiple = kid;
 
-								CompoundTerm result = Fraction.productOfNaturalFractions(firstMultiple, secondMultiple);
+						//		CompoundTerm result = Fraction.productOfNaturalFractions(firstMultiple, secondMultiple);
 
-								if(result == null){break;}
+						//		if(result == null){break;}
 
 								try {
 									resultingTerm = (CompoundTerm) tr.clone();

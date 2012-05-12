@@ -1,8 +1,9 @@
 package ghosts;
 
 import representTerms.Image;
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 //import android.util.Log;
 
@@ -12,7 +13,7 @@ public class SanitizeGhost  implements TreeFunction{
 
 	public SanitizeGhost(Image Ghost){
 //		Log.d(TAG, "old ghost tr: "+Ghost.tr);
-
+/*
 		if(Ghost.tr != null){
 			downwalk walk = new downwalk(Ghost.tr, this);
 		}
@@ -32,12 +33,12 @@ public class SanitizeGhost  implements TreeFunction{
 
 		} catch (Exception e) {}
 
-
+*/
 
 	}
 
-	public void performAction(CompoundTerm tr){
-		SanitizePlus sp = new SanitizePlus(tr);
+	public void performAction(Term tr){
+	//	SanitizePlus sp = new SanitizePlus(tr);
 	}
 
 

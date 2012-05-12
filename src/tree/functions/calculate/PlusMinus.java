@@ -1,21 +1,16 @@
 package tree.functions.calculate;
 
-import java.util.ArrayList;
-
-import move.identify.TermMath;
-
-import tree.CompoundTerm;
-import tree.functions.Plus;
-import tree.simple.Number;
+import tree.compound.CompoundTerm;
 
 public class PlusMinus {
 
 
 
 	public CompoundTerm Add(CompoundTerm tr){
-		CompoundTerm second = likenumbers(tr);
+		/*CompoundTerm second = likenumbers(tr);
 
-		return second;
+		return second;*/
+        return null;
 	}
 
 /*

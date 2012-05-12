@@ -6,7 +6,7 @@ import tests.TestStrings;
 
 import representTerms.Image;
 import representTerms.LogicEngine;
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 
 public class RunAsJava {
 
@@ -24,7 +24,7 @@ public class RunAsJava {
 
 	private void testEquations(){
 		
-		ArrayList<String> tests = TestStrings.getStrings();
+	/*	ArrayList<String> tests = TestStrings.getStrings();
 		int wrongSoFar = 0;
 		
 		for(int i = 0; i<tests.size(); i++){
@@ -46,7 +46,7 @@ public class RunAsJava {
 
 		String stats = "Percent Correct: "+(tests.size()-wrongSoFar)+"/"+tests.size()+" | "+(float)(tests.size()-wrongSoFar)/tests.size();
 		
-		System.out.println(stats);
+		System.out.println(stats);*/
 	}
 
 	private boolean equality(CompoundTerm result, CompoundTerm second){
@@ -72,30 +72,30 @@ public class RunAsJava {
 	
 	public void testMultiplication(){
 
-		String st = "(2/3)(4/5)(3/9)";
+	/*	String st = "(2/3)(4/5)(3/9)";
 		Image img = new Image(st, 2,2,2);
 		System.out.println(img.tr);
 		for(int i = 0; i<4; i++){
 			img.tr = img.tr.getResultOfOperation();
 			System.out.println(img.tr);
 		}
-
+*/
 	}
 
 	public void testAddtion(){
 
-		String st = "-4+6+5";
+		/*String st = "-4+6+5";
 		Image img = new Image(st, 2,2,2);
 		System.out.println(img.tr);
 		for(int i = 0; i<4; i++){
 			img.tr = img.tr.getResultOfOperation();
 			System.out.println(img.tr);
-		}
+		}*/
 	}
 
 	public void testNumbers(){
 		String[] tests = { "5", "0", "-3", "-4.1", "5/3", "-3/4", "pi", "e"};
-
+/*
 		for(int i = 0; i<tests.length; i++){
 
 			Image img = new Image(tests[i],2,2,2);
@@ -113,7 +113,7 @@ public class RunAsJava {
 			type += " val: "+ CompoundTerm.getNumericValue(tr);
 
 			System.out.println(type);
-		}
+		}*/
 	}
 
 	public void startFrame(String st){

@@ -2,17 +2,17 @@ package move;
 
 import move.identify.selectterm;
 import representTerms.Image;
-import tree.CompoundTerm;
-import tree.functions.Equality;
+import tree.compound.CompoundTerm;
+import tree.functions.Equals;
 
 public class equalmove {
 	
 	public CompoundTerm eqmove(Image im, CompoundTerm selected, int x, int y){
-		boolean move = false;
+		/*boolean move = false;
 		
 		CompoundTerm tr = im.tr;
 		
-		if(!(tr.getFunction() instanceof Equality)){
+		if(!(tr.getFunction() instanceof Equals)){
 			System.out.println("error: equalmove run on non equal term");
 		}
 		else{
@@ -28,21 +28,23 @@ public class equalmove {
 			}
 			
 			if(move){
-				/*if(!(over instanceof Function)
+				*//*if(!(over instanceof Function)
 						&&!(selected instanceof Function)){
 				tr = switchedterm(tr, selectedplace, overplace);
-				}*/
+				}*//*
 			}
 		}
-		return tr;
-	}
+		return tr;*/
+	    return null;
+    }
 	
 	public CompoundTerm switchedterm(CompoundTerm tr, int selectedplace, int overplace){
-		CompoundTerm placeholder = tr.getChildren().get(overplace);
+		/*CompoundTerm placeholder = tr.getChildren().get(overplace);
 		tr.getChildren().set(overplace, tr.getChildren().get(selectedplace));
 		tr.getChildren().set(selectedplace, placeholder);
 		
-		return tr;
+		return tr;*/
+        return null;
 	}
 
 }

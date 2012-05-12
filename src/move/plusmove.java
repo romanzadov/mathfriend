@@ -1,9 +1,9 @@
 package move;
 
 import move.identify.selectterm;
-import tree.CompoundTerm;
-import tree.functions.Equality;
+import tree.compound.CompoundTerm;
 import display.point;
+import tree.functions.Equals;
 
 public class plusmove {
 
@@ -14,7 +14,7 @@ public class plusmove {
 		
 		if(endterm == null){
 			
-			if(selected.getParent().getParent().getFunction() instanceof Equality){
+			if(selected.getParent().getParent().getFunction() instanceof Equals){
 				CompoundTerm higherterm = st.whichterm(selected.getParent().getParent(), x, y, new point(0,0), 0);
 				endterm = st.whichterm(higherterm, x, y, new point(0,0), 0);
 			
@@ -61,14 +61,14 @@ public class plusmove {
 					
 				}
 				else{
-					CompoundTerm hold1 = selected.getParent().getChildren().get(splace-1);
+			/*		CompoundTerm hold1 = selected.getParent().getChildren().get(splace-1);
 					CompoundTerm hold2 = selected.getParent().getChildren().get(splace);
 					selected.getParent().getChildren().set(splace,
 							selected.getParent().getChildren().get(eplace));
 					selected.getParent().getChildren().set(splace-1,
 							selected.getParent().getChildren().get(eplace-1));
 					selected.getParent().getChildren().set(eplace,hold2);
-					selected.getParent().getChildren().set(eplace-1,hold1);
+					selected.getParent().getChildren().set(eplace-1,hold1);*/
 					
 				}
 			}

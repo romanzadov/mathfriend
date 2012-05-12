@@ -1,10 +1,9 @@
 package tree.functions;
 
+import move.operators.TimesTerm;
 import parse.PreSimpleTerm;
 import representTerms.Image;
-import tree.CompoundTerm;
-import tree.notsimple.Equation;
-import display.rectangle;
+import tree.compound.*;
 
 import java.util.*;
 
@@ -14,13 +13,11 @@ public abstract class Function {
 
 
 	public int inputs;
-	public boolean invertable;
+	public boolean invertible;
 	public boolean commutative;
 	public boolean distributive;
 	public boolean associative;
 	public float identity;
-	public boolean lmult;
-	public boolean rmult;
 
 	final static public String[] KNOWN_FUNCTIONS = {"+","-","*","/","^","=", "sin", "cos", "tan", "log", "ln"};
 	final static public Character[] NOTFUNCTIONS = {'!', '@', '#', '$', '%', ',','~', '|'};
@@ -33,17 +30,18 @@ public abstract class Function {
         ORDER_OF_OPERATIONS.add(Exponent.class);
         ORDER_OF_OPERATIONS.add(AdvancedFunction.class);
     }
-	public String thisvalue;
-	public int charpos;
 
+    final static private Map<Class<? extends Function>, Class<? extends CompoundTerm>> FUNCTION_TO_TERM = new HashMap<Class<? extends Function>, Class<? extends CompoundTerm>>();
+    static {
+        FUNCTION_TO_TERM.put(Plus.class, AdditiveTerm.class);
+        FUNCTION_TO_TERM.put(Times.class, MultiplicativeTerm.class);
+        FUNCTION_TO_TERM.put(Equals.class, Equation.class);
+        FUNCTION_TO_TERM.put(Exponent.class, ExponentTerm.class);
+    }
+
+	public String thisvalue;
 
     public abstract CompoundTerm simpleOperation(CompoundTerm term);
-
-	public Function setconstants(Function a){
-		a.thisvalue = thisvalue;
-		a.charpos = charpos;
-		return a;
-	}
 
 	public boolean equals(Object a)
 	{
@@ -52,43 +50,11 @@ public abstract class Function {
 		return ans;
 	}
 
-	public boolean isoperator(){
-		boolean a = true;
-		return a;
-	}
-
-	public rectangle giverect(CompoundTerm tr){
-		rectangle a = new rectangle();
-		if(tr.getChildren().size() == 0){
-			a.bl.x = 0;
-			a.bl.y = 0;
-			a.height = 0;
-			a.width = 0;
-		}
-		if(tr.getChildren().size()>0){
-			
-			//check that all are rectangled
-/*			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).getContainer() == null){
-					System.out.println("error: equal called when not all terms are rectangled");
-				}
-			}
-			a.bl.x = tr.getChildren().get(0).getContainer().bl.x;
-			a.bl.y = tr.getChildren().get(0).getContainer().bl.y;
-			a.width = tr.getChildren().get(0).getContainer().width;
-			a.height = tr.getChildren().get(0).getContainer().height;*/
-			
-			
-
-		}
-		return a;
-	}
-
 	public abstract Image inTermMoves(Image im, CompoundTerm sel, int IntermIndex);
 	
 	public abstract Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex, double xsel);
 
-	public Equation ToBothSides(Equation eq, Function op, CompoundTerm sel) {
+	public Equation toBothSides(Equation eq, Function function, CompoundTerm sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
 	}
@@ -100,5 +66,8 @@ public abstract class Function {
     public static int getOrderOfOperation(Class<? extends Function> function) {
         return ORDER_OF_OPERATIONS.indexOf(function);
     }
-	
+
+    public static Class<? extends CompoundTerm> getCompoundTermClass(Class<? extends Function> function) {
+        return FUNCTION_TO_TERM.get(function);
+    }
 }

@@ -1,6 +1,6 @@
 package move.operators;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 import tree.functions.Function;
 
 public class AddBothSides {

@@ -1,6 +1,6 @@
 package move.identify;
 
-import tree.CompoundTerm;
+import tree.compound.CompoundTerm;
 //import android.util.Log;
 import display.point;
 import display.rectangle;
@@ -13,7 +13,7 @@ public class selectterm {
 	static final String TAG = "selectterm";
 	
 	public CompoundTerm whichterm(CompoundTerm tr, float x, float y, point termbl, int error){
-		CompoundTerm back = new CompoundTerm();
+	/*	CompoundTerm back = new CompoundTerm();
 		
 	//	System.out.println(" "+tr+"|"+x+"|"+y+"|"+termbl+"|");
 		
@@ -22,7 +22,7 @@ public class selectterm {
 		try {
 			if(!tr.isSimple() ){
 				for (int i = 0; i< tr.getChildren().size(); i++){
-					/*if(!(tr.getChildren().get(i) instanceof Function)){
+					*//*if(!(tr.getChildren().get(i) instanceof Function)){
 						boolean in = true;
 						rectangle ours = tr.getChildren().get(i).ScreenPosition.container;
 //						Log.d(TAG, ours.toString()+" click: ("+x+","+y+")");
@@ -35,7 +35,7 @@ public class selectterm {
 						//if still true, stop
 						if(in){found = true; back = tr.getChildren().get(i); break;}
 						if(!in){back = null;}
-					}*/
+					}*//*
 
 				}
 			}
@@ -64,12 +64,13 @@ public class selectterm {
 
 	
 		
-		return back;
-	}
+		return back;*/
+	    return null;
+    }
 
 	//simpler version of select term. This one only cares if you're in the same x range and ignores y
 	public CompoundTerm aboveterm(CompoundTerm tr, int x, CompoundTerm exclude, point termbl){
-		CompoundTerm back = new CompoundTerm();
+		/*CompoundTerm back = new CompoundTerm();
 		boolean found = false;
 
 		x-=termbl.x;
@@ -113,7 +114,8 @@ public class selectterm {
 		if(!found){back = null;}
 
 
-		return back;
+		return back;*/
+        return null;
 		
 	}
 }

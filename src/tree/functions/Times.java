@@ -4,7 +4,7 @@ import move.operators.TimesMove;
 
 import display.rectangle;
 import representTerms.Image;
-import tree.*;
+import tree.compound.CompoundTerm;
 
 public class Times extends Function {
 
@@ -13,13 +13,11 @@ public class Times extends Function {
 	
 	public Times(){
 		inputs=2;
-		invertable=true;
+		invertible =true;
 		commutative=true;
 		distributive=true;
 		associative=true;
 		identity=1;
-		lmult = false;
-		rmult = false;
 		
 	}
 

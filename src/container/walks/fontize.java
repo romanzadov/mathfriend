@@ -1,14 +1,15 @@
 package container.walks;
 
+import tree.Term;
+import tree.compound.CompoundTerm;
 import tree.downwalk;
-import tree.CompoundTerm;
 import tree.downwalk.TreeFunction;
 
 public class fontize  implements TreeFunction{
 
 	double font;
 	
-	public fontize(CompoundTerm tr, double fontsize){
+	public fontize(Term tr, double fontsize){
 		
 		if(tr.getContainer().width*fontsize>270){
 			fontsize = (int)270/ tr.getContainer().width;
@@ -20,7 +21,7 @@ public class fontize  implements TreeFunction{
 		
 	}
 
-	public void performAction(CompoundTerm tr) {
+	public void performAction(Term tr) {
 
 		tr.getContainer().height *=font;
 		tr.getContainer().width *=font;
