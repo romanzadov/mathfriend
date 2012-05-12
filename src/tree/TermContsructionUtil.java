@@ -53,20 +53,22 @@ public class TermContsructionUtil {
             int breakPoint = -1;
             PreSimpleTerm preSimpleTerm = preSimpleTerms.get(i);
             boolean breakPointFound = false;
-            if(PreSimpleTerm.Type.PARENTHESES.equals(preSimpleTerm.getType())) {
+            if (PreSimpleTerm.Type.PARENTHESES.equals(preSimpleTerm.getType())) {
                 i = parentheses.get(i);
             } else if (preSimpleTerms.indexOf(preSimpleTerm) > 0 && PreSimpleTerm.Type.FUNCTION.equals(preSimpleTerm.getType()) && function.equals(preSimpleTerm.getFunctionType().getFunction())) {
 
                 //ignore case of negative after multiplication
                 int index = preSimpleTerms.indexOf(preSimpleTerm);
                 PreSimpleTerm previous = null;
-                if(index > 0) {
+                if (index > 0) {
                     previous = preSimpleTerms.get(index - 1);
                 }
                 boolean ignore = false;
-                if(previous != null && PreSimpleTerm.Type.FUNCTION.equals(previous.getType()) &&
+                if (previous != null && PreSimpleTerm.Type.FUNCTION.equals(previous.getType()) &&
                         PreSimpleTerm.FunctionType.TIMES.equals(previous.getFunctionType()) &&
-                        PreSimpleTerm.FunctionType.NEGATIVE.equals(preSimpleTerm.getFunctionType())) {ignore = true;}
+                        PreSimpleTerm.FunctionType.NEGATIVE.equals(preSimpleTerm.getFunctionType())) {
+                    ignore = true;
+                }
 
                 if (!ignore) {
                     breakPointFound = true;
@@ -95,11 +97,11 @@ public class TermContsructionUtil {
 
             groupings.add(getPreSimpleTermGrouping(group, function));
         }
-        if(groupEndpoints.size() == 0) {
+        if (groupEndpoints.size() == 0) {
             groupings.add(getPreSimpleTermGrouping(preSimpleTerms, function));
         } else {
             int lastBreakpoint = groupEndpoints.get(groupEndpoints.size() - 1);
-            int endOfList =  preSimpleTerms.size();
+            int endOfList = preSimpleTerms.size();
             groupings.add(getPreSimpleTermGrouping(preSimpleTerms.subList(lastBreakpoint, endOfList), function));
         }
 
@@ -110,14 +112,18 @@ public class TermContsructionUtil {
         boolean isNegative = false;
         boolean isInverse = false;
         boolean hasParentheses = false;
-        boolean ignoreFirst = false;
-        if (group.size() > 1) {
-            PreSimpleTerm firstTerm = group.get(0);
 
+        if (PreSimpleTerm.Type.FUNCTION.equals(group.get(0).getType())) {
+            group = remove(group, group.get(0));
+        }
+
+        if (group.size() > 1) {
+
+            PreSimpleTerm firstTerm = group.get(0);
             PreSimpleTerm lastTerm = group.get(group.size() - 1);
 
             //sort by primary function instead
-            if(Times.class.equals(function)) {
+            if (Times.class.equals(function)) {
 
             }
             if (PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType())) {
@@ -126,7 +132,7 @@ public class TermContsructionUtil {
 
             } else if (PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
                 // this should account for the case of 5 = -10
-                if(Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class)) {
+                if (Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class)) {
                     isNegative = true;
                     group = remove(group, firstTerm);
 
@@ -137,25 +143,17 @@ public class TermContsructionUtil {
 
             } else if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType()) && firstTerm.getFunctionType().getFunction() == AdvancedFunction.class) {
                 group = remove(group, firstTerm);
-            } else {
-                //trim operators
-                if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType())) {
-                    ignoreFirst = true;
-                } else  {
-                    ignoreFirst = false;
-                }
             }
+
             if (isInParentheses(group)) {
                 hasParentheses = true;
                 group = removeParentheses(group);
             }
 
         }
-        if(ignoreFirst) {
-            return new PreSimpleTermGrouping(group.subList(1, group.size()), isNegative, isInverse, hasParentheses);
-        } else {
-            return new PreSimpleTermGrouping(group, isNegative, isInverse, hasParentheses);
-        }
+
+        return new PreSimpleTermGrouping(group, isNegative, isInverse, hasParentheses);
+
 
     }
 
@@ -173,7 +171,7 @@ public class TermContsructionUtil {
     private static boolean isInParentheses(List<PreSimpleTerm> preSimpleTerms) {
         Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
         try {
-             if(parentheses.get(0) == preSimpleTerms.size() - 1) {
+            if (parentheses.get(0) == preSimpleTerms.size() - 1) {
                 return true;
             }
         } catch (Exception ignore) {
@@ -183,8 +181,8 @@ public class TermContsructionUtil {
 
     private static List<PreSimpleTerm> removeParentheses(List<PreSimpleTerm> group) {
         List<PreSimpleTerm> newGroup = new ArrayList<PreSimpleTerm>();
-        if(isInParentheses(group)) {
-            for(int i = 1; i < group.size() - 1; i++) {
+        if (isInParentheses(group)) {
+            for (int i = 1; i < group.size() - 1; i++) {
                 newGroup.add(group.get(i));
             }
         }
@@ -193,8 +191,8 @@ public class TermContsructionUtil {
 
     private static List<PreSimpleTerm> remove(List<PreSimpleTerm> group, PreSimpleTerm preSimpleTerm) {
         List<PreSimpleTerm> newGroup = new ArrayList<PreSimpleTerm>();
-        for(PreSimpleTerm term: group) {
-            if(!term.equals(preSimpleTerm)) {
+        for (PreSimpleTerm term : group) {
+            if (!term.equals(preSimpleTerm)) {
                 newGroup.add(term);
             }
         }
