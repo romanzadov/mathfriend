@@ -113,7 +113,7 @@ public class TermContsructionUtil {
         boolean isInverse = false;
         boolean hasParentheses = false;
 
-        if (PreSimpleTerm.Type.FUNCTION.equals(group.get(0).getType())) {
+        if (PreSimpleTerm.Type.FUNCTION.equals(group.get(0).getType()) && !PreSimpleTerm.FunctionType.NEGATIVE.equals(group.get(0).getFunctionType())) {
             group = remove(group, group.get(0));
         }
 

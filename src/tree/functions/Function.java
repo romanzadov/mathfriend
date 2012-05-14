@@ -1,6 +1,5 @@
 package tree.functions;
 
-import move.operators.TimesTerm;
 import parse.PreSimpleTerm;
 import representTerms.Image;
 import tree.compound.*;
@@ -31,14 +30,6 @@ public abstract class Function {
         ORDER_OF_OPERATIONS.add(AdvancedFunction.class);
     }
 
-    final static private Map<Class<? extends Function>, Class<? extends CompoundTerm>> FUNCTION_TO_TERM = new HashMap<Class<? extends Function>, Class<? extends CompoundTerm>>();
-    static {
-        FUNCTION_TO_TERM.put(Plus.class, AdditiveTerm.class);
-        FUNCTION_TO_TERM.put(Times.class, MultiplicativeTerm.class);
-        FUNCTION_TO_TERM.put(Equals.class, Equation.class);
-        FUNCTION_TO_TERM.put(Exponent.class, ExponentTerm.class);
-    }
-
 	public String thisvalue;
 
     public abstract CompoundTerm simpleOperation(CompoundTerm term);
@@ -54,10 +45,10 @@ public abstract class Function {
 	
 	public abstract Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex, double xsel);
 
-	public Equation toBothSides(Equation eq, Function function, CompoundTerm sel) {
+	/*public Equation toBothSides(Equation eq, Function function, CompoundTerm sel) {
 		System.out.println("this method should not run, but delegate to specific operator.");
 		return eq;
-	}
+	}*/
 
     public static int getOrderOfOperation(PreSimpleTerm preSimpleTerm) {
         return ORDER_OF_OPERATIONS.indexOf(preSimpleTerm.getFunctionType().getFunction());
@@ -65,9 +56,5 @@ public abstract class Function {
 
     public static int getOrderOfOperation(Class<? extends Function> function) {
         return ORDER_OF_OPERATIONS.indexOf(function);
-    }
-
-    public static Class<? extends CompoundTerm> getCompoundTermClass(Class<? extends Function> function) {
-        return FUNCTION_TO_TERM.get(function);
     }
 }

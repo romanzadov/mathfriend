@@ -17,7 +17,7 @@ import tree.simple.SimpleTerm;
 import display.rectangle;
 import tree.simple.Variable;
 
-public abstract class CompoundTerm extends Term {
+public class CompoundTerm extends Term {
 
 	private Class<? extends Function> function;
 	private ArrayList<Term> children = new ArrayList<Term>();
@@ -27,7 +27,7 @@ public abstract class CompoundTerm extends Term {
         this.function = function;
     }
 
-    public static CompoundTerm getCompoundTerm(Class<? extends Function> function) {
+ /*   public static CompoundTerm getCompoundTerm(Class<? extends Function> function) {
 
         Class<? extends CompoundTerm> termClass = Function.getCompoundTermClass(function);
 
@@ -38,7 +38,7 @@ public abstract class CompoundTerm extends Term {
             return null;
         }
 
-    }
+    }*/
 
 
     public void addChild(Term child) {

@@ -191,7 +191,7 @@ public class Equals extends Function {
 */
         return null;
 	}
-	@Override
+//	@Override
 	public Image overEqualsMoves(Image im, CompoundTerm sel, int IntermIndex,
 			double xsel) {
 		// TODO Auto-generated method stub

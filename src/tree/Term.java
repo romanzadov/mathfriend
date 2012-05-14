@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class Term implements Cloneable{
 
     private CompoundTerm parent;
-    private boolean hasParentheses;
+    private boolean hasParentheses = false;
 	private boolean isNegative = false;
     private boolean isInverse = false;
 
@@ -39,13 +39,13 @@ public abstract class Term implements Cloneable{
                     PreSimpleTerm.FunctionType.NEGATIVE.equals(first.getFunctionType())) {
 
                 term = SimpleTerm.getSimpleTerm(second);
-
+                term.setNegative(true);
             }
         }
 
         if (term == null) {
             Class<? extends Function> function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
-            term = CompoundTerm.getCompoundTerm(function);
+            term = new CompoundTerm(function);
 
             List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
             for (PreSimpleTermGrouping grouping : groupings) {
