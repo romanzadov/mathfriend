@@ -9,7 +9,8 @@ public class TestStrings {
 	final static String[] integerAddition = {
 
 		//test integer addition
-		"2x-5+1/3+2-1=2x-3+1/3-1",
+            "-4-6=-10",
+            "2x-5+1/3+2-1=2x-3+1/3-1",
 		"-4+5=1",
 		"-4-6=-10",
 		"4-7=-3",

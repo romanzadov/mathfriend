@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ParsingTest {
 
-   /* @Test
+    @Test
     public void testParseTerm() {
 
         for(String formula: TestStrings.getStrings()) {
@@ -26,8 +26,8 @@ public class ParsingTest {
 
         }
 
-    }*/
-    @Test
+    }
+   /* @Test
     public void testParseTerm$() {
 
         for(String formula: TestStrings.getStrings()) {
@@ -56,7 +56,7 @@ public class ParsingTest {
 
         }
     }
-
+*/
     public Term parseAddition(String termString) {
         List<Term> terms = new ArrayList<Term>();
         StringBuffer buffer = new StringBuffer();

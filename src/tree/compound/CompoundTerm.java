@@ -27,20 +27,6 @@ public class CompoundTerm extends Term {
         this.function = function;
     }
 
- /*   public static CompoundTerm getCompoundTerm(Class<? extends Function> function) {
-
-        Class<? extends CompoundTerm> termClass = Function.getCompoundTermClass(function);
-
-        try{
-            CompoundTerm compoundTerm = termClass.newInstance();
-            return compoundTerm;
-        } catch (Exception e) {
-            return null;
-        }
-
-    }*/
-
-
     public void addChild(Term child) {
         children.add(child);
     }
@@ -260,23 +246,6 @@ public class CompoundTerm extends Term {
 		return x;
 	}
 */
-
-	public boolean SimpleCompound(){
-		CompoundTerm tr = this;
-		boolean simp = false;
-	/*	if((tr.getFunction() !=null)&&(tr.getFunction() instanceof Times)&&(tr.getChildren().size()>2)&&!(tr.isRationalNumber())){
-			boolean insidessimp = true;
-			for(int i =0; i<tr.getChildren().size(); i++){
-				if(!tr.getChildren().get(i).isSimple()){
-					insidessimp = false;
-				}
-			}
-			if(insidessimp){simp = true;}
-		}*/
-
-		return simp;
-	}
-
 
 	public boolean isNatural(){
 		boolean natural = false;
