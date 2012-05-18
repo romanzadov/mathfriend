@@ -11,10 +11,9 @@ public class Number extends SimpleTerm {
 
 	@Override
 	public String toString(){
-        final String sign = isNegative() ? "-" : "";
-        return sign+value;
+        return value+"";
 	}
-	
+
 	@Override
 	public Number clone(){
 		

@@ -50,5 +50,5 @@ public abstract class SimpleTerm extends Term {
 
 		return real;
 	}
-
+	    
 }

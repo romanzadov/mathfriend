@@ -47,6 +47,9 @@ public class CompoundTerm extends Term {
             if (child instanceof SimpleTerm) {
                 st +="[";
             }
+            if (child.isNegative()) {
+                st += "-";
+            }
             if (child.isInverse()) {
                 st += "1/";
             }
