@@ -185,7 +185,7 @@ public class PreSimpleUtil {
             if (PreSimpleTerm.FunctionType.MINUS.equals(preSimpleTerm.getFunctionType())) {
 
                 int i = preSimpleTerms.indexOf(preSimpleTerm);
-                if (i == 0 || PreSimpleTerm.FunctionType.EQUALITY.equals(preSimpleTerms.get(i - 1).getFunctionType())
+                if (i == 0 || PreSimpleTerm.FunctionType.EQUALS.equals(preSimpleTerms.get(i - 1).getFunctionType())
                         || preSimpleTerms.get(i - 1).toString().equals("(")
                         || preSimpleTerms.get(i - 1).getType().equals(PreSimpleTerm.Type.FUNCTION)) {
 

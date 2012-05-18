@@ -40,6 +40,19 @@ public abstract class Term implements Cloneable{
 
                 term = SimpleTerm.getSimpleTerm(second);
                 term.setNegative(true);
+            } else if (PreSimpleTerm.Type.FUNCTION.equals(first.getType()) &&
+                    PreSimpleTerm.FunctionType.DIVIDE.equals(first.getFunctionType())) {
+
+                term = SimpleTerm.getSimpleTerm(second);
+                term.setInverse(true);
+            }
+        } else if (preSimpleTerms.size() == 3) {
+            PreSimpleTerm first = preSimpleTerms.get(0);
+            PreSimpleTerm second = preSimpleTerms.get(1);
+            if(PreSimpleTerm.Type.FUNCTION.equals(first.getType()) &&
+                    PreSimpleTerm.Type.FUNCTION.equals(second.getType())) {
+                List<PreSimpleTerm> x = preSimpleTerms.subList(1,2);
+                term = getTerm(preSimpleTerms.subList(1,2));
             }
         }
 
@@ -52,9 +65,9 @@ public abstract class Term implements Cloneable{
 
                 Term child = getTerm(grouping.getPreSimpleTerms());
                 if (child != null) {
-                    child.setNegative(grouping.isNegative());
-                    child.setInverse(grouping.isInverse());
-                    child.setHasParentheses(grouping.hasParentheses());
+                    if(!child.isNegative()) {child.setNegative(grouping.isNegative());}
+                    if(!child.isInverse()) {child.setInverse(grouping.isInverse());}
+                    if(!child.hasParentheses()) {child.setHasParentheses(grouping.hasParentheses());}
                     ((CompoundTerm)term).addChild(child);
                 }
             }

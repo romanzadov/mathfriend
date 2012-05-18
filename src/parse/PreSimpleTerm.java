@@ -22,7 +22,7 @@ public class PreSimpleTerm {
         DIVIDE("/", Times.class),
         NEGATIVE("-", Times.class),
         EXPONENT("^", Exponent.class),
-        EQUALITY("=", Equals.class),
+        EQUALS("=", Equals.class),
         SINE("sin", AdvancedFunction.class),
         COSINE("cos", AdvancedFunction.class),
         TANGENT("tan", AdvancedFunction.class),

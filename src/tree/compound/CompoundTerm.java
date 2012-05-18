@@ -44,6 +44,9 @@ public class CompoundTerm extends Term {
 
         for(int i = 0; i<this.getChildren().size(); i++){
             Term child = getChildren().get(i);
+            if (child instanceof SimpleTerm) {
+                st +="[";
+            }
             if (child.isInverse()) {
                 st += "1/";
             }
@@ -52,6 +55,9 @@ public class CompoundTerm extends Term {
             }
             else {
                 st += child;
+            }
+             if (child instanceof SimpleTerm) {
+                st +="]";
             }
             if(this.getChildren().indexOf(child) < this.getChildren().size() - 1) {
                  st += operator;

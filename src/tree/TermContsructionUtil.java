@@ -1,11 +1,12 @@
 package tree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import parse.ParenthesisUtil;
 import parse.PreSimpleTerm;
 import tree.functions.*;
-import tree.simple.SimpleTerm;
 
 
 public class TermContsructionUtil {
@@ -45,7 +46,7 @@ public class TermContsructionUtil {
     public static List<PreSimpleTermGrouping> getGroupings(List<PreSimpleTerm> preSimpleTerms, Class<? extends Function> function) {
         List<PreSimpleTermGrouping> groupings = new ArrayList<PreSimpleTermGrouping>();
         Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
-        List<Integer[]> groupEndpoints = new ArrayList<Integer[]>();
+        List<Integer> groupEndpoints = new ArrayList<Integer>();
 
         for (int i = 0; i < preSimpleTerms.size(); i++) {
             int breakPoint = -1;
@@ -74,23 +75,14 @@ public class TermContsructionUtil {
                 }
 
             }
-
-            if (breakPointFound || preSimpleTerms.size() == preSimpleTerms.indexOf(preSimpleTerm)) {
-                if(groupEndpoints.size() == 0) {
-                    Integer[] group = {0, breakPoint};
-                    Integer[] nextGroup = {breakPoint + 1, preSimpleTerms.size() - 1};
-                    groupEndpoints.add(group);
-                    groupEndpoints.add(nextGroup);
-                } else {
-                    Integer nextGroup = {breakPoint + 1, preSimpleTerms.size() - 1};
-                    groupEndpoints.get(groupEndpoints.size() - 1)[1] = breakPoint;
-                }
-            }
-
             //if our function is multiplication, check for implicit multiplications like 2x
             if (function == Times.class && !breakPointFound) {
                 breakPointFound = hasInvisibleMultiplication(preSimpleTerm, preSimpleTerms);
                 breakPoint = preSimpleTerms.indexOf(preSimpleTerm) + 1;
+            }
+
+            if (breakPointFound || preSimpleTerms.size() == preSimpleTerms.indexOf(preSimpleTerm)) {
+                groupEndpoints.add(breakPoint);
             }
         }
 
@@ -119,34 +111,36 @@ public class TermContsructionUtil {
         boolean isNegative = false;
         boolean isInverse = false;
         boolean hasParentheses = false;
+        PreSimpleTerm firstTerm = group.get(0);
 
-        if (PreSimpleTerm.Type.FUNCTION.equals(group.get(0).getType()) && !PreSimpleTerm.FunctionType.NEGATIVE.equals(group.get(0).getFunctionType())) {
-            group = remove(group, group.get(0));
+        if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType())){
+            boolean remove = true;
+            if(PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType())){
+                remove = false;
+            } else if (PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
+                remove = false;
+            } else if (PreSimpleTerm.FunctionType.DIVIDE.equals(firstTerm.getFunctionType())) {
+                remove = false;
+            }
+            if(remove) {
+                group =  remove(group, firstTerm);
+                firstTerm = group.get(0);
+            }
         }
 
         if (group.size() > 1) {
 
-
-
-            PreSimpleTerm firstTerm = group.get(0);
-            PreSimpleTerm lastTerm = group.get(group.size() - 1);
-
-
-            //sort by primary function instead
-            if (Times.class.equals(function)) {
-
-            }
             if (PreSimpleTerm.FunctionType.MINUS.equals(firstTerm.getFunctionType())) {
                 isNegative = true;
                 group = remove(group, firstTerm);
 
             } else if (PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
                 // this should account for the case of 5 = -10
-                if (Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class) || group.size() == 2) {
+                if (Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class)) {
                     isNegative = true;
                     group = remove(group, firstTerm);
-                }
 
+                }
             } else if (PreSimpleTerm.FunctionType.DIVIDE.equals(firstTerm.getFunctionType())) {
                 isInverse = true;
                 group = remove(group, firstTerm);
