@@ -1,70 +1,58 @@
 package tree.simple;
 
-import tree.compound.CompoundTerm;
-import display.rectangle;
+import representTerms.Settings;
+import representTerms.StringRectangle;
+import display.Rectangles;
 
 public class Number extends SimpleTerm {
 	
-	public double value ;
-	public int charpos;
+	public double absoluteValue;
 
 
 	@Override
 	public String toString(){
-        return value+"";
+        String string = absoluteValue + "";
+        if(string.contains(".")) {
+            String[] parts = string.split("\\.");
+            if (parts[1].equals("0")) {
+                string = parts[0];
+            }
+            else if(parts[1].length() > 3) {
+                string = parts[0]+"."+parts[1].substring(0,2) + "...";
+            }
+        }
+        return string;
 	}
 
 	@Override
 	public Number clone(){
 		
-		Number na = new Number(this.value);
-	/*	na.getContainer().bl.x = this.getContainer().bl.x;
-		na.getContainer().bl.y = this.getContainer().bl.y;*/
+		Number na = new Number(this.absoluteValue);
 		return na;
 	}
 	
 	public Number(double a){
-		value = a;
+		absoluteValue = a;
 	}
 
     public Number(){};
 
-	public rectangle giverect(CompoundTerm tr){
-		rectangle a = new rectangle();
+	public StringRectangle getStringRectangle(){
+        String string = toString();
+		Rectangles container = new Rectangles();
 
-    /*    if (isNegative()) {//if the term is a "negative"
-            //		tr.toDraw = "-";
-            a.height = 1;
-            a.width = (float) .5;
-            tr.setContainer(a);
-        } else if (value % 1 == 0) {
-            int b = (int) value;
-            //	 tr.toDraw = ""+b;
-            a.height = 1;
-            a.width = tr.toDraw.length();
-            tr.setContainer(a);
-        } else if ((value * 1000) % 1 == 0) {
-            tr.toDraw = "" + value;
-            a.height = 1;
-            a.width = tr.toDraw.length();
-            tr.setContainer(a);
-        } else {
-            double trunkated = (int) (value * 1000);
-            trunkated = 0.0 + trunkated / 1000;
-            tr.toDraw = "" + trunkated + "...";
-            a.height = 1;
-            a.width = tr.toDraw.length();
-            tr.setContainer(a);
-        }*/
-        return a;
+        container.height = 1;
+        container.width = string.length();
+        
+        return new StringRectangle(container, string);
     }
 	
 	public void setvalue(double a){
-		value = a;
+		absoluteValue = a;
 	}
 	
-	public double getValue(){
-		return value;
+	public double getAbsoluteValue(){
+		return absoluteValue;
 	}
 	
 	public boolean isoperator(){
@@ -75,11 +63,31 @@ public class Number extends SimpleTerm {
 	public boolean equals(Object a)
 	{
 		boolean ans = false;
-		if(a.equals(value)){ans=true;}
+		if(a.equals(absoluteValue)){ans=true;}
 		return ans;
 	}
 	
-	
-	
+	public boolean isNatural(){
 
+        if(Math.floor(absoluteValue) == absoluteValue && absoluteValue >0  && !isNegative()){
+            return true;
+        }
+		return false;
+	}
+	
+    public boolean isWhole(){
+
+		if(isNatural() || absoluteValue == 0){
+			return true;
+		}
+        return false;
+    }
+
+    public boolean isInteger(){
+        return Math.floor(absoluteValue) == absoluteValue;
+	}
+
+    public boolean isDecimal(){
+		return !isInteger();
+	}
 }

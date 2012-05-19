@@ -10,17 +10,17 @@ import tree.downwalk.TreeFunction;
 
 public class stringofrects implements TreeFunction{
 
-	public ArrayList<rectangle> todraw = new ArrayList<rectangle>();
+	public ArrayList<Rectangles> todraw = new ArrayList<Rectangles>();
 	public ArrayList<StringRectangle> a = new ArrayList<StringRectangle>();
 
-	public ArrayList<rectangle> listme(CompoundTerm main, String argument){
+	public ArrayList<Rectangles> listme(CompoundTerm main, String argument){
 
 		if(argument == null){
-			rectangle rt = main.getContainer();
+			Rectangles rt = main.getContainer();
 			int width = (int)(rt.width);
 			int height = (int)(rt.height);
-			point tl = rt.topleft();
-			rectangle outline = new rectangle();
+			Points tl = rt.getTopLeft();
+			Rectangles outline = new Rectangles();
 
 	//		outline.color = new Color(210,210,210,175);
 			outline.bl.x = (int)(tl.x-2);
@@ -35,13 +35,13 @@ public class stringofrects implements TreeFunction{
 
 			CompoundTerm top = main;
 
-			rectangle rt = top.getContainer();
+			Rectangles rt = top.getContainer();
 			int width = (int)(rt.width);
 			int height = (int)(rt.height);
-			point tl = rt.topleft();
+			Points tl = rt.getTopLeft();
 
-			rectangle black = new rectangle();
-			rectangle white = new rectangle();
+			Rectangles black = new Rectangles();
+			Rectangles white = new Rectangles();
 
 	//		black.color=(Color.black);
 			black.bl.x = (int)(tl.x-2);
@@ -70,7 +70,7 @@ public class stringofrects implements TreeFunction{
 	public void performAction(Term tr) {
 		
 		
-		rectangle sr = new rectangle();
+		Rectangles sr = new Rectangles();
 		/*sr.bl.x = tr.getContainer().bl.x;
 		sr.bl.y = tr.getContainer().bl.y;
 		sr.height = tr.getContainer().height;

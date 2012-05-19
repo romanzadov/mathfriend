@@ -1,6 +1,6 @@
 package container;
 
-import display.rectangle;
+import display.Rectangles;
 
 import tree.Term;
 import tree.compound.CompoundTerm;
@@ -62,7 +62,7 @@ public class AllignFracBar {
 			}
 		}
 		
-		rectangle thiscont = new rectangle();
+		Rectangles thiscont = new Rectangles();
 		thiscont.width = xsofar;
 		thiscont.height = ysofar;
 		

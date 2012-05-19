@@ -4,16 +4,16 @@ import tree.compound.CompoundTerm;
 import tree.functions.Function;
 import tree.simple.SimpleTerm;
 //import android.util.Log;
-import display.rectangle;
+import display.Rectangles;
 
 public class specificimg {
 	
 	static final String TAG = "specificimg";
 	
-	public rectangle specificimage(CompoundTerm ter){
+	public Rectangles specificimage(CompoundTerm ter){
 		
 		
-		rectangle rect = new rectangle();
+		Rectangles rect = new Rectangles();
 		//for each term's children
 		for(int i =0; i<ter.getChildren().size();i++){
 			//if simple, make rectangle

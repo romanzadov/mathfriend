@@ -29,8 +29,11 @@ public class ParsingTest {
             String result = results.get(TestStrings.getStrings().indexOf(formula));
             Assert.assertEquals(result, term.toString());
 
-        }
 
+            //TODO if someone types in 2.0, it should not be reduced to 2
+
+            //TODO rename Rectanges, Points back to rectangle, point
+        }
     }
    /* @Test
     public void testParseTerm$() {

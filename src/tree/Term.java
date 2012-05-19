@@ -4,9 +4,10 @@ package tree;
 import parse.ParseCharacterUtil;
 import parse.PreSimpleTerm;
 import parse.PreSimpleUtil;
+import representTerms.StringRectangle;
 import tree.compound.CompoundTerm;
 import tree.functions.Function;
-import display.rectangle;
+import display.Rectangles;
 import tree.simple.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public abstract class Term implements Cloneable{
     private boolean hasParentheses = false;
 	private boolean isNegative = false;
     private boolean isInverse = false;
-
 
     public static Term getTermFromString(String st) {
         ArrayList<Character> characters = ParseCharacterUtil.getCharacterArrayFromString(st);
@@ -77,6 +77,12 @@ public abstract class Term implements Cloneable{
     }
 
 
+    protected abstract StringRectangle getStringRectangle();
+
+  /*  protected StringRectangle makeNegative() {
+
+    }*/
+
     @Override
 	public Object clone() throws CloneNotSupportedException {
 		String st = this.toString();
@@ -126,11 +132,11 @@ public abstract class Term implements Cloneable{
         return false;
     }
 
-    public rectangle getContainer() {
+    public Rectangles getContainer() {
         return null;
     }
 
-    public void setContainer(rectangle rectangle) {
+    public void setContainer(Rectangles rectangle) {
         
     }
 }

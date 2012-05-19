@@ -1,10 +1,10 @@
 package representTerms;
 
-import display.point;
+import display.Points;
 
 public class PlaceAndFont {
 
-	public point bl;
+	public Points bl;
 	@Override
 	public String toString() {
 		return "PlaceAndFont [bl=" + bl + ", font=" + font + "]";
@@ -12,7 +12,7 @@ public class PlaceAndFont {
 
 	public float font;
 	
-	public PlaceAndFont(point bel, float s){
+	public PlaceAndFont(Points bel, float s){
 		bl = bel;
 		font = s;
 	}

@@ -1,20 +1,13 @@
 package tree.simple;
 
 import parse.PreSimpleTerm;
-import tree.compound.CompoundTerm;
-import display.rectangle;
+import representTerms.StringRectangle;
 import tree.Term;
 
 public abstract class SimpleTerm extends Term {
 	//has numbers, variables, and operators
 	public String image;
 
-    public rectangle giverect(CompoundTerm tr){
-		System.out.println("error: giverect was run on simpleterm");
-		rectangle a = new rectangle();
-		
-		return a;
-	}
 
     public static SimpleTerm getSimpleTerm(PreSimpleTerm preSimpleTerm) {
         SimpleTerm child = null;

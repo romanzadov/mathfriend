@@ -7,7 +7,7 @@ public class Settings {
 	public static final float MIN_FONT = 1;
 	public static final float MAX_FONT = 50;
 	public static final float PREFFERED_FONT = 25;
-
+    public static final String DECIMAL = "\\.";
 	
 	public static enum ScreenType {
 		MAIN (700, 300,10896163),

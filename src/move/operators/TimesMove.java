@@ -1,10 +1,5 @@
 package move.operators;
 
-import java.util.ArrayList;
-
-import display.point;
-
-import move.identify.TermMath;
 import representTerms.Image;
 import tree.compound.CompoundTerm;
 import tree.functions.*;

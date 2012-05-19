@@ -1,11 +1,11 @@
 package display;
 
-public class point implements Cloneable {
+public class Points implements Cloneable {
 
 		public float x = 0;
 		public float y = 0;
 		
-		public point(){
+		public Points(){
 			
 		}
 		
@@ -14,24 +14,24 @@ public class point implements Cloneable {
 			return "("+x+","+y+")";
 		}
 		
-		public point(int X, int Y){
+		public Points(int X, int Y){
 			x = X;
 			y = Y;
 		}
-		public point(float X, float Y ){
+		public Points(float X, float Y){
 			x = X;
 			y = Y;
 			
 		}
 		
-		public point(point a, point b, String s){
+		public Points(Points a, Points b, String s){
 			if (s == "add"){
 			x = a.x+b.x;
 			y = a.y + b.y;}
 		}
 		
 		
-		public double distance(point a, point b){
+		public double distance(Points a, Points b){
 			double dist;
 			dist = Math.pow((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y), .5);
 			return dist;

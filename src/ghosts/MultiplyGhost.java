@@ -1,17 +1,10 @@
 package ghosts;
 
-import java.util.ArrayList;
-
-import container.RelativeContainer;
-import display.point;
-
-import move.identify.TermMath;
 import representTerms.Image;
 import tree.Term;
 import tree.compound.CompoundTerm;
 import tree.downwalk;
 import tree.downwalk.TreeFunction;
-import tree.functions.Times;
 
 public class MultiplyGhost implements TreeFunction{
 

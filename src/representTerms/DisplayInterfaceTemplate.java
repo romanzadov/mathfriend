@@ -2,8 +2,8 @@ package representTerms;
 
 import java.util.ArrayList;
 
-import display.point;
-import display.rectangle;
+import display.Points;
+import display.Rectangles;
 
 public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 
@@ -20,11 +20,11 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 	public ArrayList<StringRectangle> center(ArrayList<StringRectangle> toDraw){
 		
 		rectanglesScaledToIdentity = new ArrayList<StringRectangle>();
-		rectangle first = toDraw.get(0).container;
+		Rectangles first = toDraw.get(0).container;
 		PlaceAndFont paf = GUIMath.getCenteredPlaceAndFont(first.width, first.height, Settings.PREFFERED_FONT, getWidth(), getHeight());
 	//	System.out.println( " "+paf);
 		for(int i = 0; i< toDraw.size(); i++){
-			rectangle a = toDraw.get(i).container;
+			Rectangles a = toDraw.get(i).container;
 			a.scaleAndTranslate(paf.font);
 			a.translate(paf.bl.x, paf.bl.y);
 			a.flipY(getHeight());
@@ -47,22 +47,22 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 	}
 
 	@Override
-	public point scaleToIdealScreen(point a) {
-		point b = new point(a.x/getWidth() , (getHeight()-a.y)/getHeight());
+	public Points scaleToIdealScreen(Points a) {
+		Points b = new Points(a.x/getWidth() , (getHeight()-a.y)/getHeight());
 		return b;
 	}
 
 
 	@Override
-	public point scaleToRealScreen(point a) {
-		point b = new point(a.x*getWidth() , a.y*getHeight());
+	public Points scaleToRealScreen(Points a) {
+		Points b = new Points(a.x*getWidth() , a.y*getHeight());
 		return b;
 	}
 
 
 	@Override
-	public rectangle scaleToIdealScreen(rectangle a) {
-		rectangle b = new rectangle();
+	public Rectangles scaleToIdealScreen(Rectangles a) {
+		Rectangles b = new Rectangles();
 		b.height = a.height/getHeight();
 		b.width = a.width/getWidth();
 		b.bl.x = a.bl.x/getWidth();
@@ -72,8 +72,8 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 
 
 	@Override
-	public rectangle scaleToRealScreen(rectangle a) {
-		rectangle b = new rectangle();
+	public Rectangles scaleToRealScreen(Rectangles a) {
+		Rectangles b = new Rectangles();
 		b.height = a.height*getHeight();
 		b.width = a.width*getWidth();
 		b.bl.x = a.bl.x*getWidth();

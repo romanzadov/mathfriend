@@ -1,15 +1,15 @@
 package display;
 
 
-public class rectangle implements Cloneable {
+public class Rectangles implements Cloneable {
 	
 //	public Color color;
 	public float width;
 	public float height;
-	public point bl = new point();
+	public Points bl = new Points();
 	
-	public point topleft(){
-		point tl=new point();
+	public Points getTopLeft(){
+		Points tl=new Points();
 		tl.x = bl.x;
 		tl.y = bl.y+height;
 		return tl;
@@ -17,8 +17,8 @@ public class rectangle implements Cloneable {
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		rectangle clone = (rectangle)super.clone();
-		clone.bl = (point)this.bl.clone();
+		Rectangles clone = (Rectangles)super.clone();
+		clone.bl = (Points)this.bl.clone();
 		return clone;
 	}
 	
@@ -46,7 +46,7 @@ public class rectangle implements Cloneable {
 		bl.y = screenHeight-bl.y-height;
 	}
 	
-	public boolean isPointInsideRectangle(point a){
+	public boolean isPointInsideRectangle(Points a){
 		
 		boolean inside = true;
 		

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import representTerms.Image;
 import representTerms.PlaceAndFont;
-import tree.compound.CompoundTerm;
 
 public class ImagePositionManager {
 
@@ -16,9 +15,9 @@ public class ImagePositionManager {
 	int pixelWidth ;
 	int pixelHeight;
 	
-	rectangle screen;
-	rectangle ghost;
-	rectangle main;
+	Rectangles screen;
+	Rectangles ghost;
+	Rectangles main;
 
 	
 
@@ -32,8 +31,8 @@ public class ImagePositionManager {
 		//the width and height of my display remain constant. 
 	}
 	
-	public point blGhost(Image myGhost, int prefferedFont){
-		point bl = new point();
+	public Points blGhost(Image myGhost, int prefferedFont){
+		Points bl = new Points();
 		//position the ghost term. and return the bottom left corner
 		//The top 1/3 of the screen is for the ghost. It'll have to be resized if it is too big.
 		
@@ -71,7 +70,7 @@ public class ImagePositionManager {
 	public PlaceAndFont blMain(Image myMain, int prefferedFont){
 		//check that image fits into the display at the preffered font
 		
-		point bl = new point();
+		Points bl = new Points();
 		float scale = 1;
 		
 		int screenHeight = pixelHeight*2/3;

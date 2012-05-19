@@ -2,7 +2,7 @@ package tree.functions;
 
 import move.operators.TimesMove;
 
-import display.rectangle;
+import display.Rectangles;
 import representTerms.Image;
 import tree.compound.CompoundTerm;
 
@@ -32,10 +32,10 @@ public class Times extends Function {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public rectangle giverect(CompoundTerm tr){
+    public Rectangles giverect(CompoundTerm tr){
 		
 
-		rectangle rect = new rectangle();
+		Rectangles rect = new Rectangles();
 		
 		//rectangle any simpleterm
 		if(	tr.getChildren().size()==1	){
@@ -73,7 +73,7 @@ public class Times extends Function {
 	}
 	
 		
-	public rectangle makefractions(CompoundTerm tr){
+	public Rectangles makefractions(CompoundTerm tr){
 	
 /*		//set which terms are bottoms
 		for(int i = 0; i<tr.getChildren().size(); i++){

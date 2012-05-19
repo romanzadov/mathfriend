@@ -1,7 +1,8 @@
 package tree.simple;
 
+import representTerms.StringRectangle;
 import tree.compound.CompoundTerm;
-import display.rectangle;
+import display.Rectangles;
 
 public class Variable extends SimpleTerm {
 	
@@ -15,8 +16,16 @@ public class Variable extends SimpleTerm {
 	public String toString(){
 		return value.toString();
 	}
-	
-	@Override
+
+    @Override
+    public StringRectangle getStringRectangle() {
+        Rectangles container = new Rectangles();
+		container.height = 1;
+		container.width = 1;
+		return new StringRectangle(container, value.toString());
+    }
+
+    @Override
 	public Variable clone(){
 		Variable v = new Variable(this.value);
 		v.getContainer().bl.x = this.getContainer().bl.x;
@@ -24,17 +33,4 @@ public class Variable extends SimpleTerm {
 		return v;
 	}
 
-	public rectangle giverect(CompoundTerm tr){
-		rectangle a = new rectangle();
-		a.height = 1;
-		a.width = 1;
-		tr.setContainer(a);
-		return a;
-	}
-	
-	
-	public boolean isoperator(){
-		boolean a = false;
-		return a;
-	}
 }

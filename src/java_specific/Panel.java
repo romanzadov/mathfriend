@@ -13,8 +13,8 @@ import representTerms.DisplayInterface;
 import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.TouchData.TouchType;
-import representTerms.StringRectangle.type;
-import display.rectangle;
+import representTerms.StringRectangle.Type;
+import display.Rectangles;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 
@@ -46,23 +46,23 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 		if(toDraw != null){
 			for(int i = 0;  i<toDraw.size(); i++){
 				StringRectangle a = toDraw.get(i);
-				rectangle c = a.container;
+				Rectangles c = a.container;
 				
 				g.setColor(Color.white);
 
-				if(toDraw.get(i).myType == type.SELECT_COVER){
+				if(toDraw.get(i).myType == Type.SELECT_COVER){
 					g.setColor(this.getBackground());
 					g.fillRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
 					g.setColor(Color.black);
 					
 				}
 				
-				if(toDraw.get(i).myType == type.SELECTED){
+				if(toDraw.get(i).myType == Type.SELECTED){
 					g.fillRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
 				}
 				g.setColor(Color.black);
 
-				if(toDraw.get(i).myType == type.FRACTION){
+				if(toDraw.get(i).myType == Type.FRACTION){
 	//				rectangle fractionBar = Fraction.getFractionBarToDraw(c);
 	//				g.fillRect((int)fractionBar.bl.x,(int)fractionBar.bl.y, (int)fractionBar.width, (int)fractionBar.height);
 				}
@@ -75,7 +75,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 
 					// write the text in the correct squares
 				if(!a.todraw.equals("")){
-					g.drawString(a.todraw, (int)(c.bl.x+c.width/4), (int)(c.topleft().y-c.height/8));
+					g.drawString(a.todraw, (int)(c.bl.x+c.width/4), (int)(c.getTopLeft().y-c.height/8));
 				}
 
 			}

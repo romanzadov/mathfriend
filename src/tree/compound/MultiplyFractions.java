@@ -10,7 +10,7 @@ public class MultiplyFractions {
 		CompoundTerm ans = null;
 		
 		
-		
+		/*
 		if( a.isSimpleFraction() && b.isInteger()){
 			ans = fractimesnumber(a, b);
 		}
@@ -19,7 +19,7 @@ public class MultiplyFractions {
 		}
 		else if( a.isSimpleFraction() && b.isSimpleFraction()){
 			//ans = fractimesfrac(a, b);
-		}
+		}*/
 		
 	
 		

@@ -7,8 +7,8 @@ import tree.compound.CompoundTerm;
 //import android.graphics.Color;
 //import android.util.Log;
 import container.RelativeContainer;
-import display.point;
-import display.rectangle;
+import display.Points;
+import display.Rectangles;
 import display.stringofrects;
 
 
@@ -23,7 +23,7 @@ public class Image implements Cloneable{
 	//	public int background = Color.WHITE;
 	//	public int wordcolor = Color.BLACK;
 
-	public point bel =  new point();
+	public Points bel =  new Points();
 	public int font;
 
 	public double rotation =0 ;
@@ -39,7 +39,7 @@ public class Image implements Cloneable{
 			clone.tr = (CompoundTerm) this.tr.clone();
 		}
 
-		clone.bel = (point)this.bel.clone();
+		clone.bel = (Points)this.bel.clone();
 		return clone;
 	}
 
@@ -58,7 +58,7 @@ public class Image implements Cloneable{
 
 
 
-	public Image(CompoundTerm term, point bl, String argument){
+	public Image(CompoundTerm term, Points bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
@@ -79,13 +79,13 @@ public class Image implements Cloneable{
 	}
 
 
-	public Image(String myst, point bl){
+	public Image(String myst, Points bl){
 		tr = Term.getTermFromString(st);
 		bel = bl;
 		st = myst;
 	}
 
-	public void imagemove(CompoundTerm term, point bl, String argument){
+	public void imagemove(CompoundTerm term, Points bl, String argument){
 		tr = term;
 		bel = bl;
 		arg = argument;
@@ -104,13 +104,13 @@ public class Image implements Cloneable{
 		//relativeContainers = sp.writeme(tr);
 	}
 
-	public ArrayList<StringRectangle> getAbsoluteContainers(int myFont, point bel){
+	public ArrayList<StringRectangle> getAbsoluteContainers(int myFont, Points bel){
 		
 		reset();
 		ArrayList<StringRectangle> relativeContainers = getRelativeContainers();
 		ArrayList<StringRectangle> absoluteContainers = new ArrayList<StringRectangle>();
 		for(int i =0; i<relativeContainers.size(); i++){
-			rectangle rc = relativeContainers.get(i).container;
+			Rectangles rc = relativeContainers.get(i).container;
 			StringRectangle ac = new StringRectangle();
 			ac.container.bl.x    = rc.bl.x*myFont;
 			ac.container.bl.y    = rc.bl.y*myFont;

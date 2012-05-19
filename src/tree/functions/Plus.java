@@ -1,13 +1,9 @@
 package tree.functions;
-import java.util.ArrayList;
 
-import move.identify.FindSel;
-import move.identify.ReturnSel;
 import move.operators.plusmove;
 import representTerms.Image;
 import tree.compound.CompoundTerm;
-import display.point;
-import display.rectangle;
+import display.Rectangles;
 //import android.util.Log;
 
 public class Plus extends Function {
@@ -35,8 +31,8 @@ public class Plus extends Function {
     }
 
     //draws the rectangle that goes around terms with a plus operator
-	public rectangle giverect(CompoundTerm tr){
-		rectangle a = new rectangle();
+	public Rectangles giverect(CompoundTerm tr){
+		Rectangles a = new Rectangles();
 
         if(tr.getChildren().size()>=1){
 			//check rectangled and get max height

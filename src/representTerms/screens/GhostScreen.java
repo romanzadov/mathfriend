@@ -6,7 +6,7 @@ import representTerms.Image;
 import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.Settings.ScreenType;
-import representTerms.StringRectangle.type;
+import representTerms.StringRectangle.Type;
 
 
 public class GhostScreen implements AbstractedScreen{
@@ -46,7 +46,7 @@ public class GhostScreen implements AbstractedScreen{
 			StringRectangle a = relatives.get(i);
 			if(a.todraw.equals("/")){
 				a.todraw = "";
-				a.myType = type.FRACTION;
+				a.myType = Type.FRACTION;
 			}
 
 		}

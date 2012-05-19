@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import representTerms.Image;
 import representTerms.StringRectangle;
 import tree.Term;
-import tree.compound.CompoundTerm;
 import tree.downwalk;
 import tree.downwalk.TreeFunction;
-import display.point;
+import display.Points;
 
 public class AbsoluteContainer implements TreeFunction{
 
@@ -16,7 +15,7 @@ public class AbsoluteContainer implements TreeFunction{
 	ArrayList<StringRectangle> sr = new ArrayList<StringRectangle>();
 	
 	
-	public ArrayList<StringRectangle> multiply(Image im, int fontsize, point bel){
+	public ArrayList<StringRectangle> multiply(Image im, int fontsize, Points bel){
 		
 			sr = im.relativeContainers;
 			

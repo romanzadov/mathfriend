@@ -1,9 +1,7 @@
 package representTerms;
 
-import java.util.ArrayList;
-
-import display.point;
-import display.rectangle;
+import display.Points;
+import display.Rectangles;
 
 public class GUIMath {
 	
@@ -11,8 +9,8 @@ public class GUIMath {
 
     }
 
-	public static rectangle scaleFloat(rectangle a, float f){
-		rectangle b = new rectangle();
+	public static Rectangles scaleFloat(Rectangles a, float f){
+		Rectangles b = new Rectangles();
 		b.height = a.height*f;
 		b.width = a.width*f;
 		b.bl.x = a.bl.x*f;
@@ -20,8 +18,8 @@ public class GUIMath {
 		return b;
 	}
 
-	public static rectangle translateXY(rectangle a, float x, float y){
-		rectangle b = new rectangle();
+	public static Rectangles translateXY(Rectangles a, float x, float y){
+		Rectangles b = new Rectangles();
 		b.height = a.height;
 		b.width = a.width;
 		b.bl.x = a.bl.x+x;
@@ -29,8 +27,8 @@ public class GUIMath {
 		return b;
 	}
 
-	public static rectangle flipYVals(rectangle a){
-		rectangle b = new rectangle();
+	public static Rectangles flipYVals(Rectangles a){
+		Rectangles b = new Rectangles();
 		b.height = a.height;
 		b.width = a.width;
 		b.bl.x = a.bl.x;
@@ -40,7 +38,7 @@ public class GUIMath {
 	
 	public static PlaceAndFont getCenteredPlaceAndFont(float xTerm, float yTerm, float prefferedFont, int xDisplay, int yDisplay){
 
-		point bl = new point();
+		Points bl = new Points();
 		
 		if(justFits(xTerm, yTerm, prefferedFont, xDisplay, yDisplay)){
 			bl = scaledBl(xTerm, yTerm, prefferedFont, xDisplay, yDisplay);
@@ -60,7 +58,7 @@ public class GUIMath {
 		}
 	}
 	
-	private static point scaledBl(float xTerm, float yTerm, float font, int xDisplay, int yDisplay){
+	private static Points scaledBl(float xTerm, float yTerm, float font, int xDisplay, int yDisplay){
 		float xNew = (int) (xTerm*font);
 		float yNew = (int) (yTerm*font);
 		
@@ -70,7 +68,7 @@ public class GUIMath {
 		float xPos = xDisplayMiddle - xNew/2;
 		float yPos = yDisplayMiddle - yNew/2;
 		
-		return new point(xPos, yPos);
+		return new Points(xPos, yPos);
 	}
 	
 	private static int reducedFont(float xTerm, float yTerm, int xDisplay, int yDisplay){ 

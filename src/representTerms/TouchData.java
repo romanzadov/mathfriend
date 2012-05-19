@@ -1,10 +1,10 @@
 package representTerms;
 
-import display.point;
+import display.Points;
 
 public class TouchData {
 
-	public point position;
+	public Points position;
 	public float pressure;
 	public boolean down;
 	public long time;
@@ -12,14 +12,14 @@ public class TouchData {
 	public TouchType myType;
 	
 	public TouchData(float X, float Y, boolean d, long t, TouchType type){
-		position = new point(X, Y);
+		position = new Points(X, Y);
 		down = d;
 		time = t;
 		myType = type;
 	}
 	
 	public TouchData(float X, float Y, boolean d, float p, long t, TouchType type){
-		position = new point(X, Y);
+		position = new Points(X, Y);
 		pressure = p;
 		down = d;
 		time = t;

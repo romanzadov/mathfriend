@@ -1,21 +1,13 @@
 package tree.compound;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import container.walks.AssignScreenPositions;
 
-import parse.*;
 import representTerms.StringRectangle;
-import tree.PreSimpleTermGrouping;
 import tree.Term;
-import tree.TermContsructionUtil;
 import tree.functions.*;
-import tree.simple.Number;
-import tree.simple.Constants;
 import tree.simple.SimpleTerm;
-import display.rectangle;
-import tree.simple.Variable;
 
 public class CompoundTerm extends Term {
 
@@ -256,103 +248,10 @@ public class CompoundTerm extends Term {
 	}
 */
 
-	public boolean isNatural(){
-		boolean natural = false;
-		CompoundTerm tr = this;
 
-		/*if(tr instanceof Number){
-
-			Number n = (Number) tr;
-
-			if(Math.floor(n.value) == n.value  && n.value>0){
-				natural = true;
-			}
-
-		}*/
-
-		return natural;
-	}
 /*
-	public boolean isWhole(){
-		boolean whole = false;
-		CompoundTerm tr = this;
 
-		if(tr.isNatural()){
-			whole = true;
-		}
-		if(tr instanceof Number){
-
-			Number n = (Number)tr;
-			if(n.value == 0 ){ whole = true;}
-
-		}
-		return whole;
 	}*/
-
-	public boolean isInteger(){
-		boolean isint = false;
-		CompoundTerm tr = this;
-
-	/*	try {
-			if(tr.isWhole()){isint = true;}
-
-			else if(tr.getChildren().size() == 2 && tr.getChildren().get(0) instanceof Negative
-					&& tr.getChildren().get(1) instanceof Number && tr.isNegative()){
-				isint = true;
-			}
-			else if(tr.getChildren().size() == 3 && tr.getChildren().get(1) instanceof Negative
-					&& tr.getChildren().get(2) instanceof Number && tr.isNegative()){
-				isint = true;
-			}
-			if(tr instanceof Constants){
-				Number n = (Number) tr;
-
-				if(Math.floor(n.value) == n.value  && n.value>0){
-					isint = true;
-				}
-				else{
-					isint = false;
-				}
-
-			}
-		} catch (Exception e) {}*/
-
-		return isint;
-
-	}
-
-/*	public boolean isDecimal(){
-		CompoundTerm tr = this;
-		boolean decimal = false;
-		if(tr.isRealNumber()){
-			if(!(tr instanceof Fraction)){
-				decimal = true;
-			}
-		}
-		else if(tr instanceof Number ||
-				(tr instanceof NegativeTerm && tr.getAbsoluteValue() instanceof Number)){
-			decimal = true;
-		}
-		if(tr instanceof Constants){
-			decimal = false;
-		}
-		return decimal;
-	}*/
-
-
-
-	public boolean isRationalNumber(){
-		CompoundTerm tr = this;
-		boolean rational = false;
-/*		if(tr.isInteger()){
-			rational = true;
-		}
-		else if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
-				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
-			rational = true;
-		}*/
-		return rational;
-	}
 
 	public boolean isSimpleFraction(){
 		CompoundTerm tr = this;
@@ -379,45 +278,6 @@ public class CompoundTerm extends Term {
 		
 		return fraction;
 	}
-
-	/*public CompoundTerm toggleNegative(){
-		CompoundTerm mid;
-
-		if(!this.isNegative()){
-			NegativeTerm nt = new NegativeTerm(this);
-			mid = nt;
-		}
-		else{
-			mid = getAbsoluteValue();
-		}
-
-		return mid;
-	}*/
-
-	/*public CompoundTerm getAbsoluteValue(){
-		CompoundTerm mid;
-
-		if(isNegative()){
-			if(this.getChildren().size()==2){
-				mid = this.getChildren().get(1);
-			}
-			else if(this.getChildren().size()==3){
-				mid = this.getChildren().get(2);
-			}
-			else{
-				mid = null;
-			}
-
-		}
-		else{
-			mid = this;
-		}
-
-
-		return mid;
-	}*/
-
-
 
     public void insertChild(int index, CompoundTerm child) {
         children.add(index, child);
@@ -486,9 +346,7 @@ public class CompoundTerm extends Term {
 	}
 
 */	public CompoundTerm getResultOfOperation(){
-
 		return getResultOfBasicOperation();
-
 	}
 
 
@@ -516,5 +374,9 @@ public class CompoundTerm extends Term {
         return null;
     }
 
+    @Override
+    protected StringRectangle getStringRectangle() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
 

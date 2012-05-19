@@ -1,15 +1,10 @@
 package ghosts;
 
-import java.util.ArrayList;
-
-import move.identify.TermMath;
 import representTerms.Image;
 import tree.Term;
 import tree.compound.CompoundTerm;
 import tree.downwalk;
 import tree.downwalk.TreeFunction;
-import tree.functions.Plus;
-import display.point;
 
 public class LikeTermsGhost implements TreeFunction{
 

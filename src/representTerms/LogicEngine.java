@@ -8,7 +8,7 @@ import java_specific.JavaDisplay;
 import representTerms.screens.GhostScreen;
 import representTerms.screens.MainScreen;
 import representTerms.screens.OperatorScreen;
-import display.point;
+import display.Points;
 
 
 public class LogicEngine {
@@ -126,7 +126,7 @@ public class LogicEngine {
 
 	private void initMain(){
 		String st = equations.get(0);
-		Image img = new Image(st, new point(0,0));/*
+		Image img = new Image(st, new Points(0,0));/*
 		MainScreen ms = new MainScreen(st);
 		mainInterface = new JavaDisplay(ms);*/
 		mainInterface.updateDrawnRectangles(img.getRelativeContainers());

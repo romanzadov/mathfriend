@@ -11,7 +11,7 @@ import representTerms.DisplayInterfaceTemplate;
 import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.screens.AbstractedScreen;
-import display.rectangle;
+import display.Rectangles;
 
 public class JavaDisplay extends DisplayInterfaceTemplate {
 
@@ -75,7 +75,7 @@ public class JavaDisplay extends DisplayInterfaceTemplate {
 	public void updateDrawnRectangles(ArrayList<StringRectangle> toDraw) {
 	
 		if(toDraw.size()>0){
-		rectangle a = toDraw.get(0).container;
+		Rectangles a = toDraw.get(0).container;
 		toDraw = center(toDraw);
 		myPanel.updateToDraw(toDraw);
 		myPanel.invalidate();
