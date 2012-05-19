@@ -1,8 +1,7 @@
 package tree.simple;
 
-import representTerms.Settings;
 import representTerms.StringRectangle;
-import display.Rectangles;
+import display.Rectangle;
 
 public class Number extends SimpleTerm {
 	
@@ -39,7 +38,7 @@ public class Number extends SimpleTerm {
 
 	public StringRectangle getStringRectangle(){
         String string = toString();
-		Rectangles container = new Rectangles();
+		Rectangle container = new Rectangle();
 
         container.height = 1;
         container.width = string.length();

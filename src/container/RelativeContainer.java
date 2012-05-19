@@ -4,12 +4,12 @@ import tree.compound.CompoundTerm;
 //import android.util.Log;
 import container.walks.allignbls;
 import container.walks.resize;
-import display.Rectangles;
+import display.Rectangle;
 
 public class RelativeContainer {
 
 	static final String TAG = "RelativeContainer";
-	public Rectangles container;
+	public Rectangle container;
 
 	
 	

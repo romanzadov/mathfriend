@@ -15,9 +15,9 @@ public class ImagePositionManager {
 	int pixelWidth ;
 	int pixelHeight;
 	
-	Rectangles screen;
-	Rectangles ghost;
-	Rectangles main;
+	Rectangle screen;
+	Rectangle ghost;
+	Rectangle main;
 
 	
 
@@ -31,8 +31,8 @@ public class ImagePositionManager {
 		//the width and height of my display remain constant. 
 	}
 	
-	public Points blGhost(Image myGhost, int prefferedFont){
-		Points bl = new Points();
+	public Point blGhost(Image myGhost, int prefferedFont){
+		Point bl = new Point();
 		//position the ghost term. and return the bottom left corner
 		//The top 1/3 of the screen is for the ghost. It'll have to be resized if it is too big.
 		
@@ -70,7 +70,7 @@ public class ImagePositionManager {
 	public PlaceAndFont blMain(Image myMain, int prefferedFont){
 		//check that image fits into the display at the preffered font
 		
-		Points bl = new Points();
+		Point bl = new Point();
 		float scale = 1;
 		
 		int screenHeight = pixelHeight*2/3;

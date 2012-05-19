@@ -2,7 +2,7 @@ package move.identify;
 
 import tree.compound.CompoundTerm;
 //import android.util.Log;
-import display.Points;
+import display.Point;
 
 public class selectterm {
 	//when a mouse is clicked, this class will find out which
@@ -11,7 +11,7 @@ public class selectterm {
 
 	static final String TAG = "selectterm";
 	
-	public CompoundTerm whichterm(CompoundTerm tr, float x, float y, Points termbl, int error){
+	public CompoundTerm whichterm(CompoundTerm tr, float x, float y, Point termbl, int error){
 	/*	CompoundTerm back = new CompoundTerm();
 		
 	//	System.out.println(" "+tr+"|"+x+"|"+y+"|"+termbl+"|");
@@ -68,7 +68,7 @@ public class selectterm {
     }
 
 	//simpler version of select term. This one only cares if you're in the same x range and ignores y
-	public CompoundTerm aboveterm(CompoundTerm tr, int x, CompoundTerm exclude, Points termbl){
+	public CompoundTerm aboveterm(CompoundTerm tr, int x, CompoundTerm exclude, Point termbl){
 		/*CompoundTerm back = new CompoundTerm();
 		boolean found = false;
 

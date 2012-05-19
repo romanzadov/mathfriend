@@ -7,7 +7,7 @@ import parse.PreSimpleUtil;
 import representTerms.StringRectangle;
 import tree.compound.CompoundTerm;
 import tree.functions.Function;
-import display.Rectangles;
+import display.Rectangle;
 import tree.simple.*;
 
 import java.util.ArrayList;
@@ -132,11 +132,11 @@ public abstract class Term implements Cloneable{
         return false;
     }
 
-    public Rectangles getContainer() {
+    public Rectangle getContainer() {
         return null;
     }
 
-    public void setContainer(Rectangles rectangle) {
+    public void setContainer(Rectangle rectangle) {
         
     }
 }

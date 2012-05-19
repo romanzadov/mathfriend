@@ -6,7 +6,7 @@ import tree.compound.CompoundTerm;
 import tree.downwalk;
 import tree.downwalk.TreeFunction;
 //import android.util.Log;
-import display.Points;
+import display.Point;
 
 public class FindSel implements TreeFunction{
 
@@ -15,9 +15,9 @@ public class FindSel implements TreeFunction{
 	public CompoundTerm found = null;
 	Image myMain;
 	CompoundTerm mySel;
-	Points myTapped;
+	Point myTapped;
 
-	public FindSel(Image main, CompoundTerm sel, Points tapped){
+	public FindSel(Image main, CompoundTerm sel, Point tapped){
 		myMain = main;
 		mySel = sel;
 		myTapped = tapped;

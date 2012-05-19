@@ -14,7 +14,7 @@ import representTerms.TouchData;
 import representTerms.StringRectangle;
 import representTerms.TouchData.TouchType;
 import representTerms.StringRectangle.Type;
-import display.Rectangles;
+import display.Rectangle;
 
 public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 
@@ -46,7 +46,7 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 		if(toDraw != null){
 			for(int i = 0;  i<toDraw.size(); i++){
 				StringRectangle a = toDraw.get(i);
-				Rectangles c = a.container;
+				Rectangle c = a.container;
 				
 				g.setColor(Color.white);
 

@@ -1,6 +1,6 @@
 package tree.functions;
 
-import display.Rectangles;
+import display.Rectangle;
 import representTerms.Image;
 import tree.compound.CompoundTerm;
 
@@ -28,8 +28,8 @@ public class Exponent extends Function {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public Rectangles giverect(CompoundTerm tr) {
-        Rectangles a = new Rectangles();
+    public Rectangle giverect(CompoundTerm tr) {
+        Rectangle a = new Rectangle();
         float xsofar = 0;
         float ysofar = 0;
         if (tr.isSimple()) {
@@ -68,8 +68,8 @@ public class Exponent extends Function {
         return a;
     }
 
-    public Rectangles justexp(CompoundTerm tr) {
-        Rectangles a = new Rectangles();
+    public Rectangle justexp(CompoundTerm tr) {
+        Rectangle a = new Rectangle();
         tr.setContainer(a);
         return a;
     }

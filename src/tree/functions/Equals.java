@@ -1,6 +1,6 @@
 package tree.functions;
 
-import display.Rectangles;
+import display.Rectangle;
 import representTerms.Image;
 import tree.compound.CompoundTerm;
 
@@ -26,10 +26,10 @@ public class Equals extends Function {
         return "=";
     }
 
-    public Rectangles giverect(CompoundTerm tr){
-		Rectangles a = new Rectangles();
+    public Rectangle giverect(CompoundTerm tr){
+		Rectangle a = new Rectangle();
 		if(tr.getChildren().size() == 0){
-			Rectangles cont = tr.getContainer();
+			Rectangle cont = tr.getContainer();
 		//	tr.toDraw = "=";
 			a = justequal(cont);
 		}
@@ -51,7 +51,7 @@ public class Equals extends Function {
 
 			//allign
 			for(int i =0; i<tr.getChildren().size(); i++){
-				Rectangles cont = tr.getChildren().get(i).getContainer();
+				Rectangle cont = tr.getChildren().get(i).getContainer();
 				cont.bl.x = xsofar;
 				xsofar +=cont.width;
 				cont.bl.y = ysofar/2-cont.height/2;
@@ -65,8 +65,8 @@ public class Equals extends Function {
 		return a;
 	}
 
-	public Rectangles justequal(Rectangles cont){
-		Rectangles a = new Rectangles();
+	public Rectangle justequal(Rectangle cont){
+		Rectangle a = new Rectangle();
 		a.height = 1;
 		a.width = 1;
 		cont = a;

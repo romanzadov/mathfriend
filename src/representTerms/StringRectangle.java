@@ -1,6 +1,6 @@
 package representTerms;
 
-import display.Rectangles;
+import display.Rectangle;
 
 public class StringRectangle implements Cloneable{
 
@@ -11,7 +11,7 @@ public class StringRectangle implements Cloneable{
 				+ ", term=" + term + ", todraw=" + todraw + "]";
 	}
 
-	public Rectangles container = new Rectangles();
+	public Rectangle container = new Rectangle();
 	public Type myType;
  	public String todraw = "";
 	public float fontscale;
@@ -21,7 +21,7 @@ public class StringRectangle implements Cloneable{
 
 
     public StringRectangle(){}
-    public StringRectangle(Rectangles container, String string) {
+    public StringRectangle(Rectangle container, String string) {
         this.todraw = string;
         this.container = container;
     }
@@ -29,7 +29,7 @@ public class StringRectangle implements Cloneable{
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		StringRectangle clone = (StringRectangle)super.clone();
-		clone.container = (Rectangles)this.container.clone();
+		clone.container = (Rectangle)this.container.clone();
 		clone.term = (String)this.term;
 		return clone;
 	}

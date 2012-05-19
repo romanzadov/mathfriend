@@ -1,8 +1,7 @@
 package tree.simple;
 
 import representTerms.StringRectangle;
-import tree.compound.CompoundTerm;
-import display.Rectangles;
+import display.Rectangle;
 
 public class Variable extends SimpleTerm {
 	
@@ -19,7 +18,7 @@ public class Variable extends SimpleTerm {
 
     @Override
     public StringRectangle getStringRectangle() {
-        Rectangles container = new Rectangles();
+        Rectangle container = new Rectangle();
 		container.height = 1;
 		container.width = 1;
 		return new StringRectangle(container, value.toString());

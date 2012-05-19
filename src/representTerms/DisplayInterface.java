@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import representTerms.screens.AbstractedScreen;
 
-import display.Points;
-import display.Rectangles;
+import display.Point;
+import display.Rectangle;
 
 public interface DisplayInterface {
 
@@ -15,11 +15,11 @@ public interface DisplayInterface {
 	abstract boolean setBackgroundColor(int color);		//pass in int RGB
 	public void updateDrawnRectangles(ArrayList<StringRectangle> toDraw);
 	
-	public Points scaleToIdealScreen(Points a);
-	public Points scaleToRealScreen(Points a);
+	public Point scaleToIdealScreen(Point a);
+	public Point scaleToRealScreen(Point a);
 	
-	public Rectangles scaleToIdealScreen(Rectangles a);
-	public Rectangles scaleToRealScreen(Rectangles a);
+	public Rectangle scaleToIdealScreen(Rectangle a);
+	public Rectangle scaleToRealScreen(Rectangle a);
 	
 	public ArrayList<StringRectangle> getDrawnRectanglesScaledToIdentity();
 	public AbstractedScreen getAbstractScreen();

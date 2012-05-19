@@ -1,6 +1,6 @@
 package container.walks;
 
-import display.Rectangles;
+import display.Rectangle;
 import tree.Term;
 import tree.downwalk;
 import tree.downwalk.TreeFunction;
@@ -12,7 +12,7 @@ public class ResetContainer  implements TreeFunction{
 	}
 
 	public void performAction(Term tr) {
-		tr.setContainer(new Rectangles());
+		tr.setContainer(new Rectangle());
 	}
 	
 	

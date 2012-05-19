@@ -1,17 +1,17 @@
 package representTerms;
 
-import display.Points;
+import display.Point;
 
 public class PlaceAndScale {
 
-	public Points bl;
+	public Point bl;
 	public double scale;
 	
-	public PlaceAndScale(Points bel, double s){
+	public PlaceAndScale(Point bel, double s){
 		bl = bel;
 		scale = s;
 	}
-	public PlaceAndScale(Points bel, float s){
+	public PlaceAndScale(Point bel, float s){
 		bl = bel;
 		scale = s;
 	}

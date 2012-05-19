@@ -1,7 +1,7 @@
 package representTerms;
 
-import display.Points;
-import display.Rectangles;
+import display.Point;
+import display.Rectangle;
 
 public class GUIMath {
 	
@@ -9,8 +9,8 @@ public class GUIMath {
 
     }
 
-	public static Rectangles scaleFloat(Rectangles a, float f){
-		Rectangles b = new Rectangles();
+	public static Rectangle scaleFloat(Rectangle a, float f){
+		Rectangle b = new Rectangle();
 		b.height = a.height*f;
 		b.width = a.width*f;
 		b.bl.x = a.bl.x*f;
@@ -18,8 +18,8 @@ public class GUIMath {
 		return b;
 	}
 
-	public static Rectangles translateXY(Rectangles a, float x, float y){
-		Rectangles b = new Rectangles();
+	public static Rectangle translateXY(Rectangle a, float x, float y){
+		Rectangle b = new Rectangle();
 		b.height = a.height;
 		b.width = a.width;
 		b.bl.x = a.bl.x+x;
@@ -27,8 +27,8 @@ public class GUIMath {
 		return b;
 	}
 
-	public static Rectangles flipYVals(Rectangles a){
-		Rectangles b = new Rectangles();
+	public static Rectangle flipYVals(Rectangle a){
+		Rectangle b = new Rectangle();
 		b.height = a.height;
 		b.width = a.width;
 		b.bl.x = a.bl.x;
@@ -38,7 +38,7 @@ public class GUIMath {
 	
 	public static PlaceAndFont getCenteredPlaceAndFont(float xTerm, float yTerm, float prefferedFont, int xDisplay, int yDisplay){
 
-		Points bl = new Points();
+		Point bl = new Point();
 		
 		if(justFits(xTerm, yTerm, prefferedFont, xDisplay, yDisplay)){
 			bl = scaledBl(xTerm, yTerm, prefferedFont, xDisplay, yDisplay);
@@ -58,7 +58,7 @@ public class GUIMath {
 		}
 	}
 	
-	private static Points scaledBl(float xTerm, float yTerm, float font, int xDisplay, int yDisplay){
+	private static Point scaledBl(float xTerm, float yTerm, float font, int xDisplay, int yDisplay){
 		float xNew = (int) (xTerm*font);
 		float yNew = (int) (yTerm*font);
 		
@@ -68,7 +68,7 @@ public class GUIMath {
 		float xPos = xDisplayMiddle - xNew/2;
 		float yPos = yDisplayMiddle - yNew/2;
 		
-		return new Points(xPos, yPos);
+		return new Point(xPos, yPos);
 	}
 	
 	private static int reducedFont(float xTerm, float yTerm, int xDisplay, int yDisplay){ 

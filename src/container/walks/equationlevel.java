@@ -1,12 +1,12 @@
 package container.walks;
 
-import display.Points;
+import display.Point;
 
 public class equationlevel {
 
-	Points bl = new Points();
+	Point bl = new Point();
 
-	public Points level(int width, int height){
+	public Point level(int width, int height){
 
 		bl.x=(int)(300/2-width/2);
 		bl.y=(int)(440/2-height/2);

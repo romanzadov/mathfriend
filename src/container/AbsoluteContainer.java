@@ -7,7 +7,7 @@ import representTerms.StringRectangle;
 import tree.Term;
 import tree.downwalk;
 import tree.downwalk.TreeFunction;
-import display.Points;
+import display.Point;
 
 public class AbsoluteContainer implements TreeFunction{
 
@@ -15,7 +15,7 @@ public class AbsoluteContainer implements TreeFunction{
 	ArrayList<StringRectangle> sr = new ArrayList<StringRectangle>();
 	
 	
-	public ArrayList<StringRectangle> multiply(Image im, int fontsize, Points bel){
+	public ArrayList<StringRectangle> multiply(Image im, int fontsize, Point bel){
 		
 			sr = im.relativeContainers;
 			

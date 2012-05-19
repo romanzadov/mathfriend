@@ -2,7 +2,7 @@ package move;
 
 import move.identify.selectterm;
 import tree.compound.CompoundTerm;
-import display.Points;
+import display.Point;
 import tree.functions.Equals;
 
 public class plusmove {
@@ -10,13 +10,13 @@ public class plusmove {
 	public CompoundTerm plmomve(CompoundTerm main, CompoundTerm selected, int x, int y){
 		System.out.println("plus move");
 		selectterm st = new selectterm();		
-		CompoundTerm endterm = st.whichterm(selected.getParent(), x, y, new Points(0,0), 0);
+		CompoundTerm endterm = st.whichterm(selected.getParent(), x, y, new Point(0,0), 0);
 		
 		if(endterm == null){
 			
 			if(selected.getParent().getParent().getFunction() instanceof Equals){
-				CompoundTerm higherterm = st.whichterm(selected.getParent().getParent(), x, y, new Points(0,0), 0);
-				endterm = st.whichterm(higherterm, x, y, new Points(0,0), 0);
+				CompoundTerm higherterm = st.whichterm(selected.getParent().getParent(), x, y, new Point(0,0), 0);
+				endterm = st.whichterm(higherterm, x, y, new Point(0,0), 0);
 			
 			}
 		}

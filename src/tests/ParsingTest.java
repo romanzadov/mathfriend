@@ -32,7 +32,6 @@ public class ParsingTest {
 
             //TODO if someone types in 2.0, it should not be reduced to 2
 
-            //TODO rename Rectanges, Points back to rectangle, point
         }
     }
    /* @Test
