@@ -18,11 +18,16 @@ public class ParsingTest {
     @Test
     public void testParseTerm() {
 
+        List<String> results = TestStrings.getResults();
+
         for(String formula: TestStrings.getStrings()) {
 
             Term term = Term.getTermFromString(formula);
             System.out.println(formula+ " ==> "+term);
             Assert.assertNotNull(term);
+
+            String result = results.get(TestStrings.getStrings().indexOf(formula));
+            Assert.assertEquals(result, term.toString());
 
         }
 
