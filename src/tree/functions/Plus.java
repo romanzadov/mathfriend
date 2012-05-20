@@ -30,36 +30,6 @@ public class Plus extends Function {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    //draws the rectangle that goes around terms with a plus operator
-	public Rectangle giverect(CompoundTerm tr){
-		Rectangle a = new Rectangle();
-
-        if(tr.getChildren().size()>=1){
-			//check rectangled and get max height
-			float maxheight = 0;
-		/*	for(int i =0; i<tr.getChildren().size();i++){
-				if(tr.getChildren().get(i).getContainer() ==null){
-					System.out.println("error: plus called on non-rectangled");
-				}
-				if(tr.getChildren().get(i).getContainer().height>maxheight){
-					maxheight = tr.getChildren().get(i).getContainer().height;
-				}
-			}
-			float xsofar = 0;
-			for(int i =0; i<tr.getChildren().size();i++){
-				rectangle left = tr.getChildren().get(i).getContainer();
-				left.bl.y = maxheight/2-left.height/2;
-				left.bl.x = xsofar;
-				xsofar = left.bl.x+left.width;
-			}*/
-			a.height = maxheight;
-	//		a.width = xsofar;
-		}
-
-
-		return a;
-	}
-
 	public double function(double a, double b)
 	{
 		double c = a + b;

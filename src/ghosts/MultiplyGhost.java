@@ -59,7 +59,7 @@ public class MultiplyGhost implements TreeFunction{
 	
 	public MultiplyGhost(Image img){
 		im = img;
-		downwalk walk = new downwalk(img.tr, this);
+		downwalk walk = new downwalk(img.term, this);
 	}
 
 

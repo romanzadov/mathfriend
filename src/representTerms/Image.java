@@ -12,139 +12,131 @@ import display.Rectangle;
 import display.stringofrects;
 
 
-public class Image implements Cloneable{
+public class Image implements Cloneable {
 
-	public static final String TAG = "image";
-	public String st;
-	public Term tr;
+    public static final String TAG = "image";
+    public String st;
+    public Term term;
 
-	public ArrayList<StringRectangle>relativeContainers  = new ArrayList<StringRectangle>();
-	public ArrayList<StringRectangle>historyContainers =  new ArrayList<StringRectangle>();
-	//	public int background = Color.WHITE;
-	//	public int wordcolor = Color.BLACK;
+    private ArrayList<StringRectangle> relativeContainers = new ArrayList<StringRectangle>();
+    //	public int background = Color.WHITE;
+    //	public int wordcolor = Color.BLACK;
 
-	public Point bel =  new Point();
-	public int font;
+    public Point bel = new Point();
+    public int font;
 
-	public double rotation =0 ;
-	public double scalefactor =1;
-	String arg = null;
+    public double rotation = 0;
+    public double scale = 1;
 
-	public Image(){}
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		Image clone = (Image)super.clone();
+    public Image() {
+    }
 
-		if(this.tr != null){
-			clone.tr = (CompoundTerm) this.tr.clone();
-		}
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Image clone = (Image) super.clone();
 
-		clone.bel = (Point)this.bel.clone();
-		return clone;
-	}
+        if (this.term != null) {
+            clone.term = (CompoundTerm) this.term.clone();
+        }
 
-	@Override
-	public String toString(){
-		String st="";
-		if(tr == null ){return null;}
-		st+="font: "+font;
-		st+=" h "+getAbsoluteContainers(font, bel).get(0).container.height+
-		" w "+getAbsoluteContainers(font, bel).get(0).container.width+"|";
+        clone.bel = (Point) this.bel.clone();
+        return clone;
+    }
 
-		st += "bel: "+bel.toString()+" term: "+tr.toString();
-		return st;
+    @Override
+    public String toString() {
+        String st = "";
+        if (term == null) {
+            return null;
+        }
+        st += "font: " + font;
+        st += " h " + getAbsoluteContainers(font, bel).get(0).container.getHeight() +
+                " w " + getAbsoluteContainers(font, bel).get(0).container.getWidth() + "|";
 
-	}
+        st += "bel: " + bel.toString() + " term: " + term.toString();
+        return st;
 
+    }
 
+    public Image(String myst, int myFont, int screenWidth, int screenHeight) {
+        term = Term.getTermFromString(myst);
+        st = myst;
+        setRelativeContainers();
 
-	public Image(CompoundTerm term, Point bl, String argument){
-		tr = term;
-		bel = bl;
-		arg = argument;
-		st = tr.toString();
-	}
-
-	public Image(String myst, int myFont, int screenWidth, int screenHeight){
-		tr = Term.getTermFromString(st);
-		st = myst;
-		setRelativeContainers();
-
-		GUIMath gm = new GUIMath(5, 40, screenWidth, screenHeight);
+        GUIMath gm = new GUIMath(5, 40, screenWidth, screenHeight);
 /*		PlaceAndFont pf = gm.getPlaceAndFont(relativeContainers.get(0).container.width,
 												relativeContainers.get(0).container.height, myFont);
 
 		font = pf.font;
 		bel = pf.bl;*/
-	}
+    }
 
 
-	public Image(String myst, Point bl){
-		tr = Term.getTermFromString(st);
-		bel = bl;
-		st = myst;
-	}
+    public Image(String myst, Point bl) {
+        term = Term.getTermFromString(myst);
+        bel = bl;
+        st = myst;
+    }
 
-	public void imagemove(CompoundTerm term, Point bl, String argument){
-		tr = term;
-		bel = bl;
-		arg = argument;
+    public void imagemove(CompoundTerm term, Point bl) {
+        this.term = term;
+        bel = bl;
 
-	}
+    }
 
-	public ArrayList<StringRectangle> getRelativeContainers(){
-		reset();
-		return relativeContainers;
-	}
+    public ArrayList<StringRectangle> getRelativeContainers() {
+        reset();
+        return relativeContainers;
+    }
 
-	private void setRelativeContainers(){
-		RelativeContainer dc = new RelativeContainer();
-		//dc.drawelement(tr);
-		stringofrects sp = new stringofrects();
-		//relativeContainers = sp.writeme(tr);
-	}
+    private void setRelativeContainers() {
+        RelativeContainer dc = new RelativeContainer();
+        //dc.drawelement(tr);
+        stringofrects sp = new stringofrects();
+        //relativeContainers = sp.writeme(tr);
+    }
 
-	public ArrayList<StringRectangle> getAbsoluteContainers(int myFont, Point bel){
-		
-		reset();
-		ArrayList<StringRectangle> relativeContainers = getRelativeContainers();
-		ArrayList<StringRectangle> absoluteContainers = new ArrayList<StringRectangle>();
-		for(int i =0; i<relativeContainers.size(); i++){
-			Rectangle rc = relativeContainers.get(i).container;
-			StringRectangle ac = new StringRectangle();
-			ac.container.bl.x    = rc.bl.x*myFont;
-			ac.container.bl.y    = rc.bl.y*myFont;
-			ac.container.width   = rc.width*myFont;
-			ac.container.height  = rc.height*myFont;
+    public ArrayList<StringRectangle> getAbsoluteContainers(int myFont, Point bel) {
 
-			ac.container.bl.x    = rc.bl.x*myFont+bel.x;
-			ac.container.bl.y    = -rc.bl.y*myFont+bel.y;
+        reset();
+        ArrayList<StringRectangle> relativeContainers = getRelativeContainers();
+        ArrayList<StringRectangle> absoluteContainers = new ArrayList<StringRectangle>();
+        for (int i = 0; i < relativeContainers.size(); i++) {
+            Rectangle rc = relativeContainers.get(i).container;
+            StringRectangle ac = new StringRectangle();
+            ac.container.bl.x = rc.bl.x * myFont;
+            ac.container.bl.y = rc.bl.y * myFont;
+            ac.container.setWidth(rc.getWidth() * myFont);
+            ac.container.setHeight(rc.getHeight() * myFont);
 
-			ac.fontscale = relativeContainers.get(i).fontscale;
-			ac.hasParens = relativeContainers.get(i).hasParens;
-			ac.term = relativeContainers.get(i).term;
-			ac.todraw = relativeContainers.get(i).todraw;
+            ac.container.bl.x = rc.bl.x * myFont + bel.x;
+            ac.container.bl.y = -rc.bl.y * myFont + bel.y;
 
-			absoluteContainers.add(ac);
-		}
+            ac.fontscale = relativeContainers.get(i).fontscale;
+            ac.hasParens = relativeContainers.get(i).hasParens;
+            ac.term = relativeContainers.get(i).term;
+            ac.todraw = relativeContainers.get(i).todraw;
 
-		return absoluteContainers;
-	}
+            absoluteContainers.add(ac);
+        }
 
-	private void reset(){
-		tr = Term.getTermFromString(st);
-		relativeContainers  = new ArrayList<StringRectangle>();
-		//		background = Color.WHITE;
-		//		wordcolor = Color.BLACK;
+        return absoluteContainers;
+    }
 
-		//bel =  new point();
+    private void reset() {
+        term = Term.getTermFromString(st);
+        relativeContainers = new ArrayList<StringRectangle>();
+        //		background = Color.WHITE;
+        //		wordcolor = Color.BLACK;
 
-		rotation = 0;
-		scalefactor= 1;
-		String arg = null;
+        //bel =  new point();
 
-		setRelativeContainers();
+        rotation = 0;
+        scale = 1;
+        String arg = null;
 
-	}
+        setRelativeContainers();
+
+    }
 
 }

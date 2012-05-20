@@ -56,10 +56,10 @@ public class specificimg {
 		
 	public void addParentheses(CompoundTerm tr){
 		//these will be the width and height of the parentheses
-		float height = tr.getContainer().height;
+		float height = tr.getContainer().getHeight();
 		float width = height/2;
 		
-		tr.getContainer().width += width+width;
+		tr.getContainer().setWidth(tr.getContainer().getWidth() + width+width);
 		
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			//move all the contents over by the width of the parens

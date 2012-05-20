@@ -27,21 +27,21 @@ public class LogicEngine {
 
 
 
-	private LogicEngine(String st){
-		equations.add(st);
+	private LogicEngine(String formula){
+		equations.add(formula);
 		//	timer.postDelayed(task, 1000);
 	}
 
 
 
 
-	public static void init(String st){
+	public static void init(String formula){
 
 		if( LOGIC_ENGINE != null ){
 			throw new RuntimeException("Can't initialize the logic engine more than once");
 		}
 
-		LOGIC_ENGINE = new LogicEngine(st);
+		LOGIC_ENGINE = new LogicEngine(formula);
 		LOGIC_ENGINE.initGhost();
 		LOGIC_ENGINE.initMain();
 		LOGIC_ENGINE.initOperator();
@@ -126,9 +126,9 @@ public class LogicEngine {
 
 	private void initMain(){
 		String st = equations.get(0);
-		Image img = new Image(st, new Point(0,0));/*
+		Image img = new Image(st, new Point(0,0));
 		MainScreen ms = new MainScreen(st);
-		mainInterface = new JavaDisplay(ms);*/
+		mainInterface = new JavaDisplay(ms);
 		mainInterface.updateDrawnRectangles(img.getRelativeContainers());
 	}
 

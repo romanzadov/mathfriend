@@ -69,11 +69,9 @@ public abstract class Term implements Cloneable{
     }
 
 
-    protected abstract StringRectangle getStringRectangle();
+    protected abstract List<StringRectangle> getRelativeRectangles();
 
-  /*  protected StringRectangle makeNegative() {
-
-    }*/
+    public abstract Rectangle getContainer();
 
     @Override
 	public Object clone() throws CloneNotSupportedException {
@@ -122,13 +120,5 @@ public abstract class Term implements Cloneable{
             return true;
         }
         return false;
-    }
-
-    public Rectangle getContainer() {
-        return null;
-    }
-
-    public void setContainer(Rectangle rectangle) {
-        
     }
 }

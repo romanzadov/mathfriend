@@ -21,7 +21,7 @@ public class FindSel implements TreeFunction{
 		myMain = main;
 		mySel = sel;
 		myTapped = tapped;
-		downwalk dw = new downwalk(main.tr, this);
+		downwalk dw = new downwalk(main.term, this);
 //		Log.d(TAG, "main: "+myMain.tr.toString()+" sel: "+mySel.toString()+" "+tapped.toString());
 	}
 

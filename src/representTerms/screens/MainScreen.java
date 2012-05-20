@@ -1,35 +1,44 @@
 package representTerms.screens;
 
-public class MainScreen {}/*implements AbstractedScreen{
+import display.Point;
+import display.Rectangle;
+import representTerms.Image;
+import representTerms.Settings;
+import representTerms.StringRectangle;
+import representTerms.TouchData;
+
+import java.util.ArrayList;
+
+public class MainScreen implements AbstractedScreen{
 
 
 	Image main;
 	public Image sel;
 	public Image ghost;
-	point down = new point();
+	Point down = new Point();
 	double taptime = 0;
 	boolean moved = false;
 	public boolean moving = false;
-	point selsBottomLeft = new point();
+	Point selsBottomLeft = new Point();
 	ArrayList<StringRectangle> drawn = new ArrayList<StringRectangle>();
 	ArrayList<TouchData> touches = new ArrayList<TouchData>();
 	public String resultTerm = null;
 	
 	public MainScreen(String st){
-		main = new Image(st, (int)Settings.PREFFERED_FONT, 1, 1);
+		main = new Image(st, (int) Settings.PREFFERED_FONT, 1, 1);
 		sel = main;
 	}
 
 	@Override 
-	public ScreenType getScreenType(){
-		return ScreenType.MAIN;
+	public Settings.ScreenType getScreenType(){
+		return Settings.ScreenType.MAIN;
 	}
 	
 	public void performOperationOnSel(){
 		
-*//*		Image mainClone = null;
+		Image mainClone = null;
 		
-		Term compound = sel.tr.getResultOfOperation();
+		/*Term compound = sel.term.getResultOfOperation();
 		if(compound != null) {
 			try {
 				mainClone = (Image) main.clone();
@@ -38,7 +47,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 				e.printStackTrace();
 			}
 			
-			ArrayList<Integer> key = TermMath.findTreePositionOfSelected(main.tr, sel.tr);
+			ArrayList<Integer> key = TermMath.findTreePositionOfSelected(main.term, sel.term);
 			Term selClone = TermMath.findTermUsingKey(mainClone.tr, key);
 			
 			
@@ -52,7 +61,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 		
 		if(mainClone != null){
 			ghost = new Image(mainClone.tr.toString(), (int)Settings.PREFFERED_FONT, 1,1);
-		}*//*
+		}*/
 		
 	}
 	
@@ -69,20 +78,20 @@ public class MainScreen {}/*implements AbstractedScreen{
 		//first, we draw the main equation 
 		ArrayList <StringRectangle> relatives = main.getRelativeContainers();
 		for(int i = 0; i< relatives.size(); i++){
-			relatives.get(i).myType =  type.MAIN;
+			relatives.get(i).myType =  StringRectangle.Type.MAIN;
 		}
-		
+		/*
 		//second, find the selected term among them, and tag it as SELECTED
-		int position = main.tr.positionOfInnerTermDown(sel.tr);
+		int position = main.term.positionOfInnerTermDown(sel.term);
 		if(position >= 0 && position<relatives.size()){
-			relatives.get(position).myType = type.SELECTED;
+			relatives.get(position).myType = StringRectangle.Type.SELECTED;
 		}
 		
 		// if the selected term is moving, we will cover its space with another rectangle, and then draw it somewhere outside the equation.
 		if(moving){
 			if(sel!=null){
 				
-				point scaled = scaleIdealPointToRelativeOne(sel.bel, relatives.get(0).container, drawn.get(0).container);
+				Point scaled = scaleIdealPointToRelativeOne(sel.bel, relatives.get(0).container, drawn.get(0).container);
 				
 				
 				
@@ -90,7 +99,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 					StringRectangle selectedRect = (StringRectangle) relatives.get(position).clone();
 					
 					StringRectangle cover = (StringRectangle) relatives.get(position).clone();
-					cover.myType = type.SELECT_COVER;
+					cover.myType = StringRectangle.Type.SELECT_COVER;
 					relatives.add(cover);
 				
 					
@@ -101,7 +110,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 				for(int i = 0; i<sels.size(); i++){
 					sels.get(i).container.bl.x += scaled.x-relatives.get(position).container.width/2;
 					sels.get(i).container.bl.y += scaled.y;
-					sels.get(i).myType = type.SELECTED;
+					sels.get(i).myType = StringRectangle.Type.SELECTED;
 					relatives.add(sels.get(i));
 				}
 				
@@ -109,7 +118,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 		}
 		else{
 
-		}
+		}*/
 
 		//go through the rectangles and if there's any fractions, redraw the fraction bar.
 		
@@ -118,7 +127,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 			StringRectangle a = relatives.get(i);
 			if(a.todraw.equals("/")){
 				a.todraw = "";
-				a.myType = type.FRACTION;
+				a.myType = StringRectangle.Type.FRACTION;
 			}
 			
 		}
@@ -148,22 +157,22 @@ public class MainScreen {}/*implements AbstractedScreen{
 
 		float x = touch.position.x;
 		float y = touch.position.y;
-		TouchType touchType = touch.myType;
+		TouchData.TouchType touchType = touch.myType;
 		//System.out.println(""+touch);
 
 		long currenttime = System.currentTimeMillis();
 
 
-		if(touchType == TouchType.PRESSED){
-			down = new point(x,y);
+		if(touchType == TouchData.TouchType.PRESSED){
+			down = new Point(x,y);
 			taptime = touch.time;
 			moved = false;
 		}
-		if(touchType == TouchType.RELEASED){
+		if(touchType == TouchData.TouchType.RELEASED){
 
 			if(!moved){
 
-				selectterm se = new selectterm();
+				/*selectterm se = new selectterm();
 				Term newSelect = se.whichterm(sel.tr, x, y, main.tr.ScreenPosition.container.bl, 0);
 
 				if(newSelect !=null){
@@ -178,7 +187,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 					selsBottomLeft.y = main.tr.ScreenPosition.container.bl.y;
 
 					sel = main;
-				}
+				}*/
 
 				sel.bel.x = selsBottomLeft.x;
 				sel.bel.y = selsBottomLeft.y;
@@ -193,14 +202,14 @@ public class MainScreen {}/*implements AbstractedScreen{
 				//get the ghost term. If null, do nothing. If not null, indicate to the logicEngine to make switch to the next equation.
 				
 				if(ghost != null){
-					resultTerm = ghost.tr.toString();
+					resultTerm = ghost.term.toString();
 				}
 				
 			}
 			moving = false;
 		}
 
-		if(touchType == TouchType.DRAGGED){
+		if(touchType == TouchData.TouchType.DRAGGED){
 
 			moving = true;
 
@@ -209,7 +218,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 				sel.bel.x = x;
 				sel.bel.y = y;
 
-				GhostImage gm = new GhostImage();
+				/*GhostImage gm = new GhostImage();
 				//make a new ghost based on existing term positions.
 				ghost = gm.newImage(main, sel.tr, new point (x, y), down);
 			
@@ -219,7 +228,7 @@ public class MainScreen {}/*implements AbstractedScreen{
 					if(ghost != null && ghost.tr == null){
 						ghost = null;
 					}
-
+*/
 			}
 		}
 
@@ -233,16 +242,16 @@ public class MainScreen {}/*implements AbstractedScreen{
 	public void updateAbstractRectangles(ArrayList<StringRectangle> drawn) {
 		if(main.getRelativeContainers().size() == drawn.size()){
 		this.drawn = drawn;
-		main.tr.setScreenPositions(drawn);
+	//	main.term.setScreenPositions(drawn);
 		}
 	}
 
-	public point scaleIdealPointToRelativeOne(point a, rectangle relativeContainer, rectangle idealContainer){
+	public Point scaleIdealPointToRelativeOne(Point a, Rectangle relativeContainer, Rectangle idealContainer){
 		
-		point b = new point();
+		Point b = new Point();
 		
-		b.x = (a.x-idealContainer.bl.x)*relativeContainer.width/idealContainer.width;
-		b.y = (a.y - idealContainer.bl.y)*relativeContainer.height/idealContainer.height;
+		b.x = (a.x-idealContainer.bl.x)* relativeContainer.getWidth() / idealContainer.getWidth();
+		b.y = (a.y - idealContainer.bl.y)* relativeContainer.getHeight() / idealContainer.getHeight();
 		
 		return b;
 	}
@@ -254,14 +263,13 @@ public class MainScreen {}/*implements AbstractedScreen{
 		touches.clear();
 		drawn.clear();
 		ghost = null;
-		down = new point();
+		down = new Point();
 		taptime = 0;
 		moved = false;
 		moving = false;
-		selsBottomLeft = new point();
+		selsBottomLeft = new Point();
 		resultTerm = null;
 		
 	}
 	
 }
-*/

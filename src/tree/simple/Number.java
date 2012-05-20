@@ -3,9 +3,12 @@ package tree.simple;
 import representTerms.StringRectangle;
 import display.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Number extends SimpleTerm {
 	
-	public double absoluteValue;
+	private double absoluteValue;
 
 
 	@Override
@@ -36,27 +39,20 @@ public class Number extends SimpleTerm {
 
     public Number(){};
 
-	public StringRectangle getStringRectangle(){
-        String string = toString();
-		Rectangle container = new Rectangle();
-
-        container.height = 1;
-        container.width = string.length();
-        
-        return new StringRectangle(container, string);
+    @Override
+    public List<StringRectangle> getRelativeRectangles() {
+        List<StringRectangle> rectangles = new ArrayList<StringRectangle>();
+        rectangles.add(new StringRectangle(getContainer(), toString()));
+        return rectangles;
     }
-	
-	public void setvalue(double a){
-		absoluteValue = a;
-	}
-	
+
+    public Rectangle getContainer() {
+        String string = toString();
+        return new Rectangle(string.length(), 1);
+    }
+
 	public double getAbsoluteValue(){
 		return absoluteValue;
-	}
-	
-	public boolean isoperator(){
-		boolean a = false;
-		return a;
 	}
 
 	public boolean equals(Object a)

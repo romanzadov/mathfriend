@@ -77,7 +77,7 @@ public class LikeTermsGhost implements TreeFunction{
 	}
 	public LikeTermsGhost(Image img){
 		im = img;
-		downwalk walk = new downwalk(img.tr, this);
+		downwalk walk = new downwalk(img.term, this);
 	}
 
 	public void performAction(Term tr) {

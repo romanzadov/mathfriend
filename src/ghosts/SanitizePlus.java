@@ -14,7 +14,7 @@ public class SanitizePlus {
 		int pos = -1;
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			if(tr.getChildren().get(i) instanceof Number){
-				if(((Number)tr.getChildren().get(i)).absoluteValue == 0){
+				if(((Number)tr.getChildren().get(i)).getAbsoluteValue() == 0){
 					haszero = true;
 					pos = i;
 					break;

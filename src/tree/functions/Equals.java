@@ -26,52 +26,6 @@ public class Equals extends Function {
         return "=";
     }
 
-    public Rectangle giverect(CompoundTerm tr){
-		Rectangle a = new Rectangle();
-		if(tr.getChildren().size() == 0){
-			Rectangle cont = tr.getContainer();
-		//	tr.toDraw = "=";
-			a = justequal(cont);
-		}
-		else{
-			//check to see that everything is rectangled
-			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).getContainer() == null){
-					System.out.println("error: equal called when not all terms are rectangled");
-				}
-			}
-			//find top height
-			float ysofar = 0;
-			float xsofar = 0;
-			for(int i =0; i<tr.getChildren().size(); i++){
-				if(tr.getChildren().get(i).getContainer().height>ysofar){
-					ysofar = tr.getChildren().get(i).getContainer().height;
-				}
-			}
-
-			//allign
-			for(int i =0; i<tr.getChildren().size(); i++){
-				Rectangle cont = tr.getChildren().get(i).getContainer();
-				cont.bl.x = xsofar;
-				xsofar +=cont.width;
-				cont.bl.y = ysofar/2-cont.height/2;
-
-			}
-
-			a.width =  xsofar;
-			a.height = ysofar;
-
-		}
-		return a;
-	}
-
-	public Rectangle justequal(Rectangle cont){
-		Rectangle a = new Rectangle();
-		a.height = 1;
-		a.width = 1;
-		cont = a;
-		return cont;
-	}
 	public boolean function(double a, double b)
 	{
 		boolean c = a==b;

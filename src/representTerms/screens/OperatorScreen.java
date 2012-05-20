@@ -53,8 +53,8 @@ public class OperatorScreen implements AbstractedScreen{
 		if(getImage() != null){
 			
 			StringRectangle sr = new StringRectangle();
-			sr.container.width = 1;
-			sr.container.height = 1;
+			sr.container.setWidth(1);
+			sr.container.setHeight(1);
 			sr.todraw = operator.toString();
 			relatives.add(sr);
 		}

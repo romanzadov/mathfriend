@@ -21,7 +21,7 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 		
 		rectanglesScaledToIdentity = new ArrayList<StringRectangle>();
 		Rectangle first = toDraw.get(0).container;
-		PlaceAndFont paf = GUIMath.getCenteredPlaceAndFont(first.width, first.height, Settings.PREFFERED_FONT, getWidth(), getHeight());
+		PlaceAndFont paf = GUIMath.getCenteredPlaceAndFont(first.getWidth(), first.getHeight(), Settings.PREFFERED_FONT, getWidth(), getHeight());
 	//	System.out.println( " "+paf);
 		for(int i = 0; i< toDraw.size(); i++){
 			Rectangle a = toDraw.get(i).container;
@@ -63,10 +63,10 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 	@Override
 	public Rectangle scaleToIdealScreen(Rectangle a) {
 		Rectangle b = new Rectangle();
-		b.height = a.height/getHeight();
-		b.width = a.width/getWidth();
+		b.setHeight(a.getHeight() /getHeight());
+		b.setWidth(a.getWidth() /getWidth());
 		b.bl.x = a.bl.x/getWidth();
-		b.bl.y = (getHeight()-a.bl.y-a.height)/getHeight();
+		b.bl.y = (getHeight()-a.bl.y- a.getHeight())/getHeight();
 		return b;
 	}
 
@@ -74,8 +74,8 @@ public abstract class DisplayInterfaceTemplate implements DisplayInterface{
 	@Override
 	public Rectangle scaleToRealScreen(Rectangle a) {
 		Rectangle b = new Rectangle();
-		b.height = a.height*getHeight();
-		b.width = a.width*getWidth();
+		b.setHeight(a.getHeight() *getHeight());
+		b.setWidth(a.getWidth() *getWidth());
 		b.bl.x = a.bl.x*getWidth();
 		b.bl.y = a.bl.y*getHeight();
 		return b;

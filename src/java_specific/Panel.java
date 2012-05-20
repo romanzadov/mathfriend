@@ -52,13 +52,13 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 
 				if(toDraw.get(i).myType == Type.SELECT_COVER){
 					g.setColor(this.getBackground());
-					g.fillRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
+					g.fillRect((int)c.bl.x,(int)c.bl.y, (int) c.getWidth(), (int) c.getHeight());
 					g.setColor(Color.black);
 					
 				}
 				
 				if(toDraw.get(i).myType == Type.SELECTED){
-					g.fillRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
+					g.fillRect((int)c.bl.x,(int)c.bl.y, (int) c.getWidth(), (int) c.getHeight());
 				}
 				g.setColor(Color.black);
 
@@ -68,14 +68,14 @@ public class Panel extends JPanel implements MouseMotionListener, MouseListener{
 				}
 
 				if(i == 0){
-					g.drawRect((int)c.bl.x,(int)c.bl.y, (int)c.width, (int)c.height);
+					g.drawRect((int)c.bl.x,(int)c.bl.y, (int) c.getWidth(), (int) c.getHeight());
 				}
 			
 
 
 					// write the text in the correct squares
 				if(!a.todraw.equals("")){
-					g.drawString(a.todraw, (int)(c.bl.x+c.width/4), (int)(c.getTopLeft().y-c.height/8));
+					g.drawString(a.todraw, (int)(c.bl.x+ c.getWidth() /4), (int)(c.getTopLeft().y- c.getHeight() /8));
 				}
 
 			}

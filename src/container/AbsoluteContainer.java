@@ -17,15 +17,15 @@ public class AbsoluteContainer implements TreeFunction{
 	
 	public ArrayList<StringRectangle> multiply(Image im, int fontsize, Point bel){
 		
-			sr = im.relativeContainers;
+			sr = im.getRelativeContainers();
 			
 			
 			for(int i = 0; i< sr.size(); i++){
 				
 				sr.get(i).container.bl.y *= -fontsize;
 				sr.get(i).container.bl.x *= fontsize;
-				sr.get(i).container.width *=fontsize;
-				sr.get(i).container.height *= fontsize;
+				sr.get(i).container.setWidth(sr.get(i).container.getWidth() * fontsize);
+				sr.get(i).container.setHeight(sr.get(i).container.getHeight() * fontsize);
 				
 				sr.get(i).container.bl.x += bel.x;
 				sr.get(i).container.bl.y += bel.y;
@@ -37,14 +37,14 @@ public class AbsoluteContainer implements TreeFunction{
 				
 			}
 			
-		downwalk dw = new downwalk(im.tr, this);	
+		downwalk dw = new downwalk(im.term, this);
 		
 		
 		return sr;
 	}
 
 	public void performAction(Term tr) {
-		tr.setContainer(sr.get(j).container);
+	//	tr.setContainer(sr.get(j).container);
 		j++;
 		
 	}

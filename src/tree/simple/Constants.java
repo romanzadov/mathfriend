@@ -51,14 +51,14 @@ public class Constants extends Number{
         public Rectangle giverect(CompoundTerm tr) {
             Rectangle a = new Rectangle();
             if (value == Math.E) {
-                a.height = 1;
-                a.width = 1;
+                a.setHeight(1);
+                a.setWidth(1);
                 //	tr.toDraw = "e";
                 tr.setContainer(a);
             }
             if (value == Math.PI) {
-                a.height = 1;
-                a.width = 2;
+                a.setHeight(1);
+                a.setWidth(2);
                 //	tr.toDraw = "pi";
                 tr.setContainer(a);
             }

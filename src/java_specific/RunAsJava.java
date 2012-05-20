@@ -1,9 +1,5 @@
 package java_specific;
 
-import java.util.ArrayList;
-
-import tests.TestStrings;
-
 import representTerms.Image;
 import representTerms.LogicEngine;
 import tree.compound.CompoundTerm;
@@ -61,7 +57,7 @@ public class RunAsJava {
 			
 			if(result.toString().equals(second.toString()) ||
 					("("+result.toString()+")").equals(second.toString()) ||
-					img2.tr.toString().equals(second.toString())){
+					img2.term.toString().equals(second.toString())){
 				equal = true;
 			}
 		
@@ -69,7 +65,7 @@ public class RunAsJava {
 		
 		return equal;
 	}
-	
+
 	public void testMultiplication(){
 
 	/*	String st = "(2/3)(4/5)(3/9)";
@@ -116,9 +112,9 @@ public class RunAsJava {
 		}*/
 	}
 
-	public void startFrame(String st){
+	public void startFrame(String formula){
 
-		LogicEngine.init(st);
+		LogicEngine.init(formula);
 		LogicEngine LOGIC_ENGINE = LogicEngine.getLogicEngine();
 	}
 	

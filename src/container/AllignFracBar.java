@@ -49,7 +49,7 @@ public class AllignFracBar {
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			Term kid = tr.getChildren().get(i);
 			kid.getContainer().bl.x = xsofar;
-			xsofar+= kid.getContainer().width;
+			xsofar+= kid.getContainer().getWidth();
 		}
 
 
@@ -57,14 +57,14 @@ public class AllignFracBar {
 		float ysofar = 0;
 		for(int i = 0; i<tr.getChildren().size(); i++){
 			Term kid = tr.getChildren().get(i);
-			if((kid.getContainer().height + kid.getContainer().bl.y)> ysofar){
-				ysofar = kid.getContainer().height+ kid.getContainer().bl.y;
+			if((kid.getContainer().getHeight() + kid.getContainer().bl.y)> ysofar){
+				ysofar = kid.getContainer().getHeight() + kid.getContainer().bl.y;
 			}
 		}
 		
 		Rectangle thiscont = new Rectangle();
-		thiscont.width = xsofar;
-		thiscont.height = ysofar;
+		thiscont.setWidth(xsofar);
+		thiscont.setHeight(ysofar);
 		
 		tr.setContainer(thiscont);
 	}

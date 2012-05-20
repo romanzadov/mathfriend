@@ -17,8 +17,8 @@ public class stringofrects implements TreeFunction{
 
 		if(argument == null){
 			Rectangle rt = main.getContainer();
-			int width = (int)(rt.width);
-			int height = (int)(rt.height);
+			int width = (int)(rt.getWidth());
+			int height = (int)(rt.getHeight());
 			Point tl = rt.getTopLeft();
 			Rectangle outline = new Rectangle();
 
@@ -26,8 +26,8 @@ public class stringofrects implements TreeFunction{
 			outline.bl.x = (int)(tl.x-2);
 			outline.bl.y = (int)(tl.y-1);
 
-			outline.width = width;
-			outline.height = height;
+			outline.setWidth(width);
+			outline.setHeight(height);
 
 			todraw.add(outline);}
 
@@ -36,8 +36,8 @@ public class stringofrects implements TreeFunction{
 			CompoundTerm top = main;
 
 			Rectangle rt = top.getContainer();
-			int width = (int)(rt.width);
-			int height = (int)(rt.height);
+			int width = (int)(rt.getWidth());
+			int height = (int)(rt.getHeight());
 			Point tl = rt.getTopLeft();
 
 			Rectangle black = new Rectangle();
@@ -46,14 +46,14 @@ public class stringofrects implements TreeFunction{
 	//		black.color=(Color.black);
 			black.bl.x = (int)(tl.x-2);
 			black.bl.y = (int)(tl.y-1);
-			black.width = width;
-			black.height = height;
+			black.setWidth(width);
+			black.setHeight(height);
 
 //			white.color = Color.white;
 			white.bl.x = (int)(tl.x);
 			white.bl.y = (int)(tl.y);
-			white.width = width-3;
-			white.height = height-3;
+			white.setWidth(width-3);
+			white.setHeight(height-3);
 
 			todraw.add(black);
 			todraw.add(white);

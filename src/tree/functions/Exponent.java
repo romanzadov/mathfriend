@@ -28,52 +28,6 @@ public class Exponent extends Function {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public Rectangle giverect(CompoundTerm tr) {
-        Rectangle a = new Rectangle();
-        float xsofar = 0;
-        float ysofar = 0;
-        if (tr.isSimple()) {
-            a = justexp(tr);
-        } else {
-            //check that all things are containered
-    /*        for (int i = 0; i < tr.getChildren().size(); i++) {
-                if (tr.getChildren().get(i).getContainer() == null) {
-                    System.out.println("error: exponent was run on non-containered terms");
-                }
-            }
-
-
-            xsofar = tr.getChildren().get(0).getContainer().width;
-            ysofar = tr.getChildren().get(0).getContainer().height;
-
-            for (int i = 2; i < tr.getChildren().size(); i += 2) {
-                fontize ft = new fontize(tr.getChildren().get(i), .7);
-
-            }
-
-            for (int i = 2; i < tr.getChildren().size(); i += 2) {
-                rectangle cn = tr.getChildren().get(i).getContainer();
-
-                cn.bl.x = xsofar;
-                cn.bl.y = ysofar;
-                xsofar += cn.width;
-                ysofar += cn.height / 2;
-                if (i == tr.getChildren().size() - 1) {
-                    ysofar += cn.height / 2;
-                }
-            }*/
-        }
-        a.width = xsofar;
-        a.height = ysofar;
-        return a;
-    }
-
-    public Rectangle justexp(CompoundTerm tr) {
-        Rectangle a = new Rectangle();
-        tr.setContainer(a);
-        return a;
-    }
-
     public double function(double a, double b) {
         double c = Math.pow(a, b);
         return c;

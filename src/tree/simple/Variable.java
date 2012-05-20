@@ -3,6 +3,9 @@ package tree.simple;
 import representTerms.StringRectangle;
 import display.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Variable extends SimpleTerm {
 	
 	public Character value;
@@ -17,11 +20,15 @@ public class Variable extends SimpleTerm {
 	}
 
     @Override
-    public StringRectangle getStringRectangle() {
-        Rectangle container = new Rectangle();
-		container.height = 1;
-		container.width = 1;
-		return new StringRectangle(container, value.toString());
+    public List<StringRectangle> getRelativeRectangles() {
+        List<StringRectangle> rectangles = new ArrayList<StringRectangle>();
+        rectangles.add(new StringRectangle(getContainer(), toString()));
+        return rectangles;
+    }
+
+    @Override
+    public Rectangle getContainer() {
+		return new Rectangle(1,1);
     }
 
     @Override

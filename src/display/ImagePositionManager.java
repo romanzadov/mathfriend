@@ -40,19 +40,19 @@ public class ImagePositionManager {
 		int screenHeight = pixelHeight/3 - 20;
 		int screenWidth = pixelWidth - 20;
 		
-		int ghostHeight = (int)(prefferedFont*myGhost.getRelativeContainers().get(0).container.height);
-		int ghostWidth = (int)(prefferedFont*myGhost.getRelativeContainers().get(0).container.width);
+		int ghostHeight = (int)(prefferedFont* myGhost.getRelativeContainers().get(0).container.getHeight());
+		int ghostWidth = (int)(prefferedFont* myGhost.getRelativeContainers().get(0).container.getWidth());
 
 		//see if the ghostwidth and heights are too big
 		if(ghostHeight>screenHeight || ghostWidth>screenWidth){
 			//resize to fit into alloted space
 			//find biggest possible font
-			int fonty = (int)((screenHeight)/myGhost.getRelativeContainers().get(0).container.height);
-			int fontx = (int)((screenWidth)/myGhost.getRelativeContainers().get(0).container.width);
+			int fonty = (int)((screenHeight)/ myGhost.getRelativeContainers().get(0).container.getHeight());
+			int fontx = (int)((screenWidth)/ myGhost.getRelativeContainers().get(0).container.getWidth());
 			int newFont = Math.min(fontx, fonty);
 			
-			ghostHeight = (int)(newFont*myGhost.getRelativeContainers().get(0).container.height);
-			ghostWidth = (int)(newFont*myGhost.getRelativeContainers().get(0).container.width);
+			ghostHeight = (int)(newFont* myGhost.getRelativeContainers().get(0).container.getHeight());
+			ghostWidth = (int)(newFont* myGhost.getRelativeContainers().get(0).container.getWidth());
 			
 	//		myGhost.tr.font = newFont;
 
@@ -76,18 +76,18 @@ public class ImagePositionManager {
 		int screenHeight = pixelHeight*2/3;
 		int screenWidth = pixelWidth;
 		
-		int mainHeight = (int)(prefferedFont*myMain.getRelativeContainers().get(0).container.height);
-		int mainWidth = (int)(prefferedFont*myMain.getRelativeContainers().get(0).container.width);
+		int mainHeight = (int)(prefferedFont* myMain.getRelativeContainers().get(0).container.getHeight());
+		int mainWidth = (int)(prefferedFont* myMain.getRelativeContainers().get(0).container.getWidth());
 
 		if(mainHeight+20>screenHeight || mainWidth+20>screenWidth){
-			int fonty = (int)((screenHeight-20)/myMain.getRelativeContainers().get(0).container.height);
-			int fontx = (int)((screenWidth-20)/myMain.getRelativeContainers().get(0).container.width);
+			int fonty = (int)((screenHeight-20)/ myMain.getRelativeContainers().get(0).container.getHeight());
+			int fontx = (int)((screenWidth-20)/ myMain.getRelativeContainers().get(0).container.getWidth());
 			int newFont =  Math.min(fontx, fonty);
 		//	Log.d(TAG, "Newfont: "+newFont + " preffont: "+prefferedFont);
 			scale = (0f+newFont)/(0f+prefferedFont);
 		//	Log.d(TAG, ""+myMain.scalefactor);
-			mainHeight = (int)(newFont*myMain.getRelativeContainers().get(0).container.height);
-			mainWidth = (int)(newFont*myMain.getRelativeContainers().get(0).container.width);
+			mainHeight = (int)(newFont* myMain.getRelativeContainers().get(0).container.getHeight());
+			mainWidth = (int)(newFont* myMain.getRelativeContainers().get(0).container.getWidth());
 			
 		}
 		

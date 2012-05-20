@@ -11,8 +11,8 @@ public class GUIMath {
 
 	public static Rectangle scaleFloat(Rectangle a, float f){
 		Rectangle b = new Rectangle();
-		b.height = a.height*f;
-		b.width = a.width*f;
+		b.setHeight(a.getHeight() *f);
+		b.setWidth(a.getWidth() *f);
 		b.bl.x = a.bl.x*f;
 		b.bl.y = a.bl.y*f;
 		return b;
@@ -20,8 +20,8 @@ public class GUIMath {
 
 	public static Rectangle translateXY(Rectangle a, float x, float y){
 		Rectangle b = new Rectangle();
-		b.height = a.height;
-		b.width = a.width;
+		b.setHeight(a.getHeight());
+		b.setWidth(a.getWidth());
 		b.bl.x = a.bl.x+x;
 		b.bl.y = a.bl.y+y;
 		return b;
@@ -29,10 +29,10 @@ public class GUIMath {
 
 	public static Rectangle flipYVals(Rectangle a){
 		Rectangle b = new Rectangle();
-		b.height = a.height;
-		b.width = a.width;
+		b.setHeight(a.getHeight());
+		b.setWidth(a.getWidth());
 		b.bl.x = a.bl.x;
-		b.bl.y = a.bl.y + a.height;
+		b.bl.y = a.bl.y + a.getHeight();
 		return b;
 	}
 	
