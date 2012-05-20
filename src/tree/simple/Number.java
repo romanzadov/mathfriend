@@ -17,7 +17,7 @@ public class Number extends SimpleTerm {
                 string = parts[0];
             }
             else if(parts[1].length() > 3) {
-                string = parts[0]+"."+parts[1].substring(0,2) + "...";
+                string = parts[0]+"."+parts[1].substring(0,3) + "...";
             }
         }
         return string;

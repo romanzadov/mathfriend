@@ -46,16 +46,8 @@ public abstract class Term implements Cloneable{
                 term = SimpleTerm.getSimpleTerm(second);
                 term.setInverse(true);
             }
-        } else if (preSimpleTerms.size() == 3) {
-            PreSimpleTerm first = preSimpleTerms.get(0);
-            PreSimpleTerm second = preSimpleTerms.get(1);
-            if(PreSimpleTerm.Type.FUNCTION.equals(first.getType()) &&
-                    PreSimpleTerm.Type.FUNCTION.equals(second.getType())) {
-                List<PreSimpleTerm> x = preSimpleTerms.subList(1,2);
-                term = getTerm(preSimpleTerms.subList(1,2));
-            }
         }
-
+        
         if (term == null) {
             Class<? extends Function> function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
             term = new CompoundTerm(function);
