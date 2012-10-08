@@ -1,0 +1,2 @@
+serviceClass: com.mathfriend.client.GreetingService
+path: 321AB6D4DD04808320BB9FE4C4EF83C0.gwt.rpc
