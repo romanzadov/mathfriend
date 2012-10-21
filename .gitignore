@@ -10,6 +10,8 @@ web/resources/less/*.css
 *.iml
 *.ipr
 .idea/
+gwt-unitCache/
+.settings/
 
 # Target-specific files
 web/WEB-INF/override.properties

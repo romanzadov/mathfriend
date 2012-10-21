@@ -90,7 +90,7 @@ public class MathFriend implements EntryPoint {
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
-				sendNameToServer();
+				sendFormulaToServer();
 			}
 
 			/**
@@ -98,27 +98,27 @@ public class MathFriend implements EntryPoint {
 			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
+					sendFormulaToServer();
 				}
 			}
 
 			/**
 			 * Send the name from the nameField to the server and wait for a response.
 			 */
-			private void sendNameToServer() {
+			private void sendFormulaToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				String textToServer = nameField.getText();
-				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
+				String formula = nameField.getText();
+				if (!FieldVerifier.isValidFormula(formula)) {
+					errorLabel.setText("Invalid character(s)");
 					return;
 				}
 
 				// Then, we send the input to the server.
 				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
+				textToServerLabel.setText(formula);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
+				greetingService.greetServer(formula,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
