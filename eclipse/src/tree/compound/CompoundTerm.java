@@ -1,6 +1,12 @@
 package tree.compound;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.tools.ant.taskdefs.Javadoc.Html;
+
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.google.gwt.user.client.ui.Button;
 
 import container.walks.AssignScreenPositions;
 
@@ -25,45 +31,62 @@ public class CompoundTerm extends Term {
 
 	@Override
 	public String toString(){
-		String st = "";
+		
+		String html = "";
         String operator = "";
         try {
             operator = function.newInstance().toString();
         } catch (Exception ignore){
-
         }
 
 
         for(int i = 0; i<this.getChildren().size(); i++){
             Term child = getChildren().get(i);
-            if (child instanceof SimpleTerm) {
-                st +="[";
+            String element = "<span %s>%s</span>";
+            List<String> classes = new ArrayList<String>();
+            if(child.isSimple()) {
+                classes.add("term");
+            } else {
+            	classes.add("compoundTerm");
             }
+            String content = "";
+            
             if (child.isNegative()) {
-                st += "-";
+            	classes.add("negative");
+            	content += "-";
             }
             if (child.isInverse()) {
-                st += "1/";
+            	classes.add("inverse");
+            	content += "1/";
             }
             if(child.hasParentheses()) {
-                st += "(" + child + ")";
+            	classes.add("parantheses");
             }
-            else {
-                st += child;
-            }
-             if (child instanceof SimpleTerm) {
-                st +="]";
-            }
+            
+            content += child.toString();
+            
+            String classList = "";
+            classList += "class=\'";
+        	for(String c: classes) {
+        		classList += c + " ";
+        	}
+        	classList += "\'";
+            element = String.format(element, classList, content);
+            
+            html += element;
+            
             if(this.getChildren().indexOf(child) < this.getChildren().size() - 1) {
-                 st += operator;
+            	html += "<span class=\'operator not-sortable\'>" + operator + "</span>";
             }
         }
-
-		return st;
+		return html;
 	}
 
-
-	
+	public Button getButton() {
+		final Button a = new Button("Start!");
+		a.setText("25");
+		return a;
+	}
 	
 
 /*

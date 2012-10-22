@@ -3,6 +3,7 @@ package com.mathfriend.server;
 import tree.Term;
 import tree.compound.CompoundTerm;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mathfriend.client.GreetingService;
 
@@ -13,7 +14,7 @@ import com.mathfriend.client.GreetingService;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
-	public String greetServer(String input) throws IllegalArgumentException {
+	public CompoundTerm greetServer(String input) throws IllegalArgumentException {
 	
 		String serverInfo = getServletContext().getServerInfo();
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
@@ -24,7 +25,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 		CompoundTerm term = (CompoundTerm)Term.getTermFromString(input);
 		
-		return term.toString();
+		
+		return term;
 	}
 
 	/**

@@ -2,7 +2,7 @@ package com.mathfriend.shared;
 
 public class FieldVerifier {
 
-	final static String[] invalidStrings = {"{", "}", "[", "]", "&", "!", "@", "\'", "\"", "#", "%", "-"};
+	final static String[] invalidStrings = {"{", "}", "[", "]", "&", "!", "@", "\'", "\"", "#", "%"};
 	
 	public static boolean isValidFormula(String formula) {
 		if (formula == null) {
