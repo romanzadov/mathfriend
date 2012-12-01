@@ -44,9 +44,8 @@ public class CompoundTerm extends Term {
             Term child = getChildren().get(i);
             String element = "<span %s>%s</span>";
             List<String> classes = new ArrayList<String>();
-            if(child.isSimple()) {
-                classes.add("term");
-            } else {
+            classes.add("term");
+            if(!child.isSimple()) {
             	classes.add("compoundTerm");
             }
             String content = "";

@@ -2,6 +2,7 @@ package com.mathfriend.client;
 
 import org.apache.tools.ant.taskdefs.Javadoc.Html;
 
+import tree.Term;
 import tree.compound.CompoundTerm;
 
 import com.mathfriend.shared.FieldVerifier;
@@ -98,15 +99,15 @@ public class MathFriend implements EntryPoint {
 
 				// Then, we send the input to the server.
 				greetingService.greetServer(formula,
-						new AsyncCallback<CompoundTerm>() {
+						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								formulaHtml
 										.setText(caught.getMessage());
 							}
 
-							public void onSuccess(CompoundTerm term) {
-								formulaHtml.setText(term.toString());
+							public void onSuccess(String term) {
+								formulaHtml.setHTML(term.toString());
 							}
 						});
 			}

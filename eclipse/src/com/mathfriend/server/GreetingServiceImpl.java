@@ -14,7 +14,7 @@ import com.mathfriend.client.GreetingService;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
-	public CompoundTerm greetServer(String input) throws IllegalArgumentException {
+	public String greetServer(String input) throws IllegalArgumentException {
 	
 		String serverInfo = getServletContext().getServerInfo();
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
@@ -26,7 +26,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		CompoundTerm term = (CompoundTerm)Term.getTermFromString(input);
 		
 		
-		return term;
+		return term.toString();
 	}
 
 	/**
