@@ -51,8 +51,10 @@ h1 {
 	display: inline-block;
 	border: 1px solid black;
 	padding-top: 10px;
+	cursor: default;
 }
 .selected {
+	cursor: pointer;
 	background: orange;
 }
 .not-sortable {

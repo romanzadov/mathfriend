@@ -1,23 +1,24 @@
 $(function() {
-	$('button').click(attachDraggable);
+	window.setInterval(attachDraggable,100);
 });
 
 function attachDraggable() {
-	$( ".term" ).mousedown(select);
-	$("span, .gwt-HTML").sortable({cancel: ".not-sortable"});
+	$( ".term" ).mouseup(select);
+	$(".selected").parent().sortable({cancel: ".not-sortable"});
 }
 
+
+var lastEvent;
 function select(event) {
-	if (event.gotSelection) {
-		//already selected
-	} else {
-		if ($(this).hasClass("selected")) {
-			event.gotSelection = true;
-		}
-		else if (!$(this).parent().hasClass("term") || $(this).parent().hasClass("selected")) {
-			$( ".term" ).removeClass("selected");
-			$(this).addClass("selected");
-			event.gotSelection = true;
+	if (!$(this).hasClass("selected")) {
+		if (!$(this).parent().hasClass("term") || $(this).parent().hasClass("selected")) {
+			if (lastEvent != event.originalEvent) {
+				$( ".term" ).removeClass("selected");
+				$(this).addClass("selected");
+				lastEvent = event.originalEvent;
+			}
 		} 	
 	}
 }
+
+//disable select after drag
