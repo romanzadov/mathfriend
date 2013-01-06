@@ -41,22 +41,22 @@ h1 {
 }
 .term {
 	font-size: 16px;
-	background: red;
 	text-align: center;
-	vertical-align: bottom;
+	vertical-align: middle;
 	display: inline-block;
 	border: 1px solid black;
 	padding-top: 10px;
 	cursor: default;
 }
-.term .plus {
-	background: url('img/operators.jpg') 10px 10px no-repeat;
-	background-size: 20px 5px;
+.compoundTerm {
+	padding: 0;
 }
 .selected {
 	cursor: pointer;
 	background: orange;
 }
-.not-sortable {
-	background: green;
+.Fraction .fractionBar {
+	margin: 2px 0;
+	background: black;
 }
+

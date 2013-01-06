@@ -129,8 +129,8 @@ public class TimesTerm {
 
 						CompoundTerm kid = tr.getCompoundChildren().get(i);
 
-						if(
-                                //kid.isDecimal() ||
+						/*if(
+                                kid.isDecimal() ||
                                         kid.isFraction()){
 							if(firstMultiple == null){
 								firstMultiple = kid;
@@ -150,15 +150,15 @@ public class TimesTerm {
 								}
 
 								//remove the second addent and replace the first addent with our result
-	/*							resultingTerm = TimesMove.removeChild(resultingTerm, tr.getChilds().indexOf(secondMultiple));
+								resultingTerm = TimesMove.removeChild(resultingTerm, tr.getChilds().indexOf(secondMultiple));
 								resultingTerm = TimesMove.replaceMultiplicativeTerm(resultingTerm, result, tr.getChilds().indexOf(firstMultiple));
-*/
+
 								done = true;
 							}
-						}
+						}*/
 
 
-					}
+					} 
 				}
 			}
 

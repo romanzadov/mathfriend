@@ -6,7 +6,9 @@ import parse.PreSimpleTerm;
 import parse.PreSimpleUtil;
 import representTerms.StringRectangle;
 import tree.compound.CompoundTerm;
+import tree.compound.Fraction;
 import tree.functions.Function;
+import tree.functions.Times;
 import display.Rectangle;
 import tree.simple.*;
 
@@ -15,7 +17,7 @@ import java.util.List;
 
 public abstract class Term implements Cloneable{
 
-    private CompoundTerm parent;
+    protected CompoundTerm parent;
     private boolean hasParentheses = false;
 	private boolean isNegative = false;
     private boolean isInverse = false;
@@ -63,8 +65,32 @@ public abstract class Term implements Cloneable{
                     ((CompoundTerm)term).addChild(child);
                 }
             }
+            if (function.equals(Times.class)) {
+            	ArrayList<Term> children = ((CompoundTerm)term).getChildren();
+            	ArrayList<Term> newChildren = new ArrayList<Term>();
+            	for (int i = 0; i<children.size(); i++) {
+            		Term child = children.get(i);
+            		if (child.isInverse()) {
+            			newChildren.add(Fraction.getOneOverTerm(child));
+            		} else if (i == children.size() - 1) 
+            			newChildren.add(child);
+            		else {
+            			Term nextChild = children.get(i + 1);
+            			if (nextChild.isInverse()) {
+            				Fraction fraction = new Fraction(child, nextChild);
+	            			newChildren.add(fraction);
+	            			i = i+1;
+            			} else {
+            				newChildren.add(child);
+            			}
+            		}
+            	}
+            	((CompoundTerm)term).setChildren(newChildren);
+            }
         }
-
+        
+        
+        
         return term;
     }
 

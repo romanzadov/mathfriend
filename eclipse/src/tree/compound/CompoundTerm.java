@@ -76,7 +76,7 @@ public class CompoundTerm extends Term {
         return String.format(html, classList, content);        
 	}
 	
-	private String getContent(Term child) {
+	protected String getContent(Term child) {
 		if (child.isSimple()) {
 	        String html = "<span %s>" + child.toString() + "</span>";
 	        List<String> classes = new ArrayList<String>();
