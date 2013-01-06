@@ -16,6 +16,7 @@ gwt-unitCache/
 # Target-specific files
 web/WEB-INF/override.properties
 web/WEB-INF/log4j.properties
+war/
 
 # JUnit temp files
 junit*.properties

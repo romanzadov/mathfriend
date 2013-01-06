@@ -32,61 +32,74 @@ public class CompoundTerm extends Term {
 	@Override
 	public String toString(){
 		
-		String html = "";
-        String operator = "";
-        try {
-            operator = function.newInstance().toString();
-        } catch (Exception ignore){
+        String html = "<span %s>%s</span>";
+        List<String> classes = new ArrayList<String>();
+        classes.add("term");
+        if(!this.isSimple()) {
+        	classes.add("compoundTerm");
+        	classes.add(function.getSimpleName());
         }
-
-
+        String content = "";
+        if (this.isInverse()) {
+        	classes.add("inverse");
+        }
+        if(this.hasParentheses()) {
+        	classes.add("parantheses");
+        }
+        
         for(int i = 0; i<this.getChildren().size(); i++){
-            Term child = getChildren().get(i);
-            String element = "<span %s>%s</span>";
-            List<String> classes = new ArrayList<String>();
-            classes.add("term");
-            if(!child.isSimple()) {
-            	classes.add("compoundTerm");
-            }
-            String content = "";
-            
-            if (child.isNegative()) {
-            	classes.add("negative");
-            	content += "-";
-            }
-            if (child.isInverse()) {
-            	classes.add("inverse");
-            	content += "1/";
-            }
-            if(child.hasParentheses()) {
-            	classes.add("parantheses");
-            }
-            
-            content += child.toString();
-            
-            String classList = "";
-            classList += "class=\'";
-        	for(String c: classes) {
-        		classList += c + " ";
-        	}
-        	classList += "\'";
-            element = String.format(element, classList, content);
-            
-            html += element;
-            
-            if(this.getChildren().indexOf(child) < this.getChildren().size() - 1) {
-            	html += "<span class=\'operator not-sortable\'>" + operator + "</span>";
+        	
+            content += getContent(getChildren().get(i));
+            if(i < this.getChildren().size() - 1) {
+            	String operator = "";
+            	if (function == Equals.class) {
+            		operator = "=";
+            	} else if (function == Plus.class) {
+            		Term nextChild = this.getChildren().get(i + 1);
+            		if (nextChild.isNegative()) {
+            			operator = "-";
+            		} else {
+            			operator = "+";
+            		}
+            	} 
+            	content += "<span class=\'operator\'>" + operator + "</span>";
             }
         }
-		return html;
-	}
-
-	public Button getButton() {
-		final Button a = new Button("Start!");
-		a.setText("25");
-		return a;
+        
+        String classList = "";
+        classList += "class=\'";
+    	for(String c: classes) {
+    		classList += c + " ";
+    	}
+    	classList += "\'";
+    	
+        return String.format(html, classList, content);        
 	}
 	
+	private String getContent(Term child) {
+		if (child.isSimple()) {
+	        String html = "<span %s>" + child.toString() + "</span>";
+	        List<String> classes = new ArrayList<String>();
+	        classes.add("term");
+	        classes.add(child.getClass().getSimpleName());
+	        if (child.isInverse()) {
+	        	classes.add("inverse");
+	        }
+	        if(child.hasParentheses()) {
+	        	classes.add("parantheses");
+	        }	
+	        String classList = "";
+	        classList += "class=\'";
+	    	for(String c: classes) {
+	    		classList += c + " ";
+	    	}
+	    	classList += "\'";
+	    	
+	        return String.format(html, classList);   
+		} else {
+			return child.toString();
+		}
+	}
 
 /*
 	public CompoundTerm MultiplyLikeTerms(CompoundTerm tr){
@@ -282,22 +295,6 @@ public class CompoundTerm extends Term {
 				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
 			fraction = true;
 		}*/
-		return fraction;
-	}
-	
-	public boolean isFraction(){
-		CompoundTerm tr = this;
-		boolean fraction = false;
-		/*if(tr.isSimpleFraction()){
-			fraction = true;
-		}
-		else if(tr instanceof Fraction){
-			fraction = true;
-		}
-		else if(tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 ){
-			fraction = true;
-		}*/
-		
 		return fraction;
 	}
 

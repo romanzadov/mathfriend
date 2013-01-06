@@ -37,13 +37,9 @@ h1 {
 }
 
 .term, .operator {
-	padding: 5px 10px;
+	padding: 5px 10px 0 10px;
 }
-.operator {
-	font-size: 16px;
-	display: inline-block;
-}
-.term, .compoundTerm {
+.term {
 	font-size: 16px;
 	background: red;
 	text-align: center;
@@ -52,6 +48,10 @@ h1 {
 	border: 1px solid black;
 	padding-top: 10px;
 	cursor: default;
+}
+.term .plus {
+	background: url('img/operators.jpg') 10px 10px no-repeat;
+	background-size: 20px 5px;
 }
 .selected {
 	cursor: pointer;

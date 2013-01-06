@@ -4,7 +4,6 @@ $(function() {
 
 function attachDraggable() {
 	$( ".term" ).mouseup(select);
-	$(".selected").parent().sortable({cancel: ".not-sortable"});
 }
 
 
