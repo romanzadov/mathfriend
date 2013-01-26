@@ -32,20 +32,16 @@ public class CompoundTerm extends Term {
 	@Override
 	public String toString(){
 		
-        String html = "<span %s>%s</span>";
+        String html = "<mrow %s>%s</mrow>";
+        if (this.hasParentheses()) {
+        	 html = "<mfenced separators=\'\' %s>%s</mfenced>";
+        }
         List<String> classes = new ArrayList<String>();
         classes.add("term");
-        if(!this.isSimple()) {
-        	classes.add("compoundTerm");
-        	classes.add(function.getSimpleName());
-        }
+    	classes.add("compoundTerm");
+    	classes.add(function.getSimpleName());
+    	
         String content = "";
-        if (this.isInverse()) {
-        	classes.add("inverse");
-        }
-        if(this.hasParentheses()) {
-        	classes.add("parantheses");
-        }
         
         for(int i = 0; i<this.getChildren().size(); i++){
         	
@@ -62,7 +58,9 @@ public class CompoundTerm extends Term {
             			operator = "+";
             		}
             	} 
-            	content += "<span class=\'operator\'>" + operator + "</span>";
+            	if (content != "") {
+            		content += "<mo>" + operator + "</mo>";
+            	}	
             }
         }
         
@@ -79,15 +77,19 @@ public class CompoundTerm extends Term {
 	protected String getContent(Term child) {
 		if (child.isSimple()) {
 	        String html = "<span %s>" + child.toString() + "</span>";
+	        if (child instanceof tree.simple.Variable) {
+		        html = "<mi %s>" + child.toString() + "</mi>";
+	        } else if (child instanceof tree.simple.Number) {
+		        html = "<mn %s>" + child.toString() + "</mn>";
+	        }
+	        
 	        List<String> classes = new ArrayList<String>();
 	        classes.add("term");
 	        classes.add(child.getClass().getSimpleName());
 	        if (child.isInverse()) {
 	        	classes.add("inverse");
 	        }
-	        if(child.hasParentheses()) {
-	        	classes.add("parantheses");
-	        }	
+
 	        String classList = "";
 	        classList += "class=\'";
 	    	for(String c: classes) {

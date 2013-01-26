@@ -1,10 +1,19 @@
 $(function() {
-	window.setInterval(attachDraggable,100);
+	window.setInterval(setup,100);
+	
 });
 
-function attachDraggable() {
-	$( ".term" ).mouseup(select);
+function setup() {
+	$('.term').mouseup(select);
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
+
+var timeoutId = 0;
+$('.term').mousedown(function() {
+    timeoutId = setTimeout(createDoubleToDrag(term), 500);
+}).bind('mouseup mouseleave', function() {
+    clearTimeout(timeoutId);
+});
 
 
 var lastEvent;
@@ -20,4 +29,13 @@ function select(event) {
 	}
 }
 
-//disable select after drag
+function createDoubleToDrag(term) {
+	var x = $(term).clone();
+	$('#draggedTerm').html(x);
+	$(document).bind('mousemove', function(e){
+	    $('#draggedTerm').css({
+	       left:  e.pageX - 20,
+	       top:   e.pageY - 180
+	    });
+	});
+}

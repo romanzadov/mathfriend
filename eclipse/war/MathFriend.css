@@ -59,4 +59,6 @@ h1 {
 	margin: 2px 0;
 	background: black;
 }
-
+#draggedTerm {
+	position: absolute;
+}

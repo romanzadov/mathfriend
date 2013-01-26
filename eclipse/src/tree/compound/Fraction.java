@@ -48,7 +48,7 @@ public class Fraction extends CompoundTerm{
 	
 	@Override
 	public String toString() {
-		String html = "<span %s>%s</span>";
+		String html = "<mfrac %s>%s</mfrac>";
         List<String> classes = new ArrayList<String>();
         classes.add("term");
         if(!this.isSimple()) {
@@ -57,12 +57,8 @@ public class Fraction extends CompoundTerm{
         }
         String content = "";
 
-        if(this.hasParentheses()) {
-        	classes.add("parantheses");
-        }
         
-        content += getContent(numerator);
-        content += "<div class=\'operator fractionBar\'></div>";
+        content += getContent(numerator) +" ";
         content += getContent(denominator);
         
         String classList = "";

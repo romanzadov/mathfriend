@@ -107,7 +107,8 @@ public class MathFriend implements EntryPoint {
 							}
 
 							public void onSuccess(String term) {
-								formulaHtml.setHTML(term.toString());
+								formulaHtml.setHTML("<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">"
+									+ term.toString() + "</math>");
 							}
 						});
 			}

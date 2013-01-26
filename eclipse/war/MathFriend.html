@@ -11,11 +11,17 @@
     <link type="text/css" rel="stylesheet" href="MathFriend.css">
 
     <title>Web Application Starter Project</title>
-    
+    <script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    jax: ["output/HTML-CSS"]
+	  });
+	</script>
     <script type="text/javascript" language="javascript" src="mathfriend/mathfriend.nocache.js"></script>
     <script src="js/jquery-1.7.2.min.js"></script>
 	<script src="js/jquery-ui-1.8.21.custom.min.js"></script>
 	<script src="js/jquery.ui.touch-punch.min.js"></script>
+	<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!--	<script src="js/mathjax-MathJax-24a378e/MathJax.js" type="text/javascript"></script> -->
 	<script type="text/javascript" language="javascript" src="js/main.js"></script>
   </head>
   <body>
@@ -39,7 +45,9 @@
       </tr>
     </table>
     <div id="formulaContainer">
-      
-    </div>
+
+	</div>    
+	  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" id="draggedTerm">
+	  </math>
   </body>
 </html>
