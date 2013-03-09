@@ -59,4 +59,10 @@ h1 {
 	margin: 2px 0;
 	background: black;
 }
-
+.ghosted {
+	color: white;
+	background: white;
+}
+#ghostContainer {
+	position: absolute;
+}
