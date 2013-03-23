@@ -32,7 +32,7 @@ public class CompoundTerm extends Term {
 	@Override
 	public String toString(){
 		
-        String html = "<span %s>%s</span>";
+        String html = "<span %s %s>%s</span>";
         List<String> classes = new ArrayList<String>();
         classes.add("term");
         if(!this.isSimple()) {
@@ -72,13 +72,13 @@ public class CompoundTerm extends Term {
     		classList += c + " ";
     	}
     	classList += "\'";
-    	
-        return String.format(html, classList, content);        
+    	String id = "data-id = \""+this.hashCode()+"\"";
+        return String.format(html, classList, id, content);        
 	}
 	
 	protected String getContent(Term child) {
 		if (child.isSimple()) {
-	        String html = "<span %s>" + child.toString() + "</span>";
+	        String html = "<span %s %s>" + child.toString() + "</span>";
 	        List<String> classes = new ArrayList<String>();
 	        classes.add("term");
 	        classes.add(child.getClass().getSimpleName());
@@ -94,8 +94,8 @@ public class CompoundTerm extends Term {
 	    		classList += c + " ";
 	    	}
 	    	classList += "\'";
-	    	
-	        return String.format(html, classList);   
+	    	String id = "data-id = \""+this.hashCode()+"\"";
+	        return String.format(html, classList, id);   
 		} else {
 			return child.toString();
 		}

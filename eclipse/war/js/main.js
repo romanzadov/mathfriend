@@ -1,9 +1,10 @@
 $(function() {
 	window.setInterval(attachDraggable,100);
 	$(document).bind('mousemove', function(e){
-	    $('#ghostContainer').css({
-	       left:  e.pageX,
-	       top:   e.pageY + 20
+		var ghost = $('#ghostContainer');
+	    ghost.css({
+	       left:  e.pageX + 30,
+	       top:   e.pageY - 30
 	    });
 	});
 });
@@ -15,7 +16,7 @@ function attachDraggable() {
 var selected;
 var lastEvent;
 function select(event) {
-	if (!$(this).hasClass("selected") && !ghostMade) {
+	if (!$(this).hasClass("selected") && (ghost == null)) {
 		if (!$(this).parent().hasClass("term") || $(this).parent().hasClass("selected")) {
 			if (lastEvent != event.originalEvent) {
 				$( ".term" ).removeClass("selected");
@@ -30,8 +31,11 @@ function select(event) {
 
 function makeDraggable(term) {
 	var pressTimer
-	$("body").mouseup(function(){
+	$("body").mouseup(function(event){
 	  clearTimeout(pressTimer);
+	  if (ghost != null) {
+		  postDrop(ghost.data().id, $(event.target).data().id);
+	  }
 	  clearGhost();
 	  return false;
 	}).mousedown(function(){
@@ -42,15 +46,23 @@ function makeDraggable(term) {
 	});
 }
 
-var ghostMade = false;
+function postDrop(ghost, target) {
+	$.ajax({
+        url: "/drag",
+        type: "POST",
+        data: {ghostId:"" + ghost, targetId:""+target}
+    });
+}
+
+var ghost= null;
 function makeGhost(term) {
 	$('#ghostContainer').html(term.clone());
 	$(".ghosted").removeClass("ghosted");
 	term.addClass('ghosted');
-	ghostMade = true;
+	ghost = term;
 }
 function clearGhost() {
 	$('#ghostContainer').html("");
 	$(".ghosted").removeClass("ghosted");
-	ghostMade = false;
+	ghost = null;
 }
