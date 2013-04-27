@@ -8,5 +8,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface GreetingServiceAsync {
-	void greetServer(String name, AsyncCallback<String> callback);
+	void getFirstCompoundTermHtml(String formula, AsyncCallback<String> callback);
+	void getMovedTerm(int downId, int ghostId, AsyncCallback<String> callback);
 }

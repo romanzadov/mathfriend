@@ -94,12 +94,8 @@ public abstract class Term implements Cloneable{
         return term;
     }
 
-
     protected abstract StringRectangle getStringRectangle();
 
-  /*  protected StringRectangle makeNegative() {
-
-    }*/
 
     @Override
 	public Object clone() throws CloneNotSupportedException {

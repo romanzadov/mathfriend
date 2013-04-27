@@ -8,12 +8,20 @@ import tree.compound.CompoundTerm;
 import com.mathfriend.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -25,21 +33,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import container.walks.newparens;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
+
 public class MathFriend implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
+	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
+	
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
 
@@ -66,7 +67,30 @@ public class MathFriend implements EntryPoint {
 		
 		final HTML formulaHtml = new HTML();
 		RootPanel.get("formulaContainer").add(formulaHtml);
+	
+		final Element ghost = RootPanel.get("ghostContainer").getElement();
+		class FormulaHandler implements MouseUpHandler {
+			@Override
+			public void onMouseUp(MouseUpEvent event) {
+				EventTarget x = event.getNativeEvent().getEventTarget();
+				Integer dropId = getIdFromHtml(x.toString());
+				
+				String html =  RootPanel.get("ghostContainer").getElement().getInnerHTML();
+				Integer ghostId = getIdFromHtml(html);
+				System.out.println("GhostId: " + ghostId + " | eventId: " + dropId);
+				
+				greetingService.getMovedTerm(dropId, ghostId, 
+					new AsyncCallback<String>() {
+					public void onFailure(Throwable caught) {
+					}
 
+					public void onSuccess(String term) {
+						formulaHtml.setHTML(term.toString());
+					}
+				});
+			}
+		}
+		
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
 			/**
@@ -98,7 +122,7 @@ public class MathFriend implements EntryPoint {
 				}
 
 				// Then, we send the input to the server.
-				greetingService.greetServer(formula,
+				greetingService.getFirstCompoundTermHtml(formula,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
@@ -117,5 +141,17 @@ public class MathFriend implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+		
+		FormulaHandler formulaHandler = new FormulaHandler();
+		formulaHtml.addMouseUpHandler(formulaHandler);
+	}
+	
+	private Integer getIdFromHtml(String html) {
+		if (html.contains("data-id=\"")) {
+			String afterId = html.split("data-id=\"")[1];
+			String beforeQuote = afterId.split("\"")[0];
+			return Integer.valueOf(beforeQuote);
+		}
+		return null;
 	}
 }

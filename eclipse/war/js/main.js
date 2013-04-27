@@ -47,11 +47,7 @@ function makeDraggable(term) {
 }
 
 function postDrop(ghost, target) {
-	$.ajax({
-        url: "/drag",
-        type: "POST",
-        data: {ghostId:"" + ghost, targetId:""+target}
-    });
+
 }
 
 var ghost= null;

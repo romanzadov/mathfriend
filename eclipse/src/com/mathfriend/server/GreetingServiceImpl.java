@@ -1,20 +1,24 @@
 package com.mathfriend.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tree.Term;
+import tree.TermUtil;
 import tree.compound.CompoundTerm;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mathfriend.client.GreetingService;
 
-/**
- * The server side implementation of the RPC service.
- */
+
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
+	
+	private List<CompoundTerm> terms = new ArrayList<CompoundTerm>();
 
-	public String greetServer(String input) throws IllegalArgumentException {
+	public String getFirstCompoundTermHtml(String input) throws IllegalArgumentException {
 	
 		String serverInfo = getServletContext().getServerInfo();
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
@@ -23,24 +27,41 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		CompoundTerm term = (CompoundTerm)Term.getTermFromString(input);
-		
-		
+		CompoundTerm term = (CompoundTerm)Term.getTermFromString(input);		
+		terms.add(term);
 		return term.toString();
 	}
 
-	/**
-	 * Escape an html string. Escaping data received from the client helps to
-	 * prevent cross-site script vulnerabilities.
-	 * 
-	 * @param html the html string to escape
-	 * @return the escaped string
-	 */
+
+	
+	public String getCompoundTermHtmlFromOperation(int endTermId) {
+		CompoundTerm currentTerm = terms.get(terms.size() - 1);
+		Term endTerm = TermUtil.getDescendantById(currentTerm, endTermId);
+
+		if (endTerm == null) {
+			return currentTerm.toString();
+		}
+		return currentTerm.toString();
+	}
+	
 	private String escapeHtml(String html) {
 		if (html == null) {
 			return null;
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
+	}
+
+
+
+	@Override
+	public String getMovedTerm(int downId, int ghostId) {
+		CompoundTerm lastTerm = terms.get(terms.size() - 1);
+		Term down = TermUtil.getDescendantById(lastTerm, downId);
+		Term ghost = TermUtil.getDescendantById(lastTerm, ghostId);
+		if (down == null  || ghost == null) {
+			return null;
+		}
+		return null;
 	}
 }
