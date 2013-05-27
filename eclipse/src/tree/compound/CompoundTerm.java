@@ -48,7 +48,9 @@ public class CompoundTerm extends Term {
         }
         
         for(int i = 0; i<this.getChildren().size(); i++){
-        	
+        	if (i == 0 && this.getChildren().get(0).isNegative()) {
+        		content += "-";
+        	}
             content += getContent(getChildren().get(i));
             if(i < this.getChildren().size() - 1) {
             	String operator = "";
@@ -94,7 +96,7 @@ public class CompoundTerm extends Term {
 	    		classList += c + " ";
 	    	}
 	    	classList += "\'";
-	    	String id = "data-id = \""+this.hashCode()+"\"";
+	    	String id = "data-id = \""+child.hashCode()+"\"";
 	        return String.format(html, classList, id);   
 		} else {
 			return child.toString();
@@ -298,12 +300,12 @@ public class CompoundTerm extends Term {
 		return fraction;
 	}
 
-    public void insertChild(int index, CompoundTerm child) {
+    public void insertChild(int index, Term child) {
         children.add(index, child);
         child.setParent(this);
     }
 
-    public void setChild(int index, CompoundTerm child) {
+    public void setChild(int index, Term child) {
         children.set(index, child);
         child.setParent(this);
     }
@@ -397,5 +399,6 @@ public class CompoundTerm extends Term {
     protected StringRectangle getStringRectangle() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
+    
 }
 

@@ -79,7 +79,7 @@ public class MathFriend implements EntryPoint {
 				Integer ghostId = getIdFromHtml(html);
 				System.out.println("GhostId: " + ghostId + " | eventId: " + dropId);
 				
-				greetingService.getMovedTerm(dropId, ghostId, 
+				greetingService.getMovedTerm(ghostId, dropId, 
 					new AsyncCallback<String>() {
 					public void onFailure(Throwable caught) {
 					}

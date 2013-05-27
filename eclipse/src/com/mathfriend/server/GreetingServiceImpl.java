@@ -31,18 +31,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		terms.add(term);
 		return term.toString();
 	}
-
-
 	
-	public String getCompoundTermHtmlFromOperation(int endTermId) {
-		CompoundTerm currentTerm = terms.get(terms.size() - 1);
-		Term endTerm = TermUtil.getDescendantById(currentTerm, endTermId);
-
-		if (endTerm == null) {
-			return currentTerm.toString();
-		}
-		return currentTerm.toString();
-	}
+	
 	
 	private String escapeHtml(String html) {
 		if (html == null) {
@@ -62,6 +52,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		if (down == null  || ghost == null) {
 			return null;
 		}
-		return null;
+		return TermUtil.getOperationResult(lastTerm, down, ghost).toString();
 	}
 }

@@ -59,7 +59,8 @@ public abstract class Term implements Cloneable{
 
                 Term child = getTerm(grouping.getPreSimpleTerms());
                 if (child != null) {
-                    if(!child.isNegative()) {child.setNegative(grouping.isNegative());}
+            		child.setParent((CompoundTerm)term);
+                	if(!child.isNegative()) {child.setNegative(grouping.isNegative());}
                     if(!child.isInverse()) {child.setInverse(grouping.isInverse());}
                     if(!child.hasParentheses()) {child.setHasParentheses(grouping.hasParentheses());}
                     ((CompoundTerm)term).addChild(child);
@@ -88,7 +89,6 @@ public abstract class Term implements Cloneable{
             	((CompoundTerm)term).setChildren(newChildren);
             }
         }
-        
         
         
         return term;
