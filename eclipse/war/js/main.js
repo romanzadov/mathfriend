@@ -19,8 +19,13 @@ function select(event) {
 	if (!$(this).hasClass("selected") && (ghost == null)) {
 		if (!$(this).parent().hasClass("term") || $(this).parent().hasClass("selected")) {
 			if (lastEvent != event.originalEvent) {
-				$( ".term" ).removeClass("selected");
+				$(".term").removeClass("selected");
 				$(this).addClass("selected");
+				
+				$(".term").removeClass("parent");
+				if ($(this).parent().hasClass("compoundTerm")) {
+					$(this).parent().addClass("parent");
+				}
 				selected = $(this);
 				makeDraggable(selected);
 				lastEvent = event.originalEvent;

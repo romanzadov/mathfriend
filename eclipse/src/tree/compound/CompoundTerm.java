@@ -3,17 +3,11 @@ package tree.compound;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tools.ant.taskdefs.Javadoc.Html;
-
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.google.gwt.user.client.ui.Button;
-
 import container.walks.AssignScreenPositions;
 
 import representTerms.StringRectangle;
 import tree.Term;
 import tree.functions.*;
-import tree.simple.SimpleTerm;
 
 public class CompoundTerm extends Term {
 
@@ -64,7 +58,9 @@ public class CompoundTerm extends Term {
             			operator = "+";
             		}
             	} 
-            	content += "<span class=\'operator\'>" + operator + "</span>";
+            	if (operator != "") {
+            		content += "<span class=\'operator\'>" + operator + "</span>";
+            	}
             }
         }
         
