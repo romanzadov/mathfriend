@@ -8,7 +8,6 @@ import representTerms.StringRectangle;
 import tree.compound.CompoundTerm;
 import tree.compound.Fraction;
 import tree.functions.Function;
-import tree.functions.Times;
 import display.Rectangle;
 import tree.simple.*;
 
@@ -51,7 +50,7 @@ public abstract class Term implements Cloneable{
         }
         
         if (term == null) {
-            Class<? extends Function> function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
+            Function function = TermContsructionUtil.getHighestPriorityFunction(preSimpleTerms);
             term = new CompoundTerm(function);
 
             List<PreSimpleTermGrouping> groupings = TermContsructionUtil.getGroupings(preSimpleTerms, function);
@@ -66,7 +65,7 @@ public abstract class Term implements Cloneable{
                     ((CompoundTerm)term).addChild(child);
                 }
             }
-            if (function.equals(Times.class)) {
+            if (function.equals(Function.TIMES)) {
             	ArrayList<Term> children = ((CompoundTerm)term).getChildren();
             	ArrayList<Term> newChildren = new ArrayList<Term>();
             	for (int i = 0; i<children.size(); i++) {

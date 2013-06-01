@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tree.Term;
+import tree.simple.Number;
 import tree.functions.Function;
-import tree.functions.Times;
 
 public class Fraction extends CompoundTerm{
 
@@ -13,19 +13,19 @@ public class Fraction extends CompoundTerm{
 	private Term denominator;
 	
 	public static Fraction getOneOverTerm(final Term denominator) {
-		final tree.simple.Number numerator = new tree.simple.Number(1);
+		final Number numerator = new Number(1);
 		numerator.setParent(denominator.getParent());
 		return new Fraction(numerator, denominator);
 	}
 	
 	public static Fraction getIdentityFraction(final Term numerator) {
-		final tree.simple.Number denominator = new tree.simple.Number(1);
+		final Number denominator = new Number(1);
 		denominator.setParent(numerator.getParent());
 		return new Fraction(numerator, denominator);
 	}
 	
 	public Fraction(final Term numerator, final Term denominator) {
-		super(Times.class);
+		super(Function.TIMES);
 		this.numerator = numerator;
 		this.denominator = denominator;
 		this.parent = numerator.getParent();
@@ -35,7 +35,7 @@ public class Fraction extends CompoundTerm{
 	
 	@Override
 	public Function getFunction() {
-		return new Times();
+		return Function.TIMES;
 	}
 	
 	@Override
@@ -48,7 +48,7 @@ public class Fraction extends CompoundTerm{
 	
 	@Override
 	public String toString() {
-		String html = "<span %s>%s</span>";
+		String html = "<span %s %s>%s</span>";
         List<String> classes = new ArrayList<String>();
         classes.add("term");
         if(!this.isSimple()) {
@@ -72,7 +72,8 @@ public class Fraction extends CompoundTerm{
     	}
     	classList += "\'";
     	
-        return String.format(html, classList, content);     
+    	String id = "data-id = \""+ hashCode()+"\"";
+        return String.format(html, classList, id, content);     
 	}
 	
 	public Term getNumerator() {

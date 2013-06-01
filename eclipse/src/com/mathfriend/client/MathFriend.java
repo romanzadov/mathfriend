@@ -77,7 +77,6 @@ public class MathFriend implements EntryPoint {
 				
 				String html =  RootPanel.get("ghostContainer").getElement().getInnerHTML();
 				Integer ghostId = getIdFromHtml(html);
-				System.out.println("GhostId: " + ghostId + " | eventId: " + dropId);
 				
 				greetingService.getMovedTerm(ghostId, dropId, 
 					new AsyncCallback<String>() {

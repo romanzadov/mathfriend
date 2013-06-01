@@ -3,7 +3,7 @@ package move;
 import move.identify.selectterm;
 import tree.compound.CompoundTerm;
 import display.Point;
-import tree.functions.Equals;
+import tree.functions.Function;
 
 public class plusmove {
 
@@ -14,7 +14,7 @@ public class plusmove {
 		
 		if(endterm == null){
 			
-			if(selected.getParent().getParent().getFunction() instanceof Equals){
+			if(selected.getParent().getParent().getFunction().equals(Function.EQUALS)){
 				CompoundTerm higherterm = st.whichterm(selected.getParent().getParent(), x, y, new Point(0,0), 0);
 				endterm = st.whichterm(higherterm, x, y, new Point(0,0), 0);
 			

@@ -11,26 +11,25 @@ import tree.functions.*;
 
 public class TermContsructionUtil {
 
-    public static Class<? extends Function> getHighestPriorityFunction(List<PreSimpleTerm> preSimpleTerms) {
-        Class<? extends Function> primaryPreFunction = null;
+    public static Function getHighestPriorityFunction(List<PreSimpleTerm> preSimpleTerms) {
+        Function primaryPreFunction = null;
         int order = Integer.MAX_VALUE;
         Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
 
         for (int i = 0; i < preSimpleTerms.size(); i++) {
             PreSimpleTerm preSimpleTerm = preSimpleTerms.get(i);
             if (preSimpleTerm.getType().equals(PreSimpleTerm.Type.FUNCTION)) {
-
-                if (Function.getOrderOfOperation(preSimpleTerm) < order) {
+                if (preSimpleTerm.getFunctionType().getFunction().orderOfOperation < order) {
                     primaryPreFunction = preSimpleTerm.getFunctionType().getFunction();
-                    order = Function.getOrderOfOperation(preSimpleTerm);
+                    order = preSimpleTerm.getFunctionType().getFunction().orderOfOperation;
                 }
             }
 
             //check for invisible multiplication
             if (hasInvisibleMultiplication(preSimpleTerm, preSimpleTerms)) {
-                if (Function.getOrderOfOperation(Times.class) < order) {
-                    primaryPreFunction = Times.class;
-                    order = Function.getOrderOfOperation(Times.class);
+                if (Function.TIMES.orderOfOperation < order) {
+                    primaryPreFunction = Function.TIMES;
+                    order = Function.TIMES.orderOfOperation;
                 }
             }
 
@@ -43,7 +42,7 @@ public class TermContsructionUtil {
         return primaryPreFunction;
     }
 
-    public static List<PreSimpleTermGrouping> getGroupings(List<PreSimpleTerm> preSimpleTerms, Class<? extends Function> function) {
+    public static List<PreSimpleTermGrouping> getGroupings(List<PreSimpleTerm> preSimpleTerms, Function function) {
         List<PreSimpleTermGrouping> groupings = new ArrayList<PreSimpleTermGrouping>();
         Map<Integer, Integer> parentheses = ParenthesisUtil.getParenthesisGroups(preSimpleTerms);
         List<Integer> groupEndpoints = new ArrayList<Integer>();
@@ -76,7 +75,7 @@ public class TermContsructionUtil {
 
             }
             //if our function is multiplication, check for implicit multiplications like 2x
-            if (function == Times.class && !breakPointFound) {
+            if (function == Function.TIMES && !breakPointFound) {
                 breakPointFound = hasInvisibleMultiplication(preSimpleTerm, preSimpleTerms);
                 breakPoint = preSimpleTerms.indexOf(preSimpleTerm) + 1;
             }
@@ -107,7 +106,7 @@ public class TermContsructionUtil {
         return groupings;
     }
 
-    private static PreSimpleTermGrouping getPreSimpleTermGrouping(List<PreSimpleTerm> group, Class<? extends Function> function) {
+    private static PreSimpleTermGrouping getPreSimpleTermGrouping(List<PreSimpleTerm> group, Function function) {
         boolean isNegative = false;
         boolean isInverse = false;
         boolean hasParentheses = false;
@@ -136,7 +135,7 @@ public class TermContsructionUtil {
 
             } else if (PreSimpleTerm.FunctionType.NEGATIVE.equals(firstTerm.getFunctionType())) {
                 // this should account for the case of 5 = -10
-                if (Function.getOrderOfOperation(function) > Function.getOrderOfOperation(Plus.class)) {
+                if (function.orderOfOperation > Function.PLUS.orderOfOperation) {
                     isNegative = true;
                     group = remove(group, firstTerm);
 
@@ -145,9 +144,9 @@ public class TermContsructionUtil {
                 isInverse = true;
                 group = remove(group, firstTerm);
 
-            } else if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType()) && firstTerm.getFunctionType().getFunction() == AdvancedFunction.class) {
+            } /*else if (PreSimpleTerm.Type.FUNCTION.equals(firstTerm.getType()) && firstTerm.getFunctionType().getFunction() == AdvancedFunction.class) {
                 group = remove(group, firstTerm);
-            }
+            }*/
 
             if (isInParentheses(group)) {
                 hasParentheses = true;

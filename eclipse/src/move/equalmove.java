@@ -3,7 +3,6 @@ package move;
 import move.identify.selectterm;
 import representTerms.Image;
 import tree.compound.CompoundTerm;
-import tree.functions.Equals;
 
 public class equalmove {
 	

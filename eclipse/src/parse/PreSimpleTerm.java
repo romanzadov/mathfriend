@@ -16,28 +16,23 @@ public class PreSimpleTerm {
     private Constants.Constant constant;
 
     public static enum FunctionType {
-        PLUS("+", Plus.class),
-        MINUS("-", Plus.class),
-        TIMES("*", Times.class),
-        DIVIDE("/", Times.class),
-        NEGATIVE("-", Times.class),
-        EXPONENT("^", Exponent.class),
-        EQUALS("=", Equals.class),
-        SINE("sin", AdvancedFunction.class),
-        COSINE("cos", AdvancedFunction.class),
-        TANGENT("tan", AdvancedFunction.class),
-        LOG("log", AdvancedFunction.class),
-        LN("ln", AdvancedFunction.class);
+        PLUS("+", Function.PLUS),
+        MINUS("-", Function.PLUS),
+        TIMES("*", Function.TIMES),
+        DIVIDE("/", Function.TIMES),
+        NEGATIVE("-", Function.TIMES),
+        EXPONENT("^", Function.EXPONENT),
+        EQUALS("=", Function.EQUALS);
 
         private String representation;
-        private Class<? extends Function> function;
+        private Function function;
 
-        FunctionType(String representation, Class<? extends Function> function) {
+        FunctionType(String representation, Function function) {
             this.representation = representation;
             this.function = function;
         }
 
-        public Class<? extends Function> getFunction() {
+        public Function getFunction() {
             return function;
         }
 
