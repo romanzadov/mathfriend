@@ -1,7 +1,6 @@
 package tree.simple;
 
 import parse.PreSimpleTerm;
-import representTerms.StringRectangle;
 import tree.Term;
 
 public abstract class SimpleTerm extends Term {

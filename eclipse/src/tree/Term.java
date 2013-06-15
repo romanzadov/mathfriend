@@ -4,11 +4,9 @@ package tree;
 import parse.ParseCharacterUtil;
 import parse.PreSimpleTerm;
 import parse.PreSimpleUtil;
-import representTerms.StringRectangle;
 import tree.compound.CompoundTerm;
 import tree.compound.Fraction;
 import tree.functions.Function;
-import display.Rectangle;
 import tree.simple.*;
 
 import java.util.ArrayList;
@@ -28,6 +26,10 @@ public abstract class Term implements Cloneable{
         return getTerm(preSimpleTerms);
     }
 
+    public String toHtml() {
+    	return this.toString();
+    }
+    
     protected static Term getTerm(List<PreSimpleTerm> preSimpleTerms) {
         Term term = null;
 
@@ -93,18 +95,6 @@ public abstract class Term implements Cloneable{
         return term;
     }
 
-    protected abstract StringRectangle getStringRectangle();
-
-
-    @Override
-	public Object clone() throws CloneNotSupportedException {
-		String st = this.toString();
-		Term clone = getTermFromString(st);
-
-		return clone;
-	}
-
-
     public CompoundTerm getParent() {
         return parent;
     }
@@ -114,7 +104,7 @@ public abstract class Term implements Cloneable{
 
     }
 
-        public boolean hasParentheses() {
+    public boolean hasParentheses() {
         return hasParentheses;
     }
 
@@ -130,6 +120,10 @@ public abstract class Term implements Cloneable{
         isNegative = negative;
     }
 
+    public void toggleNegative() {
+    	isNegative = !isNegative;
+    }
+    
     public boolean isInverse() {
         return isInverse;
     }
@@ -137,19 +131,21 @@ public abstract class Term implements Cloneable{
     public void setInverse(boolean inverse) {
         isInverse = inverse;
     }
+    
+    public boolean isAdditive() {
+    	return (this instanceof CompoundTerm && ((CompoundTerm)this).getFunction().equals(Function.PLUS));
+    }
+    
+    public boolean isMultiplicative() {
+    	return (this instanceof CompoundTerm && ((CompoundTerm)this).getFunction().equals(Function.TIMES));
+    }
+    
+    public boolean isEquality() {
+    	return (this instanceof CompoundTerm && ((CompoundTerm)this).getFunction().equals(Function.EQUALS));
+    }
 
     public boolean isSimple() {
-        if (this instanceof SimpleTerm) {
-            return true;
-        }
-        return false;
+        return this instanceof SimpleTerm;
     }
 
-    public Rectangle getContainer() {
-        return null;
-    }
-
-    public void setContainer(Rectangle rectangle) {
-        
-    }
 }

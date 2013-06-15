@@ -1,7 +1,5 @@
 package tree.simple;
 
-import representTerms.StringRectangle;
-import display.Rectangle;
 
 public class Number extends SimpleTerm {
 	
@@ -35,16 +33,6 @@ public class Number extends SimpleTerm {
 	}
 
     public Number(){};
-
-	public StringRectangle getStringRectangle(){
-        String string = toString();
-		Rectangle container = new Rectangle();
-
-        container.height = 1;
-        container.width = string.length();
-        
-        return new StringRectangle(container, string);
-    }
 	
 	public void setvalue(double a){
 		absoluteValue = a;

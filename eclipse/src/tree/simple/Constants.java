@@ -1,7 +1,6 @@
 package tree.simple;
 
 import tree.compound.CompoundTerm;
-import display.Rectangle;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -46,23 +45,6 @@ public class Constants extends Number{
 
         public double getValue() {
             return value;
-        }
-
-        public Rectangle giverect(CompoundTerm tr) {
-            Rectangle a = new Rectangle();
-            if (value == Math.E) {
-                a.height = 1;
-                a.width = 1;
-                //	tr.toDraw = "e";
-                tr.setContainer(a);
-            }
-            if (value == Math.PI) {
-                a.height = 1;
-                a.width = 2;
-                //	tr.toDraw = "pi";
-                tr.setContainer(a);
-            }
-            return a;
         }
 
         public boolean isoperator() {

@@ -29,7 +29,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 		CompoundTerm term = (CompoundTerm)Term.getTermFromString(input);		
 		terms.add(term);
-		return term.toString();
+		return term.toHtml();
 	}
 	
 	
@@ -52,6 +52,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		if (down == null  || ghost == null) {
 			return null;
 		}
-		return TermUtil.getOperationResult(lastTerm, down, ghost).toString();
+		return TermUtil.getOperationResult(lastTerm, down, ghost).toHtml();
 	}
 }

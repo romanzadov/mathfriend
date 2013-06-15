@@ -2,10 +2,6 @@ package tree.compound;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import container.walks.AssignScreenPositions;
-
-import representTerms.StringRectangle;
 import tree.Term;
 import tree.functions.*;
 
@@ -20,11 +16,37 @@ public class CompoundTerm extends Term {
     }
 
     public void addChild(Term child) {
+    	child.setParent(this);
         children.add(child);
     }
 
-	@Override
-	public String toString(){
+    @Override
+    public String toString() {
+    	String content = "";
+    	for(int i = 0; i<this.getChildren().size(); i++){
+        	if (i == 0 && this.getChildren().get(0).isNegative()) {
+        		content += "-";
+        	}
+            content += getChildren().get(i).toString();
+            if(i < this.getChildren().size() - 1) {
+            	String operator = "";
+            	if (Function.EQUALS.equals(function)) {
+            		operator = "=";
+            	} else if (Function.PLUS.equals(function)) {
+            		Term nextChild = this.getChildren().get(i + 1);
+            		if (nextChild.isNegative()) {
+            			operator = "-";
+            		} else {
+            			operator = "+";
+            		}
+            	} 
+            	content +=  operator;
+            }
+        }
+    	return content;
+    }
+    
+	public String toHtml(){
 		
         String html = "<span %s %s>%s</span>";
         List<String> classes = new ArrayList<String>();
@@ -95,7 +117,7 @@ public class CompoundTerm extends Term {
 	    	String id = "data-id = \""+child.hashCode()+"\"";
 	        return String.format(html, classList, id);   
 		} else {
-			return child.toString();
+			return ((CompoundTerm)child).toHtml();
 		}
 	}
 
@@ -140,12 +162,7 @@ public class CompoundTerm extends Term {
         return compoundTerms;
     }
 
-	public void setScreenPositions(ArrayList<StringRectangle> screenPositions){
-		//set the position of the containers of the term as they are drawn on a screen.
-
-		AssignScreenPositions asp = new AssignScreenPositions(this, screenPositions);
-	}
-
+	
 	public CompoundTerm getResultOfOperation(){
 		return getResultOfBasicOperation();
 	}
@@ -170,10 +187,5 @@ public class CompoundTerm extends Term {
         return function;
     }
 
-    @Override
-    protected StringRectangle getStringRectangle() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-    
 }
 
