@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class Term implements Cloneable{
 
-    protected CompoundTerm parent;
+    private CompoundTerm parent;
     private boolean hasParentheses = false;
 	private boolean isNegative = false;
     private boolean isInverse = false;
@@ -87,7 +87,11 @@ public abstract class Term implements Cloneable{
             			}
             		}
             	}
-            	((CompoundTerm)term).setChildren(newChildren);
+            	if (newChildren.size() == 1) {
+            		term = newChildren.get(0);
+            	} else {
+            		((CompoundTerm)term).setChildren(newChildren);
+            	}
             }
         }
         

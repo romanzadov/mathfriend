@@ -121,16 +121,6 @@ public class CompoundTerm extends Term {
 		}
 	}
 
-	public boolean isSimpleFraction(){
-		CompoundTerm tr = this;
-		boolean fraction = false;
-		/*if (tr.getFunction() instanceof Divide && tr.getChildren().size() == 3 &&
-				tr.getChildren().get(0).isInteger() && tr.getChildren().get(2).isInteger()){
-			fraction = true;
-		}*/
-		return fraction;
-	}
-
     public void insertChild(int index, Term child) {
         children.add(index, child);
         child.setParent(this);

@@ -28,9 +28,10 @@ public class Fraction extends CompoundTerm{
 		super(Function.TIMES);
 		this.numerator = numerator;
 		this.denominator = denominator;
-		this.parent = numerator.getParent();
+		setParent(numerator.getParent());
 		numerator.setParent(this);
 		denominator.setParent(this);
+		
 	}
 	
 	@Override
@@ -46,8 +47,7 @@ public class Fraction extends CompoundTerm{
 		return childs;
 	}
 	
-	@Override
-	public String toString() {
+	public String toHtml() {
 		String html = "<span %s %s>%s</span>";
         List<String> classes = new ArrayList<String>();
         classes.add("term");
