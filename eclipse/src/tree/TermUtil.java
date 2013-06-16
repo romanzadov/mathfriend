@@ -8,6 +8,7 @@ import com.mathfriend.exception.NullParentException;
 import tree.compound.CompoundTerm;
 import tree.functions.Function;
 import tree.functions.PlusUtil;
+import tree.functions.TimesUtil;
 
 public class TermUtil {
 	
@@ -69,11 +70,21 @@ public class TermUtil {
 					addTerms(start, end);
 					return term;
 				case TIMES:
+					divideTerms(start, end);
+					return term;
 				default:
 			}
-			
 		}
 		return null;
+	}
+	
+	private static void divideTerms(Term start, Term end) throws NullParentException {
+		removeTerm(start);
+		CompoundTerm parent = end.getParent();
+		
+		CompoundTerm dividend = TimesUtil.divideTerms(end, start);
+		dividend.setParent(parent);
+		parent.setChild(parent.getChildren().indexOf(end), dividend);
 	}
 	
 	private static void addTerms(Term start, Term end) throws NullParentException{

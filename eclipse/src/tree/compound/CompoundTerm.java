@@ -39,7 +39,14 @@ public class CompoundTerm extends Term {
             		} else {
             			operator = "+";
             		}
-            	} 
+            	} else if (Function.TIMES.equals(function)) {
+            		Term nextChild = this.getChildren().get(i + 1);
+            		if (nextChild.isInverse()) {
+            			operator = "/";
+            		} else {
+            			operator = "*";
+            		}
+            	}
             	content +=  operator;
             }
         }
@@ -61,6 +68,10 @@ public class CompoundTerm extends Term {
         }
         if(this.hasParentheses()) {
         	classes.add("parantheses");
+        }
+        if(this.hasParentheses()) {
+        	classes.add("parantheses");
+        	content += "(";
         }
         
         for(int i = 0; i<this.getChildren().size(); i++){
@@ -84,6 +95,10 @@ public class CompoundTerm extends Term {
             		content += "<span class=\'operator\'>" + operator + "</span>";
             	}
             }
+        }
+        
+        if(this.hasParentheses()) {
+        	content += ")";
         }
         
         String classList = "";

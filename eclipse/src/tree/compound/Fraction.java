@@ -28,10 +28,10 @@ public class Fraction extends CompoundTerm{
 		super(Function.TIMES);
 		this.numerator = numerator;
 		this.denominator = denominator;
+		denominator.setInverse(true);
 		setParent(numerator.getParent());
 		numerator.setParent(this);
 		denominator.setParent(this);
-		
 	}
 	
 	@Override
@@ -82,5 +82,20 @@ public class Fraction extends CompoundTerm{
 	
 	public Term getDenominator() {
 		return denominator;
+	}
+	
+	public static Term getInverse(Term x) {
+		if(!x.isFraction()) {
+			return new Fraction(new Number(1), x);
+		}
+		
+		Fraction f = (Fraction)x;
+		if (f.getNumerator().isNumber(1)) {
+			return f.getDenominator();
+		}
+		
+		Fraction product = new Fraction(f.getDenominator(), f.getNumerator());
+		product.setParent(null);
+		return product;
 	}
 }

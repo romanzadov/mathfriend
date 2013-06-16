@@ -8,6 +8,7 @@ import tree.compound.CompoundTerm;
 import tree.compound.Fraction;
 import tree.functions.Function;
 import tree.simple.*;
+import tree.simple.Number;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,4 +153,21 @@ public abstract class Term implements Cloneable{
         return this instanceof SimpleTerm;
     }
 
+    public boolean isFraction() {
+    	return this instanceof Fraction;
+    }
+    
+    public boolean isNumber(double value) {
+    	if (this instanceof Number) {
+    		Number n = (Number)this;
+    		if (n.absoluteValue == Math.abs(value)) {
+    			if (value == 0) {
+    				return true;
+    			}
+    			return n.isNegative() == (value < 0);
+    		}
+    	}
+    	return false;
+    }
 }
+ 
