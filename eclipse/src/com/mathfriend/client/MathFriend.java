@@ -8,8 +8,10 @@ import tree.compound.CompoundTerm;
 import com.mathfriend.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
+import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -50,6 +52,7 @@ public class MathFriend implements EntryPoint {
 		final TextBox nameField = new TextBox();
 		final Label errorLabel = new Label();
 
+
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
 
@@ -65,6 +68,7 @@ public class MathFriend implements EntryPoint {
 		
 		final HTML formulaHtml = new HTML();
 		RootPanel.get("formulaContainer").add(formulaHtml);
+		
 	
 		final Element ghost = RootPanel.get("ghostContainer").getElement();
 		class FormulaHandler implements MouseUpHandler {
@@ -82,6 +86,7 @@ public class MathFriend implements EntryPoint {
 					}
 
 					public void onSuccess(String term) {
+						addToHistory(formulaHtml.getHTML());
 						formulaHtml.setHTML(term.toString());
 					}
 				});
@@ -123,12 +128,13 @@ public class MathFriend implements EntryPoint {
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
-								formulaHtml
-										.setText(caught.getMessage());
+								formulaHtml.setText(caught.getMessage());
 							}
 
 							public void onSuccess(String term) {
-								formulaHtml.setHTML(term.toString());
+								formulaHtml.setHTML(term);
+								nameField.setVisible(false);
+								sendButton.setVisible(false);
 							}
 						});
 			}
@@ -141,6 +147,13 @@ public class MathFriend implements EntryPoint {
 		
 		FormulaHandler formulaHandler = new FormulaHandler();
 		formulaHtml.addMouseUpHandler(formulaHandler);
+	}
+	
+	private void addToHistory(String term) {
+		final Element historyList = RootPanel.get("history").getElement();
+		LIElement liElement = Document.get().createLIElement();
+	    liElement.setInnerHTML(term);
+		historyList.insertFirst(liElement);
 	}
 	
 	private Integer getIdFromHtml(String html) {

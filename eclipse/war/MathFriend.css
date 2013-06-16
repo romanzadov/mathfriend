@@ -32,8 +32,7 @@ h1 {
   margin: 15px 6px 6px;
 }
 #formulaContainer {
-	text-align: center;
-	margin-top: 20px;
+	
 }
 
 .term, .operator {
@@ -59,7 +58,7 @@ h1 {
 	background: #FFE271;
 }
 .Fraction .fractionBar {
-	margin: 2px 0;
+	margin: 2px 0 1px 0;
 	background: black;
 }
 .ghosted {
@@ -68,4 +67,28 @@ h1 {
 }
 #ghostContainer {
 	position: absolute;
+}
+#history-and-formula {
+	text-align: center;
+}
+#history {
+	margin: 0;
+	padding: 0;
+	margin-top: 40px;
+	padding-top: 30px;
+	border-top: 1px solid white;
+}
+#history li {
+	color: gray;
+	margin: 10px 0 15px 0;
+}
+#history .Fraction .fractionBar {
+	background: gray;
+}
+#sandbox {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #dddddd;
+	min-height: 600px;
 }
