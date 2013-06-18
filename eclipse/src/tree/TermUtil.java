@@ -88,8 +88,8 @@ public class TermUtil {
 	}
 	
 	private static void addTerms(Term start, Term end) throws NullParentException{
-		removeTerm(start);
 		CompoundTerm parent = end.getParent();
+		removeTerm(start);
 		
 		CompoundTerm sum = PlusUtil.subtractTerms(end, start);		
 		sum.setParent(parent);
@@ -117,6 +117,7 @@ public class TermUtil {
 		
 		List<Term> children = parent.getChildren();
 		children.remove(extra);
+		extra.setParent(null);
 	}
 	
 	private static CompoundTerm switchSiblings(CompoundTerm term, Term start, Term end) {

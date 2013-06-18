@@ -77,6 +77,8 @@ public class CompoundTerm extends Term {
         for(int i = 0; i<this.getChildren().size(); i++){
         	if (i == 0 && this.getChildren().get(0).isNegative()) {
         		content += "-";
+        	} else if (getChildren().get(i).isNegative() && this.function.equals(Function.EQUALS)) {
+        		content += "-";
         	}
             content += getContent(getChildren().get(i));
             if(i < this.getChildren().size() - 1) {
