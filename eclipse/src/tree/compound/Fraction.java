@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tree.Term;
-import tree.simple.Number;
 import tree.functions.Function;
+import tree.simple.Number;
 
 public class Fraction extends CompoundTerm{
 

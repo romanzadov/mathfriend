@@ -1,9 +1,9 @@
 package tree;
 
 
-import parse.PreSimpleTerm;
-
 import java.util.List;
+
+import parse.PreSimpleTerm;
 
 public class PreSimpleTermGrouping {
 

@@ -1,7 +1,6 @@
 package tree;
 
 
-import tree.compound.CompoundTerm;
 
 public class downwalk {
 	//walk through all the nodes in down order and change things

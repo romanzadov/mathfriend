@@ -6,7 +6,7 @@ import java.util.Map;
 
 import parse.ParenthesisUtil;
 import parse.PreSimpleTerm;
-import tree.functions.*;
+import tree.functions.Function;
 
 
 public class TermContsructionUtil {

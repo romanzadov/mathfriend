@@ -1,10 +1,10 @@
 package parse;
 
 
-import tree.functions.*;
-import tree.simple.Constants;
-
 import java.util.List;
+
+import tree.functions.Function;
+import tree.simple.Constants;
 
 public class PreSimpleTerm {
 

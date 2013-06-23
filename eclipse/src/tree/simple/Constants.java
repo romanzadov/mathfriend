@@ -1,7 +1,5 @@
 package tree.simple;
 
-import tree.compound.CompoundTerm;
-
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -12,10 +10,6 @@ public class Constants extends Number{
     }
 
     private Constant constant;
-
-    private Constants(double a) {
-        super(a);
-    }
 
     public Constants(Constant constant) {
         this.constant = constant;

@@ -2,7 +2,6 @@ package parse;
 
 import java.util.ArrayList;
 
-
 import tree.functions.Function;
 
 
@@ -34,15 +33,9 @@ public class GrammarCheck {
 		
 		if(lefts!= rights){
 			good = false;
-		//	MessageWindow mw = new MessageWindow("You mismatched your parentheses");
 		}
 		if(bad.size()>0){
 			good = false;
-			String bd = new String();
-			for(int i = 0; i<bad.size(); i++){
-				bd+=bad.get(i);
-			}
-		//	MessageWindow mw = new MessageWindow("I can't recognize  "+bd);
 		}
 		
 		

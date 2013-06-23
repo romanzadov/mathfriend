@@ -1,6 +1,5 @@
 package tree.compound;
 
-import tree.simple.Number;
 
 public class MultiplyFractions {
 

@@ -17,7 +17,8 @@ public class ParseCharacterUtil {
         if (GrammarCheck.CheckChars(formula)) {
             return removeSpaces(formula);
         } else {
-            throw new RuntimeException("Formula did not pass grammar check:  " + st){};
+            throw new RuntimeException("Formula did not pass grammar check:  " + st){
+				private static final long serialVersionUID = 1L;};
         }
 
     }

@@ -1,8 +1,5 @@
 package move;
 
-import java.util.ArrayList;
-
-import move.identify.TermMath;
 import tree.compound.CompoundTerm;
 
 public class ChangeBranch {

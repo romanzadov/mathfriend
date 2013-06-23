@@ -23,7 +23,6 @@ public class ParenthesisUtil {
             }
         }
 
-        int n = 0;
         int formulaLength = formula.size();
         Map<Integer, Integer> parenthesesPairs = new HashMap<Integer, Integer>();
         boolean done = false;
@@ -47,7 +46,6 @@ public class ParenthesisUtil {
                             parenthesesPairs.put(leftParenthesisPosition, rightParenthesisPosition);
                             placesOfParenthesisInFormula[rightParenthesisPosition] = 0;
                             placesOfParenthesisInFormula[leftParenthesisPosition] = 0;
-                            n++;
                             leftParenthesisPosition = 0;
                             rightParenthesisPosition = 0;
                             j = formulaLength;

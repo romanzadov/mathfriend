@@ -7,7 +7,6 @@ import tree.Term;
 import tree.TermUtil;
 import tree.compound.CompoundTerm;
 
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mathfriend.client.GreetingService;
 
@@ -20,7 +19,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 	public String getFirstCompoundTermHtml(String input) throws IllegalArgumentException {
 	
-		String serverInfo = getServletContext().getServerInfo();
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
 
 		// Escape data from the client to avoid cross-site script vulnerabilities.

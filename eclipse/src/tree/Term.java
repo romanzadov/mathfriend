@@ -1,17 +1,17 @@
 package tree;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import parse.ParseCharacterUtil;
 import parse.PreSimpleTerm;
 import parse.PreSimpleUtil;
 import tree.compound.CompoundTerm;
 import tree.compound.Fraction;
 import tree.functions.Function;
-import tree.simple.*;
 import tree.simple.Number;
-
-import java.util.ArrayList;
-import java.util.List;
+import tree.simple.SimpleTerm;
 
 public abstract class Term implements Cloneable{
 

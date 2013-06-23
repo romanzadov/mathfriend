@@ -1,7 +1,5 @@
 package com.mathfriend.client;
 
-import tree.compound.CompoundTerm;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**

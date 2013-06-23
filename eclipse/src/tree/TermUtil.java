@@ -3,12 +3,12 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mathfriend.exception.NullParentException;
-
 import tree.compound.CompoundTerm;
 import tree.functions.Function;
 import tree.functions.PlusUtil;
 import tree.functions.TimesUtil;
+
+import com.mathfriend.exception.NullParentException;
 
 public class TermUtil {
 	
