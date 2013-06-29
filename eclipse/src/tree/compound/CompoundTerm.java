@@ -2,9 +2,8 @@ package tree.compound;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import tree.Term;
-import tree.functions.Function;
+import tree.functions.*;
 
 public class CompoundTerm extends Term {
 

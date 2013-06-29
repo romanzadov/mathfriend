@@ -148,6 +148,4 @@ public class TermUtil {
 		}
 		return null;
 	}
-	
-	
 }

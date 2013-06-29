@@ -22,12 +22,6 @@ public abstract class SimpleTerm extends Term {
         return child;
     }
 
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		SimpleTerm clone = (SimpleTerm)super.clone();
-		return clone;
-	}
-
     public boolean isRealNumber(){
 		boolean real = false;
 	/*	if(this.isRationalNumber()){
@@ -42,5 +36,5 @@ public abstract class SimpleTerm extends Term {
 
 		return real;
 	}
-	    
+
 }

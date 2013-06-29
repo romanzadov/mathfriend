@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
-	String getFirstCompoundTermHtml(String name) throws IllegalArgumentException;
+	String getFirstCompoundTermHtml(String formula);
 
 	String getMovedTerm(int downId, int ghostId);
 }

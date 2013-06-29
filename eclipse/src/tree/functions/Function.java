@@ -1,5 +1,7 @@
 package tree.functions;
 
+import java.io.Serializable;
+
 
 public enum Function {
 

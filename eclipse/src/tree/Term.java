@@ -13,7 +13,7 @@ import tree.functions.Function;
 import tree.simple.Number;
 import tree.simple.SimpleTerm;
 
-public abstract class Term implements Cloneable{
+public abstract class Term {
 
     private CompoundTerm parent;
     private boolean hasParentheses = false;
