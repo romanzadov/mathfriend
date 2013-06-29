@@ -2,8 +2,10 @@ package tree.compound;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import tree.Term;
-import tree.functions.*;
+import tree.TermUtil;
+import tree.functions.Function;
 
 public class CompoundTerm extends Term {
 
@@ -75,26 +77,35 @@ public class CompoundTerm extends Term {
         }
         
         for(int i = 0; i<this.getChildren().size(); i++){
+        	Term child = getChildren().get(i);
+
         	if (i == 0 && this.getChildren().get(0).isNegative()) {
         		content += "-";
         	} else if (getChildren().get(i).isNegative() && this.function.equals(Function.EQUALS)) {
         		content += "-";
         	}
-            content += getContent(getChildren().get(i));
+            content += getContent(child);
             if(i < this.getChildren().size() - 1) {
-            	String operator = "";
+        		Term nextChild = this.getChildren().get(i + 1);
+            	String operatorContent = "";
             	if (Function.EQUALS.equals(function)) {
-            		operator = "=";
+            		operatorContent = "=";
             	} else if (Function.PLUS.equals(function)) {
-            		Term nextChild = this.getChildren().get(i + 1);
             		if (nextChild.isNegative()) {
-            			operator = "-";
+            			operatorContent = "-";
             		} else {
-            			operator = "+";
+            			operatorContent = "+";
             		}
-            	} 
-            	if (operator != "") {
-            		content += "<span class=\'operator\'>" + operator + "</span>";
+            	} else if (Function.TIMES.equals(function)) {
+            		if (TermUtil.canBeMultiplied(child, nextChild)) {
+            			operatorContent = "*";
+            		}
+            	}
+            	if (operatorContent != "") {
+            		String operator = "<span class=\'operator\' %s %s >%s</span>";
+                	String id = "data-id = \""+this.hashCode()+"\"";
+                	String operatorId = "data-operator-id = \""+ i +"\"";
+            		content += String.format(operator, id, operatorId, operatorContent);
             	}
             }
         }
@@ -112,7 +123,7 @@ public class CompoundTerm extends Term {
     	String id = "data-id = \""+this.hashCode()+"\"";
         return String.format(html, classList, id, content);        
 	}
-	
+		
 	protected String getContent(Term child) {
 		if (child.isSimple()) {
 	        String html = "<span %s %s>" + child.toString() + "</span>";
@@ -142,7 +153,7 @@ public class CompoundTerm extends Term {
         children.add(index, child);
         child.setParent(this);
     }
-
+    
     public void setChild(int index, Term child) {
         children.set(index, child);
         child.setParent(this);
@@ -153,6 +164,11 @@ public class CompoundTerm extends Term {
 		for(Term child: children) {
 			child.setParent(this);
 		}
+	}
+	
+	public void removeChild(Term child) {
+		children.remove(child);
+		child.setParent(null);
 	}
 
 	public ArrayList<Term> getChildren() {

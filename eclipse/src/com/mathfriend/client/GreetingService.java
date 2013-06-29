@@ -11,4 +11,6 @@ public interface GreetingService extends RemoteService {
 	String getFirstCompoundTermHtml(String formula);
 
 	String getMovedTerm(int downId, int ghostId);
+
+	String performOperation(int operatorId, int dataId);
 }

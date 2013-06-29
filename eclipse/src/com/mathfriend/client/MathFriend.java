@@ -1,5 +1,6 @@
 package com.mathfriend.client;
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -56,7 +57,8 @@ public class MathFriend implements EntryPoint {
 		
 		final HTML formulaHtml = new HTML();
 		RootPanel.get("formulaContainer").add(formulaHtml);
-			
+		final Element ghost = RootPanel.get("ghostContainer").getElement();
+		
 		class FormulaHandler implements MouseUpHandler {
 			@Override
 			public void onMouseUp(MouseUpEvent event) {
@@ -65,18 +67,33 @@ public class MathFriend implements EntryPoint {
 				
 				String html =  RootPanel.get("ghostContainer").getElement().getInnerHTML();
 				Integer ghostId = getIdFromHtml(html);
-				
-				greetingService.getMovedTerm(ghostId, dropId, 
-					new AsyncCallback<String>() {
-					public void onFailure(Throwable caught) {
-					}
 
-					public void onSuccess(String term) {
-						addToHistory(formulaHtml.getHTML());
-						formulaHtml.setHTML(term.toString());
-					}
-				});
+				if (ghostId != null) {
+					greetingService.getMovedTerm(ghostId, dropId, 
+						new AsyncCallback<String>() {
+						public void onFailure(Throwable caught) {
+						}
+	
+						public void onSuccess(String term) {
+							addToHistory(formulaHtml.getHTML());
+							formulaHtml.setHTML(term.toString());
+						}
+					});
+				} /*else if (HtmlUtil.parentElementHasClass(x.toString(), "something")) {
+					Integer operatorId = getOperatorIdFromHtml(x.toString());
+					greetingService.performOperation(operatorId, dropId,
+						new AsyncCallback<String>() {
+						public void onFailure(Throwable caught) {
+						}
+
+						public void onSuccess(String term) {
+							addToHistory(formulaHtml.getHTML());
+							formulaHtml.setHTML(term.toString());
+						}
+					});			
+				}*/
 			}
+			
 		}
 		
 		// Create a handler for the sendButton and nameField
@@ -145,6 +162,15 @@ public class MathFriend implements EntryPoint {
 	private Integer getIdFromHtml(String html) {
 		if (html.contains("data-id=\"")) {
 			String afterId = html.split("data-id=\"")[1];
+			String beforeQuote = afterId.split("\"")[0];
+			return Integer.valueOf(beforeQuote);
+		}
+		return null;
+	}
+	
+	private Integer getOperatorIdFromHtml(String html) {
+		if (html.contains("operator-id=\"")) {
+			String afterId = html.split("operator-id=\"")[1];
 			String beforeQuote = afterId.split("\"")[0];
 			return Integer.valueOf(beforeQuote);
 		}

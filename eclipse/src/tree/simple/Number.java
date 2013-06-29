@@ -21,21 +21,24 @@ public class Number extends SimpleTerm {
         return string;
 	}
 
-	@Override
-	public Number clone(){
-		
-		Number na = new Number(this.absoluteValue);
-		return na;
-	}
-	
 	public Number(double a){
-		absoluteValue = a;
+		if (a < 0) {
+			setNegative(true);
+		}
+		absoluteValue = Math.abs(a);
 	}
 
     public Number(){};
 	
 	public void setvalue(double a){
 		absoluteValue = a;
+	}
+	
+	public double getValue() {
+		if (this.isNegative()) {
+			return absoluteValue * -1;
+		}
+		return absoluteValue;
 	}
 	
 	public double getAbsoluteValue(){

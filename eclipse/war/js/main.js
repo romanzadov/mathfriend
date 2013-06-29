@@ -67,3 +67,6 @@ function clearGhost() {
 	$(".ghosted").removeClass("ghosted");
 	ghost = null;
 }
+function makeOperator(term) {
+	$("#operator").html("<span >"+ term.operator +"</span>")
+}

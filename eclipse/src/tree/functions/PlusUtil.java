@@ -2,8 +2,18 @@ package tree.functions;
 
 import tree.Term;
 import tree.compound.CompoundTerm;
+import tree.simple.Number;
 
 public class PlusUtil {
+	
+	public static Term addTermValues(Term x, Term y) {
+		if (x.isNumber() && y.isNumber()) {
+			Number sum = new Number(((Number)x).getValue() + ((Number)y).getValue());
+			sum.setParent(null);
+			return sum;
+		}
+		throw new RuntimeException("Addig not numbers");
+	}
 
 	public static CompoundTerm addTerms(Term x, Term y) {
 		

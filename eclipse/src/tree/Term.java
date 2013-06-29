@@ -157,6 +157,10 @@ public abstract class Term {
     	return this instanceof Fraction;
     }
     
+    public boolean isNumber() {
+    	return this instanceof Number;
+    }
+    
     public boolean isNumber(double value) {
     	if (this instanceof Number) {
     		Number n = (Number)this;

@@ -34,7 +34,41 @@ public class TermUtil {
 		return terms;
 	}
 	
-	public static Term getOperationResult(CompoundTerm term, Term start, Term end) {
+	public static Term getOperationResult(CompoundTerm term, CompoundTerm operand, int operatorId) {
+		if (operatorId < operand.getChildren().size() - 1) {
+			Term a = term.getChildren().get(operatorId);
+			Term b = term.getChildren().get(operatorId + 1);
+			
+			switch (operand.getFunction()) {
+				case PLUS: {
+					getAddResult(term, a, b);
+					return term;
+				}
+				case TIMES: {
+					
+				}
+				default :
+			}
+			
+		}
+		return null;
+	}
+	
+	private static void getAddResult(CompoundTerm term, Term a, Term b) {
+		CompoundTerm parent = a.getParent();
+		int position = parent.getChildren().indexOf(a);
+		parent.removeChild(a);
+		parent.removeChild(b);
+		Term sum = PlusUtil.addTermValues(a, b);
+		if (parent.getChildren().size() == 0) {
+			CompoundTerm grandparent = parent.getParent();
+			grandparent.setChild(grandparent.getChildren().indexOf(parent), sum);
+		} else {
+			parent.insertChild(position, sum);
+		}
+	}
+	
+	public static Term getMoveResult(CompoundTerm term, Term start, Term end) {
 		Term startSibling = getSibling(start, end);
 		if (startSibling != null) {
 			return switchSiblings(term, start, startSibling);
@@ -148,4 +182,12 @@ public class TermUtil {
 		}
 		return null;
 	}
+	
+    public static boolean canBeMultiplied(Term a, Term b) {
+    	return a.isNumber() && b.isNumber();
+    }
+    
+    public static boolean canBeAdded(Term a, Term b) {
+    	return a.isNumber() && b.isNumber();
+    }
 }

@@ -50,6 +50,21 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		if (down == null  || ghost == null) {
 			return null;
 		}
-		return TermUtil.getOperationResult(lastTerm, down, ghost).toHtml();
+		return TermUtil.getMoveResult(lastTerm, down, ghost).toHtml();
+	}
+
+
+
+	@Override
+	public String performOperation(int operatorId, int dataId) {
+		CompoundTerm lastTerm = terms.get(terms.size() - 1);
+		try {
+			CompoundTerm operand = (CompoundTerm)TermUtil.getDescendantById(lastTerm, dataId);
+			return TermUtil.getOperationResult(lastTerm, operand, operatorId).toHtml();
+		} catch (ClassCastException e) {
+			
+		}
+			
+		return null;
 	}
 }
