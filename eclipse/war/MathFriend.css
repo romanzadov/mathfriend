@@ -43,8 +43,6 @@ h1 {
 	text-align: center;
 	vertical-align: middle;
 	display: inline-block;
-	<!--border: 1px solid black; -->
-	padding-top: 10px;
 	cursor: default;
 }
 .compoundTerm {

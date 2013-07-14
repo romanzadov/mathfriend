@@ -57,18 +57,17 @@ public class MathFriend implements EntryPoint {
 		
 		final HTML formulaHtml = new HTML();
 		RootPanel.get("formulaContainer").add(formulaHtml);
-		final Element ghost = RootPanel.get("ghostContainer").getElement();
 		
 		class FormulaHandler implements MouseUpHandler {
 			@Override
 			public void onMouseUp(MouseUpEvent event) {
 				EventTarget x = event.getNativeEvent().getEventTarget();
 				Integer dropId = getIdFromHtml(x.toString());
-				
+
 				String html =  RootPanel.get("ghostContainer").getElement().getInnerHTML();
 				Integer ghostId = getIdFromHtml(html);
 
-				if (ghostId != null) {
+				if (ghostId != null && dropId != null) {
 					greetingService.getMovedTerm(ghostId, dropId, 
 						new AsyncCallback<String>() {
 						public void onFailure(Throwable caught) {
@@ -79,7 +78,7 @@ public class MathFriend implements EntryPoint {
 							formulaHtml.setHTML(term.toString());
 						}
 					});
-				} /*else if (HtmlUtil.parentElementHasClass(x.toString(), "something")) {
+				} else if (ghostId == null) {
 					Integer operatorId = getOperatorIdFromHtml(x.toString());
 					greetingService.performOperation(operatorId, dropId,
 						new AsyncCallback<String>() {
@@ -91,7 +90,7 @@ public class MathFriend implements EntryPoint {
 							formulaHtml.setHTML(term.toString());
 						}
 					});			
-				}*/
+				}
 			}
 			
 		}
@@ -169,8 +168,8 @@ public class MathFriend implements EntryPoint {
 	}
 	
 	private Integer getOperatorIdFromHtml(String html) {
-		if (html.contains("operator-id=\"")) {
-			String afterId = html.split("operator-id=\"")[1];
+		if (html.contains("data-operator-id=\"") && html.contains("active") && !html.contains("term")) {
+			String afterId = html.split("data-operator-id=\"")[1];
 			String beforeQuote = afterId.split("\"")[0];
 			return Integer.valueOf(beforeQuote);
 		}

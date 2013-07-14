@@ -6,7 +6,7 @@ import tree.simple.Number;
 
 public class PlusUtil {
 	
-	public static Term addTermValues(Term x, Term y) {
+	public static Number addTermValues(Term x, Term y) {
 		if (x.isNumber() && y.isNumber()) {
 			Number sum = new Number(((Number)x).getValue() + ((Number)y).getValue());
 			sum.setParent(null);

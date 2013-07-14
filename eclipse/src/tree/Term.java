@@ -11,6 +11,7 @@ import tree.compound.CompoundTerm;
 import tree.compound.Fraction;
 import tree.functions.Function;
 import tree.simple.Number;
+import tree.simple.Variable;
 import tree.simple.SimpleTerm;
 
 public abstract class Term {
@@ -159,6 +160,10 @@ public abstract class Term {
     
     public boolean isNumber() {
     	return this instanceof Number;
+    }
+    
+    public boolean isVariable() {
+    	return this instanceof Variable;
     }
     
     public boolean isNumber(double value) {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tree.compound.CompoundTerm;
+import tree.compound.Fraction;
+import tree.compound.FractionUtil;
 import tree.functions.Function;
 import tree.functions.PlusUtil;
 import tree.functions.TimesUtil;
@@ -36,8 +38,8 @@ public class TermUtil {
 	
 	public static Term getOperationResult(CompoundTerm term, CompoundTerm operand, int operatorId) {
 		if (operatorId < operand.getChildren().size() - 1) {
-			Term a = term.getChildren().get(operatorId);
-			Term b = term.getChildren().get(operatorId + 1);
+			Term a = operand.getChildren().get(operatorId);
+			Term b = operand.getChildren().get(operatorId + 1);
 			
 			switch (operand.getFunction()) {
 				case PLUS: {
@@ -45,13 +47,40 @@ public class TermUtil {
 					return term;
 				}
 				case TIMES: {
-					
+					getTimesResult(term, a, b);
+					return term;
 				}
 				default :
 			}
 			
 		}
 		return null;
+	}
+	
+	private static void getTimesResult(CompoundTerm term, Term a, Term b) {
+		final CompoundTerm parent = a.getParent();
+		final Term multiple;
+		if (parent.isFraction()) {
+			CompoundTerm grandparent = parent.getParent();
+			if (FractionUtil.isReducible((Fraction)parent)) {
+				FractionUtil.reduceFraction((Fraction)parent);
+			} else {
+				multiple = TimesUtil.divideNumbers(a, b);
+				grandparent.setChild(grandparent.getChildren().indexOf(parent), multiple);
+			}
+			
+		} else {
+			int position = parent.getChildren().indexOf(a);
+			parent.removeChild(a);
+			parent.removeChild(b);
+			multiple = TimesUtil.multiplyNumbers(a, b);
+			if (parent.getChildren().size() == 0) {
+				CompoundTerm grandparent = parent.getParent();
+				grandparent.setChild(grandparent.getChildren().indexOf(parent), multiple);
+			} else {
+				parent.insertChild(position, multiple);
+			}
+		}
 	}
 	
 	private static void getAddResult(CompoundTerm term, Term a, Term b) {
@@ -114,11 +143,15 @@ public class TermUtil {
 	
 	private static void divideTerms(Term start, Term end) throws NullParentException {
 		removeTerm(start);
-		CompoundTerm parent = end.getParent();
-		
-		CompoundTerm dividend = TimesUtil.divideTerms(end, start);
-		dividend.setParent(parent);
-		parent.setChild(parent.getChildren().indexOf(end), dividend);
+		final CompoundTerm parent = end.getParent();
+		final CompoundTerm result;
+		if (start.isInverse()) {
+			start.setInverse(false);
+			result = TimesUtil.multiplyTerms(end, start);
+		} else {
+			result = TimesUtil.divideTerms(end, start);
+		}
+		parent.setChild(parent.getChildren().indexOf(end), result);
 	}
 	
 	private static void addTerms(Term start, Term end) throws NullParentException{
@@ -126,7 +159,6 @@ public class TermUtil {
 		removeTerm(start);
 		
 		CompoundTerm sum = PlusUtil.subtractTerms(end, start);		
-		sum.setParent(parent);
 		parent.setChild(parent.getChildren().indexOf(end), sum);
 	}
 	
@@ -146,6 +178,9 @@ public class TermUtil {
 			List<Term> children = parent.getChildren();
 			children.remove(extra);
 			Term sibling  = children.get(0);
+			if (sibling.isInverse()) {
+				sibling = new Fraction(new tree.simple.Number(1), sibling);
+			}
 			grandparent.setChild(grandparent.getChildren().indexOf(parent), sibling);
 		}
 		
@@ -184,7 +219,11 @@ public class TermUtil {
 	}
 	
     public static boolean canBeMultiplied(Term a, Term b) {
-    	return a.isNumber() && b.isNumber();
+    	boolean canMultiply = true;
+    	if (a.isVariable() && b.isVariable() || a.isVariable() && b.isNumber() || a.isNumber() && b.isVariable()) {
+    		canMultiply = false;
+    	}
+    	return canMultiply;
     }
     
     public static boolean canBeAdded(Term a, Term b) {

@@ -28,9 +28,21 @@ function select(event) {
 				}
 				selected = $(this);
 				makeDraggable(selected);
+				activateOperators(selected);
 				lastEvent = event.originalEvent;
 			}
 		} 	
+	}
+}
+
+function activateOperators(term) {
+	$(".operator").removeClass("active");
+	var operators = $(term).find(".operator");
+	for (var i = 0; i<operators.size(); i++) {
+		var operator = operators[i];
+		if ($(operator).data().id == $(term).data().id) {
+			$(operator).addClass("active");
+		}
 	}
 }
 
@@ -38,9 +50,7 @@ function makeDraggable(term) {
 	var pressTimer
 	$("body").mouseup(function(event){
 	  clearTimeout(pressTimer);
-	  if (ghost != null) {
-		  postDrop(ghost.data().id, $(event.target).data().id);
-	  }
+	  
 	  clearGhost();
 	  return false;
 	}).mousedown(function(){
@@ -49,10 +59,6 @@ function makeDraggable(term) {
 	  },300)
 	  return false; 
 	});
-}
-
-function postDrop(ghost, target) {
-
 }
 
 var ghost= null;
@@ -66,7 +72,4 @@ function clearGhost() {
 	$('#ghostContainer').html("");
 	$(".ghosted").removeClass("ghosted");
 	ghost = null;
-}
-function makeOperator(term) {
-	$("#operator").html("<span >"+ term.operator +"</span>")
 }

@@ -47,6 +47,17 @@ public class Fraction extends CompoundTerm{
 		return childs;
 	}
 	
+	@Override
+	public void setChild(int place, Term child) {
+		if (place == 0) {
+			setNumerator(child);
+		} else if (place == 1) {
+			setDenominator(child);
+		} else {
+			throw new RuntimeException("Trying to add " + place + "th child to Fraction.");
+		}
+	}
+	
 	public String toHtml() {
 		String html = "<span %s %s>%s</span>";
         List<String> classes = new ArrayList<String>();
@@ -61,8 +72,18 @@ public class Fraction extends CompoundTerm{
         	classes.add("parantheses");
         }
         
+        String operator = "<div class=\'operator fractionBar\' %s %s ></div>";
+    	String id = "data-id = \""+this.hashCode()+"\"";
+    	String operatorId = "data-operator-id = 0";
+        
+    	if (numerator.isSimple() && numerator.isNegative()) {
+    		content += "-";
+    	}
         content += getContent(numerator);
-        content += "<div class=\'operator fractionBar\'></div>";
+		content += String.format(operator, id, operatorId);
+		if (denominator.isSimple() && denominator.isNegative()) {
+    		content += "-";
+    	}
         content += getContent(denominator);
         
         String classList = "";
@@ -72,7 +93,6 @@ public class Fraction extends CompoundTerm{
     	}
     	classList += "\'";
     	
-    	String id = "data-id = \""+ hashCode()+"\"";
         return String.format(html, classList, id, content);     
 	}
 	
@@ -90,12 +110,19 @@ public class Fraction extends CompoundTerm{
 		}
 		
 		Fraction f = (Fraction)x;
-		if (f.getNumerator().isNumber(1)) {
-			return f.getDenominator();
-		}
 		
 		Fraction product = new Fraction(f.getDenominator(), f.getNumerator());
 		product.setParent(null);
 		return product;
+	}
+	
+	private void setNumerator(Term child) {
+		child.setParent(this);
+		numerator = child;
+	}
+	
+	private void setDenominator(Term child) {
+		child.setParent(this);
+		denominator = child;
 	}
 }

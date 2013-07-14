@@ -3,8 +3,47 @@ package tree.functions;
 import tree.Term;
 import tree.compound.CompoundTerm;
 import tree.compound.Fraction;
+import tree.simple.Number;
 
 public class TimesUtil {
+	
+	public static Term divideNumbers(Term a, Term b) {
+		if (a.isNumber() && b.isNumber() && b.isInverse()) {
+			Number product = new Number( ((Number)a).getValue() /  ((Number)b).getValue());
+			product.setParent(null);
+			return product;
+		}
+		throw new RuntimeException("Dividing numbers not possible.");
+	}
+	
+	public static Term multiplyNumbers(Term a, Term b) {
+		if (a.isNumber() && b.isNumber()) {
+			Number product = new Number( ((Number)a).getValue() *  ((Number)b).getValue());
+			product.setParent(null);
+			return product;
+		} else if (a.isFraction() || b.isFraction()) {
+			if (!a.isFraction()) {
+				Fraction second = (Fraction)b;
+				if (a.isInverse()) {
+					return new Fraction(second.getNumerator(), multiplyTerms(a, second.getDenominator()));
+				} else {
+					return new Fraction(multiplyTerms(a, second.getNumerator()), second.getDenominator());
+				}
+			} else if (!b.isFraction()) {
+				Fraction first = (Fraction)a;
+				if (b.isInverse()) {
+					return new Fraction(first.getNumerator(), multiplyTerms(first.getDenominator(), b));
+				} else {
+					return new Fraction(multiplyTerms(first.getNumerator(), b), first.getDenominator());
+				}
+			} else {
+				Fraction first = (Fraction)a;
+				Fraction second = (Fraction)b;
+				return new Fraction(multiplyTerms(first.getNumerator(), second.getNumerator()), multiplyTerms(first.getDenominator(), second.getDenominator()));
+			}
+		}
+		throw new RuntimeException("Multiplying not numbers");
+	}
 	
 	public static CompoundTerm divideTerms(Term x, Term y) {
 		if (y.isFraction()) {
@@ -26,12 +65,12 @@ public class TimesUtil {
 			y.setHasParentheses(true);
 		}
 		
-		if (x.isMultiplicative()) {
+		if (x.isMultiplicative() && !x.isFraction()) {
 			multiple.setChildren(((CompoundTerm)x).getChildren());
 		} else {
 			multiple.addChild(x);
 		}
-		if (y.isMultiplicative()) {
+		if (y.isMultiplicative() && !y.isFraction()) {
 			for(Term child: ((CompoundTerm)y).getChildren()) {
 				multiple.addChild(child);
 			}

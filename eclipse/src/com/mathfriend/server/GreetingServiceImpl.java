@@ -58,6 +58,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public String performOperation(int operatorId, int dataId) {
 		CompoundTerm lastTerm = terms.get(terms.size() - 1);
+		System.out.println("performing: " + operatorId + " | " + dataId);
+		System.out.println("last: " + lastTerm);
 		try {
 			CompoundTerm operand = (CompoundTerm)TermUtil.getDescendantById(lastTerm, dataId);
 			return TermUtil.getOperationResult(lastTerm, operand, operatorId).toHtml();
