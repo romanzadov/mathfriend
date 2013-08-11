@@ -25,10 +25,6 @@ import com.mathfriend.shared.FieldVerifier;
 
 public class MathFriend implements EntryPoint {
 	
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
-
 	
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
@@ -40,16 +36,19 @@ public class MathFriend implements EntryPoint {
 		final Button sendButton = new Button("Start!");
 		final TextBox nameField = new TextBox();
 		final Label errorLabel = new Label();
+		final Button undoButton = new Button("undo");
 
 
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
+		undoButton.setVisible(false);
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel.get("nameFieldContainer").add(nameField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
+		RootPanel.get("actionsContainer").add(undoButton);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
@@ -75,6 +74,7 @@ public class MathFriend implements EntryPoint {
 	
 						public void onSuccess(String term) {
 							addToHistory(formulaHtml.getHTML());
+							undoButton.setVisible(true);
 							formulaHtml.setHTML(term.toString());
 						}
 					});
@@ -87,35 +87,27 @@ public class MathFriend implements EntryPoint {
 
 						public void onSuccess(String term) {
 							addToHistory(formulaHtml.getHTML());
+							undoButton.setVisible(true);
 							formulaHtml.setHTML(term.toString());
 						}
 					});			
 				}
 			}
-			
 		}
 		
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
 			public void onClick(ClickEvent event) {
 				sendFormulaToServer();
 			}
 
-			/**
-			 * Fired when the user types in the nameField.
-			 */
+			
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					sendFormulaToServer();
 				}
 			}
 
-			/**
-			 * Send the name from the nameField to the server and wait for a response.
-			 */
 			private void sendFormulaToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
@@ -141,11 +133,41 @@ public class MathFriend implements EntryPoint {
 						});
 			}
 		}
+		
+		// Create a handler for the sendButton and nameField
+		class ActionHandler implements ClickHandler, KeyUpHandler {
+			public void onClick(ClickEvent event) {
+				undoStep();
+			}
+
+			private void undoStep() {
+				greetingService.undoStep(
+					new AsyncCallback<String>() {
+						public void onFailure(Throwable caught) {
+							// Show the RPC error message to the user
+							formulaHtml.setText(caught.getMessage());
+						}
+
+						public void onSuccess(String term) {
+							formulaHtml.setHTML(term);
+							removeLastFromHistory(undoButton);
+						}
+					});
+			}
+
+			@Override
+			public void onKeyUp(KeyUpEvent event) {				
+			}
+		}
+
 
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+		
+		ActionHandler actionHandler = new ActionHandler();
+		undoButton.addClickHandler(actionHandler);
 		
 		FormulaHandler formulaHandler = new FormulaHandler();
 		formulaHtml.addMouseUpHandler(formulaHandler);
@@ -156,6 +178,15 @@ public class MathFriend implements EntryPoint {
 		LIElement liElement = Document.get().createLIElement();
 	    liElement.setInnerHTML(term);
 		historyList.insertFirst(liElement);
+	}
+	
+	private void removeLastFromHistory(Button undoButton) {
+		final Element historyList = RootPanel.get("history").getElement();
+		historyList.removeChild(historyList.getChild(0));
+		System.out.println("child count: " + historyList.getChildCount());
+		if (historyList.getChildCount() == 1) {
+			undoButton.setVisible(false);
+		}
 	}
 	
 	private Integer getIdFromHtml(String html) {

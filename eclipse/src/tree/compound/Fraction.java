@@ -58,6 +58,10 @@ public class Fraction extends CompoundTerm{
 		}
 	}
 	
+	public String toString() {
+		return "(" + numerator.toString() +")/(" + denominator.toString() +")";
+	}
+	
 	public String toHtml() {
 		String html = "<span %s %s>%s</span>";
         List<String> classes = new ArrayList<String>();

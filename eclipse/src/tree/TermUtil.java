@@ -71,9 +71,9 @@ public class TermUtil {
 			
 		} else {
 			int position = parent.getChildren().indexOf(a);
+			multiple = TimesUtil.multiplyNumbers(a, b);
 			parent.removeChild(a);
 			parent.removeChild(b);
-			multiple = TimesUtil.multiplyNumbers(a, b);
 			if (parent.getChildren().size() == 0) {
 				CompoundTerm grandparent = parent.getParent();
 				grandparent.setChild(grandparent.getChildren().indexOf(parent), multiple);
@@ -86,9 +86,9 @@ public class TermUtil {
 	private static void getAddResult(CompoundTerm term, Term a, Term b) {
 		CompoundTerm parent = a.getParent();
 		int position = parent.getChildren().indexOf(a);
+		Term sum = PlusUtil.addTermValues(a, b);
 		parent.removeChild(a);
 		parent.removeChild(b);
-		Term sum = PlusUtil.addTermValues(a, b);
 		if (parent.getChildren().size() == 0) {
 			CompoundTerm grandparent = parent.getParent();
 			grandparent.setChild(grandparent.getChildren().indexOf(parent), sum);
@@ -97,21 +97,16 @@ public class TermUtil {
 		}
 	}
 	
-	public static Term getMoveResult(CompoundTerm term, Term start, Term end) {
+	public static Term getMoveResult(CompoundTerm term, Term start, Term end) throws NullParentException {
 		Term startSibling = getSibling(start, end);
 		if (startSibling != null) {
 			return switchSiblings(term, start, startSibling);
 		}
 		Term overEqualsSibling = getOverEqualsSibling(start, end);
 		if (overEqualsSibling != null) {
-			try {
-				return switchOverEquals(term, start, overEqualsSibling);
-			} catch (NullParentException e) {
-				e.printStackTrace();
-			}
+			return switchOverEquals(term, start, overEqualsSibling);
 		}
-		
-		return null;
+		throw new RuntimeException("Not a valid move option.");
 	}
 	
 	private static Term getOverEqualsSibling(Term start, Term end) {
@@ -138,7 +133,7 @@ public class TermUtil {
 				default:
 			}
 		}
-		return null;
+		throw new RuntimeException("Unable to switch over equals.");
 	}
 	
 	private static void divideTerms(Term start, Term end) throws NullParentException {

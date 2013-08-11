@@ -12,7 +12,7 @@ public class PlusUtil {
 			sum.setParent(null);
 			return sum;
 		}
-		throw new RuntimeException("Addig not numbers");
+		throw new RuntimeException("Adding not numbers");
 	}
 
 	public static CompoundTerm addTerms(Term x, Term y) {

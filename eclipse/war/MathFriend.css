@@ -97,3 +97,6 @@ h1 {
 	background: #dddddd;
 	min-height: 600px;
 }
+#actionsContainer {
+	float: right;
+}

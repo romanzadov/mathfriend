@@ -24,34 +24,57 @@ public class CompoundTerm extends Term {
 
     @Override
     public String toString() {
-    	String content = "";
-    	for(int i = 0; i<this.getChildren().size(); i++){
-        	if (i == 0 && this.getChildren().get(0).isNegative()) {
+        String content = "";
+        
+        if(this.hasParentheses()) {
+        	if (this.isNegative()) {
         		content += "-";
         	}
-            content += getChildren().get(i).toString();
+        	content += "(";
+        }
+        
+        for(int i = 0; i<this.getChildren().size(); i++){
+        	Term child = getChildren().get(i);
+
+        	if (i == 0 && this.getChildren().get(0).isNegative()) {
+        		content += "-";
+        	} else if (getChildren().get(i).isNegative() && this.function.equals(Function.EQUALS)) {
+        		content += "-";
+        	} else if (getChildren().get(i).isNegative() && this.function.equals(Function.TIMES)) {
+            	if (!child.hasParentheses()) {
+	        		child.setHasParentheses(true);
+	        		content += "-";
+            	}
+        	}
+        	content += child.toString();
             if(i < this.getChildren().size() - 1) {
-            	String operator = "";
+        		Term nextChild = this.getChildren().get(i + 1);
+            	String operatorContent = "";
             	if (Function.EQUALS.equals(function)) {
-            		operator = "=";
+            		operatorContent = "=";
             	} else if (Function.PLUS.equals(function)) {
-            		Term nextChild = this.getChildren().get(i + 1);
             		if (nextChild.isNegative()) {
-            			operator = "-";
+            			operatorContent = "-";
             		} else {
-            			operator = "+";
+            			operatorContent = "+";
             		}
             	} else if (Function.TIMES.equals(function)) {
-            		Term nextChild = this.getChildren().get(i + 1);
             		if (nextChild.isInverse()) {
-            			operator = "/";
-            		} else {
-            			operator = "*";
+            			operatorContent = "/";
+            		} else if (TermUtil.canBeMultiplied(child, nextChild)) {
+                		operatorContent = "*";
             		}
+            	} else if (Function.EXPONENT.equals(function)) {
+            		operatorContent += "^";
             	}
-            	content +=  operator;
+            	content += operatorContent;
             }
         }
+        
+        if(this.hasParentheses()) {
+        	content += ")";
+        }
+        
     	return content;
     }
     
@@ -67,9 +90,6 @@ public class CompoundTerm extends Term {
         String content = "";
         if (this.isInverse()) {
         	classes.add("inverse");
-        }
-        if(this.hasParentheses()) {
-        	classes.add("parantheses");
         }
         if(this.hasParentheses()) {
         	classes.add("parantheses");

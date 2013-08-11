@@ -5,6 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestStrings {
+	
+	final static String[] equations = {
+		"2x",
+		"2x-5",
+		"-5+2x",
+		"-5-3x",
+		"-3x-5",
+		"-2/x"
+	};
 
 	final static String[] integerAddition = {
 
@@ -47,7 +56,7 @@ public class TestStrings {
 		"1/2*3/4=(1*3)/(2*4)",
 		"1/2*3/4*5/6=(1*3)/(2*4)*5/6",
 		"1/2*3=(1*3)/2",
-		"4.1*5/2.3 = (4.1*5)/2.3",
+		"4.1*5/2.3=(4.1*5)/2.3",
 		"3/4*2=(3*2)/4",
 		"3x/5*4=12x/5",
 		"1/3*2x/5=(1*2)/3*x/5",
