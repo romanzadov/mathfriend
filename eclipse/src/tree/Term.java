@@ -131,7 +131,13 @@ public abstract class Term {
     }
     
     public boolean isInverse() {
-        return isInverse;
+    	boolean isDenominator = false;
+    	if (getParent() != null && getParent().isFraction()) {
+    		if (((Fraction)getParent()).getDenominator().equals(this)) {
+    			isDenominator = true;
+    		}
+    	}
+        return isInverse || isDenominator;
     }
 
     public void setInverse(boolean inverse) {

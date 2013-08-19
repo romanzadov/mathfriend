@@ -109,6 +109,14 @@ public class TermUtil {
 		throw new RuntimeException("Not a valid move option.");
 	}
 	
+	private static boolean areTermsSwitchable(Term a, Term b) {
+		CompoundTerm parent = a.getParent();
+		if (parent.isFraction()) {
+			return false;
+		}
+		return true;
+	}
+	
 	private static Term getOverEqualsSibling(Term start, Term end) {
 		if (Function.EQUALS.equals(start.getParent().getFunction())) {
 			return getSibling(start, end);
@@ -185,12 +193,15 @@ public class TermUtil {
 	}
 	
 	private static CompoundTerm switchSiblings(CompoundTerm term, Term start, Term end) {
-		CompoundTerm parent = start.getParent();
-		int startIndex = parent.getChildren().indexOf(start);
-		int endIndex = parent.getChildren().indexOf(end);
-		parent.setChild(startIndex, end);
-		parent.setChild(endIndex, start);
-		return term;
+		if (areTermsSwitchable(start, end)) {
+			CompoundTerm parent = start.getParent();
+			int startIndex = parent.getChildren().indexOf(start);
+			int endIndex = parent.getChildren().indexOf(end);
+			parent.setChild(startIndex, end);
+			parent.setChild(endIndex, start);
+			return term;
+		}
+		return null;
 	}
 	
 	private static Term getSibling(Term self, Term relative) {
