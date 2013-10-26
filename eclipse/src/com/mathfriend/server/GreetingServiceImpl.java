@@ -3,13 +3,13 @@ package com.mathfriend.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import tests.TestStrings;
 import tree.Term;
 import tree.TermUtil;
 import tree.compound.CompoundTerm;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mathfriend.client.GreetingService;
+import com.mathfriend.client.TermResponse;
 import com.mathfriend.exception.NullParentException;
 
 
@@ -47,7 +47,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 
 	@Override
-	public String getMovedTerm(int downId, int ghostId) {
+	public TermResponse getMovedTerm(int downId, int ghostId) {
 		CompoundTerm lastTerm = getLastTerm();
 		Term down = TermUtil.getDescendantById(lastTerm, downId);
 		Term ghost = TermUtil.getDescendantById(lastTerm, ghostId);
@@ -57,7 +57,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		try {
 			CompoundTerm movedTerm = (CompoundTerm)TermUtil.getMoveResult(lastTerm, down, ghost);
 			setLastTerm(movedTerm);
-			return movedTerm.toHtml();
+			return new TermResponse(movedTerm.toHtml(), movedTerm.toString());
 		} catch (NullParentException e) {
 			throw new RuntimeException("Unable to move.");
 		}
@@ -66,13 +66,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 
 	@Override
-	public String performOperation(int operatorId, int dataId) {
+	public TermResponse performOperation(int operatorId, int dataId) {
 		CompoundTerm lastTerm = getLastTerm();
 		try {
 			CompoundTerm operand = (CompoundTerm)TermUtil.getDescendantById(lastTerm, dataId);
 			CompoundTerm operationResult = (CompoundTerm)TermUtil.getOperationResult(lastTerm, operand, operatorId);
 			setLastTerm(operationResult);
-			return operationResult.toHtml();
+			return new TermResponse(operationResult.toHtml(), operationResult.toString());
 		} catch (ClassCastException e) {
 			
 		}

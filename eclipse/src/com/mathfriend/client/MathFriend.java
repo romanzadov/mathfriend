@@ -68,27 +68,29 @@ public class MathFriend implements EntryPoint {
 
 				if (ghostId != null && dropId != null) {
 					greetingService.getMovedTerm(ghostId, dropId, 
-						new AsyncCallback<String>() {
+						new AsyncCallback<TermResponse>() {
 						public void onFailure(Throwable caught) {
 						}
 	
-						public void onSuccess(String term) {
+						public void onSuccess(TermResponse term) {
 							addToHistory(formulaHtml.getHTML());
 							undoButton.setVisible(true);
-							formulaHtml.setHTML(term.toString());
+							formulaHtml.setHTML(term.getHtml());
+							errorLabel.setText(term.getText());
 						}
 					});
 				} else if (ghostId == null) {
 					Integer operatorId = getOperatorIdFromHtml(x.toString());
 					greetingService.performOperation(operatorId, dropId,
-						new AsyncCallback<String>() {
+						new AsyncCallback<TermResponse>() {
 						public void onFailure(Throwable caught) {
 						}
 
-						public void onSuccess(String term) {
+						public void onSuccess(TermResponse term) {
 							addToHistory(formulaHtml.getHTML());
 							undoButton.setVisible(true);
-							formulaHtml.setHTML(term.toString());
+							formulaHtml.setHTML(term.getHtml());
+							errorLabel.setText(term.getText());
 						}
 					});			
 				}

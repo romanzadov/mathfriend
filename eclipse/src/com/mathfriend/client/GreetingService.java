@@ -2,7 +2,6 @@ package com.mathfriend.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.mathfriend.exception.NullParentException;
 
 /**
  * The client side stub for the RPC service.
@@ -11,9 +10,9 @@ import com.mathfriend.exception.NullParentException;
 public interface GreetingService extends RemoteService {
 	String getFirstCompoundTermHtml(String formula);
 
-	String getMovedTerm(int downId, int ghostId);
+	TermResponse getMovedTerm(int downId, int ghostId);
 
-	String performOperation(int operatorId, int dataId);
+	TermResponse performOperation(int operatorId, int dataId);
 
 	String undoStep();
 }

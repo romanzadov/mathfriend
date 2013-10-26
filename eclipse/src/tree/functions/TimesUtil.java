@@ -41,12 +41,33 @@ public class TimesUtil {
 				Fraction second = (Fraction)b;
 				return new Fraction(multiplyTerms(first.getNumerator(), second.getNumerator()), multiplyTerms(first.getDenominator(), second.getDenominator()));
 			}
+		} else if (a.isNumber() || b.isNumber()) {
+			return getDistributed(a, b);
 		}
 		throw new RuntimeException("Multiplying not numbers");
 	}
 	
+	private static CompoundTerm getDistributed(Term a, Term b) {
+		CompoundTerm product = new CompoundTerm(Function.PLUS);
+		final CompoundTerm additive;
+		final Term multiplyer;
+		if(a.isAdditive()) {
+			additive = (CompoundTerm) a;
+			multiplyer = b;
+		} else if (b.isAdditive()) {
+			additive = (CompoundTerm) b;
+			multiplyer = a;
+		} else {
+			return multiplyTerms(a, b);
+		}
+		for (Term child: additive.getChildren()) {
+			product.addChild(multiplyTerms(Term.getTermFromString(multiplyer.toString()), child));
+		}
+		return product;
+	}
+	
 	public static CompoundTerm divideTerms(Term x, Term y) {
-		if (y.isFraction()) {
+		if (y.isFraction() || x.isFraction()) {
 			return multiplyTerms(x, Fraction.getInverse(y));
 		}
 		if (y.isInverse()) {
@@ -77,8 +98,9 @@ public class TimesUtil {
 		} else {
 			multiple.addChild(y);
 		}
-		
 		return multiple;
 	}
+	
+
 	
 }

@@ -1,8 +1,5 @@
 package tree.functions;
 
-import java.io.Serializable;
-
-
 public enum Function {
 
 	EQUALS(1,2),
