@@ -1,0 +1,30 @@
+# Generated files
+*.class
+build/
+out/
+reports/
+test-coverage-reports/
+web/resources/less/*.css
+
+# IntelliJ support files
+*.iml
+*.ipr
+.idea/
+
+# Target-specific files
+web/WEB-INF/override.properties
+web/WEB-INF/log4j.properties
+
+# JUnit temp files
+junit*.properties
+
+# Uploaded media files
+web/media
+
+# Mac files
+.DS_Store
+
+# Re-fetchable node files
+node_modules/
+
+.svn
