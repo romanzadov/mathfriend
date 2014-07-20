@@ -1,3 +1,0 @@
-# Module mathfriend
-# RPC service class, partial path of RPC policy file
-com.mathfriend.client.GreetingService, 93C494C4A756B8A16DE2E0806069C2F3.gwt.rpc
