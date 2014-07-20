@@ -5,3 +5,37 @@
 /tomcat.*
 /.idea
 /*.iml
+=======
+# Generated files
+*.class
+build/
+out/
+reports/
+test-coverage-reports/
+web/resources/less/*.css
+
+# IntelliJ support files
+*.iml
+*.ipr
+.idea/
+gwt-unitCache/
+.settings/
+
+# Target-specific files
+web/WEB-INF/override.properties
+web/WEB-INF/log4j.properties
+war/
+
+# JUnit temp files
+junit*.properties
+
+# Uploaded media files
+web/media
+
+# Mac files
+.DS_Store
+
+# Re-fetchable node files
+node_modules/
+
+.svn
