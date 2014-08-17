@@ -1,4 +1,4 @@
-package tree.compound;
+package com.example.tree.compound;
 
 
 public class MultiplyFractions {

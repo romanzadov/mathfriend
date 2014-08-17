@@ -1,11 +1,11 @@
-package tree.compound;
+package com.example.tree.compound;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tree.Term;
-import tree.TermUtil;
-import tree.functions.Function;
+import com.example.tree.Term;
+import com.example.tree.TermUtil;
+import com.example.tree.functions.Function;
 
 public class CompoundTerm extends Term {
 

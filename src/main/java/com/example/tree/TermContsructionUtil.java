@@ -1,12 +1,12 @@
-package tree;
+package com.example.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import parse.ParenthesisUtil;
-import parse.PreSimpleTerm;
-import tree.functions.Function;
+import com.example.parse.ParenthesisUtil;
+import com.example.parse.PreSimpleTerm;
+import com.example.tree.functions.Function;
 
 
 public class TermContsructionUtil {

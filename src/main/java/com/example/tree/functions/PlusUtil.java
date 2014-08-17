@@ -1,8 +1,8 @@
-package tree.functions;
+package com.example.tree.functions;
 
-import tree.Term;
-import tree.compound.CompoundTerm;
-import tree.simple.Number;
+import com.example.tree.Term;
+import com.example.tree.compound.CompoundTerm;
+import com.example.tree.simple.Number;
 
 public class PlusUtil {
 	

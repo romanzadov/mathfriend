@@ -11,6 +11,15 @@ function select(event) {
 }
 
 function handleClick() {
+    var formula = $("#nameFieldContainer input").val();
+    $.ajax({
+        type: "POST",
+        url: "/people/parse",
+        data: {formula: formula},
+        success: function(data) {
+            alert(data);
+        }
+    });
 	alert(parse($("input").val()));
 }
 

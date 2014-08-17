@@ -1,18 +1,21 @@
-package tree;
+package com.example.tree;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import parse.ParseCharacterUtil;
-import parse.PreSimpleTerm;
-import parse.PreSimpleUtil;
-import tree.compound.CompoundTerm;
-import tree.compound.Fraction;
-import tree.functions.Function;
-import tree.simple.Number;
-import tree.simple.Variable;
-import tree.simple.SimpleTerm;
+import com.example.parse.ParseCharacterUtil;
+import com.example.parse.PreSimpleUtil;
+import com.example.tree.functions.Function;
+import com.example.parse.ParseCharacterUtil;
+import com.example.parse.PreSimpleTerm;
+import com.example.parse.PreSimpleUtil;
+import com.example.tree.compound.CompoundTerm;
+import com.example.tree.compound.Fraction;
+import com.example.tree.functions.Function;
+import com.example.tree.simple.Number;
+import com.example.tree.simple.Variable;
+import com.example.tree.simple.SimpleTerm;
 
 public abstract class Term {
 

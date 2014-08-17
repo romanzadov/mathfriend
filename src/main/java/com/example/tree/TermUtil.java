@@ -1,16 +1,16 @@
-package tree;
+package com.example.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tree.compound.CompoundTerm;
-import tree.compound.Fraction;
-import tree.compound.FractionUtil;
-import tree.functions.Function;
-import tree.functions.PlusUtil;
-import tree.functions.TimesUtil;
+import com.example.NullParentException;
+import com.example.tree.compound.CompoundTerm;
+import com.example.tree.compound.Fraction;
+import com.example.tree.compound.FractionUtil;
+import com.example.tree.functions.Function;
+import com.example.tree.functions.PlusUtil;
+import com.example.tree.functions.TimesUtil;
 
-import com.mathfriend.exception.NullParentException;
 
 public class TermUtil {
 	
@@ -182,7 +182,7 @@ public class TermUtil {
 			children.remove(extra);
 			Term sibling  = children.get(0);
 			if (sibling.isInverse()) {
-				sibling = new Fraction(new tree.simple.Number(1), sibling);
+				sibling = new Fraction(new com.example.tree.simple.Number(1), sibling);
 			}
 			grandparent.setChild(grandparent.getChildren().indexOf(parent), sibling);
 		}

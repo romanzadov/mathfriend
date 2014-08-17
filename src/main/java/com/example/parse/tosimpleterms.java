@@ -1,4 +1,4 @@
-package parse;
+package com.example.parse;
 import java.util.ArrayList;
 
 import tree.functions.Function;

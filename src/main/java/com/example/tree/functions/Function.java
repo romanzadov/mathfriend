@@ -1,4 +1,4 @@
-package tree.functions;
+package com.example.tree.functions;
 
 public enum Function {
 

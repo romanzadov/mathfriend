@@ -1,10 +1,10 @@
-package parse;
+package com.example.parse;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-import tree.functions.Function;
-import tree.simple.Constants;
+import com.example.tree.functions.Function;
+import com.example.tree.simple.Constants;
 
 public class PreSimpleUtil {
 

@@ -1,4 +1,4 @@
-package tree.simple;
+package com.example.tree.simple;
 
 import java.util.EnumSet;
 import java.util.Set;

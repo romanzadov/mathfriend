@@ -1,4 +1,4 @@
-package tree.simple;
+package com.example.tree.simple;
 
 
 public class Variable extends SimpleTerm {

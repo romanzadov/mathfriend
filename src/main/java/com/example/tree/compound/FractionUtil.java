@@ -1,8 +1,8 @@
-package tree.compound;
+package com.example.tree.compound;
 
 import java.math.BigInteger;
 
-import tree.simple.Number;
+import com.example.tree.simple.Number;
 
 public class FractionUtil {
 
